@@ -19,6 +19,7 @@ import { content } from './content';
 import { PreviewProvider } from './provider';
 import { tsconfig } from './tsconfig';
 import { utils } from './utils';
+import { V0Button } from './v0-button';
 
 type ComponentModule = {
   name: string;
@@ -254,6 +255,7 @@ export const Preview = async ({
               Console
             </SandboxTabsTrigger>
           </SandboxTabsList>
+          <V0Button name={name} />
           <SandboxTabsContent value="code" className="overflow-hidden">
             <ResizablePanelGroup
               direction="horizontal"
