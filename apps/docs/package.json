@@ -12,6 +12,7 @@
     "@logtail/next": "^0.1.7",
     "@next/bundle-analyzer": "^15.1.7",
     "@next/third-parties": "^15.1.7",
+    "@repo/ai": "workspace:*",
     "@repo/announcement": "workspace:*",
     "@repo/avatar-stack": "workspace:*",
     "@repo/calendar": "workspace:*",
