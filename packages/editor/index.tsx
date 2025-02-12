@@ -514,7 +514,7 @@ export const EditorProvider = ({
       codeBlock: false,
       bulletList: {
         HTMLAttributes: {
-          class: cn('list-outside list-disc pl-3'),
+          class: cn('list-outside list-disc pl-4'),
         },
       },
       orderedList: {
@@ -560,6 +560,26 @@ export const EditorProvider = ({
     }),
     CodeBlockLowlight.configure({
       lowlight,
+      HTMLAttributes: {
+        class: cn(
+          'rounded-md border p-4 text-sm',
+          'bg-background text-foreground',
+          '[&_.hljs-doctag]:text-[#d73a49] [&_.hljs-keyword]:text-[#d73a49] [&_.hljs-meta_.hljs-keyword]:text-[#d73a49] [&_.hljs-template-tag]:text-[#d73a49] [&_.hljs-template-variable]:text-[#d73a49] [&_.hljs-type]:text-[#d73a49] [&_.hljs-variable.language_]:text-[#d73a49]',
+          '[&_.hljs-title.class_.inherited__]:text-[#6f42c1] [&_.hljs-title.class_]:text-[#6f42c1] [&_.hljs-title.function_]:text-[#6f42c1] [&_.hljs-title]:text-[#6f42c1]',
+          '[&_.hljs-attr]:text-[#005cc5] [&_.hljs-attribute]:text-[#005cc5] [&_.hljs-literal]:text-[#005cc5] [&_.hljs-meta]:text-[#005cc5] [&_.hljs-number]:text-[#005cc5] [&_.hljs-operator]:text-[#005cc5] [&_.hljs-selector-attr]:text-[#005cc5] [&_.hljs-selector-class]:text-[#005cc5] [&_.hljs-selector-id]:text-[#005cc5] [&_.hljs-variable]:text-[#005cc5]',
+          '[&_.hljs-meta_.hljs-string]:text-[#032f62] [&_.hljs-regexp]:text-[#032f62] [&_.hljs-string]:text-[#032f62]',
+          '[&_.hljs-built_in]:text-[#e36209] [&_.hljs-symbol]:text-[#e36209]',
+          '[&_.hljs-code]:text-[#6a737d] [&_.hljs-comment]:text-[#6a737d] [&_.hljs-formula]:text-[#6a737d]',
+          '[&_.hljs-name]:text-[#22863a] [&_.hljs-quote]:text-[#22863a] [&_.hljs-selector-pseudo]:text-[#22863a] [&_.hljs-selector-tag]:text-[#22863a]',
+          '[&_.hljs-subst]:text-[#24292e]',
+          '[&_.hljs-section]:font-bold [&_.hljs-section]:text-[#005cc5]',
+          '[&_.hljs-bullet]:text-[#735c0f]',
+          '[&_.hljs-emphasis]:text-[#24292e] [&_.hljs-emphasis]:italic',
+          '[&_.hljs-strong]:font-bold [&_.hljs-strong]:text-[#24292e]',
+          '[&_.hljs-addition]:bg-[#f0fff4] [&_.hljs-addition]:text-[#22863a]',
+          '[&_.hljs-deletion]:bg-[#ffeef0] [&_.hljs-deletion]:text-[#b31d28]'
+        ),
+      },
     }),
     Superscript,
     Subscript,
@@ -771,9 +791,11 @@ const BubbleMenuButton = ({
   </Button>
 );
 
+export type EditorClearFormattingProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorClearFormatting = ({
   hideName = true,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: EditorClearFormattingProps) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -790,6 +812,8 @@ export const EditorClearFormatting = ({
     />
   );
 };
+
+export type EditorNodeTextProps = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorNodeText = ({
   hideName = false,
@@ -820,6 +844,8 @@ export const EditorNodeText = ({
   );
 };
 
+export type EditorNodeHeading1Props = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorNodeHeading1 = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -839,6 +865,8 @@ export const EditorNodeHeading1 = ({
     />
   );
 };
+
+export type EditorNodeHeading2Props = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorNodeHeading2 = ({
   hideName = false,
@@ -860,6 +888,8 @@ export const EditorNodeHeading2 = ({
   );
 };
 
+export type EditorNodeHeading3Props = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorNodeHeading3 = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -879,6 +909,8 @@ export const EditorNodeHeading3 = ({
     />
   );
 };
+
+export type EditorNodeBulletListProps = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorNodeBulletList = ({
   hideName = false,
@@ -900,6 +932,8 @@ export const EditorNodeBulletList = ({
   );
 };
 
+export type EditorNodeOrderedListProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorNodeOrderedList = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -920,6 +954,8 @@ export const EditorNodeOrderedList = ({
   );
 };
 
+export type EditorNodeTaskListProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorNodeTaskList = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -939,6 +975,8 @@ export const EditorNodeTaskList = ({
     />
   );
 };
+
+export type EditorNodeQuoteProps = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorNodeQuote = ({
   hideName = false,
@@ -967,6 +1005,8 @@ export const EditorNodeQuote = ({
   );
 };
 
+export type EditorNodeCodeProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorNodeCode = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -986,6 +1026,8 @@ export const EditorNodeCode = ({
     />
   );
 };
+
+export type EditorNodeTableProps = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorNodeTable = ({
   hideName = false,
@@ -1057,6 +1099,8 @@ export const EditorSelector = ({
   );
 };
 
+export type EditorFormatBoldProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorFormatBold = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -1076,6 +1120,8 @@ export const EditorFormatBold = ({
     />
   );
 };
+
+export type EditorFormatItalicProps = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorFormatItalic = ({
   hideName = false,
@@ -1097,6 +1143,8 @@ export const EditorFormatItalic = ({
   );
 };
 
+export type EditorFormatStrikeProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorFormatStrike = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -1116,6 +1164,8 @@ export const EditorFormatStrike = ({
     />
   );
 };
+
+export type EditorFormatCodeProps = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorFormatCode = ({
   hideName = false,
@@ -1137,6 +1187,8 @@ export const EditorFormatCode = ({
   );
 };
 
+export type EditorFormatSubscriptProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorFormatSubscript = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -1156,6 +1208,8 @@ export const EditorFormatSubscript = ({
     />
   );
 };
+
+export type EditorFormatSuperscriptProps = Pick<EditorButtonProps, 'hideName'>;
 
 export const EditorFormatSuperscript = ({
   hideName = false,
@@ -1177,6 +1231,8 @@ export const EditorFormatSuperscript = ({
   );
 };
 
+export type EditorFormatUnderlineProps = Pick<EditorButtonProps, 'hideName'>;
+
 export const EditorFormatUnderline = ({
   hideName = false,
 }: Pick<EditorButtonProps, 'hideName'>) => {
@@ -1197,15 +1253,15 @@ export const EditorFormatUnderline = ({
   );
 };
 
-type BubbleMenuLinkSelectorProperties = {
-  readonly open: boolean;
-  readonly onOpenChange: (open: boolean) => void;
+export type EditorLinkSelectorProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 };
 
 export const EditorLinkSelector = ({
   open,
   onOpenChange,
-}: BubbleMenuLinkSelectorProperties & Pick<EditorButtonProps, 'hideName'>) => {
+}: EditorLinkSelectorProps) => {
   const [url, setUrl] = useState<string>('');
   const inputReference = useRef<HTMLInputElement>(null);
   const { editor } = useCurrentEditor();
@@ -1312,7 +1368,7 @@ export const EditorLinkSelector = ({
   );
 };
 
-export type EditorColorProps = {
+export type EditorTextColorProps = Pick<EditorButtonProps, 'hideName'> & {
   color: string;
   name: string;
 };
@@ -1321,7 +1377,7 @@ export const EditorTextColor = ({
   color,
   name,
   hideName = false,
-}: EditorColorProps & Pick<EditorButtonProps, 'hideName'>) => {
+}: EditorTextColorProps) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1344,11 +1400,16 @@ export const EditorTextColor = ({
   );
 };
 
+export type EditorBackgroundColorProps = Pick<EditorButtonProps, 'hideName'> & {
+  color: string;
+  name: string;
+};
+
 export const EditorBackgroundColor = ({
   color,
   name,
   hideName = false,
-}: EditorColorProps & Pick<EditorButtonProps, 'hideName'>) => {
+}: EditorBackgroundColorProps) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {

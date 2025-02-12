@@ -77,13 +77,22 @@ const backgroundColors = [
 ];
 
 const Example = () => {
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState({"type":"doc","content":[{"type":"heading","attrs":{"level":1},"content":[{"type":"text","text":"Heading 1"}]},{"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Heading 2"}]},{"type":"heading","attrs":{"level":3},"content":[{"type":"text","text":"Heading 3"}]},{"type":"heading","attrs":{"level":4},"content":[{"type":"text","text":"Heading 4"}]},{"type":"heading","attrs":{"level":5},"content":[{"type":"text","text":"Heading 5"}]},{"type":"heading","attrs":{"level":6},"content":[{"type":"text","text":"Heading 6"}]},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","text":"Hello, world."}]},{"type":"paragraph"},{"type":"taskList","content":[{"type":"taskItem","attrs":{"checked":false},"content":[{"type":"paragraph","content":[{"type":"text","text":"This is a todo list"}]}]},{"type":"taskItem","attrs":{"checked":false},"content":[{"type":"paragraph","content":[{"type":"text","text":"With two items"}]}]}]},{"type":"paragraph"},{"type":"bulletList","content":[{"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"This is an unordered list"}]},{"type":"bulletList","content":[{"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"With a nested item"}]}]}]}]}]},{"type":"paragraph"},{"type":"orderedList","attrs":{"start":1},"content":[{"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"This is an ordered list"}]}]},{"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"With two items"}]}]}]},{"type":"paragraph"},{"type":"blockquote","content":[{"type":"paragraph","content":[{"type":"text","text":"This is a quote, probably by someone famous."}]}]},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","text":"This is some "},{"type":"text","marks":[{"type":"code"}],"text":"inline code"},{"type":"text","text":", while this is a code block:"}]},{"type":"paragraph"},{"type":"codeBlock","attrs":{"language":null},"content":[{"type":"text","text":"function x () {\\n  console.log('hello, world.');\\n}"}]},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","text":"You can also create complex tables, like so:"}]},{"type":"table","content":[{"type":"tableRow","content":[{"type":"tableHeader","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Here’s a column"}]}]},{"type":"tableHeader","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Another column"}]}]},{"type":"tableHeader","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Yet another"}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Cell 1A"}]}]},{"type":"tableCell","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Cell 2A"}]}]},{"type":"tableCell","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Cell 3A"}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Cell 1B"}]}]},{"type":"tableCell","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Cell 2B"}]}]},{"type":"tableCell","attrs":{"colspan":1,"rowspan":1,"colwidth":null},"content":[{"type":"paragraph","content":[{"type":"text","text":"Cell 3B"}]}]}]}]}]});
+
+  const handleUpdate = ({ editor }: { editor: Editor }) => {
+    const json = editor.getJSON();
+
+    setContent(json);
+    console.log(JSON.stringify(json));
+  };
 
   return (
     <div className="bg-secondary flex h-screen w-full items-center justify-center p-8">
       <EditorProvider
+        content={content}
         placeholder="Start typing..."
-        className="bg-background rounded-lg border w-full h-full p-4"
+        className="bg-background rounded-lg border w-full h-full p-4 overflow-y-auto"
+        onUpdate={handleUpdate}
       >
         <EditorFloatingMenu>
           <EditorNodeHeading1 hideName />
@@ -158,11 +167,24 @@ export default Example;`} />
 
 ## Features
 
-TBD
-
-## Examples
-
-TBD.
+- Rich text editing with TipTap
+- Slash commands for quick formatting
+- Floating menu for common actions
+- Bubble menu for text selection
+- Text formatting (bold, italic, underline, strikethrough, code, superscript, subscript)
+- Text and background colors
+- Links
+- Clear formatting
+- Tables with column/row management
+- Merge and split table cells
+- Character and word count
+- Code blocks with syntax highlighting
+- Headings (H1, H2, H3)
+- Lists (bullet, ordered, task)
+- Blockquotes
+- Horizontal rules
+- Placeholder text
+- Character limit support
 
 ## Props
 
@@ -172,3 +194,114 @@ The editor component is made up of the following subcomponents:
 
 <AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorProviderProps" />
 
+### EditorFloatingMenu
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFloatingMenuProps" />
+
+### EditorBubbleMenu 
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorBubbleMenuProps" />
+
+### EditorSelector
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorSelectorProps" />
+
+### EditorNodeText
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeTextProps" />
+
+### EditorNodeHeading1
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeHeading1Props" />
+
+### EditorNodeHeading2
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeHeading2Props" />
+
+### EditorNodeHeading3
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeHeading3Props" />
+
+### EditorNodeBulletList
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeBulletListProps" />
+
+### EditorNodeOrderedList
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeOrderedListProps" />
+
+### EditorNodeTaskList
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeTaskListProps" />
+
+### EditorNodeQuote
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeQuoteProps" />
+
+### EditorNodeCode
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorNodeCodeProps" />
+
+### EditorFormatBold
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFormatBoldProps" />
+
+### EditorFormatItalic
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFormatItalicProps" />
+
+### EditorFormatUnderline
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFormatUnderlineProps" />
+
+### EditorFormatStrike
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFormatStrikeProps" />
+
+### EditorFormatCode
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFormatCodeProps" />
+
+### EditorFormatSuperscript
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFormatSuperscriptProps" />
+
+### EditorFormatSubscript
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorFormatSubscriptProps" />
+
+### EditorTextColor
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorTextColorProps" />
+
+### EditorBackgroundColor
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorBackgroundColorProps" />
+
+### EditorLinkSelector
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorLinkSelectorProps" />
+
+### EditorClearFormatting
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorClearFormattingProps" />
+
+### EditorTableMenu
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorTableMenuProps" />
+
+### EditorTableColumnMenu
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorTableColumnMenuProps" />
+
+### EditorTableRowMenu
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorTableRowMenuProps" />
+
+### EditorTableGlobalMenu
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorTableGlobalMenuProps" />
+
+### EditorCharacterCount
+
+<AutoTypeTable path="node_modules/@repo/editor/index.tsx" name="EditorCharacterCountProps" />
