@@ -1710,7 +1710,7 @@ export const EditorTableHeaderColumnToggle = () => {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
@@ -1736,7 +1736,7 @@ export const EditorTableHeaderRowToggle = () => {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
@@ -1762,7 +1762,7 @@ export const EditorTableDelete = () => {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
@@ -1788,7 +1788,7 @@ export const EditorTableMergeCells = () => {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
@@ -1814,7 +1814,7 @@ export const EditorTableSplitCell = () => {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
@@ -1840,7 +1840,7 @@ export const EditorTableFix = () => {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
