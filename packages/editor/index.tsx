@@ -519,7 +519,7 @@ export const EditorProvider = ({
       },
       orderedList: {
         HTMLAttributes: {
-          class: cn('list-outside list-decimal pl-3'),
+          class: cn('list-outside list-decimal pl-4'),
         },
       },
       listItem: {
