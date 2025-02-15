@@ -32,7 +32,7 @@ type RegistryItem = {
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
   registryDependencies?: Record<string, string>;
-  files?: { content: string }[];
+  files?: { path: string; content: string }[];
 };
 
 type PreviewProps = {
@@ -140,12 +140,14 @@ export const Preview = async ({
   code,
   dependencies: demoDependencies,
 }: PreviewProps) => {
-  let registry = registryCache.get(name);
+  const [packageName, componentName] = name.split('/');
+
+  let registry = registryCache.get(packageName);
   if (!registry) {
     registry = (await import(
-      `../../public/registry/${name}.json`
+      `../../public/registry/${packageName}.json`
     )) as RegistryItem;
-    registryCache.set(name, registry);
+    registryCache.set(packageName, registry);
   }
 
   const [, initialParsedComponents] = await Promise.all([
@@ -163,9 +165,10 @@ export const Preview = async ({
     '/lib/content.ts': content,
   });
 
-  const selectedComponentContent = parseContent(
-    registry.files?.[0]?.content ?? ''
+  const selectedFile = registry.files?.find(
+    (file) => file.path === `${componentName ?? 'index'}.tsx`
   );
+  const selectedComponentContent = parseContent(selectedFile?.content ?? '');
 
   // Parse the selected component content
   const selectedComponentDeps = await parseShadcnComponents(
