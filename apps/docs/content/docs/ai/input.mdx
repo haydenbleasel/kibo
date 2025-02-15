@@ -1,0 +1,269 @@
+---
+title: AI Input
+description: An input is a component that allows a user to send a message to a large language model.
+icon: TextCursorInput
+---
+
+<PoweredBy packages={[
+  { name: 'Lucide', url: 'https://lucide.dev/' },
+]} />
+
+<Preview name="ai/input" code={`'use client';
+
+import {
+  AIInput,
+  AIInputTextarea,
+  AIInputToolbar,
+  AIInputButton,
+  AIInputTools,
+  AIInputSubmit,
+  AIInputModelSelect,
+  AIInputModelSelectTrigger,
+  AIInputModelSelectContent,
+  AIInputModelSelectItem,
+  AIInputModelSelectValue,
+} from '@/components/ui/kibo-ui/ai/input';
+import { PlusIcon, MicIcon, GlobeIcon, SendIcon } from 'lucide-react';
+import { FormEventHandler, useState } from 'react';
+
+const models = [
+  { id: 'gpt-4', name: 'GPT-4' },
+  { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
+  { id: 'claude-2', name: 'Claude 2' },
+  { id: 'claude-instant', name: 'Claude Instant' },
+  { id: 'palm-2', name: 'PaLM 2' },
+  { id: 'llama-2-70b', name: 'Llama 2 70B' },
+  { id: 'llama-2-13b', name: 'Llama 2 13B' },
+  { id: 'cohere-command', name: 'Command' },
+  { id: 'mistral-7b', name: 'Mistral 7B'  }
+];
+
+const Example = () => {
+  const [model, setModel] = useState<string>(models[0].id);
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const message = formData.get('message');
+    console.log('Submitted message:', message);
+  };
+
+  return (
+    <div className="flex w-full h-screen items-end justify-center gap-4 bg-secondary p-8">
+      <AIInput onSubmit={handleSubmit}>
+        <AIInputTextarea />
+        <AIInputToolbar>
+          <AIInputTools>
+            <AIInputButton>
+              <PlusIcon size={16} />
+            </AIInputButton>
+            <AIInputButton>
+              <MicIcon size={16} />
+            </AIInputButton>
+            <AIInputButton>
+              <GlobeIcon size={16} />
+              <span>Search</span>
+            </AIInputButton>
+            <AIInputModelSelect value={model} onValueChange={setModel}>
+              <AIInputModelSelectTrigger>
+                <AIInputModelSelectValue />
+              </AIInputModelSelectTrigger>
+              <AIInputModelSelectContent>
+                {models.map((model) => (
+                  <AIInputModelSelectItem key={model.id} value={model.id}>
+                    {model.name}
+                  </AIInputModelSelectItem>
+                ))}
+              </AIInputModelSelectContent>
+            </AIInputModelSelect>
+          </AIInputTools>
+          <AIInputSubmit>
+            <SendIcon size={16} />
+          </AIInputSubmit>
+        </AIInputToolbar>
+      </AIInput>
+    </div>
+  );
+};
+
+export default Example;`} />
+
+## Installation
+
+<Installer packageName="ai" />
+
+## Features
+
+- Auto-resizing textarea that adjusts height based on content
+- Support for keyboard shortcuts (Cmd/Ctrl + Enter to submit)
+- Customizable min/max height for the textarea
+- Flexible toolbar with support for custom actions and tools
+- Built-in model selection dropdown
+- Responsive design with mobile-friendly controls
+- Clean, modern styling with customizable themes
+- Form-based submission handling
+
+## Examples
+
+### Custom Model Icons
+
+<Preview name="ai/input" code={`'use client';
+
+import {
+  AIInput,
+  AIInputTextarea,
+  AIInputToolbar,
+  AIInputButton,
+  AIInputTools,
+  AIInputSubmit,
+  AIInputModelSelect,
+  AIInputModelSelectTrigger,
+  AIInputModelSelectContent,
+  AIInputModelSelectItem,
+  AIInputModelSelectValue,
+} from '@/components/ui/kibo-ui/ai/input';
+import { PlusIcon, MicIcon, GlobeIcon, SendIcon } from 'lucide-react';
+import { FormEventHandler, useState } from 'react';
+
+const models = [
+  { id: 'gpt-4', name: 'GPT-4', provider: 'openai.com' },
+  { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'openai.com' },
+  { id: 'claude-2', name: 'Claude 2', provider: 'anthropic.com' },
+  { id: 'claude-instant', name: 'Claude Instant', provider: 'anthropic.com' },
+  { id: 'palm-2', name: 'PaLM 2', provider: 'google.com' },
+  { id: 'llama-2-70b', name: 'Llama 2 70B', provider: 'meta.com' },
+  { id: 'llama-2-13b', name: 'Llama 2 13B', provider: 'meta.com' },
+  { id: 'cohere-command', name: 'Command', provider: 'cohere.com' },
+  { id: 'mistral-7b', name: 'Mistral 7B', provider: 'mistral.ai' }
+];
+
+const Example = () => {
+  const [model, setModel] = useState<string>(models[0].id);
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const message = formData.get('message');
+    console.log('Submitted message:', message);
+  };
+
+  return (
+    <div className="flex w-full h-screen items-end justify-center gap-4 bg-secondary p-8">
+      <AIInput onSubmit={handleSubmit}>
+        <AIInputTextarea />
+        <AIInputToolbar>
+          <AIInputTools>
+            <AIInputButton>
+              <PlusIcon size={16} />
+            </AIInputButton>
+            <AIInputButton>
+              <MicIcon size={16} />
+            </AIInputButton>
+            <AIInputButton>
+              <GlobeIcon size={16} />
+              <span>Search</span>
+            </AIInputButton>
+            <AIInputModelSelect value={model} onValueChange={setModel}>
+              <AIInputModelSelectTrigger>
+                <AIInputModelSelectValue />
+              </AIInputModelSelectTrigger>
+              <AIInputModelSelectContent>
+                {models.map((model) => (
+                  <AIInputModelSelectItem key={model.id} value={model.id}>
+                    <img
+                      src={\`https://img.logo.dev/\${model.provider}?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}\`}
+                      alt={model.provider}
+                      className="w-4 h-4 mr-2 inline-flex"
+                    />
+                    {model.name}
+                  </AIInputModelSelectItem>
+                ))}
+              </AIInputModelSelectContent>
+            </AIInputModelSelect>
+          </AIInputTools>
+          <AIInputSubmit>
+            <SendIcon size={16} />
+          </AIInputSubmit>
+        </AIInputToolbar>
+      </AIInput>
+    </div>
+  );
+};
+
+export default Example;`} />
+
+## Props
+
+The input is made up of the following subcomponents:
+
+### AIInput
+
+The `AIInput` component is the main component that renders the input form.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputProps" />
+
+### AIInputTextarea
+
+The `AIInputTextarea` component is the textarea that allows the user to enter their message.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputTextareaProps" />
+
+### AIInputToolbar
+
+The `AIInputToolbar` component is a container for the input tools and submit button.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputToolbarProps" />
+
+### AIInputTools
+
+The `AIInputTools` component is a container for the input tools.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputToolsProps" />
+
+### AIInputSubmit
+
+The `AIInputSubmit` component is the submit button that allows the user to submit their message.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputSubmitProps" />
+
+### AIInputModelSelect
+
+The `AIInputModelSelect` component is the dropdown that allows the user to select the model.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputModelSelectProps" />
+
+### AIInputModelSelectTrigger
+
+The `AIInputModelSelectTrigger` component is the trigger that allows the user to open the dropdown.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputModelSelectTriggerProps" />
+
+### AIInputModelSelectContent
+
+The `AIInputModelSelectContent` component is the content of the dropdown.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputModelSelectContentProps" />
+
+### AIInputModelSelectItem
+
+The `AIInputModelSelectItem` component is an item in the dropdown.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputModelSelectItemProps" />
+
+### AIInputModelSelectValue
+
+The `AIInputModelSelectValue` component is the value of the dropdown.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputModelSelectValueProps" />
+
+### AIInputModelSelectContent
+
+The `AIInputModelSelectContent` component is the content of the dropdown.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputModelSelectContentProps" />
+
+### AIInputModelSelectItem
+
+The `AIInputModelSelectItem` component is an item in the dropdown.
+
+<AutoTypeTable path="node_modules/@repo/ai/input.tsx" name="AIInputModelSelectItemProps" />
