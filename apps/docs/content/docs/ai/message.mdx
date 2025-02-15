@@ -32,7 +32,19 @@ const Example = () => (
         <MessageAvatar src="https://github.com/shadcn.png" fallback="SH" />
         <MessageList>
           <Message>Sure, I can help you with that.</Message>
-          <Message>What's the component you're building?</Message>
+          <Message>Here's some code for the component:</Message>
+          <Message>
+            {\`
+# Button.tsx
+
+Here's the code for the component.
+
+\\\`\\\`\\\`jsx
+function Button() {
+  return <button>Click me</button>
+}
+\\\`\\\`\\\`
+\`}</Message>
         </MessageList>
       </MessageGroup>
       <MessageGroup owner>
