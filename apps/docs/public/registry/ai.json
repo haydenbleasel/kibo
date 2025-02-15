@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "homepage": "https://www.kibo-ui.com/ai",
+  "name": "ai",
+  "type": "registry:ui",
+  "author": "Hayden Bleasel <hello@haydenbleasel.com>",
+  "registryDependencies": [],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "devDependencies": [],
+  "files": [
+    {
+      "type": "registry:ui",
+      "path": "indicator.tsx",
+      "content": "",
+      "target": "components/ui/kibo-ui/ai/indicator.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "path": "message.tsx",
+      "content": "import { cn } from '@repo/shadcn-ui/lib/utils';\nimport type { HTMLAttributes } from 'react';\n\nexport type MessagesProps = HTMLAttributes<HTMLDivElement>;\n\nexport const Messages = ({ className, ...props }: MessagesProps) => (\n  <div className={cn('flex flex-col gap-8', className)} {...props} />\n);\n\nexport type MessageGroupProps = HTMLAttributes<HTMLDivElement>;\n\nexport const MessageGroup = ({ className, ...props }: MessageGroupProps) => (\n  <div className={cn('flex flex-col gap-2', className)} {...props} />\n);\n\nexport type MessageProps = HTMLAttributes<HTMLDivElement>;\n\nexport const Message = ({ className, ...props }: MessageProps) => (\n  <div className={cn('flex flex-col items-end gap-2', className)} {...props} />\n);\n",
+      "target": "components/ui/kibo-ui/ai/message.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "path": "input.tsx",
+      "content": "",
+      "target": "components/ui/kibo-ui/ai/input.tsx"
+    }
+  ]
+}
