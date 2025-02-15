@@ -10,30 +10,36 @@ import { AutoTypeTable } from 'fumadocs-typescript/ui';
   { name: 'Lucide', url: 'https://lucide.dev/' },
 ]} />
 
-<Preview name="message" code={`import {
+<Preview name="ai/message" code={`import {
   Messages,
   MessageGroup,
-  Message
+  Message,
+  MessageList,
+  MessageAvatar,
 } from '@/components/ui/kibo-ui/ai/message';
 import { ArrowUpRightIcon } from 'lucide-react';
 
 const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4 bg-secondary">
+  <div className="flex w-full h-screen items-center justify-center gap-4 bg-secondary overflow-y-auto p-8">
     <Messages>
       <MessageGroup owner>
-        <Message>hello, world.</Message>
-        <Message>hello, world.</Message>
-        <Message>hello, world.</Message>
+        <MessageList>
+          <Message>Hey there! I need help with a React component I'm building.</Message>
+        </MessageList>
+        <MessageAvatar src="https://github.com/haydenbleasel.png" fallback="HB" />
       </MessageGroup>
       <MessageGroup>
-        <Message>hello, world.</Message>
-        <Message>hello, world.</Message>
-        <Message>hello, world.</Message>
+        <MessageAvatar src="https://github.com/shadcn.png" fallback="SH" />
+        <MessageList>
+          <Message>Sure, I can help you with that.</Message>
+          <Message>What's the component you're building?</Message>
+        </MessageList>
       </MessageGroup>
       <MessageGroup owner>
-        <Message>hello, world.</Message>
-        <Message>hello, world.</Message>
-        <Message>hello, world.</Message>
+        <MessageList>
+          <Message>It's a button component that displays a loading state when clicked.</Message>
+        </MessageList>
+        <MessageAvatar src="https://github.com/haydenbleasel.png" fallback="HB" />
       </MessageGroup>
     </Messages>
   </div>

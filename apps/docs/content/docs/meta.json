@@ -1,5 +1,13 @@
 {
-  "title": "ui",
+  "title": "Components",
+  "description": "Components are the building blocks of your application. They are used to create the UI of your application.",
   "root": true,
-  "pages": ["---Introduction---", "index", "setup", "---Components---", "..."]
+  "pages": [
+    "---Introduction---",
+    "index",
+    "setup",
+    "---Components---",
+    "ai",
+    "..."
+  ]
 }

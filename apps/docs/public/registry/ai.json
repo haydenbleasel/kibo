@@ -5,6 +5,7 @@
   "type": "registry:ui",
   "author": "Hayden Bleasel <hello@haydenbleasel.com>",
   "registryDependencies": [
+    "avatar",
     "button",
     "select",
     "textarea"
@@ -16,14 +17,8 @@
   "files": [
     {
       "type": "registry:ui",
-      "path": "indicator.tsx",
-      "content": "",
-      "target": "components/ui/kibo-ui/ai/indicator.tsx"
-    },
-    {
-      "type": "registry:ui",
       "path": "message.tsx",
-      "content": "import { cn } from '@repo/shadcn-ui/lib/utils';\nimport type { HTMLAttributes } from 'react';\n\nexport type MessagesProps = HTMLAttributes<HTMLDivElement>;\n\nexport const Messages = ({ className, ...props }: MessagesProps) => (\n  <div className={cn('flex flex-col gap-8', className)} {...props} />\n);\n\nexport type MessageGroupProps = HTMLAttributes<HTMLDivElement>;\n\nexport const MessageGroup = ({ className, ...props }: MessageGroupProps) => (\n  <div className={cn('flex flex-col gap-2', className)} {...props} />\n);\n\nexport type MessageProps = HTMLAttributes<HTMLDivElement>;\n\nexport const Message = ({ className, ...props }: MessageProps) => (\n  <div className={cn('flex flex-col items-end gap-2', className)} {...props} />\n);\n",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';\nimport { cn } from '@/lib/utils';\nimport type { ComponentProps, HTMLAttributes } from 'react';\n\nexport type MessagesProps = HTMLAttributes<HTMLDivElement>;\n\nexport const Messages = ({ className, ...props }: MessagesProps) => (\n  <div className={cn('flex w-full flex-col gap-8', className)} {...props} />\n);\n\nexport type MessageGroupProps = HTMLAttributes<HTMLDivElement> & {\n  owner?: boolean;\n};\n\nexport const MessageGroup = ({\n  className,\n  owner,\n  ...props\n}: MessageGroupProps) => (\n  <div\n    className={cn(\n      'group flex items-end gap-2',\n      owner ? '[&>div]:items-end' : '[&>div]:items-start'\n    )}\n    {...props}\n  />\n);\n\nexport type MessageProps = HTMLAttributes<HTMLDivElement>;\n\nexport const Message = ({ className, ...props }: MessageProps) => (\n  <div\n    className={cn(\n      'flex flex-col gap-1 rounded-md border bg-background p-2 text-sm shadow-sm',\n      className\n    )}\n    {...props}\n  />\n);\n\nexport type MessageAvatarProps = ComponentProps<typeof Avatar> & {\n  fallback?: string;\n  src?: string;\n};\n\nexport const MessageAvatar = ({\n  className,\n  src,\n  fallback,\n  ...props\n}: MessageAvatarProps) => (\n  <Avatar className={cn('size-8 shrink-0', className)} {...props}>\n    <AvatarImage src={src} />\n    <AvatarFallback>{fallback}</AvatarFallback>\n  </Avatar>\n);\n\nexport type MessageListProps = HTMLAttributes<HTMLDivElement>;\n\nexport const MessageList = ({ className, ...props }: MessageListProps) => (\n  <div className={cn('flex flex-1 flex-col gap-2', className)} {...props} />\n);\n",
       "target": "components/ui/kibo-ui/ai/message.tsx"
     },
     {
