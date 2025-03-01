@@ -6,7 +6,7 @@
     "@repo/shadcn-ui": "workspace:*",
     "@tanstack/react-table": "^8.21.2",
     "jotai": "^2.12.1",
-    "lucide-react": "^0.476.0",
+    "lucide-react": "^0.477.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
