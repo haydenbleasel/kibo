@@ -21,7 +21,7 @@
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.8",
     "turbo": "^2.4.4",
     "typescript": "^5.8.2",
     "ultracite": "^4.1.20"
