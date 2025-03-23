@@ -114,9 +114,12 @@ export const DialogStackTrigger = ({
   };
 
   if (asChild && children) {
-    return cloneElement(children as ReactElement, {
+    return cloneElement(children as ReactElement<DialogStackTriggerProps>, {
       onClick: handleClick,
-      className: cn(className, (children as ReactElement).props.className),
+      className: cn(
+        className,
+        (children as ReactElement<DialogStackTriggerProps>).props.className
+      ),
       ...props,
     });
   }
@@ -210,7 +213,9 @@ export const DialogStackBody = ({
         >
           <div className="pointer-events-auto relative flex w-full flex-col items-center justify-center">
             {Children.map(children, (child, index) =>
-              cloneElement(child as ReactElement, { index })
+              cloneElement(child as ReactElement<DialogStackChildProps>, {
+                index,
+              })
             )}
           </div>
         </div>
@@ -372,9 +377,12 @@ export const DialogStackNext = ({
   };
 
   if (asChild && children) {
-    return cloneElement(children as ReactElement, {
+    return cloneElement(children as ReactElement<DialogStackNextProps>, {
       onClick: handleNext,
-      className: cn(className, (children as ReactElement).props.className),
+      className: cn(
+        className,
+        (children as ReactElement<DialogStackNextProps>).props.className
+      ),
       ...props,
     });
   }
@@ -419,9 +427,12 @@ export const DialogStackPrevious = ({
   };
 
   if (asChild && children) {
-    return cloneElement(children as ReactElement, {
+    return cloneElement(children as ReactElement<DialogStackPreviousProps>, {
       onClick: handlePrevious,
-      className: cn(className, (children as ReactElement).props.className),
+      className: cn(
+        className,
+        (children as ReactElement<DialogStackPreviousProps>).props.className
+      ),
       ...props,
     });
   }
