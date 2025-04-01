@@ -7,7 +7,7 @@
     "@tiptap/core": "^2.11.5",
     "@tiptap/extension-character-count": "^2.11.5",
     "@tiptap/extension-code-block-lowlight": "^2.11.5",
-    "@tiptap/extension-color": "^2.11.5",
+    "@tiptap/extension-color": "^2.11.7",
     "@tiptap/extension-placeholder": "^2.11.5",
     "@tiptap/extension-subscript": "^2.11.5",
     "@tiptap/extension-superscript": "^2.11.5",
