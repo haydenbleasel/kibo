@@ -74,7 +74,7 @@
     "@types/lodash.groupby": "^4.6.9",
     "@types/lodash.merge": "^4.6.9",
     "@types/mdx": "^2.0.13",
-    "@types/node": "22.13.8",
+    "@types/node": "22.13.14",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "autoprefixer": "^10.4.20",
