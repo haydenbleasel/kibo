@@ -43,7 +43,7 @@
     "@t3-oss/env-nextjs": "^0.12.0",
     "@tailwindcss/postcss": "^4.0.9",
     "@vercel/analytics": "^1.5.0",
-    "@vercel/og": "^0.6.5",
+    "@vercel/og": "^0.6.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
