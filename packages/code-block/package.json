@@ -6,7 +6,7 @@
     "@icons-pack/react-simple-icons": "^12.0.0",
     "@radix-ui/react-use-controllable-state": "^1.1.0",
     "@repo/shadcn-ui": "workspace:*",
-    "@shikijs/transformers": "^3.1.0",
+    "@shikijs/transformers": "^3.2.1",
     "lucide-react": "^0.477.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
