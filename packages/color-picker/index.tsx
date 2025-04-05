@@ -130,14 +130,13 @@ export const ColorPickerSelection = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const { hue, setSaturation } = useColorPicker();
+  const { hue, setSaturation, setLightness } = useColorPicker();
 
   const handlePointerMove = useCallback(
     (event: PointerEvent) => {
       if (!isDragging || !containerRef.current) {
         return;
       }
-
       const rect = containerRef.current.getBoundingClientRect();
       const x = Math.max(
         0,
@@ -147,21 +146,27 @@ export const ColorPickerSelection = ({
         0,
         Math.min(1, (event.clientY - rect.top) / rect.height)
       );
-
       setPosition({ x, y });
-      setSaturation((1 - y) * 100);
+      setSaturation(x * 100);
+      const topLightness = x < 0.01 ? 100 : 50 + (50 * (1 - x));
+      const lightness = topLightness * (1 - y);
+      
+      setLightness(lightness);
     },
-    [isDragging, setSaturation]
+    [isDragging, setSaturation, setLightness]
   );
 
   useEffect(() => {
+    const handlePointerUp = () => setIsDragging(false);
+    
     if (isDragging) {
       window.addEventListener('pointermove', handlePointerMove);
-      window.addEventListener('pointerup', () => setIsDragging(false));
+      window.addEventListener('pointerup', handlePointerUp);
     }
+    
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('pointerup', () => setIsDragging(false));
+      window.removeEventListener('pointerup', handlePointerUp);
     };
   }, [isDragging, handlePointerMove]);
 
@@ -173,7 +178,9 @@ export const ColorPickerSelection = ({
         className
       )}
       style={{
-        background: `linear-gradient(0deg,rgb(0,0,0),transparent),linear-gradient(90deg,rgb(255,255,255),hsl(${hue},100%,50%))`,
+        background: `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
+                     linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)),
+                     hsl(${hue}, 100%, 50%)`
       }}
       onPointerDown={(e) => {
         e.preventDefault();
@@ -183,7 +190,7 @@ export const ColorPickerSelection = ({
       {...props}
     >
       <div
-        className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white"
+        className="pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white -translate-x-1/2 -translate-y-1/2"
         style={{
           left: `${position.x * 100}%`,
           top: `${position.y * 100}%`,
@@ -378,9 +385,7 @@ export const ColorPickerFormat = ({
         )}
         {...props}
       >
-        <span className="-translate-y-1/2 absolute top-1/2 left-2 text-xs">
-          #
-        </span>
+       
         <Input
           type="text"
           value={hex}
