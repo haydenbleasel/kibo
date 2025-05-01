@@ -26,11 +26,7 @@ const Example = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="flex size-full items-end justify-center gap-4 bg-secondary p-8">
-      <AIResponse>{content}</AIResponse>
-    </div>
-  );
+  return <AIResponse>{content}</AIResponse>;
 };
 
 export default Example;

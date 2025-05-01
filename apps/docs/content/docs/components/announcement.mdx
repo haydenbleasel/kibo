@@ -8,28 +8,7 @@ icon: Megaphone
   { name: 'Lucide', url: 'https://lucide.dev/' },
 ]} />
 
-<Preview name="announcement" code={`'use client';
-
-import {
-  Announcement,
-  AnnouncementTag,
-  AnnouncementTitle,
-} from '@/components/ui/kibo-ui/announcement';
-import { ArrowUpRightIcon } from 'lucide-react';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4 bg-secondary">
-    <Announcement>
-      <AnnouncementTag>Latest update</AnnouncementTag>
-      <AnnouncementTitle>
-        New feature added
-        <ArrowUpRightIcon size={16} className="shrink-0 text-muted-foreground" />
-      </AnnouncementTitle>
-    </Announcement>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="announcement.tsx" />
 
 ## Installation
 
@@ -48,77 +27,11 @@ export default Example;`} />
 
 ### Themes
 
-<Preview name="announcement" code={`'use client';
-
-import {
-  Announcement,
-  AnnouncementTag,
-  AnnouncementTitle,
-} from '@/components/ui/kibo-ui/announcement';
-import { ArrowUpRightIcon } from 'lucide-react';
-
-const Example = () => (
-  <div className="flex flex-col w-full h-screen items-center justify-center gap-4">
-
-    <Announcement themed className="bg-rose-100 text-rose-700">
-      <AnnouncementTag>Error</AnnouncementTag>
-      <AnnouncementTitle>
-        Something went wrong
-        <ArrowUpRightIcon size={16} className="shrink-0 opacity-70" />
-      </AnnouncementTitle>
-    </Announcement>
-
-    <Announcement themed className="bg-emerald-100 text-emerald-700">
-      <AnnouncementTag>Success</AnnouncementTag>
-      <AnnouncementTitle>
-        New feature added
-        <ArrowUpRightIcon size={16} className="shrink-0 opacity-70" />
-      </AnnouncementTitle>
-    </Announcement>
-
-    <Announcement themed className="bg-orange-100 text-orange-700">
-      <AnnouncementTag>Warning</AnnouncementTag>
-      <AnnouncementTitle>
-        Approaching your limit
-        <ArrowUpRightIcon size={16} className="shrink-0 opacity-70" />
-      </AnnouncementTitle>
-    </Announcement>
-
-    <Announcement themed className="bg-sky-100 text-sky-700">
-      <AnnouncementTag>Info</AnnouncementTag>
-      <AnnouncementTitle>
-        Welcome to the platform
-        <ArrowUpRightIcon size={16} className="shrink-0 opacity-70" />
-      </AnnouncementTitle>
-    </Announcement>
-  
-  </div>
-);
-
-export default Example;`} />
+<Preview path="announcement-themes.tsx" />
 
 ### Without Tag
 
-<Preview name="announcement" code={`'use client';
-
-import {
-  Announcement,
-  AnnouncementTitle,
-} from '@/components/ui/kibo-ui/announcement';
-import { ArrowUpRightIcon } from 'lucide-react';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4 bg-secondary">
-    <Announcement>
-      <AnnouncementTitle>
-        New feature added
-        <ArrowUpRightIcon size={16} className="shrink-0 text-muted-foreground" />
-      </AnnouncementTitle>
-    </Announcement>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="announcement-tagless.tsx" />
 
 ## Props
 
