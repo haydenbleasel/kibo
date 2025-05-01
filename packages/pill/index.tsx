@@ -106,7 +106,6 @@ export const PillIndicator = ({
 );
 
 export type PillDeltaProps = {
-  children: ReactNode;
   className?: string;
   delta: number;
 };
