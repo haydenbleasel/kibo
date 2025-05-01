@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { CodeBlockContent } from '@repo/code-block/server';
 import {
   Tabs,
   TabsContent,
@@ -9,6 +8,7 @@ import {
 } from '@repo/shadcn-ui/components/ui/tabs';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { CodeIcon, EyeIcon } from 'lucide-react';
+import { PreviewCode } from './code';
 
 type PreviewProps = {
   path: string;
@@ -16,10 +16,14 @@ type PreviewProps = {
 };
 
 export const Preview = async ({ path, className }: PreviewProps) => {
-  const resolvedPath = join('..', 'examples', `${path}.tsx`);
-  const filePath = join(process.cwd(), 'content', resolvedPath);
-  const code = await readFile(filePath, 'utf-8');
-  const Component = await import(resolvedPath).then((module) => module.default);
+  const code = await readFile(
+    join(process.cwd(), 'examples', `${path}.tsx`),
+    'utf-8'
+  );
+
+  const Component = await import(`../../examples/${path}.tsx`).then(
+    (module) => module.default
+  );
 
   const parsedCode = code
     .replace(/@repo\/shadcn-ui\//g, '@/')
@@ -47,18 +51,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
         value="code"
         className="size-full overflow-y-auto bg-background"
       >
-        <CodeBlockContent
-          className={cn(
-            '[&_code]:rounded-none [&_code]:border-none [&_code]:p-4 [&_pre]:p-0',
-            '[&_.shiki]:!bg-transparent dark:[&_.shiki]:!bg-transparent'
-          )}
-          themes={{
-            light: 'github-light',
-            dark: 'github-dark',
-          }}
-        >
-          {parsedCode}
-        </CodeBlockContent>
+        <PreviewCode code={parsedCode} language="tsx" filename="index.tsx" />
       </TabsContent>
       <TabsContent
         value="preview"

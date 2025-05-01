@@ -18,11 +18,13 @@ import {
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
 } from '@repo/code-block';
+import type { HTMLAttributes } from 'react';
 import ReactMarkdown, { type Options } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-export type AIResponseProps = Options & {
-  className?: string;
+export type AIResponseProps = HTMLAttributes<HTMLDivElement> & {
+  options?: Options;
+  children: Options['children'];
 };
 
 const components: Options['components'] = {
@@ -97,17 +99,25 @@ const components: Options['components'] = {
   },
 };
 
-export const AIResponse = ({ className, ...props }: AIResponseProps) => (
+export const AIResponse = ({
+  className,
+  options,
+  children,
+  ...props
+}: AIResponseProps) => (
   <div
     className={cn(
       'prose dark:prose-invert size-full prose-pre:p-0 prose-p:leading-relaxed',
       className
     )}
+    {...props}
   >
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       components={components}
-      {...props}
-    />
+      {...options}
+    >
+      {children}
+    </ReactMarkdown>
   </div>
 );

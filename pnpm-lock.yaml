@@ -198,6 +198,9 @@ importers:
       schema-dts:
         specifier: ^1.1.5
         version: 1.1.5
+      shiki:
+        specifier: ^3.3.0
+        version: 3.3.0
       sonner:
         specifier: ^2.0.3
         version: 2.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
