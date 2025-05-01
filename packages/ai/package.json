@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@repo/code-block": "workspace:*",
     "@repo/shadcn-ui": "workspace:*",
     "lucide-react": "^0.488.0",
+    "motion": "^12.7.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-markdown": "^10.1.0",

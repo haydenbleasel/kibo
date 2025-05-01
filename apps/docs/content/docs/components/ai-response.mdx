@@ -1,11 +1,13 @@
 ---
 title: AI Response
-description: A component that displays a response from a large language model.
+description: A component that renders a Markdown response from a large language model.
 icon: AArrowDown
 ---
 
 <PoweredBy packages={[
   { name: 'react-markdown', url: 'https://remarkjs.github.io/react-markdown/' },
+  { name: 'remark-gfm', url: 'https://github.com/remarkjs/remark-gfm' },
+  { name: 'code-block', url: 'https://www.kibo-ui.com/components/code-block' },
 ]} />
 
 <Preview path="ai-response" />

@@ -253,12 +253,18 @@ importers:
 
   packages/ai:
     dependencies:
+      '@repo/code-block':
+        specifier: workspace:*
+        version: link:../code-block
       '@repo/shadcn-ui':
         specifier: workspace:*
         version: link:../shadcn-ui
       lucide-react:
         specifier: ^0.488.0
         version: 0.488.0(react@19.1.0)
+      motion:
+        specifier: ^12.7.2
+        version: 12.7.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0

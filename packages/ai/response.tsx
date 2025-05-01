@@ -1,6 +1,23 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import {
+  type BundledLanguage,
+  CodeBlock,
+  CodeBlockBody,
+  CodeBlockContent,
+  CodeBlockCopyButton,
+  CodeBlockFilename,
+  CodeBlockFiles,
+  CodeBlockHeader,
+  CodeBlockItem,
+  type CodeBlockProps,
+  CodeBlockSelect,
+  CodeBlockSelectContent,
+  CodeBlockSelectItem,
+  CodeBlockSelectTrigger,
+  CodeBlockSelectValue,
+} from '@repo/code-block';
 import ReactMarkdown, { type Options } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -8,50 +25,89 @@ export type AIResponseProps = Options & {
   className?: string;
 };
 
-export function AIResponse({ className, ...props }: AIResponseProps) {
-  return (
-    <div
-      className={cn(
-        'prose dark:prose-invert prose-pre:p-0 prose-p:leading-relaxed',
-        className
-      )}
+const components: Options['components'] = {
+  p: ({ children }) => <p className="mb-2">{children}</p>,
+  a: ({ href, children }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-medium underline underline-offset-4"
     >
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          p: ({ children }) => <p className="mb-2">{children}</p>,
-          a: ({ href, children }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              {children}
-            </a>
-          ),
-          code: ({ node, inline, className, children, ...props }) => {
-            if (inline) {
-              return (
-                <code
-                  className="rounded bg-muted px-1 py-0.5 font-mono text-sm"
-                  {...props}
-                >
-                  {children}
-                </code>
-              );
-            }
-            return (
-              <pre className="mt-2 mb-2 overflow-x-auto rounded-lg bg-muted p-4">
-                <code className="font-mono text-sm" {...props}>
-                  {children}
-                </code>
-              </pre>
-            );
-          },
-        }}
-        {...props}
-      />
-    </div>
-  );
-}
+      {children}
+    </a>
+  ),
+  code: ({ node, className, children }) => {
+    let language = 'javascript';
+
+    if (typeof node?.properties?.className === 'string') {
+      language = node.properties.className.replace('language-', '');
+    }
+
+    const data: CodeBlockProps['data'] = [
+      {
+        language,
+        filename: 'index.js',
+        code: children as string,
+      },
+    ];
+
+    return (
+      <CodeBlock
+        className={cn('my-4', className)}
+        data={data}
+        defaultValue={data[0].language}
+      >
+        <CodeBlockHeader>
+          <CodeBlockFiles>
+            {(item) => (
+              <CodeBlockFilename key={item.language} value={item.language}>
+                {item.filename}
+              </CodeBlockFilename>
+            )}
+          </CodeBlockFiles>
+          <CodeBlockSelect>
+            <CodeBlockSelectTrigger>
+              <CodeBlockSelectValue />
+            </CodeBlockSelectTrigger>
+            <CodeBlockSelectContent>
+              {(item) => (
+                <CodeBlockSelectItem key={item.language} value={item.language}>
+                  {item.language}
+                </CodeBlockSelectItem>
+              )}
+            </CodeBlockSelectContent>
+          </CodeBlockSelect>
+          <CodeBlockCopyButton
+            onCopy={() => console.log('Copied code to clipboard')}
+            onError={() => console.error('Failed to copy code to clipboard')}
+          />
+        </CodeBlockHeader>
+        <CodeBlockBody>
+          {(item) => (
+            <CodeBlockItem key={item.language} value={item.language}>
+              <CodeBlockContent language={item.language as BundledLanguage}>
+                {item.code}
+              </CodeBlockContent>
+            </CodeBlockItem>
+          )}
+        </CodeBlockBody>
+      </CodeBlock>
+    );
+  },
+};
+
+export const AIResponse = ({ className, ...props }: AIResponseProps) => (
+  <div
+    className={cn(
+      'prose dark:prose-invert size-full prose-pre:p-0 prose-p:leading-relaxed',
+      className
+    )}
+  >
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={components}
+      {...props}
+    />
+  </div>
+);
