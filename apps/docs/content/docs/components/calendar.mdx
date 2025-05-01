@@ -11,50 +11,7 @@ icon: CalendarRange
   { name: 'Lucide', url: 'https://lucide.dev/' },
 ]} />
 
-<Preview name="calendar" code={`'use client';
-
-import {
-  CalendarBody,
-  CalendarDate,
-  CalendarDatePagination,
-  CalendarDatePicker,
-  CalendarHeader,
-  CalendarItem,
-  CalendarMonthPicker,
-  CalendarProvider,
-  CalendarYearPicker,
-} from '@/components/ui/kibo-ui/calendar';
-import { exampleFeatures } from '@/lib/content';
-
-const earliestYear =
-  exampleFeatures
-    .map((feature) => feature.startAt.getFullYear())
-    .sort()
-    .at(0) ?? new Date().getFullYear();
-
-const latestYear =
-  exampleFeatures
-    .map((feature) => feature.endAt.getFullYear())
-    .sort()
-    .at(-1) ?? new Date().getFullYear();
-
-const Example = () => (
-  <CalendarProvider>
-    <CalendarDate>
-      <CalendarDatePicker>
-        <CalendarMonthPicker />
-        <CalendarYearPicker start={earliestYear} end={latestYear} />
-      </CalendarDatePicker>
-      <CalendarDatePagination />
-    </CalendarDate>
-    <CalendarHeader />
-    <CalendarBody features={exampleFeatures}>
-      {({ feature }) => <CalendarItem key={feature.id} feature={feature} />}
-    </CalendarBody>
-  </CalendarProvider>
-);
-
-export default Example;`} />
+<Preview path="calendar" />
 
 ## Installation
 
@@ -73,43 +30,7 @@ export default Example;`} />
 
 ### Without a date picker
 
-<Preview name="calendar" code={`'use client';
-
-import {
-  CalendarBody,
-  CalendarDate,
-  CalendarDatePagination,
-  CalendarDatePicker,
-  CalendarHeader,
-  CalendarItem,
-  CalendarMonthPicker,
-  CalendarProvider,
-  CalendarYearPicker,
-} from '@/components/ui/kibo-ui/calendar';
-import { exampleFeatures } from '@/lib/content';
-
-const earliestYear =
-  exampleFeatures
-    .map((feature) => feature.startAt.getFullYear())
-    .sort()
-    .at(0) ?? new Date().getFullYear();
-
-const latestYear =
-  exampleFeatures
-    .map((feature) => feature.endAt.getFullYear())
-    .sort()
-    .at(-1) ?? new Date().getFullYear();
-
-const Example = () => (
-  <CalendarProvider>
-    <CalendarHeader />
-    <CalendarBody features={exampleFeatures}>
-      {({ feature }) => <CalendarItem key={feature.id} feature={feature} />}
-    </CalendarBody>
-  </CalendarProvider>
-);
-
-export default Example;`} />
+<Preview path="calendar-headless" />
 
 ## Props
 
