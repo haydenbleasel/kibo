@@ -41,7 +41,7 @@
     "@sentry/nextjs": "^9.12.0",
     "@t3-oss/env-core": "^0.12.0",
     "@t3-oss/env-nextjs": "^0.12.0",
-    "@tailwindcss/postcss": "^4.1.4",
+    "@tailwindcss/postcss": "^4.1.5",
     "@vercel/analytics": "^1.5.0",
     "@vercel/og": "^0.6.8",
     "class-variance-authority": "^0.7.1",
