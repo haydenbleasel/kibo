@@ -26,7 +26,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
     <Tabs
       defaultValue="preview"
       className={cn(
-        'not-prose h-full max-h-[30rem] w-full gap-0 overflow-hidden rounded-lg border',
+        'not-prose h-full max-h-[30rem] w-full gap-0 overflow-hidden rounded-lg border bg-secondary/50',
         className
       )}
     >
@@ -40,12 +40,12 @@ export const Preview = async ({ path, className }: PreviewProps) => {
           Preview
         </TabsTrigger>
       </TabsList>
-      <TabsContent
-        value="code"
-        className="size-full overflow-y-auto bg-background"
-      >
+      <TabsContent value="code" className="size-full overflow-y-auto">
         <CodeBlockContent
-          className="[&_code]:rounded-none [&_code]:border-none [&_code]:p-4 [&_pre]:p-0"
+          className={cn(
+            '[&_code]:rounded-none [&_code]:border-none [&_code]:p-4 [&_pre]:p-0',
+            '[&_.shiki]:!bg-transparent dark:[&_.shiki]:!bg-transparent'
+          )}
           themes={{
             light: 'github-light',
             dark: 'github-dark',
@@ -56,7 +56,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
       </TabsContent>
       <TabsContent
         value="preview"
-        className="relative flex size-full flex-col items-center justify-center gap-4 overflow-y-auto bg-secondary/50 p-8"
+        className="relative flex size-full flex-col items-center justify-center gap-4 overflow-y-auto p-8"
       >
         <div className="absolute top-8 right-0 left-0 border border-border/50 border-dashed" />
         <div className="absolute right-0 bottom-8 left-0 border border-border/50 border-dashed" />
