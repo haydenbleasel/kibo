@@ -1,16 +1,18 @@
 'use client';
 
 import {
-  CalendarBody,
-  CalendarDate,
-  CalendarDatePagination,
-  CalendarDatePicker,
-  CalendarHeader,
-  CalendarItem,
-  CalendarMonthPicker,
-  CalendarProvider,
-  CalendarYearPicker,
-} from '@repo/calendar';
+  GanttFeatureItem,
+  GanttFeatureList,
+  GanttFeatureListGroup,
+  GanttHeader,
+  GanttMarker,
+  GanttProvider,
+  GanttSidebar,
+  GanttSidebarGroup,
+  GanttSidebarItem,
+  GanttTimeline,
+  GanttToday,
+} from '@repo/gantt';
 import {
   addMonths,
   endOfMonth,
@@ -350,32 +352,95 @@ const exampleFeatures = [
   },
 ];
 
-const earliestYear =
-  exampleFeatures
-    .map((feature) => feature.startAt.getFullYear())
-    .sort()
-    .at(0) ?? new Date().getFullYear();
+const exampleMarkers = [
+  {
+    id: '1',
+    date: startOfMonth(subMonths(today, 3)),
+    label: 'Project Kickoff',
+    className: 'bg-blue-100 text-blue-900',
+  },
+  {
+    id: '2',
+    date: subMonths(endOfMonth(today), 2),
+    label: 'Phase 1 Completion',
+    className: 'bg-green-100 text-green-900',
+  },
+  {
+    id: '3',
+    date: startOfMonth(addMonths(today, 3)),
+    label: 'Beta Release',
+    className: 'bg-purple-100 text-purple-900',
+  },
+  {
+    id: '4',
+    date: endOfMonth(addMonths(today, 6)),
+    label: 'Version 1.0 Launch',
+    className: 'bg-red-100 text-red-900',
+  },
+  {
+    id: '5',
+    date: startOfMonth(addMonths(today, 9)),
+    label: 'User Feedback Review',
+    className: 'bg-orange-100 text-orange-900',
+  },
+  {
+    id: '6',
+    date: endOfMonth(addMonths(today, 12)),
+    label: 'Annual Performance Evaluation',
+    className: 'bg-teal-100 text-teal-900',
+  },
+];
 
-const latestYear =
-  exampleFeatures
-    .map((feature) => feature.endAt.getFullYear())
-    .sort()
-    .at(-1) ?? new Date().getFullYear();
+const Example = () => {
+  const groupedFeatures: Record<string, typeof exampleFeatures> =
+    exampleFeatures.reduce<Record<string, typeof exampleFeatures>>(
+      (groups, feature) => {
+        const groupName = feature.group.name;
+        return {
+          ...groups,
+          [groupName]: [...(groups[groupName] || []), feature],
+        };
+      },
+      {}
+    );
 
-const Example = () => (
-  <CalendarProvider>
-    <CalendarDate>
-      <CalendarDatePicker>
-        <CalendarMonthPicker />
-        <CalendarYearPicker start={earliestYear} end={latestYear} />
-      </CalendarDatePicker>
-      <CalendarDatePagination />
-    </CalendarDate>
-    <CalendarHeader />
-    <CalendarBody features={exampleFeatures}>
-      {({ feature }) => <CalendarItem key={feature.id} feature={feature} />}
-    </CalendarBody>
-  </CalendarProvider>
-);
+  const sortedGroupedFeatures = Object.fromEntries(
+    Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
+      nameA.localeCompare(nameB)
+    )
+  );
+
+  return (
+    <GanttProvider range="monthly" zoom={100} className="border">
+      <GanttSidebar>
+        {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+          <GanttSidebarGroup key={group} name={group}>
+            {features.map((feature) => (
+              <GanttSidebarItem key={feature.id} feature={feature} />
+            ))}
+          </GanttSidebarGroup>
+        ))}
+      </GanttSidebar>
+      <GanttTimeline>
+        <GanttHeader />
+        <GanttFeatureList>
+          {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+            <GanttFeatureListGroup key={group}>
+              {features.map((feature) => (
+                <div className="flex" key={feature.id}>
+                  <GanttFeatureItem {...feature} />
+                </div>
+              ))}
+            </GanttFeatureListGroup>
+          ))}
+        </GanttFeatureList>
+        {exampleMarkers.map((marker) => (
+          <GanttMarker key={marker.id} {...marker} />
+        ))}
+        <GanttToday />
+      </GanttTimeline>
+    </GanttProvider>
+  );
+};
 
 export default Example;

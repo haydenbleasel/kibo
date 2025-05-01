@@ -43,7 +43,10 @@ export const Preview = async ({ path, className }: PreviewProps) => {
           Preview
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="code" className="size-full overflow-y-auto">
+      <TabsContent
+        value="code"
+        className="size-full overflow-y-auto bg-background"
+      >
         <CodeBlockContent
           className={cn(
             '[&_code]:rounded-none [&_code]:border-none [&_code]:p-4 [&_pre]:p-0',

@@ -13,15 +13,16 @@ import {
   subDays,
   subMonths,
 } from 'date-fns';
+
 const today = new Date();
 
-export const exampleStatuses = [
+const exampleStatuses = [
   { id: '1', name: 'Planned', color: '#6B7280' },
   { id: '2', name: 'In Progress', color: '#F59E0B' },
   { id: '3', name: 'Done', color: '#10B981' },
 ];
 
-export const exampleFeatures = [
+const exampleFeatures = [
   {
     id: '1',
     name: 'AI Scene Analysis',
@@ -341,45 +342,6 @@ export const exampleFeatures = [
     },
     initiative: { id: '3', name: 'Cloud Migration' },
     release: { id: '7', name: 'v1.6' },
-  },
-];
-
-export const exampleMarkers = [
-  {
-    id: '1',
-    date: startOfMonth(subMonths(today, 3)),
-    label: 'Project Kickoff',
-    className: 'bg-blue-100 text-blue-900',
-  },
-  {
-    id: '2',
-    date: subMonths(endOfMonth(today), 2),
-    label: 'Phase 1 Completion',
-    className: 'bg-green-100 text-green-900',
-  },
-  {
-    id: '3',
-    date: startOfMonth(addMonths(today, 3)),
-    label: 'Beta Release',
-    className: 'bg-purple-100 text-purple-900',
-  },
-  {
-    id: '4',
-    date: endOfMonth(addMonths(today, 6)),
-    label: 'Version 1.0 Launch',
-    className: 'bg-red-100 text-red-900',
-  },
-  {
-    id: '5',
-    date: startOfMonth(addMonths(today, 9)),
-    label: 'User Feedback Review',
-    className: 'bg-orange-100 text-orange-900',
-  },
-  {
-    id: '6',
-    date: endOfMonth(addMonths(today, 12)),
-    label: 'Annual Performance Evaluation',
-    className: 'bg-teal-100 text-teal-900',
   },
 ];
 
