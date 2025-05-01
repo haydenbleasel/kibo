@@ -24,7 +24,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
 
   return (
     <Tabs
-      defaultValue="code"
+      defaultValue="preview"
       className={cn(
         'h-full max-h-[30rem] w-full gap-0 overflow-hidden rounded-lg border',
         className
@@ -56,7 +56,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
       </TabsContent>
       <TabsContent
         value="preview"
-        className="size-full overflow-y-auto bg-background"
+        className="flex size-full flex-col items-center justify-center gap-4 overflow-y-auto bg-secondary p-8"
       >
         <Component />
       </TabsContent>
