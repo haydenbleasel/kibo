@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@radix-ui/react-use-controllable-state": "^1.1.1",
+    "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@repo/shadcn-ui": "workspace:*",
-    "lucide-react": "^0.488.0",
-    "motion": "^12.7.2",
+    "lucide-react": "^0.503.0",
+    "motion": "^12.9.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-fast-marquee": "^1.6.5"

@@ -6,7 +6,7 @@
     "@repo/shadcn-ui": "workspace:*",
     "date-fns": "^4.1.0",
     "jotai": "^2.12.3",
-    "lucide-react": "^0.488.0",
+    "lucide-react": "^0.503.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

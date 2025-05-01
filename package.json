@@ -21,18 +21,18 @@
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^22.14.1",
-    "turbo": "^2.5.0",
+    "@types/node": "^22.15.3",
+    "turbo": "^2.5.2",
     "typescript": "^5.8.3",
     "ultracite": "^4.2.1"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@10.10.0",
   "type": "module",
   "dependencies": {
     "tsup": "^8.4.0",
-    "zod": "^3.24.2"
+    "zod": "^3.24.3"
   }
 }

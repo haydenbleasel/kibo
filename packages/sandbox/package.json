@@ -5,7 +5,7 @@
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.20.0",
     "@repo/shadcn-ui": "workspace:*",
-    "lucide-react": "^0.488.0",
+    "lucide-react": "^0.503.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
