@@ -53,6 +53,7 @@ import {
   type EditorProviderProps as TiptapEditorProviderProps,
   useCurrentEditor,
 } from '@tiptap/react';
+export type { Editor, JSONContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Suggestion, { type SuggestionOptions } from '@tiptap/suggestion';
 import Fuse from 'fuse.js';
