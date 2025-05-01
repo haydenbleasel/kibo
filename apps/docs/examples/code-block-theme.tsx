@@ -77,8 +77,8 @@ const Example = () => (
           value={item.language}
           language={item.language as BundledLanguage}
           themes={{
-            light: 'github-light',
-            dark: 'github-dark-default',
+            light: 'vitesse-light',
+            dark: 'vitesse-dark',
           }}
         >
           {item.code}
