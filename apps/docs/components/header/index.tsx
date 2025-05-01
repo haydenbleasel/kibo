@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Grid from './grid.svg';
 
 export const Header = () => (
-  <span className="pointer-events-none absolute inset-0 flex h-[64rem] select-none justify-center overflow-hidden">
+  <span className="-z-1 pointer-events-none absolute inset-0 flex h-[64rem] select-none justify-center overflow-hidden">
     <Image
       src={Grid}
       alt="Header Background"

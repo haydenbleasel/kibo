@@ -4,35 +4,7 @@ description: Avatar Stack is a component that allows you to stack and overlap av
 icon: Users
 ---
 
-<Preview name="avatar-stack" code={`'use client';
-
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { AvatarStack } from '@/components/ui/kibo-ui/avatar-stack';
-
-const Example = () => (
-  <div className="flex h-screen w-full items-center justify-center bg-secondary p-8">
-    <AvatarStack>
-      <Avatar>
-        <AvatarImage src="https://github.com/haydenbleasel.png" />
-        <AvatarFallback>HB</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://github.com/leerob.png" />
-        <AvatarFallback>LR</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://github.com/serafimcloud.png" />
-        <AvatarFallback>SC</AvatarFallback>
-      </Avatar>
-    </AvatarStack>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="avatar-stack" />
 
 ## Installation
 
@@ -47,35 +19,7 @@ export default Example;`} />
 
 ### With hover animation
 
-<Preview name="avatar-stack" code={`'use client';
-
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { AvatarStack } from '@/components/ui/kibo-ui/avatar-stack';
-
-const Example = () => (
-  <div className="flex h-screen w-full items-center justify-center bg-secondary p-8">
-    <AvatarStack animate>
-      <Avatar>
-        <AvatarImage src="https://github.com/haydenbleasel.png" />
-        <AvatarFallback>HB</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://github.com/leerob.png" />
-        <AvatarFallback>LR</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://github.com/serafimcloud.png" />
-        <AvatarFallback>SC</AvatarFallback>
-      </Avatar>
-    </AvatarStack>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="avatar-stack-hover" />
 
 ## Props
 

@@ -16,7 +16,7 @@ type PreviewProps = {
 };
 
 export const Preview = async ({ path, className }: PreviewProps) => {
-  const resolvedPath = join('..', 'examples', path);
+  const resolvedPath = join('..', 'examples', `${path}.tsx`);
   const filePath = join(process.cwd(), 'content', resolvedPath);
   const code = await readFile(filePath, 'utf-8');
   const Component = await import(resolvedPath).then((module) => module.default);
@@ -26,7 +26,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
     <Tabs
       defaultValue="preview"
       className={cn(
-        'h-full max-h-[30rem] w-full gap-0 overflow-hidden rounded-lg border',
+        'not-prose h-full max-h-[30rem] w-full gap-0 overflow-hidden rounded-lg border',
         className
       )}
     >
