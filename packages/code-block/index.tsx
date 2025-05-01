@@ -331,7 +331,7 @@ export const CodeBlock = ({
   return (
     <CodeBlockContext.Provider value={{ value, onValueChange, data }}>
       <div
-        className={cn('overflow-hidden rounded-md border', className)}
+        className={cn('size-full overflow-hidden rounded-md border', className)}
         {...props}
       />
     </CodeBlockContext.Provider>
