@@ -20,13 +20,13 @@ const Layout = ({ children }: LayoutProps) => (
       <ThemeProvider>
         <RootProvider>
           <TooltipProvider>{children}</TooltipProvider>
-          <Toaster />
         </RootProvider>
         <VercelAnalytics />
         {env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
       </ThemeProvider>
+      <Toaster />
     </body>
   </html>
 );
