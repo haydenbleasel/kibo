@@ -6,6 +6,12 @@ type PoweredByProps = {
   packages: { name: string; url: string }[];
 };
 
+const getHostname = (url: string) => {
+  const parsedUrl = new URL(url);
+
+  return parsedUrl.hostname.replace('www.', '');
+};
+
 export const PoweredBy = ({ packages }: PoweredByProps) => (
   <div className="not-prose mb-8 flex flex-col gap-2">
     <p className="text-muted-foreground text-sm">Powered by</p>
@@ -22,7 +28,7 @@ export const PoweredBy = ({ packages }: PoweredByProps) => (
           )}
         >
           <Image
-            src={`https://img.logo.dev/${new URL(url).hostname}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
+            src={`https://img.logo.dev/${getHostname(url)}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
             alt={name}
             width={14}
             height={14}
