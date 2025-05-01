@@ -1,0 +1,14 @@
+'use client';
+
+import { Rating, RatingButton } from '@repo/rating';
+import { HeartIcon } from 'lucide-react';
+
+const Example = () => (
+  <Rating defaultValue={3}>
+    {Array.from({ length: 5 }).map((_, index) => (
+      <RatingButton key={index} icon={<HeartIcon />} />
+    ))}
+  </Rating>
+);
+
+export default Example;
