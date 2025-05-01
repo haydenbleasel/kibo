@@ -19,29 +19,34 @@ import type { BundledLanguage } from '@repo/code-block';
 
 const code = [
   {
-    language: 'jsx',
-    filename: 'MyComponent.jsx',
-    code: `function MyComponent(props) {
-  return (
-    <div>
-      <h1>Hello, random user!</h1> // [!code --]
-      <h1>Hello, {props.name}!</h1> // [!code ++]
-      <p>This is an example React component.</p>
-    </div>
-  );
+    language: 'js',
+    filename: 'utils.js',
+    code: `function calculateTotal(items) {
+  let total = 0;
+  for (let i = 0; i < items.length; i++) {
+    total += items[i].price * items[i].quantity; // [!code --]
+    const itemTotal = items[i].price * items[i].quantity; // [!code ++]
+    total += itemTotal; // [!code ++]
+  }
+  return total;
 }`,
   },
   {
-    language: 'tsx',
-    filename: 'MyComponent.tsx',
-    code: `function MyComponent(props: { name: string }) {
-  return (
-    <div>
-      <h1>Hello, random user!</h1> // [!code --]
-      <h1>Hello, {props.name}!</h1> // [!code ++]
-      <p>This is an example React component.</p>
-    </div>
-  );
+    language: 'ts',
+    filename: 'utils.ts',
+    code: `interface Item {
+  price: number;
+  quantity: number;
+}
+
+function calculateTotal(items: Item[]): number {
+  let total = 0;
+  for (let i = 0; i < items.length; i++) {
+    total += items[i].price * items[i].quantity; // [!code --]
+    const itemTotal = items[i].price * items[i].quantity; // [!code ++]
+    total += itemTotal; // [!code ++]
+  }
+  return total;
 }`,
   },
 ];

@@ -19,28 +19,28 @@ import type { BundledLanguage } from '@repo/code-block';
 
 const code = [
   {
-    language: 'jsx',
-    filename: 'MyComponent.jsx',
-    code: `function MyComponent(props) {
-  return (
-    <div>
-      <h1>Hello, random user!</h1> // [!code focus]
-      <p>This is an example React component.</p>
-    </div>
-  );
-}`,
+    language: 'js',
+    filename: 'utils.js',
+    code: `function calculateDiscount(price, percentage) {
+  const discount = price * (percentage / 100); // [!code focus]
+  return price - discount;
+}
+
+// Example usage
+const finalPrice = calculateDiscount(100, 20);
+console.log(finalPrice); // 80`,
   },
   {
-    language: 'tsx',
-    filename: 'MyComponent.tsx',
-    code: `function MyComponent(props: { name: string }) {
-  return (
-    <div>
-      <h1>Hello, {props.name}!</h1> // [!code focus]
-      <p>This is an example React component.</p>
-    </div>
-  );
-}`,
+    language: 'ts',
+    filename: 'utils.ts',
+    code: `function calculateDiscount(price: number, percentage: number): number {
+  const discount = price * (percentage / 100); // [!code focus]
+  return price - discount;
+}
+
+// Example usage
+const finalPrice: number = calculateDiscount(100, 20);
+console.log(finalPrice); // 80`,
   },
 ];
 
