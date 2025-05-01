@@ -8,17 +8,7 @@ icon: Loader
   { name: 'Lucide', url: 'https://lucide.dev/' },
 ]} />
 
-<Preview name="spinner" code={`'use client';
-
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4 bg-secondary">
-    <Spinner />
-  </div>
-);
-
-export default Example;`} />
+<Preview path="spinner" />
 
 ## Installation
 
@@ -33,38 +23,11 @@ export default Example;`} />
 
 ### Variants
 
-<Preview name="spinner" code={`'use client';
-
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
-
-const variants = ['default', 'circle', 'pinwheel', 'circle-filled', 'ellipsis', 'ring', 'bars', 'infinite'];
-
-const Example = () => (
-  <div className="grid grid-cols-4 w-full h-screen items-center justify-center gap-8 bg-secondary">
-    {variants.map((variant) => (
-      <div key={variant} className="flex flex-col items-center justify-center gap-4">
-        <Spinner key={variant} variant={variant} />
-        <span className="text-xs text-muted-foreground font-mono">{variant}</span>
-      </div>
-    ))}
-  </div>
-);
-
-export default Example;`} />
+<Preview path="spinner-variants" />
 
 ### Customization
 
-<Preview name="spinner" code={`'use client';
-
-import { Spinner } from '@/components/ui/kibo-ui/spinner';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center bg-secondary">
-    <Spinner size={64} className="text-blue-500" />
-  </div>
-);
-
-export default Example;`} />
+<Preview path="spinner-customization" />
 
 ## Props
 
