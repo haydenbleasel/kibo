@@ -115,7 +115,7 @@ export type RatingProps = {
 export const Rating = ({
   value: controlledValue,
   onValueChange: controlledOnValueChange,
-  defaultValue,
+  defaultValue = 0,
   onChange,
   readOnly = false,
   className,
