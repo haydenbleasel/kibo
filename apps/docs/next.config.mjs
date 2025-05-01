@@ -56,7 +56,19 @@ const config = {
       },
     ],
   },
+
   staticPageGenerationTimeout: 180,
+
+  experimental: {
+    turbo: {
+      rules: {
+        '*.html': {
+          loaders: ['raw-loader'],
+          as: '*.js',
+        },
+      },
+    },
+  },
 
   // biome-ignore lint/suspicious/useAwait: "redirects is async"
   async redirects() {

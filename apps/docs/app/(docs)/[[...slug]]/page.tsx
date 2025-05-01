@@ -41,7 +41,7 @@ const Page = async (props: PageProps) => {
       >
         <DocsTitle>{page.data.title}</DocsTitle>
         <DocsDescription>{page.data.description}</DocsDescription>
-        <DocsBody>
+        <DocsBody className="relative z-10">
           <MDX
             components={{
               ...defaultMdxComponents,
