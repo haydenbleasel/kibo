@@ -25,7 +25,11 @@ export const AvatarStack = ({
   >
     {Children.map(children, (child, index) => (
       <div
-        className={cn('shrink-0 overflow-hidden rounded-full', className)}
+        className={cn(
+          'size-full shrink-0 overflow-hidden rounded-full',
+          '[&_[data-slot="avatar"]]:size-full',
+          className
+        )}
         style={{
           width: size,
           height: size,

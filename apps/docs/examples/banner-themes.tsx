@@ -16,8 +16,8 @@ const Example = () => (
       className="w-full"
       style={
         {
-          '--primary': '0 72.2% 50.6%',
-          '--primary-foreground': '0 85.7% 97.3%',
+          '--primary': 'oklch(0.637 0.237 25.331)',
+          '--primary-foreground': 'oklch(0.971 0.013 17.38)',
         } as CSSProperties
       }
     >
@@ -34,8 +34,8 @@ const Example = () => (
       className="w-full"
       style={
         {
-          '--primary': '24.6 95% 53.1%',
-          '--primary-foreground': '60 9.1% 97.8%',
+          '--primary': 'oklch(0.705 0.213 47.604)',
+          '--primary-foreground': 'oklch(0.98 0.016 73.684)',
         } as CSSProperties
       }
     >
@@ -50,8 +50,8 @@ const Example = () => (
       className="w-full"
       style={
         {
-          '--primary': '142.1 76.2% 36.3%',
-          '--primary-foreground': '355.7 100% 97.3%',
+          '--primary': 'oklch(0.723 0.219 149.579)',
+          '--primary-foreground': 'oklch(0.982 0.018 155.826)',
         } as CSSProperties
       }
     >
