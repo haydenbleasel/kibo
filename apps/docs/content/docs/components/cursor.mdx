@@ -4,43 +4,7 @@ description: A cursor component, great for realtime interactive applications.
 icon: MousePointer2
 ---
 
-<Preview name="cursor" code={`'use client';
-
-import {
-  Cursor,
-  CursorName,
-  CursorMessage,
-  CursorPointer,
-  CursorBody,
-} from '@/components/ui/kibo-ui/cursor';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4">
-    <Cursor className="absolute top-24 left-24">
-      <CursorPointer className="text-emerald-500" />
-      <CursorBody className="bg-emerald-100 text-emerald-700">
-        <CursorName>@haydenbleasel</CursorName>
-        <CursorMessage>Can we adjust the color?</CursorMessage>
-      </CursorBody>
-    </Cursor>
-    <Cursor className="absolute top-48 right-32">
-      <CursorPointer className="text-rose-500" />
-      <CursorBody className="bg-rose-100 text-rose-700">
-        <CursorName>@leerob</CursorName>
-        <CursorMessage>One more thing...</CursorMessage>
-      </CursorBody>
-    </Cursor>
-    <Cursor className="absolute bottom-24 left-48">
-      <CursorPointer className="text-sky-500" />
-      <CursorBody className="bg-sky-100 text-sky-700">
-        <CursorName>@shadcn</CursorName>
-        <CursorMessage>Another new component?!!</CursorMessage>
-      </CursorBody>
-    </Cursor>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="cursor" />
 
 ## Installation
 
@@ -59,122 +23,23 @@ export default Example;`} />
 
 ### Cursor only
 
-<Preview name="cursor" code={`'use client';
-
-import {
-  Cursor,
-  CursorPointer,
-} from '@/components/ui/kibo-ui/cursor';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4">
-    <Cursor>
-      <CursorPointer />
-    </Cursor>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="cursor-only" />
 
 ### Cursor with name
 
-<Preview name="cursor" code={`'use client';
-
-import {
-  Cursor,
-  CursorPointer,
-  CursorBody,
-  CursorName,
-} from '@/components/ui/kibo-ui/cursor';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4">
-    <Cursor>
-      <CursorPointer />
-      <CursorBody>
-        <CursorName>Hayden</CursorName>
-      </CursorBody>
-    </Cursor>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="cursor-name" />
 
 ### Cursor with message
 
-<Preview name="cursor" code={`'use client';
-
-import {
-  Cursor,
-  CursorPointer,
-  CursorBody,
-  CursorMessage,
-} from '@/components/ui/kibo-ui/cursor';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4">
-    <Cursor color="#000000">
-      <CursorPointer />
-      <CursorBody>
-        <CursorMessage>That looks great!</CursorMessage>
-      </CursorBody>
-    </Cursor>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="cursor-message" />
 
 ### Cursor with name and message
 
-<Preview name="cursor" code={`'use client';
-
-import {
-  Cursor,
-  CursorPointer,
-  CursorBody,
-  CursorName,
-  CursorMessage,
-} from '@/components/ui/kibo-ui/cursor';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4">
-    <Cursor color="#000000">
-      <CursorPointer />
-      <CursorBody>
-        <CursorName>Hayden</CursorName>
-        <CursorMessage>That looks great!</CursorMessage>
-      </CursorBody>
-    </Cursor>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="cursor-name-message" />
 
 ### Cursor with custom color
 
-<Preview name="cursor" code={`'use client';
-
-import {
-  Cursor,
-  CursorPointer,
-  CursorBody,
-  CursorName,
-  CursorMessage,
-} from '@/components/ui/kibo-ui/cursor';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4">
-    <Cursor>
-      <CursorPointer className="text-indigo-500" />
-      <CursorBody className="bg-indigo-100 text-indigo-700">
-        <CursorName>@haydenbleasel</CursorName>
-        <CursorMessage>Can we adjust the color?</CursorMessage>
-      </CursorBody>
-    </Cursor>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="cursor-color" />
 
 ## Props
 
