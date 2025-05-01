@@ -56,8 +56,12 @@ export const Preview = async ({ path, className }: PreviewProps) => {
       </TabsContent>
       <TabsContent
         value="preview"
-        className="flex size-full flex-col items-center justify-center gap-4 overflow-y-auto bg-secondary p-8"
+        className="relative flex size-full flex-col items-center justify-center gap-4 overflow-y-auto bg-secondary/50 p-8"
       >
+        <div className="absolute top-8 right-0 left-0 border border-border/50 border-dashed" />
+        <div className="absolute right-0 bottom-8 left-0 border border-border/50 border-dashed" />
+        <div className="absolute top-0 bottom-0 left-8 border border-border/50 border-dashed" />
+        <div className="absolute top-0 right-8 bottom-0 border border-border/50 border-dashed" />
         <Component />
       </TabsContent>
     </Tabs>
