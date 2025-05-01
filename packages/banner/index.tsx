@@ -1,10 +1,11 @@
 'use client';
 
-import { Button, type ButtonProps } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { type LucideIcon, XIcon } from 'lucide-react';
 import {
+  type ComponentProps,
   type HTMLAttributes,
   type MouseEventHandler,
   createContext,
@@ -89,7 +90,7 @@ export const BannerTitle = ({ className, ...props }: BannerTitleProps) => (
   <p className={cn('flex-1 text-sm', className)} {...props} />
 );
 
-export type BannerActionProps = ButtonProps;
+export type BannerActionProps = ComponentProps<typeof Button>;
 
 export const BannerAction = ({
   variant = 'outline',
@@ -108,7 +109,7 @@ export const BannerAction = ({
   />
 );
 
-export type BannerCloseProps = ButtonProps;
+export type BannerCloseProps = ComponentProps<typeof Button>;
 
 export const BannerClose = ({
   variant = 'ghost',

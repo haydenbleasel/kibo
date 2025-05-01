@@ -1,7 +1,7 @@
 'use client';
 
-import { Badge, type BadgeProps } from '@/components/ui/badge';
-import { Button, type ButtonProps } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -109,7 +109,7 @@ export const Tags = ({
   );
 };
 
-export type TagsTriggerProps = ButtonProps;
+export type TagsTriggerProps = ComponentProps<typeof Button>;
 
 export const TagsTrigger = ({
   className,
@@ -135,7 +135,8 @@ export const TagsTrigger = ({
   </PopoverTrigger>
 );
 
-export type TagsValueProps = BadgeProps;
+export type TagsValueProps = ComponentProps<typeof Badge>;
+
 export const TagsValue = ({
   className,
   children,

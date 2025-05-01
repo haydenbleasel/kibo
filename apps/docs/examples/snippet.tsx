@@ -39,17 +39,19 @@ const Example = () => {
             </SnippetTabsTrigger>
           ))}
         </SnippetTabsList>
-        <SnippetCopyButton
-          value={activeCommand?.code}
-          onCopy={() =>
-            console.log(`Copied "${activeCommand?.code}" to clipboard`)
-          }
-          onError={() =>
-            console.error(
-              `Failed to copy "${activeCommand?.code}" to clipboard`
-            )
-          }
-        />
+        {activeCommand && (
+          <SnippetCopyButton
+            value={activeCommand.code}
+            onCopy={() =>
+              console.log(`Copied "${activeCommand.code}" to clipboard`)
+            }
+            onError={() =>
+              console.error(
+                `Failed to copy "${activeCommand.code}" to clipboard`
+              )
+            }
+          />
+        )}
       </SnippetHeader>
       {commands.map((command) => (
         <SnippetTabsContent key={command.label} value={command.label}>
