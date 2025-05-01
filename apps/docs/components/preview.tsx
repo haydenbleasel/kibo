@@ -20,7 +20,10 @@ export const Preview = async ({ path, className }: PreviewProps) => {
   const filePath = join(process.cwd(), 'content', resolvedPath);
   const code = await readFile(filePath, 'utf-8');
   const Component = await import(resolvedPath).then((module) => module.default);
-  const parsedCode = code.replace(/@repo\//g, '@/components/ui/kibo-ui/');
+
+  const parsedCode = code
+    .replace(/@repo\/shadcn-ui\//g, '@/')
+    .replace(/@repo\//g, '@/components/ui/kibo-ui/');
 
   return (
     <Tabs
