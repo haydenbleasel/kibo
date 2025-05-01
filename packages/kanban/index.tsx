@@ -137,7 +137,10 @@ export const KanbanProvider = ({
 }: KanbanProviderProps) => (
   <DndContext collisionDetection={rectIntersection} onDragEnd={onDragEnd}>
     <div
-      className={cn('grid w-full auto-cols-fr grid-flow-col gap-4', className)}
+      className={cn(
+        'grid size-full auto-cols-fr grid-flow-col gap-4',
+        className
+      )}
     >
       {children}
     </div>
