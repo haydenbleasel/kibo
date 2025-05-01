@@ -1,3 +1,5 @@
+'use client';
+
 import { Announcement, AnnouncementTitle } from '@repo/announcement';
 import { ArrowUpRightIcon } from 'lucide-react';
 

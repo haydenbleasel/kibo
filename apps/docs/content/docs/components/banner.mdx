@@ -8,23 +8,7 @@ icon: CircleAlert
   { name: 'Lucide', url: 'https://lucide.dev/' },
 ]} />
 
-<Preview name="banner" code={`'use client';
-
-import { Banner, BannerClose, BannerIcon, BannerTitle, BannerAction } from '@/components/ui/kibo-ui/banner';
-import { CircleAlert } from 'lucide-react';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center">
-    <Banner>
-      <BannerIcon icon={CircleAlert} />
-      <BannerTitle>Important message</BannerTitle>
-      <BannerAction>Learn more</BannerAction>
-      <BannerClose />
-    </Banner>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="banner" />
 
 ## Installation
 
@@ -44,70 +28,11 @@ export default Example;`} />
 
 ### Inset
 
-<Preview name="banner" code={`'use client';
-
-import { Banner, BannerClose, BannerIcon, BannerTitle, BannerAction } from '@/components/ui/kibo-ui/banner';
-import { CircleAlert } from 'lucide-react';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center p-8">
-    <Banner inset>
-      <BannerIcon icon={CircleAlert} />
-      <BannerTitle>Important message</BannerTitle>
-      <BannerAction>Learn more</BannerAction>
-      <BannerClose />
-    </Banner>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="banner-inset" />
 
 ### Different primary colors
 
-<Preview name="banner" code={`'use client';
-
-import { Banner, BannerClose, BannerIcon, BannerTitle, BannerAction } from '@/components/ui/kibo-ui/banner';
-import { CircleAlert } from 'lucide-react';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center flex-col gap-4">
-    <div className="w-full" style={{
-      '--primary': '0 72.2% 50.6%',
-      '--primary-foreground': '0 85.7% 97.3%',
-    }}>
-      <Banner>
-        <BannerIcon icon={CircleAlert} />
-        <BannerTitle>Something's gone <strong>horribly</strong> wrong.</BannerTitle>
-        <BannerAction>Restart</BannerAction>
-        <BannerClose />
-      </Banner>
-    </div>
-    <div className="w-full" style={{
-      '--primary': '24.6 95% 53.1%',
-      '--primary-foreground': '60 9.1% 97.8%',
-    }}>
-      <Banner>
-        <BannerIcon icon={CircleAlert} />
-        <BannerTitle>You're almost out of disk space.</BannerTitle>
-        <BannerAction>Upgrade</BannerAction>
-        <BannerClose />
-      </Banner>
-    </div>
-    <div className="w-full" style={{
-      '--primary': '142.1 76.2% 36.3%',
-      '--primary-foreground': '355.7 100% 97.3%',
-    }}>
-      <Banner>
-        <BannerIcon icon={CircleAlert} />
-        <BannerTitle>You've been selected for a secret mission.</BannerTitle>
-        <BannerAction>Accept</BannerAction>
-        <BannerClose />
-      </Banner>
-    </div>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="banner-themes" />
 
 ## Props
 
