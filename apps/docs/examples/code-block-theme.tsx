@@ -8,6 +8,7 @@ import {
   CodeBlockFilename,
   CodeBlockFiles,
   CodeBlockHeader,
+  CodeBlockItem,
   CodeBlockSelect,
   CodeBlockSelectContent,
   CodeBlockSelectItem,
@@ -72,17 +73,17 @@ const Example = () => (
     </CodeBlockHeader>
     <CodeBlockBody>
       {(item) => (
-        <CodeBlockContent
-          key={item.language}
-          value={item.language}
-          language={item.language as BundledLanguage}
-          themes={{
-            light: 'vitesse-light',
-            dark: 'vitesse-dark',
-          }}
-        >
-          {item.code}
-        </CodeBlockContent>
+        <CodeBlockItem key={item.language} value={item.language}>
+          <CodeBlockContent
+            themes={{
+              light: 'vitesse-light',
+              dark: 'vitesse-dark',
+            }}
+            language={item.language as BundledLanguage}
+          >
+            {item.code}
+          </CodeBlockContent>
+        </CodeBlockItem>
       )}
     </CodeBlockBody>
   </CodeBlock>

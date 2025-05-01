@@ -565,65 +565,78 @@ export const CodeBlockBody = ({
   );
 };
 
-export type CodeBlockContentProps = {
+export type CodeBlockItemProps = HTMLAttributes<HTMLDivElement> & {
+  value: string;
+  lineNumbers?: boolean;
+};
+
+export const CodeBlockItem = ({
+  children,
+  lineNumbers = true,
+  className,
+  value,
+  ...props
+}: CodeBlockItemProps) => {
+  const { value: activeValue } = useContext(CodeBlockContext);
+
+  if (value !== activeValue) {
+    return null;
+  }
+
+  return (
+    <div
+      className={cn(
+        codeBlockClassName,
+        lineHighlightClassNames,
+        lineDiffClassNames,
+        lineFocusedClassNames,
+        wordHighlightClassNames,
+        darkModeClassNames,
+        lineNumbers && lineNumberClassNames,
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+export type CodeBlockContentProps = HTMLAttributes<HTMLDivElement> & {
   themes?: CodeOptionsMultipleThemes['themes'];
   language?: BundledLanguage;
-  lineNumbers?: boolean;
   syntaxHighlighting?: boolean;
-  value?: string;
   children: string;
-  className?: string;
 };
 
 export const CodeBlockContent = ({
   children,
   themes,
   language,
-  lineNumbers = true,
   syntaxHighlighting = true,
-  value,
-  className,
+  ...props
 }: CodeBlockContentProps) => {
   const [html, setHtml] = useState<string | null>(null);
-  const { value: activeValue } = useContext(CodeBlockContext);
-  const compiledClassName = cn(
-    codeBlockClassName,
-    lineHighlightClassNames,
-    lineDiffClassNames,
-    lineFocusedClassNames,
-    wordHighlightClassNames,
-    darkModeClassNames,
-    lineNumbers && lineNumberClassNames,
-    className
-  );
 
   useEffect(() => {
-    if (value !== activeValue || !syntaxHighlighting) {
+    if (!syntaxHighlighting) {
       return;
     }
 
     highlight(children as string, language, themes)
       .then(setHtml)
       .catch(console.error);
-  }, [children, themes, activeValue, syntaxHighlighting, value, language]);
-
-  if (value !== activeValue) {
-    return null;
-  }
+  }, [children, themes, syntaxHighlighting, language]);
 
   if (!syntaxHighlighting || !html) {
-    return (
-      <CodeBlockFallback className={compiledClassName}>
-        {children}
-      </CodeBlockFallback>
-    );
+    return <CodeBlockFallback>{children}</CodeBlockFallback>;
   }
 
   return (
     <div
       // biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
       dangerouslySetInnerHTML={{ __html: html }}
-      className={compiledClassName}
+      {...props}
     />
   );
 };

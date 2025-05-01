@@ -1,6 +1,11 @@
 'use client';
 
-import { CodeBlock, CodeBlockBody, CodeBlockContent } from '@repo/code-block';
+import {
+  CodeBlock,
+  CodeBlockBody,
+  CodeBlockContent,
+  CodeBlockItem,
+} from '@repo/code-block';
 import type { BundledLanguage } from 'shiki';
 
 const code = [
@@ -34,13 +39,11 @@ const Example = () => (
   <CodeBlock data={code} defaultValue={code[0].language}>
     <CodeBlockBody>
       {(item) => (
-        <CodeBlockContent
-          key={item.language}
-          value={item.language}
-          language={item.language as BundledLanguage}
-        >
-          {item.code}
-        </CodeBlockContent>
+        <CodeBlockItem key={item.language} value={item.language}>
+          <CodeBlockContent language={item.language as BundledLanguage}>
+            {item.code}
+          </CodeBlockContent>
+        </CodeBlockItem>
       )}
     </CodeBlockBody>
   </CodeBlock>
