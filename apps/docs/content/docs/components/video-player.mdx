@@ -8,46 +8,7 @@ icon: Play
   { name: 'media-chrome', url: 'https://www.media-chrome.org/' },
 ]} />
 
-<Preview className="h-[33rem]" name="video-player" code={`'use client';
-
-import {
-  VideoPlayer,
-  VideoPlayerContent,
-  VideoPlayerControlBar,
-  VideoPlayerMuteButton,
-  VideoPlayerPlayButton,
-  VideoPlayerSeekBackwardButton,
-  VideoPlayerSeekForwardButton,
-  VideoPlayerTimeDisplay,
-  VideoPlayerTimeRange,
-  VideoPlayerVolumeRange,
-} from '@/components/ui/kibo-ui/video-player';
-import { useState } from 'react';
-
-const Example = () => (
-  <div className="p-4">
-    <VideoPlayer className="border rounded-lg overflow-hidden">
-      <VideoPlayerContent
-        slot="media"
-        src="https://stream.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/high.mp4"
-        preload="auto"
-        muted
-        crossOrigin=""
-      />
-      <VideoPlayerControlBar>
-        <VideoPlayerPlayButton />
-        <VideoPlayerSeekBackwardButton />
-        <VideoPlayerSeekForwardButton />
-        <VideoPlayerTimeRange />
-        <VideoPlayerTimeDisplay showDuration />
-        <VideoPlayerMuteButton />
-        <VideoPlayerVolumeRange />
-      </VideoPlayerControlBar>
-    </VideoPlayer>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="video-player" />
 
 ## Installation
 
@@ -67,51 +28,6 @@ export default Example;`} />
 - Playback controls (play/pause, seek forward/backward)
 - Progress bar with interactive seeking
 - Cross-browser compatibility
-
-## Examples
-
-### Dark mode (class)
-
-<Preview className="h-[33rem]" name="video-player" code={`'use client';
-
-import {
-  VideoPlayer,
-  VideoPlayerContent,
-  VideoPlayerControlBar,
-  VideoPlayerMuteButton,
-  VideoPlayerPlayButton,
-  VideoPlayerSeekBackwardButton,
-  VideoPlayerSeekForwardButton,
-  VideoPlayerTimeDisplay,
-  VideoPlayerTimeRange,
-  VideoPlayerVolumeRange,
-} from '@/components/ui/kibo-ui/video-player';
-import { useState } from 'react';
-
-const Example = () => (
-  <div className="p-4 dark">
-    <VideoPlayer className="border rounded-lg overflow-hidden">
-      <VideoPlayerContent
-        slot="media"
-        src="https://stream.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/high.mp4"
-        preload="auto"
-        muted
-        crossOrigin=""
-      />
-      <VideoPlayerControlBar>
-        <VideoPlayerPlayButton />
-        <VideoPlayerSeekBackwardButton />
-        <VideoPlayerSeekForwardButton />
-        <VideoPlayerTimeRange />
-        <VideoPlayerTimeDisplay showDuration />
-        <VideoPlayerMuteButton />
-        <VideoPlayerVolumeRange />
-      </VideoPlayerControlBar>
-    </VideoPlayer>
-  </div>
-);
-
-export default Example;`} />
 
 ## Props
 
