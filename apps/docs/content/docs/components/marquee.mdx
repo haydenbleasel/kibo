@@ -9,36 +9,7 @@ icon: GalleryHorizontalEnd
   { name: 'useHooks', url: 'https://usehooks.com/' },
 ]} />
 
-<Preview name="marquee" code={`'use client';
-
-import {
-  Marquee,
-  MarqueeItem,
-  MarqueeFade,
-  MarqueeContent,
-} from '@/components/ui/kibo-ui/marquee';
-
-const Example = () => (
-  <div className="h-screen w-full flex items-center justify-center">
-    <Marquee>
-      <MarqueeFade side="left" />
-      <MarqueeFade side="right" />
-      <MarqueeContent>
-        {new Array(10).fill(null).map((_, index) => (
-          <MarqueeItem key={index} className="w-32 h-32">
-            <img
-              src={\`https://placehold.co/128x128?random=\${index}\`}
-              alt={\`Image \${index}\`}
-              className="rounded-full overflow-hidden"
-            />
-          </MarqueeItem>
-        ))}
-      </MarqueeContent>
-    </Marquee>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="marquee" />
 
 ## Installation
 
@@ -53,100 +24,15 @@ export default Example;`} />
 
 ### Without fading
 
-<Preview name="marquee" code={`'use client';
-
-import {
-  Marquee,
-  MarqueeItem,
-  MarqueeFade,
-  MarqueeContent,
-} from '@/components/ui/kibo-ui/marquee';
-
-const Example = () => (
-  <div className="py-4">
-    <Marquee>
-      <MarqueeContent>
-        {new Array(10).fill(null).map((_, index) => (
-          <MarqueeItem key={index} className="w-16 h-16">
-            <img
-              src={\`https://placehold.co/64x64?random=\${index}\`}
-              alt={\`Image \${index}\`}
-              className="rounded-full overflow-hidden"
-            />
-          </MarqueeItem>
-        ))}
-      </MarqueeContent>
-    </Marquee>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="marquee-no-fade" />
 
 ### Without pre-defined options
 
-<Preview name="marquee" code={`'use client';
-
-import {
-  Marquee,
-  MarqueeItem,
-  MarqueeFade,
-  MarqueeContent,
-} from '@/components/ui/kibo-ui/marquee';
-
-const Example = () => (
-  <div className="py-4">
-    <Marquee>
-      <MarqueeFade side="left" />
-      <MarqueeFade side="right" />
-      <MarqueeContent loop={1} autoFill={false} pauseOnHover={false}>
-        {new Array(10).fill(null).map((_, index) => (
-          <MarqueeItem key={index} className="w-16 h-16">
-            <img
-              src={\`https://placehold.co/64x64?random=\${index}\`}
-              alt={\`Image \${index}\`}
-              className="rounded-full overflow-hidden"
-            />
-          </MarqueeItem>
-        ))}
-      </MarqueeContent>
-    </Marquee>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="marquee-raw" />
 
 ### Custom spacing
 
-<Preview name="marquee" code={`'use client';
-
-import {
-  Marquee,
-  MarqueeItem,
-  MarqueeFade,
-  MarqueeContent,
-} from '@/components/ui/kibo-ui/marquee';
-
-const Example = () => (
-  <div className="py-4">
-    <Marquee>
-      <MarqueeFade side="left" />
-      <MarqueeFade side="right" />
-      <MarqueeContent>
-        {new Array(10).fill(null).map((_, index) => (
-          <MarqueeItem key={index} className="w-16 h-16 -mx-2">
-            <img
-              src={\`https://placehold.co/64x64?random=\${index}\`}
-              alt={\`Image \${index}\`}
-              className="rounded-full overflow-hidden ring-2 ring-background"
-            />
-          </MarqueeItem>
-        ))}
-      </MarqueeContent>
-    </Marquee>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="marquee-spacing" />
 
 ## Props
 
