@@ -107,6 +107,7 @@ import {
   type CodeOptionsMultipleThemes,
   codeToHtml,
 } from 'shiki';
+export type { BundledLanguage } from 'shiki';
 
 const filenameIconMap = {
   '.env': SiDotenv,

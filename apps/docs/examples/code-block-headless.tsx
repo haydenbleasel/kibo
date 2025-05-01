@@ -6,7 +6,7 @@ import {
   CodeBlockContent,
   CodeBlockItem,
 } from '@repo/code-block';
-import type { BundledLanguage } from 'shiki';
+import type { BundledLanguage } from '@repo/code-block';
 
 const code = [
   {

@@ -63,7 +63,6 @@
     "react-dom": "^19.1.0",
     "require-in-the-middle": "^7.5.2",
     "schema-dts": "^1.1.5",
-    "shiki": "3.3.0",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
     "ts-morph": "25.0.1",
