@@ -9,69 +9,7 @@ icon: Code
   { name: 'Lucide', url: 'https://lucide.dev/' },
 ]} />
 
-<Preview name="snippet" code={`'use client';
-
-import {
-  Snippet,
-  SnippetCopyButton,
-  SnippetHeader,
-  SnippetTabsContent,
-  SnippetTabsList,
-  SnippetTabsTrigger,
-} from '@/components/ui/kibo-ui/snippet';
-import { HeartIcon, BoxIcon } from 'lucide-react';
-import { useState } from 'react';
-
-const commands = [
-  {
-    label: 'kibo-ui',
-    icon: HeartIcon,
-    code: \`npx kibo-ui@latest add snippet\`,
-  },
-  {
-    label: 'shadcn',
-    icon: BoxIcon,
-    code: \`npx shadcn@latest add https://www.kibo-ui.com/registry/snippet.json\`,
-  },
-];
-
-const Example = () => {
-  const [value, setValue] = useState(commands[0].label);
-  const activeCommand = commands.find((command) => command.label === value);
-
-  return (
-    <div className="p-4">
-      <Snippet value={value} onValueChange={setValue}>
-        <SnippetHeader>
-          <SnippetTabsList>
-            {commands.map((command) => (
-              <SnippetTabsTrigger key={command.label} value={command.label}>
-                <command.icon size={14} />
-                <span>{command.label}</span>
-              </SnippetTabsTrigger>
-            ))}
-          </SnippetTabsList>
-          <SnippetCopyButton
-            value={activeCommand?.code}
-            onCopy={() =>
-              console.log(\`Copied "\${activeCommand?.code}" to clipboard\`)
-            }
-            onError={() =>
-              console.error(\`Failed to copy "\${activeCommand?.code}" to clipboard\`)
-            }
-          />
-        </SnippetHeader>
-        {commands.map((command) => (
-          <SnippetTabsContent key={command.label} value={command.label}>
-            {command.code}
-          </SnippetTabsContent>
-        ))}
-      </Snippet>
-    </div>
-  );
-};
-
-export default Example;`} />
+<Preview path="snippet" />
 
 ## Installation
 
@@ -90,74 +28,7 @@ export default Example;`} />
 
 ### NPM packages
 
-<Preview name="snippet" code={`'use client';
-
-import {
-  Snippet,
-  SnippetCopyButton,
-  SnippetHeader,
-  SnippetTabsContent,
-  SnippetTabsList,
-  SnippetTabsTrigger,
-} from '@/components/ui/kibo-ui/snippet';
-import { HeartIcon, BoxIcon } from 'lucide-react';
-import { useState } from 'react';
-
-const commands = [
-  {
-    label: 'npm',
-    code: 'npx next-forge@latest init',
-  },
-  {
-    label: 'yarn',
-    code: 'yarn dlx next-forge@latest init',
-  },
-  {
-    label: 'pnpm',
-    code: 'pnpx next-forge@latest init',
-  },
-  {
-    label: 'bun',
-    code: 'bunx next-forge@latest init',
-  },
-];
-
-const Example = () => {
-  const [value, setValue] = useState(commands[0].label);
-  const activeCommand = commands.find((command) => command.label === value);
-
-  return (
-    <div className="p-4">
-      <Snippet value={value} onValueChange={setValue}>
-        <SnippetHeader>
-          <SnippetTabsList>
-            {commands.map((command) => (
-              <SnippetTabsTrigger key={command.label} value={command.label}>
-                {command.label}
-              </SnippetTabsTrigger>
-            ))}
-          </SnippetTabsList>
-          <SnippetCopyButton
-            value={activeCommand?.code}
-            onCopy={() =>
-              console.log(\`Copied "\${activeCommand?.code}" to clipboard\`)
-            }
-            onError={() =>
-              console.error(\`Failed to copy "\${activeCommand?.code}" to clipboard\`)
-            }
-          />
-        </SnippetHeader>
-        {commands.map((command) => (
-          <SnippetTabsContent key={command.label} value={command.label}>
-            {command.code}
-          </SnippetTabsContent>
-        ))}
-      </Snippet>
-    </div>
-  );
-};
-
-export default Example;`} />
+<Preview path="snippet-npm" />
 
 ## Props
 
