@@ -9,38 +9,7 @@ icon: Palette
   { name: 'color', url: 'https://github.com/Qix-/color' },
 ]} />
 
-<Preview name="color-picker" code={`'use client';
-
-import {
-  ColorPicker,
-  ColorPickerSelection,
-  ColorPickerHue,
-  ColorPickerAlpha,
-  ColorPickerOutput,
-  ColorPickerEyeDropper,
-  ColorPickerFormat,
-} from '@/components/ui/kibo-ui/color-picker';
-
-const Example = () => (
-  <div className="flex w-full h-screen items-center justify-center gap-4 bg-secondary">
-    <ColorPicker className="w-full max-w-[300px] rounded-md border bg-background p-4 shadow-sm">
-      <ColorPickerSelection />
-      <div className="flex items-center gap-4">
-        <ColorPickerEyeDropper />
-        <div className="w-full grid gap-1">
-          <ColorPickerHue />
-          <ColorPickerAlpha />
-        </div>
-      </div>
-      <div className="flex items-center gap-2">
-        <ColorPickerOutput />
-        <ColorPickerFormat />
-      </div>
-    </ColorPicker>
-  </div>
-);
-
-export default Example;`} />
+<Preview path="color-picker" />
 
 ## Installation
 
