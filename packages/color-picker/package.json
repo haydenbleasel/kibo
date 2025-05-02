@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@radix-ui/react-slider": "^1.3.2",
     "@repo/shadcn-ui": "workspace:*",
     "color": "^5.0.0",
     "lucide-react": "^0.503.0",
+    "radix-ui": "^1.3.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

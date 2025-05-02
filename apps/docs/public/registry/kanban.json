@@ -10,7 +10,6 @@
   "dependencies": [
     "@dnd-kit/core",
     "@dnd-kit/modifiers",
-    "@radix-ui/react-portal",
     "lucide-react"
   ],
   "devDependencies": [],

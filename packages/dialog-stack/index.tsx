@@ -1,8 +1,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import * as Portal from '@radix-ui/react-portal';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
+import { Portal } from 'radix-ui';
 import {
   Children,
   cloneElement,

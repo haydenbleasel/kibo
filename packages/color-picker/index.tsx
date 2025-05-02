@@ -8,9 +8,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { Range, Root, Thumb, Track } from '@radix-ui/react-slider';
 import Color from 'color';
 import { PipetteIcon } from 'lucide-react';
+import { Slider } from 'radix-ui';
 import {
   type ComponentProps,
   type HTMLAttributes,
@@ -200,7 +200,7 @@ export const ColorPickerSelection = ({
   );
 };
 
-export type ColorPickerHueProps = ComponentProps<typeof Root>;
+export type ColorPickerHueProps = ComponentProps<typeof Slider.Root>;
 
 export const ColorPickerHue = ({
   className,
@@ -209,7 +209,7 @@ export const ColorPickerHue = ({
   const { hue, setHue } = useColorPicker();
 
   return (
-    <Root
+    <Slider.Root
       value={[hue]}
       max={360}
       step={1}
@@ -217,15 +217,15 @@ export const ColorPickerHue = ({
       onValueChange={([hue]) => setHue(hue)}
       {...props}
     >
-      <Track className="relative my-0.5 h-3 w-full grow rounded-full bg-[linear-gradient(90deg,#FF0000,#FFFF00,#00FF00,#00FFFF,#0000FF,#FF00FF,#FF0000)]">
-        <Range className="absolute h-full" />
-      </Track>
-      <Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
-    </Root>
+      <Slider.Track className="relative my-0.5 h-3 w-full grow rounded-full bg-[linear-gradient(90deg,#FF0000,#FFFF00,#00FF00,#00FFFF,#0000FF,#FF00FF,#FF0000)]">
+        <Slider.Range className="absolute h-full" />
+      </Slider.Track>
+      <Slider.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+    </Slider.Root>
   );
 };
 
-export type ColorPickerAlphaProps = ComponentProps<typeof Root>;
+export type ColorPickerAlphaProps = ComponentProps<typeof Slider.Root>;
 
 export const ColorPickerAlpha = ({
   className,
@@ -234,7 +234,7 @@ export const ColorPickerAlpha = ({
   const { alpha, setAlpha } = useColorPicker();
 
   return (
-    <Root
+    <Slider.Root
       value={[alpha]}
       max={100}
       step={1}
@@ -242,7 +242,7 @@ export const ColorPickerAlpha = ({
       onValueChange={([alpha]) => setAlpha(alpha)}
       {...props}
     >
-      <Track
+      <Slider.Track
         className="relative my-0.5 h-3 w-full grow rounded-full"
         style={{
           background:
@@ -250,10 +250,10 @@ export const ColorPickerAlpha = ({
         }}
       >
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent to-black/50" />
-        <Range className="absolute h-full rounded-full bg-transparent" />
-      </Track>
-      <Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
-    </Root>
+        <Slider.Range className="absolute h-full rounded-full bg-transparent" />
+      </Slider.Track>
+      <Slider.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+    </Slider.Root>
   );
 };
 
