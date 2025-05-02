@@ -155,7 +155,7 @@ const Example = () => {
 
   return (
     <>
-      <div className="size-full overflow-y-auto">
+      <div className="size-full overflow-y-auto pb-36">
         {messages.map(({ content, ...message }, index) => (
           <AIMessage key={index} {...message}>
             <AIResponse>{content}</AIResponse>
