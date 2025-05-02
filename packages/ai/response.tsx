@@ -105,13 +105,7 @@ export const AIResponse = ({
   children,
   ...props
 }: AIResponseProps) => (
-  <div
-    className={cn(
-      'prose dark:prose-invert size-full prose-pre:p-0 prose-p:leading-relaxed',
-      className
-    )}
-    {...props}
-  >
+  <div className={cn('size-full', className)} {...props}>
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       components={components}
