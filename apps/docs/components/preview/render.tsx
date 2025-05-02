@@ -12,7 +12,7 @@ export const PreviewRender = ({ children }: PreviewRenderProps) => {
 
   return (
     <div
-      className="relative flex size-full flex-col items-center justify-center gap-4 overflow-y-auto p-8"
+      className="relative flex size-full flex-col items-center justify-center gap-4 overflow-hidden p-8"
       style={
         {
           '--primary':

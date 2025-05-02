@@ -63,7 +63,9 @@ const Example = () => {
                   <img
                     src={`https://img.logo.dev/${model.provider}?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
                     alt={model.provider}
-                    className="mr-2 inline-flex h-4 w-4"
+                    className="inline-flex size-4"
+                    width={16}
+                    height={16}
                   />
                   {model.name}
                 </AIInputModelSelectItem>

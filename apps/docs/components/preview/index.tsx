@@ -37,7 +37,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
         className
       )}
     >
-      <Tabs defaultValue="preview" className="h-full w-full gap-0">
+      <Tabs defaultValue="preview" className="size-full gap-0">
         <TabsList className="w-full rounded-none border-b">
           <TabsTrigger value="code">
             <CodeIcon size={16} className="text-muted-foreground" />
@@ -54,7 +54,7 @@ export const Preview = async ({ path, className }: PreviewProps) => {
         >
           <PreviewCode code={parsedCode} language="tsx" filename="index.tsx" />
         </TabsContent>
-        <TabsContent value="preview">
+        <TabsContent value="preview" className="size-full overflow-hidden">
           <PreviewRender>
             <Component />
           </PreviewRender>

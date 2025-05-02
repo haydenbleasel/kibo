@@ -20,7 +20,7 @@ const Layout = ({ children }: LayoutProps) => (
           alt="Kibo UI"
           width={611}
           height={116}
-          className="h-5 w-[105px] dark:invert"
+          className="h-[18px] w-auto dark:invert"
         />
       ),
       mode: 'top',

@@ -28,7 +28,6 @@ export type AIResponseProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const components: Options['components'] = {
-  p: ({ children }) => <p className="mb-2">{children}</p>,
   a: ({ href, children }) => (
     <a
       href={href}
