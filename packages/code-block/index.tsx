@@ -555,18 +555,10 @@ export type CodeBlockBodyProps = Omit<
   children: (item: CodeBlockData) => ReactNode;
 };
 
-export const CodeBlockBody = ({
-  children,
-  className,
-  ...props
-}: CodeBlockBodyProps) => {
+export const CodeBlockBody = ({ children, ...props }: CodeBlockBodyProps) => {
   const { data } = useContext(CodeBlockContext);
 
-  return (
-    <div className="" {...props}>
-      {data.map(children)}
-    </div>
-  );
+  return <div {...props}>{data.map(children)}</div>;
 };
 
 export type CodeBlockItemProps = HTMLAttributes<HTMLDivElement> & {
