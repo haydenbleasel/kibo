@@ -33,11 +33,11 @@ export const Preview = async ({ path, className }: PreviewProps) => {
   return (
     <div
       className={cn(
-        'not-prose h-full max-h-[30rem] w-full gap-0 overflow-hidden rounded-lg border bg-background',
+        'not-prose h-full max-h-[32rem] w-full overflow-hidden rounded-lg border bg-background',
         className
       )}
     >
-      <Tabs defaultValue="preview" className="h-full w-full">
+      <Tabs defaultValue="preview" className="h-full w-full gap-0">
         <TabsList className="w-full rounded-none border-b">
           <TabsTrigger value="code">
             <CodeIcon size={16} className="text-muted-foreground" />

@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import {
   MediaControlBar,
   MediaController,
@@ -16,15 +17,15 @@ import type { CSSProperties, ComponentProps } from 'react';
 export type VideoPlayerProps = ComponentProps<typeof MediaController>;
 
 const variables = {
-  '--media-primary-color': 'hsl(var(--primary))',
-  '--media-secondary-color': 'hsl(var(--background))',
-  '--media-text-color': 'hsl(var(--foreground))',
-  '--media-background-color': 'hsl(var(--background))',
-  '--media-control-hover-background': 'hsl(var(--accent))',
+  '--media-primary-color': 'var(--primary)',
+  '--media-secondary-color': 'var(--background)',
+  '--media-text-color': 'var(--foreground)',
+  '--media-background-color': 'var(--background)',
+  '--media-control-hover-background': 'var(--accent)',
   '--media-font-family': 'var(--font-sans)',
-  '--media-live-button-icon-color': 'hsl(var(--muted-foreground))',
-  '--media-live-button-indicator-color': 'hsl(var(--destructive))',
-  '--media-range-track-background': 'hsl(var(--border))',
+  '--media-live-button-icon-color': 'var(--muted-foreground)',
+  '--media-live-button-indicator-color': 'var(--destructive)',
+  '--media-range-track-background': 'var(--border)',
 } as CSSProperties;
 
 export const VideoPlayer = ({ style, ...props }: VideoPlayerProps) => (
@@ -45,52 +46,73 @@ export const VideoPlayerControlBar = (props: VideoPlayerControlBarProps) => (
 
 export type VideoPlayerTimeRangeProps = ComponentProps<typeof MediaTimeRange>;
 
-export const VideoPlayerTimeRange = (props: VideoPlayerTimeRangeProps) => (
-  <MediaTimeRange {...props} />
+export const VideoPlayerTimeRange = ({
+  className,
+  ...props
+}: VideoPlayerTimeRangeProps) => (
+  <MediaTimeRange className={cn('p-2.5', className)} {...props} />
 );
 
 export type VideoPlayerTimeDisplayProps = ComponentProps<
   typeof MediaTimeDisplay
 >;
 
-export const VideoPlayerTimeDisplay = (props: VideoPlayerTimeDisplayProps) => (
-  <MediaTimeDisplay {...props} />
+export const VideoPlayerTimeDisplay = ({
+  className,
+  ...props
+}: VideoPlayerTimeDisplayProps) => (
+  <MediaTimeDisplay className={cn('p-2.5', className)} {...props} />
 );
 
 export type VideoPlayerVolumeRangeProps = ComponentProps<
   typeof MediaVolumeRange
 >;
 
-export const VideoPlayerVolumeRange = (props: VideoPlayerVolumeRangeProps) => (
-  <MediaVolumeRange {...props} />
+export const VideoPlayerVolumeRange = ({
+  className,
+  ...props
+}: VideoPlayerVolumeRangeProps) => (
+  <MediaVolumeRange className={cn('p-2.5', className)} {...props} />
 );
 
 export type VideoPlayerPlayButtonProps = ComponentProps<typeof MediaPlayButton>;
 
-export const VideoPlayerPlayButton = (props: VideoPlayerPlayButtonProps) => (
-  <MediaPlayButton {...props} />
+export const VideoPlayerPlayButton = ({
+  className,
+  ...props
+}: VideoPlayerPlayButtonProps) => (
+  <MediaPlayButton className={cn('p-2.5', className)} {...props} />
 );
 
 export type VideoPlayerSeekBackwardButtonProps = ComponentProps<
   typeof MediaSeekBackwardButton
 >;
 
-export const VideoPlayerSeekBackwardButton = (
-  props: VideoPlayerSeekBackwardButtonProps
-) => <MediaSeekBackwardButton {...props} />;
+export const VideoPlayerSeekBackwardButton = ({
+  className,
+  ...props
+}: VideoPlayerSeekBackwardButtonProps) => (
+  <MediaSeekBackwardButton className={cn('p-2.5', className)} {...props} />
+);
 
 export type VideoPlayerSeekForwardButtonProps = ComponentProps<
   typeof MediaSeekForwardButton
 >;
 
-export const VideoPlayerSeekForwardButton = (
-  props: VideoPlayerSeekForwardButtonProps
-) => <MediaSeekForwardButton {...props} />;
+export const VideoPlayerSeekForwardButton = ({
+  className,
+  ...props
+}: VideoPlayerSeekForwardButtonProps) => (
+  <MediaSeekForwardButton className={cn('p-2.5', className)} {...props} />
+);
 
 export type VideoPlayerMuteButtonProps = ComponentProps<typeof MediaMuteButton>;
 
-export const VideoPlayerMuteButton = (props: VideoPlayerMuteButtonProps) => (
-  <MediaMuteButton {...props} />
+export const VideoPlayerMuteButton = ({
+  className,
+  ...props
+}: VideoPlayerMuteButtonProps) => (
+  <MediaMuteButton className={cn('p-2.5', className)} {...props} />
 );
 
 export type VideoPlayerContentProps = ComponentProps<'video'>;
