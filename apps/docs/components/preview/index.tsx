@@ -15,9 +15,14 @@ import { PreviewSource } from './source';
 type PreviewProps = {
   path: string;
   className?: string;
+  type?: 'component' | 'block';
 };
 
-export const Preview = async ({ path, className }: PreviewProps) => {
+export const Preview = async ({
+  path,
+  className,
+  type = 'component',
+}: PreviewProps) => {
   const code = await readFile(
     join(process.cwd(), 'examples', `${path}.tsx`),
     'utf-8'
@@ -54,7 +59,10 @@ export const Preview = async ({ path, className }: PreviewProps) => {
   return (
     <div
       className={cn(
-        'not-prose h-full max-h-[32rem] w-full overflow-hidden rounded-lg border bg-background',
+        'size-full overflow-hidden rounded-lg border bg-background',
+        type === 'block' &&
+          'max-h-[40rem] prose-code:border-none prose-code:p-0',
+        type === 'component' && 'not-prose max-h-[32rem]',
         className
       )}
     >
