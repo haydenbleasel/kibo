@@ -2,10 +2,21 @@
   "root": true,
   "title": "Components",
   "pages": [
-    "---AI Components---",
+    "---AI Chatbot---",
     "ai-input",
-    "ai-response",
-    "---Core Components---",
+    "---Collaboration---",
+    "avatar-stack",
+    "cursor",
+    "---Project Management---",
+    "calendar",
+    "gantt",
+    "kanban",
+    "list",
+    "table",
+    "---Code---",
+    "code-block",
+    "snippet",
+    "---Other---",
     "..."
   ]
 }
