@@ -93,10 +93,20 @@ export const Preview = async ({
         >
           <PreviewCode code={parsedCode} language="tsx" filename="index.tsx" />
         </TabsContent>
-        <TabsContent value="preview" className="size-full overflow-hidden">
-          <PreviewRender>
+        <TabsContent
+          value="preview"
+          className={cn(
+            'size-full',
+            type === 'component' ? 'overflow-hidden' : 'overflow-auto'
+          )}
+        >
+          {type === 'block' ? (
             <Component />
-          </PreviewRender>
+          ) : (
+            <PreviewRender>
+              <Component />
+            </PreviewRender>
+          )}
         </TabsContent>
       </Tabs>
     </div>
