@@ -1,6 +1,11 @@
 'use client';
 
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@repo/shadcn-ui/components/ui/avatar';
+import {
   TableBody,
   TableCell,
   TableColumnHeader,
@@ -360,13 +365,12 @@ const Example = () => {
       cell: ({ row }) => (
         <div className="flex items-center gap-2">
           <div className="relative">
-            <img
-              src={row.original.owner.image}
-              alt={row.original.owner.name}
-              width={24}
-              height={24}
-              className="h-6 w-6 rounded-full"
-            />
+            <Avatar className="size-6">
+              <AvatarImage src={row.original.owner.image} />
+              <AvatarFallback>
+                {row.original.owner.name?.slice(0, 2)}
+              </AvatarFallback>
+            </Avatar>
             <div
               className="absolute right-0 bottom-0 h-2 w-2 rounded-full ring-2 ring-background"
               style={{
