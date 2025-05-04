@@ -8,7 +8,6 @@ import {
   KanbanHeader,
   KanbanProvider,
 } from '@repo/kanban';
-import type { DragEndEvent } from '@repo/kanban';
 import {
   addMonths,
   endOfMonth,
@@ -363,33 +362,9 @@ const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
 const Example = () => {
   const [features, setFeatures] = useState(exampleFeatures);
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-
-    if (!over) {
-      return;
-    }
-
-    const status = exampleStatuses.find(({ id }) => id === over.id);
-
-    if (!status) {
-      return;
-    }
-
-    setFeatures(
-      features.map((feature) => {
-        if (feature.id === active.id) {
-          return { ...feature, column: status.id };
-        }
-
-        return feature;
-      })
-    );
-  };
-
   return (
     <KanbanProvider
-      onDragEnd={handleDragEnd}
+      onDataChange={setFeatures}
       columns={exampleStatuses}
       data={features}
     >
@@ -397,12 +372,11 @@ const Example = () => {
         <KanbanBoard key={column.id} id={column.id}>
           <KanbanHeader>{column.name}</KanbanHeader>
           <KanbanCards id={column.id}>
-            {(feature: (typeof features)[number], index) => (
+            {(feature: (typeof features)[number]) => (
               <KanbanCard
                 key={feature.id}
                 id={feature.id}
                 name={feature.name}
-                index={index}
                 column={column.id}
               >
                 <div className="flex items-start justify-between gap-2">
