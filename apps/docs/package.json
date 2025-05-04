@@ -13,6 +13,7 @@
     "@logtail/next": "^0.2.0",
     "@next/bundle-analyzer": "^15.3.1",
     "@next/third-parties": "^15.3.1",
+    "@number-flow/react": "^0.5.9",
     "@repo/ai": "workspace:*",
     "@repo/announcement": "workspace:*",
     "@repo/avatar-stack": "workspace:*",
