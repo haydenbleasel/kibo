@@ -72,6 +72,7 @@ const logos = [
     url: 'https://youtube.com',
   },
 ];
+
 const Example = () => (
   <div className="flex flex-col gap-16 px-8 py-24 text-center">
     <div className="flex flex-col items-center justify-center gap-8">
