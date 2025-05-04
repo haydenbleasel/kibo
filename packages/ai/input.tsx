@@ -119,6 +119,7 @@ export const AIInputTextarea = ({
       ref={textareaRef}
       className={cn(
         'w-full resize-none rounded-none border-none p-3 shadow-none outline-none ring-0',
+        'focus-visible:ring-0',
         className
       )}
       onChange={(e) => {
@@ -146,7 +147,14 @@ export const AIInputToolbar = ({
 export type AIInputToolsProps = HTMLAttributes<HTMLDivElement>;
 
 export const AIInputTools = ({ className, ...props }: AIInputToolsProps) => (
-  <div className={cn('flex items-center gap-1', className)} {...props} />
+  <div
+    className={cn(
+      'flex items-center gap-1',
+      '[&_button:first-child]:rounded-bl-xl',
+      className
+    )}
+    {...props}
+  />
 );
 
 export type AIInputButtonProps = ComponentProps<typeof Button>;
@@ -166,7 +174,7 @@ export const AIInputButton = ({
       variant={variant}
       size={newSize}
       className={cn(
-        'shrink-0 gap-1.5 text-muted-foreground',
+        'shrink-0 gap-1.5 rounded-lg text-muted-foreground',
         newSize === 'default' && 'px-3',
         className
       )}
@@ -179,7 +187,7 @@ export type AIInputSubmitProps = ComponentProps<typeof Button>;
 
 export const AIInputSubmit = ({
   className,
-  variant = 'ghost',
+  variant = 'default',
   size = 'icon',
   ...props
 }: AIInputSubmitProps) => (
@@ -187,7 +195,7 @@ export const AIInputSubmit = ({
     type="submit"
     variant={variant}
     size={size}
-    className={cn('gap-1.5 text-muted-foreground', className)}
+    className={cn('gap-1.5 rounded-lg rounded-br-xl', className)}
     {...props}
   />
 );

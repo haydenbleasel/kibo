@@ -13,7 +13,7 @@ import {
   AIInputToolbar,
   AIInputTools,
 } from '@repo/ai/input';
-import { AIMessage } from '@repo/ai/message';
+import { AIMessage, AIMessageAvatar, AIMessageContent } from '@repo/ai/message';
 import { AIResponse } from '@repo/ai/response';
 import { GlobeIcon, MicIcon, PlusIcon, SendIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -157,8 +157,11 @@ const Example = () => {
     <>
       <div className="size-full overflow-y-auto pb-36">
         {messages.map(({ content, ...message }, index) => (
-          <AIMessage key={index} {...message}>
-            <AIResponse>{content}</AIResponse>
+          <AIMessage key={index} from={message.from}>
+            <AIMessageAvatar src={message.avatar} name={message.name} />
+            <AIMessageContent>
+              <AIResponse>{content}</AIResponse>
+            </AIMessageContent>
           </AIMessage>
         ))}
       </div>
