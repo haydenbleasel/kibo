@@ -1,32 +1,26 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import {
   DndContext,
   DragOverlay,
   KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   closestCenter,
   useDroppable,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
 import type {
-  Active,
   Announcements,
   DndContextProps,
   DragEndEvent,
   DragStartEvent,
-  Over,
 } from '@dnd-kit/core';
-import {
-  SortableContext,
-  arrayMove,
-  sortableKeyboardCoordinates,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+import { SortableContext, arrayMove, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import {
   type HTMLAttributes,
@@ -59,26 +53,6 @@ type KanbanContextProps<
   activeCardId: string | null;
 };
 
-const hasDraggableData = <T extends Active | Over>(
-  entry: T | null | undefined
-): entry is T & {
-  data: {
-    type: 'board' | 'card';
-  };
-} => {
-  if (!entry) {
-    return false;
-  }
-
-  const data = entry.data.current;
-
-  if (data?.type === 'board' || data?.type === 'card') {
-    return true;
-  }
-
-  return false;
-};
-
 const KanbanContext = createContext<KanbanContextProps>({
   columns: [],
   data: [],
@@ -97,11 +71,11 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
   const items = data.map((item) => item.id);
 
   return (
-    <SortableContext items={items} strategy={verticalListSortingStrategy}>
+    <SortableContext items={items}>
       <div
         className={cn(
-          'flex h-full min-h-40 flex-col gap-2 overflow-y-auto rounded-md border bg-secondary p-2 text-xs shadow-sm outline-2 transition-all',
-          isOver ? 'outline-primary' : 'outline-transparent',
+          'flex size-full min-h-40 flex-col divide-y overflow-hidden rounded-md border bg-secondary text-xs shadow-sm ring-2 transition-all',
+          isOver ? 'ring-primary' : 'ring-transparent',
           className
         )}
         ref={setNodeRef}
@@ -160,7 +134,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
               {activeCardId === id && (
                 <Card
                   className={cn(
-                    'cursor-grab rounded-md p-3 shadow-sm',
+                    'cursor-grab rounded-md p-3 shadow-sm ring-2 ring-primary',
                     isDragging && 'cursor-grabbing',
                     className
                   )}
@@ -193,16 +167,22 @@ export const KanbanCards = <T extends KanbanItemProps = KanbanItemProps>({
   const filteredData = data.filter((item) => item.column === props.id);
 
   return (
-    <div className={cn('flex flex-1 flex-col gap-2', className)} {...props}>
-      {filteredData.map((item, index) => children(item, index))}
-    </div>
+    <ScrollArea className="overflow-hidden">
+      <div
+        className={cn('flex flex-grow flex-col gap-2 p-2', className)}
+        {...props}
+      >
+        {filteredData.map((item, index) => children(item, index))}
+      </div>
+      <ScrollBar orientation="vertical" />
+    </ScrollArea>
   );
 };
 
 export type KanbanHeaderProps = HTMLAttributes<HTMLDivElement>;
 
 export const KanbanHeader = ({ className, ...props }: KanbanHeaderProps) => (
-  <div className={cn('m-0 font-semibold text-sm', className)} {...props} />
+  <div className={cn('m-0 p-2 font-semibold text-sm', className)} {...props} />
 );
 
 export type KanbanProviderProps<
@@ -232,10 +212,9 @@ export const KanbanProvider = <
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
+    useSensor(MouseSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor)
   );
 
   const handleDragStart = (event: DragStartEvent) => {
