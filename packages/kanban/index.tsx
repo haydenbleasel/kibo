@@ -13,9 +13,12 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import type {
+  Active,
+  Announcements,
   DndContextProps,
   DragEndEvent,
   DragStartEvent,
+  Over,
 } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -52,13 +55,33 @@ type KanbanContextProps<
 > = {
   columns: C[];
   data: T[];
-  activeId: string | null;
+  activeCardId: string | null;
+};
+
+const hasDraggableData = <T extends Active | Over>(
+  entry: T | null | undefined
+): entry is T & {
+  data: {
+    type: 'board' | 'card';
+  };
+} => {
+  if (!entry) {
+    return false;
+  }
+
+  const data = entry.data.current;
+
+  if (data?.type === 'board' || data?.type === 'card') {
+    return true;
+  }
+
+  return false;
 };
 
 const KanbanContext = createContext<KanbanContextProps>({
   columns: [],
   data: [],
-  activeId: null,
+  activeCardId: null,
 });
 
 export type KanbanBoardProps = {
@@ -109,7 +132,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
   } = useSortable({
     id,
   });
-  const { activeId } = useContext(KanbanContext) as KanbanContextProps;
+  const { activeCardId } = useContext(KanbanContext) as KanbanContextProps;
 
   const style = {
     transition,
@@ -123,14 +146,14 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
           className={cn(
             'rounded-md p-3 shadow-sm',
             isDragging && 'cursor-grabbing',
-            activeId === id && 'opacity-50',
+            activeCardId === id && 'opacity-50',
             className
           )}
         >
           {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
         </Card>
       </div>
-      {activeId === id ? (
+      {activeCardId === id ? (
         <DragOverlay>
           <Card
             className={cn(
@@ -198,7 +221,7 @@ export const KanbanProvider = <
   onDataChange,
   ...props
 }: KanbanProviderProps<T, C>) => {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -208,7 +231,7 @@ export const KanbanProvider = <
   );
 
   const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string);
+    setActiveCardId(event.active.id as string);
 
     setTimeout(() => {
       // debugger;
@@ -218,7 +241,7 @@ export const KanbanProvider = <
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
-    setActiveId(null);
+    setActiveCardId(null);
 
     onDragEnd?.(event);
 
@@ -250,13 +273,39 @@ export const KanbanProvider = <
     onDataChange?.(newData);
   };
 
+  const announcements: Announcements = {
+    onDragStart({ active }) {
+      const { name, column } = data.find((item) => item.id === active.id) ?? {};
+
+      return `Picked up the card "${name}" from the "${column}" column`;
+    },
+    onDragOver({ active, over }) {
+      const { name } = data.find((item) => item.id === active.id) ?? {};
+      const newColumn = columns.find((column) => column.id === over?.id)?.name;
+
+      return `Dragged the card "${name}" over the "${newColumn}" column`;
+    },
+    onDragEnd({ active, over }) {
+      const { name } = data.find((item) => item.id === active.id) ?? {};
+      const newColumn = columns.find((column) => column.id === over?.id)?.name;
+
+      return `Dropped the card "${name}" into the "${newColumn}" column`;
+    },
+    onDragCancel({ active }) {
+      const { name } = data.find((item) => item.id === active.id) ?? {};
+
+      return `Cancelled dragging the card "${name}"`;
+    },
+  };
+
   return (
-    <KanbanContext.Provider value={{ columns, data, activeId }}>
+    <KanbanContext.Provider value={{ columns, data, activeCardId }}>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
         onDragStart={handleDragStart}
+        accessibility={{ announcements }}
         {...props}
       >
         <div
