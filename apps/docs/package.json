@@ -9,6 +9,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.7.0",
     "@icons-pack/react-simple-icons": "^12.7.0",
     "@logtail/next": "^0.2.0",
     "@next/bundle-analyzer": "^15.3.1",

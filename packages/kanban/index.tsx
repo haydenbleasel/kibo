@@ -194,7 +194,7 @@ export const KanbanCards = <T extends KanbanItemProps = KanbanItemProps>({
 export type KanbanHeaderProps = HTMLAttributes<HTMLDivElement>;
 
 export const KanbanHeader = ({ className, ...props }: KanbanHeaderProps) => (
-  <p className={cn('m-0 font-semibold text-sm', className)} {...props} />
+  <div className={cn('m-0 font-semibold text-sm', className)} {...props} />
 );
 
 export type KanbanProviderProps<
