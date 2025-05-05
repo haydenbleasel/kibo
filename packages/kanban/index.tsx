@@ -119,7 +119,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
       <div style={style} {...listeners} {...attributes} ref={setNodeRef}>
         <Card
           className={cn(
-            'cursor-grab rounded-md p-3 shadow-sm',
+            'cursor-grab gap-4 rounded-md p-3 shadow-sm',
             isDragging && 'cursor-grabbing',
             activeCardId === id && 'opacity-50',
             className
@@ -134,7 +134,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
               {activeCardId === id && (
                 <Card
                   className={cn(
-                    'cursor-grab rounded-md p-3 shadow-sm ring-2 ring-primary',
+                    'cursor-grab gap-4 rounded-md p-3 shadow-sm ring-2 ring-primary',
                     isDragging && 'cursor-grabbing',
                     className
                   )}
@@ -154,7 +154,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
 
 export type KanbanCardsProps<T extends KanbanItemProps = KanbanItemProps> =
   Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'id'> & {
-    children: (item: T, index: number) => ReactNode;
+    children: (item: T) => ReactNode;
     id: string;
   };
 
@@ -172,7 +172,7 @@ export const KanbanCards = <T extends KanbanItemProps = KanbanItemProps>({
         className={cn('flex flex-grow flex-col gap-2 p-2', className)}
         {...props}
       >
-        {filteredData.map((item, index) => children(item, index))}
+        {filteredData.map(children)}
       </div>
       <ScrollBar orientation="vertical" />
     </ScrollArea>

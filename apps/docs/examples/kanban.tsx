@@ -79,9 +79,6 @@ const Example = () => {
                     <p className="m-0 flex-1 font-medium text-sm">
                       {feature.name}
                     </p>
-                    <p className="m-0 text-muted-foreground text-xs">
-                      {feature.owner.name}
-                    </p>
                   </div>
                   {feature.owner && (
                     <Avatar className="h-4 w-4 shrink-0">
