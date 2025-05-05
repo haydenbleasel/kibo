@@ -35,6 +35,7 @@ import {
   useContext,
   useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 
 export type { DragEndEvent } from '@dnd-kit/core';
 
@@ -144,7 +145,7 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
       <div style={style} {...listeners} {...attributes} ref={setNodeRef}>
         <Card
           className={cn(
-            'rounded-md p-3 shadow-sm',
+            'cursor-grab rounded-md p-3 shadow-sm',
             isDragging && 'cursor-grabbing',
             activeCardId === id && 'opacity-50',
             className
@@ -153,19 +154,26 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
           {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
         </Card>
       </div>
-      {activeCardId === id ? (
-        <DragOverlay>
-          <Card
-            className={cn(
-              'rounded-md p-3 shadow-sm',
-              isDragging && 'cursor-grabbing',
-              className
-            )}
-          >
-            {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
-          </Card>
-        </DragOverlay>
-      ) : null}
+      {'document' in window
+        ? createPortal(
+            <DragOverlay>
+              {activeCardId === id && (
+                <Card
+                  className={cn(
+                    'cursor-grab rounded-md p-3 shadow-sm',
+                    isDragging && 'cursor-grabbing',
+                    className
+                  )}
+                >
+                  {children ?? (
+                    <p className="m-0 font-medium text-sm">{name}</p>
+                  )}
+                </Card>
+              )}
+            </DragOverlay>,
+            document.body
+          )
+        : null}
     </>
   );
 };
