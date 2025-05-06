@@ -18,6 +18,7 @@ import type {
   Announcements,
   DndContextProps,
   DragEndEvent,
+  DragOverEvent,
   DragStartEvent,
 } from '@dnd-kit/core';
 import { SortableContext, arrayMove, useSortable } from '@dnd-kit/sortable';
@@ -30,6 +31,9 @@ import {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import tunnel from 'tunnel-rat';
+
+const t = tunnel();
 
 export type { DragEndEvent } from '@dnd-kit/core';
 
@@ -66,23 +70,21 @@ export type KanbanBoardProps = {
 };
 
 export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
-  const { isOver, setNodeRef } = useDroppable({ id });
-  const { data } = useContext(KanbanContext) as KanbanContextProps;
-  const items = data.map((item) => item.id);
+  const { isOver, setNodeRef } = useDroppable({
+    id,
+  });
 
   return (
-    <SortableContext items={items}>
-      <div
-        className={cn(
-          'flex size-full min-h-40 flex-col divide-y overflow-hidden rounded-md border bg-secondary text-xs shadow-sm ring-2 transition-all',
-          isOver ? 'ring-primary' : 'ring-transparent',
-          className
-        )}
-        ref={setNodeRef}
-      >
-        {children}
-      </div>
-    </SortableContext>
+    <div
+      className={cn(
+        'flex size-full min-h-40 flex-col divide-y overflow-hidden rounded-md border bg-secondary text-xs shadow-sm ring-2 transition-all',
+        isOver ? 'ring-primary' : 'ring-transparent',
+        className
+      )}
+      ref={setNodeRef}
+    >
+      {children}
+    </div>
   );
 };
 
@@ -120,34 +122,26 @@ export const KanbanCard = <T extends KanbanItemProps = KanbanItemProps>({
         <Card
           className={cn(
             'cursor-grab gap-4 rounded-md p-3 shadow-sm',
-            isDragging && 'cursor-grabbing',
-            activeCardId === id && 'opacity-50',
+            isDragging && 'pointer-events-none cursor-grabbing opacity-30',
             className
           )}
         >
           {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
         </Card>
       </div>
-      {'document' in window
-        ? createPortal(
-            <DragOverlay>
-              {activeCardId === id && (
-                <Card
-                  className={cn(
-                    'cursor-grab gap-4 rounded-md p-3 shadow-sm ring-2 ring-primary',
-                    isDragging && 'cursor-grabbing',
-                    className
-                  )}
-                >
-                  {children ?? (
-                    <p className="m-0 font-medium text-sm">{name}</p>
-                  )}
-                </Card>
-              )}
-            </DragOverlay>,
-            document.body
-          )
-        : null}
+      {activeCardId === id && (
+        <t.In>
+          <Card
+            className={cn(
+              'cursor-grab gap-4 rounded-md p-3 shadow-sm ring-2 ring-primary',
+              isDragging && 'cursor-grabbing',
+              className
+            )}
+          >
+            {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
+          </Card>
+        </t.In>
+      )}
     </>
   );
 };
@@ -165,15 +159,18 @@ export const KanbanCards = <T extends KanbanItemProps = KanbanItemProps>({
 }: KanbanCardsProps<T>) => {
   const { data } = useContext(KanbanContext) as KanbanContextProps<T>;
   const filteredData = data.filter((item) => item.column === props.id);
+  const items = filteredData.map((item) => item.id);
 
   return (
     <ScrollArea className="overflow-hidden">
-      <div
-        className={cn('flex flex-grow flex-col gap-2 p-2', className)}
-        {...props}
-      >
-        {filteredData.map(children)}
-      </div>
+      <SortableContext items={items}>
+        <div
+          className={cn('flex flex-grow flex-col gap-2 p-2', className)}
+          {...props}
+        >
+          {filteredData.map(children)}
+        </div>
+      </SortableContext>
       <ScrollBar orientation="vertical" />
     </ScrollArea>
   );
@@ -194,6 +191,9 @@ export type KanbanProviderProps<
   columns: C[];
   data: T[];
   onDataChange?: (data: T[]) => void;
+  onDragStart?: (event: DragStartEvent) => void;
+  onDragEnd?: (event: DragEndEvent) => void;
+  onDragOver?: (event: DragOverEvent) => void;
 };
 
 export const KanbanProvider = <
@@ -203,6 +203,7 @@ export const KanbanProvider = <
   children,
   onDragStart,
   onDragEnd,
+  onDragOver,
   className,
   columns,
   data,
@@ -218,13 +219,42 @@ export const KanbanProvider = <
   );
 
   const handleDragStart = (event: DragStartEvent) => {
-    setActiveCardId(event.active.id as string);
-
-    setTimeout(() => {
-      // debugger;
-    }, 1000);
-
+    const card = data.find((item) => item.id === event.active.id);
+    if (card) {
+      setActiveCardId(event.active.id as string);
+    }
     onDragStart?.(event);
+  };
+
+  const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event;
+
+    if (!over) {
+      return;
+    }
+
+    const activeItem = data.find((item) => item.id === active.id);
+    const overItem = data.find((item) => item.id === over.id);
+
+    if (!activeItem || !overItem) {
+      return;
+    }
+
+    const activeColumn = activeItem.column;
+    const overColumn = overItem.column;
+
+    if (activeColumn !== overColumn) {
+      let newData = [...data];
+      const activeIndex = newData.findIndex((item) => item.id === active.id);
+      const overIndex = newData.findIndex((item) => item.id === over.id);
+
+      newData[activeIndex].column = overColumn;
+      newData = arrayMove(newData, activeIndex, overIndex);
+
+      onDataChange?.(newData);
+    }
+
+    onDragOver?.(event);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -242,18 +272,6 @@ export const KanbanProvider = <
 
     const oldIndex = newData.findIndex((item) => item.id === active.id);
     const newIndex = newData.findIndex((item) => item.id === over.id);
-
-    const oldColumn = newData.find((item) => item.id === active.id)?.column;
-    const newColumn = newData.find((item) => item.id === over.id)?.column;
-
-    if (oldColumn !== newColumn && oldColumn && newColumn) {
-      newData[oldIndex].column = newColumn;
-    }
-
-    console.log(
-      'moving',
-      `id: ${active.id}, oldIndex: ${oldIndex}, newIndex: ${newIndex}`
-    );
 
     newData = arrayMove(newData, oldIndex, newIndex);
 
@@ -292,6 +310,7 @@ export const KanbanProvider = <
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
         onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
         accessibility={{ announcements }}
         {...props}
       >
@@ -303,6 +322,12 @@ export const KanbanProvider = <
         >
           {columns.map((column) => children(column))}
         </div>
+        {createPortal(
+          <DragOverlay>
+            <t.Out />
+          </DragOverlay>,
+          document.body
+        )}
       </DndContext>
     </KanbanContext.Provider>
   );
