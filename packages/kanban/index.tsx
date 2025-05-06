@@ -322,12 +322,13 @@ export const KanbanProvider = <
         >
           {columns.map((column) => children(column))}
         </div>
-        {createPortal(
-          <DragOverlay>
-            <t.Out />
-          </DragOverlay>,
-          document.body
-        )}
+        {typeof window !== 'undefined' &&
+          createPortal(
+            <DragOverlay>
+              <t.Out />
+            </DragOverlay>,
+            document.body
+          )}
       </DndContext>
     </KanbanContext.Provider>
   );
