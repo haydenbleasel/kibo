@@ -9,30 +9,29 @@ import {
   KanbanHeader,
   KanbanProvider,
 } from '@repo/kanban';
-import { endOfMonth, startOfMonth, subDays, subMonths } from 'date-fns';
 import { useState } from 'react';
 
-const today = new Date();
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-const exampleStatuses = [
+const columns = [
   { id: faker.string.uuid(), name: 'Planned', color: '#6B7280' },
   { id: faker.string.uuid(), name: 'In Progress', color: '#F59E0B' },
   { id: faker.string.uuid(), name: 'Done', color: '#10B981' },
 ];
 
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+const users = new Array(4).map(() => ({
+  id: faker.string.uuid(),
+  name: faker.person.fullName(),
+  image: faker.image.avatar(),
+}));
 
 const exampleFeatures = new Array(20).fill(null).map((_, index) => ({
   id: faker.string.uuid(),
   name: capitalize(faker.company.buzzPhrase()),
-  startAt: startOfMonth(subMonths(today, index)),
-  endAt: subDays(endOfMonth(today), index),
-  column: exampleStatuses[index % exampleStatuses.length].id,
-  owner: {
-    id: faker.string.uuid(),
-    image: faker.image.avatar(),
-    name: faker.person.fullName(),
-  },
+  startAt: faker.date.past({ years: 0.5, refDate: new Date() }),
+  endAt: faker.date.future({ years: 0.5, refDate: new Date() }),
+  column: columns[index % columns.length].id,
+  owner: faker.helpers.arrayElement(users),
 }));
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -52,7 +51,7 @@ const Example = () => {
   return (
     <KanbanProvider
       onDataChange={setFeatures}
-      columns={exampleStatuses}
+      columns={columns}
       data={features}
     >
       {(column) => (
