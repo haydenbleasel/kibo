@@ -7,10 +7,13 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from '@icons-pack/react-simple-icons';
-import {} from '@repo/announcement';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import ReactPlayer from 'react-player/youtube';
+
+const ReactPlayer = dynamic(() => import('react-player/youtube'), {
+  ssr: false,
+});
 
 export const Hero = () => (
   <div className="grid grid-cols-2 items-center gap-16 px-8 py-16">
@@ -26,14 +29,7 @@ export const Hero = () => (
         <Button asChild size="lg">
           <Link href="/docs/components">Browse components</Link>
         </Button>
-        <Button variant="ghost" asChild size="lg">
-          <a
-            href="https://github.com/haydenbleasel/kibo"
-            className="no-underline"
-          >
-            View source code
-          </a>
-        </Button>
+        {/* <GitHubButton /> */}
       </div>
       <div className="mt-8 flex items-center gap-12 text-muted-foreground">
         <SiReact />
