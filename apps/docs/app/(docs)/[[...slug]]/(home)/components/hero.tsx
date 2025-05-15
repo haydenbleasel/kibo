@@ -1,66 +1,19 @@
 'use client';
 
 import {
-  SiAmazon,
-  SiApple,
-  SiFacebook,
-  SiGithub,
-  SiGoogle,
-  SiInstagram,
   SiLucide,
   SiReact,
   SiShadcnui,
   SiTailwindcss,
   SiTypescript,
-  SiYoutube,
 } from '@icons-pack/react-simple-icons';
 import {
   Announcement,
   AnnouncementTag,
   AnnouncementTitle,
 } from '@repo/announcement';
-import {} from '@repo/marquee';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
-import {} from '@repo/video-player';
 import Link from 'next/link';
-
-const logos = [
-  {
-    name: 'GitHub',
-    icon: SiGithub,
-    url: 'https://github.com',
-  },
-  {
-    name: 'Facebook',
-    icon: SiFacebook,
-    url: 'https://facebook.com',
-  },
-  {
-    name: 'Google',
-    icon: SiGoogle,
-    url: 'https://google.com',
-  },
-  {
-    name: 'Amazon',
-    icon: SiAmazon,
-    url: 'https://amazon.com',
-  },
-  {
-    name: 'Apple',
-    icon: SiApple,
-    url: 'https://apple.com',
-  },
-  {
-    name: 'Instagram',
-    icon: SiInstagram,
-    url: 'https://instagram.com',
-  },
-  {
-    name: 'YouTube',
-    icon: SiYoutube,
-    url: 'https://youtube.com',
-  },
-];
 
 export const Hero = () => (
   <div className="flex flex-col gap-16 px-8 py-24 text-center">

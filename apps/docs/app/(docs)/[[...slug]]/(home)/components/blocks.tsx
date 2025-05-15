@@ -1,6 +1,6 @@
-import AIInputExample from '../../../examples/ai-chatbot';
-import CollaborativeCanvasExample from '../../../examples/collaborative-canvas';
-import { source } from '../../../lib/source';
+import AIInputExample from '../../../../../examples/ai-chatbot';
+import CollaborativeCanvasExample from '../../../../../examples/collaborative-canvas';
+import { source } from '../../../../../lib/source';
 
 const aiChatbot = source.getPage(['blocks', 'ai-chatbot']);
 const collaborativeCanvas = source.getPage(['blocks', 'collaborative-canvas']);

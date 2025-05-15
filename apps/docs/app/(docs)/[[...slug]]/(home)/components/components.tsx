@@ -1,8 +1,8 @@
-import AIInputExample from '../../../examples/ai-input-icons';
-import CodeBlockExample from '../../../examples/code-block';
-import ColorPickerExample from '../../../examples/color-picker';
-import QrCodeExample from '../../../examples/qr-code';
-import { source } from '../../../lib/source';
+import AIInputExample from '../../../../../examples/ai-input-icons';
+import CodeBlockExample from '../../../../../examples/code-block';
+import ColorPickerExample from '../../../../../examples/color-picker';
+import QrCodeExample from '../../../../../examples/qr-code';
+import { source } from '../../../../../lib/source';
 
 const colorPicker = source.getPage(['components', 'color-picker']);
 const aiInput = source.getPage(['components', 'ai-input']);

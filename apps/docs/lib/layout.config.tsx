@@ -9,7 +9,15 @@ export const baseOptions: BaseLayoutProps = {
     },
     {
       text: 'Docs',
-      url: '/docs',
+      url: '/overview',
+    },
+    {
+      text: 'Components',
+      url: '/components',
+    },
+    {
+      text: 'Blocks',
+      url: '/blocks',
     },
   ],
   githubUrl: 'https://github.com/haydenbleasel/kibo',

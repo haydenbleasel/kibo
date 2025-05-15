@@ -1,5 +1,6 @@
 import { createGenerator } from 'fumadocs-typescript';
 import { AutoTypeTable } from 'fumadocs-typescript/ui';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   DocsBody,
@@ -8,12 +9,13 @@ import {
   DocsTitle,
 } from 'fumadocs-ui/page';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { Header } from '../../../components/header';
 import { Installer } from '../../../components/installer';
 import { PoweredBy } from '../../../components/powered-by';
 import { Preview } from '../../../components/preview';
+import { baseOptions } from '../../../lib/layout.config';
 import { source } from '../../../lib/source';
+import Home from './(home)';
 
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
@@ -26,13 +28,31 @@ const Page = async (props: PageProps) => {
   const page = source.getPage(params.slug);
 
   if (!page) {
-    notFound();
+    return (
+      <DocsLayout
+        {...baseOptions}
+        tree={source.pageTree}
+        sidebar={{ hidden: true, collapsible: false }}
+        nav={{ ...baseOptions.nav, mode: 'top' }}
+      >
+        <Home />
+      </DocsLayout>
+    );
   }
 
   const MDX = page.data.body;
 
   return (
-    <>
+    <DocsLayout
+      {...baseOptions}
+      tree={source.pageTree}
+      tabMode="navbar"
+      sidebar={{ collapsible: false }}
+      nav={{
+        ...baseOptions.nav,
+        mode: 'top',
+      }}
+    >
       <Header />
       <DocsPage
         toc={page.data.toc}
@@ -55,7 +75,7 @@ const Page = async (props: PageProps) => {
           />
         </DocsBody>
       </DocsPage>
-    </>
+    </DocsLayout>
   );
 };
 
@@ -68,7 +88,11 @@ export async function generateMetadata(props: {
   const page = source.getPage(params.slug);
 
   if (!page) {
-    notFound();
+    return {
+      title: 'Kibo UI',
+      description:
+        'Kibo UI is a custom registry of composable, accessible and open source components designed for use with shadcn/ui.',
+    };
   }
 
   return {
