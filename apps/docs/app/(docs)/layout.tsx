@@ -1,6 +1,6 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
-import Image from 'next/image';
 import type { ReactNode } from 'react';
+import { baseOptions } from '../../lib/layout.config';
 import { source } from '../../lib/source';
 
 type LayoutProps = {
@@ -9,20 +9,12 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => (
   <DocsLayout
+    {...baseOptions}
     tree={source.pageTree}
     tabMode="navbar"
     sidebar={{ collapsible: false }}
-    githubUrl="https://github.com/haydenbleasel/kibo"
     nav={{
-      title: (
-        <Image
-          src="/logo.svg"
-          alt="Kibo UI"
-          width={611}
-          height={116}
-          className="h-[18px] w-auto dark:invert"
-        />
-      ),
+      ...baseOptions.nav,
       mode: 'top',
     }}
   >

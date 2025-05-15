@@ -67,7 +67,6 @@ const config = {
   // biome-ignore lint/suspicious/useAwait: "redirects is async"
   async redirects() {
     return [
-      { source: '/', destination: '/overview', permanent: false },
       {
         source: '/components',
         destination: '/components/announcement',
