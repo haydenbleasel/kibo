@@ -44,9 +44,9 @@ const icons = [
 ];
 
 export const Hero = () => (
-  <div className="grid grid-cols-2 items-center gap-16 px-8 py-16">
+  <div className="grid items-center gap-16 px-4 py-16 sm:px-8 lg:grid-cols-2">
     <div className="flex max-w-3xl flex-col gap-6">
-      <h1 className="mb-0 text-balance font-semibold text-6xl">
+      <h1 className="mb-0 text-balance font-semibold text-5xl xl:text-6xl">
         The best way to build your website
       </h1>
       <p className="mt-0 mb-0 text-balance text-foreground/80 text-xl">

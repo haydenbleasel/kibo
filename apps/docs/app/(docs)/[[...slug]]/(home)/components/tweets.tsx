@@ -13,8 +13,8 @@ const tweets = [
 ];
 
 export const Tweets = () => (
-  <div className="grid grid-cols-3 divide-x divide-dotted">
-    <div className="sticky top-0 flex flex-col gap-4 self-start p-8">
+  <div className="grid divide-y ly:divide-y-0 divide-dotted lg:grid-cols-3 lg:divide-x">
+    <div className="flex flex-col gap-4 self-start p-4 sm:p-8">
       <h2 className="max-w-lg font-semibold text-3xl">
         What people are saying
       </h2>
@@ -23,7 +23,10 @@ export const Tweets = () => (
       </p>
     </div>
     <div
-      className={cn('col-span-2 columns-2 p-8', '[&_.react-tweet-theme]:mt-0!')}
+      className={cn(
+        'p-4 sm:p-8 lg:col-span-2 lg:columns-2',
+        '[&_.react-tweet-theme]:mt-0!'
+      )}
     >
       {tweets.map((tweet) => (
         <Tweet key={tweet} id={tweet} />

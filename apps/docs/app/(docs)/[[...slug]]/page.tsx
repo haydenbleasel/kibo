@@ -41,7 +41,7 @@ const Page = async (props: PageProps) => {
               target="_blank"
               rel="noreferrer noopener"
             >
-              Come join the converation 😻
+              Come say hello 😻
             </a>
           </p>
         </Banner>

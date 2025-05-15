@@ -95,7 +95,7 @@ const Example = () => {
             </TabsTrigger>
           </TabsList>
         </Tabs>
-        <div className="mt-8 grid w-full max-w-4xl grid-cols-3 gap-4">
+        <div className="mt-8 grid w-full max-w-4xl gap-4 lg:grid-cols-3">
           {plans.map((plan) => (
             <Card
               key={plan.id}

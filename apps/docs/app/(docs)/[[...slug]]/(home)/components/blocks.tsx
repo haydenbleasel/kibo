@@ -40,7 +40,7 @@ const examples = [
     name: pricing?.data.title,
     description: pricing?.data.description,
     component: PricingPageExample,
-    className: 'col-span-2 border-b-0',
+    className: 'lg:col-span-2',
   },
 ];
 
@@ -71,9 +71,8 @@ const ExampleCard = ({
     <div
       key={name}
       className={cn(
-        'flex h-full flex-col gap-8 border-l border-dotted p-8',
-        '[&:last-child]:border-b',
-        index % 2 === 0 && 'border-l-0',
+        'flex h-full flex-col gap-8 border-dotted p-4 sm:p-8',
+        'lg:[&:nth-child(2n)]:border-r-0',
         className
       )}
     >
@@ -95,7 +94,7 @@ const ExampleCard = ({
 
 export const Blocks = () => (
   <>
-    <div className="flex w-full items-start justify-between gap-4 px-8 py-16">
+    <div className="flex w-full flex-col items-start justify-between gap-4 px-4 py-16 sm:px-8 md:flex-row">
       <div className="grid gap-4">
         <h2 className="max-w-lg font-semibold text-3xl">
           Building blocks for interfaces
@@ -112,7 +111,7 @@ export const Blocks = () => (
         </Link>
       </Button>
     </div>
-    <div className="grid grid-cols-1 divide-y divide-dotted md:grid-cols-2">
+    <div className="grid grid-cols-1 divide-y divide-dotted lg:grid-cols-2 lg:divide-x">
       {examples.map((example, index) => (
         <ExampleCard key={example.name} index={index} {...example} />
       ))}

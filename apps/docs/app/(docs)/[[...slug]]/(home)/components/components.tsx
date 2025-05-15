@@ -76,7 +76,7 @@ const examples = [
     name: qrCode?.data.title,
     description: qrCode?.data.description,
     component: () => (
-      <div className="w-full rounded-xl border bg-background p-8">
+      <div className="w-full rounded-xl border bg-background p-4 sm:p-8">
         <QrCodeExample />
       </div>
     ),
@@ -160,7 +160,7 @@ const ExampleCard = ({
     <div
       key={name}
       className={cn(
-        'flex h-full flex-col gap-8 p-8',
+        'flex h-full flex-col gap-8 p-4 sm:p-8',
         'sm:[&:nth-child(2n)]:border-r-0',
         'sm:[&:nth-last-child(2)]:border-b-0',
         'xl:[&:nth-child(2n)]:border-r',
@@ -187,7 +187,7 @@ const ExampleCard = ({
 
 export const Components = () => (
   <>
-    <div className="flex w-full items-start justify-between gap-4 px-8 py-16">
+    <div className="flex w-full flex-col items-start justify-between gap-4 px-4 py-16 sm:px-8 md:flex-row">
       <div className="grid gap-4">
         <h2 className="max-w-lg font-semibold text-3xl">
           Functional and fully composable
