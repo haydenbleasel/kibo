@@ -7,7 +7,9 @@ type HomeLayoutProps = {
 };
 
 const HomeLayout = ({ children }: HomeLayoutProps) => (
-  <FumaDocsHomeLayout {...baseOptions}>{children}</FumaDocsHomeLayout>
+  <FumaDocsHomeLayout className="bg-secondary" {...baseOptions}>
+    {children}
+  </FumaDocsHomeLayout>
 );
 
 export default HomeLayout;

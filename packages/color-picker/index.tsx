@@ -175,7 +175,10 @@ export const ColorPickerSelection = ({
   return (
     <div
       ref={containerRef}
-      className={cn('relative size-full cursor-crosshair rounded', className)}
+      className={cn(
+        'relative aspect-square w-full cursor-crosshair rounded',
+        className
+      )}
       style={{
         background: `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
                      linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)),

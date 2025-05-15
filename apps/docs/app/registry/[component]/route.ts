@@ -9,7 +9,7 @@ type RegistryParams = {
   params: Promise<{ component: string }>;
 };
 
-const getPackage = async (packageName: string) => {
+export const getPackage = async (packageName: string) => {
   const packageDir = join(process.cwd(), '..', '..', 'packages', packageName);
   const packagePath = join(packageDir, 'package.json');
   const packageJson = JSON.parse(await readFile(packagePath, 'utf-8'));
