@@ -72,6 +72,11 @@ const config = {
         destination: '/components/announcement',
         permanent: false,
       },
+      {
+        source: '/blocks',
+        destination: '/blocks/ai-chatbot',
+        permanent: false,
+      },
       { source: '/ai', destination: '/components/ai', permanent: true },
       {
         source: '/ai/:slug*',

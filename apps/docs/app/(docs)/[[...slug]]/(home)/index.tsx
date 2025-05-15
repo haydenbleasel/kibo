@@ -3,7 +3,7 @@ import { Components } from './components/components';
 import { Hero } from './components/hero';
 
 const Home = () => (
-  <div className="w-full bg-secondary pt-[var(--fd-nav-height)]">
+  <div className="w-full bg-secondary pt-[var(--fd-nav-height)] dark:bg-background">
     <div className="container mx-auto divide-y divide-dotted border-x border-dotted px-0">
       <Hero />
       <Components />

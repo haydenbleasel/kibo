@@ -67,8 +67,7 @@ const Page = async (props: PageProps) => {
     <DocsLayout
       {...baseOptions}
       tree={source.pageTree}
-      tabMode="navbar"
-      sidebar={{ collapsible: false }}
+      sidebar={{ collapsible: false, tabs: false }}
       nav={{
         ...baseOptions.nav,
         mode: 'top',

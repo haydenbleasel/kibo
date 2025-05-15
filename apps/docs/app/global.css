@@ -179,3 +179,7 @@ h1, h2, h3 {
 [data-theme-toggle] svg {
   @apply fill-none;
 }
+
+#nd-subnav [data-active="true"] {
+  @apply font-medium text-primary;
+}
