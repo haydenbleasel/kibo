@@ -333,6 +333,7 @@ const PercentageInput = ({ className, ...props }: PercentageInputProps) => {
     <div className="relative">
       <Input
         type="text"
+        readOnly
         {...props}
         className={cn(
           'h-8 w-[3.25rem] rounded-l-none bg-secondary px-2 text-xs shadow-none',
@@ -369,6 +370,7 @@ export const ColorPickerFormat = ({
         <Input
           type="text"
           value={hex}
+          readOnly
           className="h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none"
         />
         <PercentageInput value={alpha} />

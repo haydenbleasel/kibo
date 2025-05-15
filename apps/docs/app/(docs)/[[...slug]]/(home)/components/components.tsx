@@ -21,9 +21,9 @@ import { ArrowRightIcon, type LucideProps, icons } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type ComponentType, createElement } from 'react';
-import CodeBlockExample from '../../../../../examples/code-block';
 import QrCodeExample from '../../../../../examples/qr-code';
 import { source } from '../../../../../lib/source';
+import { CodeBlockExample } from './code-block-example';
 
 const colorPicker = source.getPage(['components', 'color-picker']);
 const imageZoom = source.getPage(['components', 'image-zoom']);
@@ -85,7 +85,7 @@ const examples = [
     icon: codeBlock?.data.icon,
     name: codeBlock?.data.title,
     description: codeBlock?.data.description,
-    component: CodeBlockExample,
+    component: () => <CodeBlockExample />,
   },
   {
     icon: dropzone?.data.icon,
@@ -97,7 +97,7 @@ const examples = [
         minSize={1024}
         maxFiles={10}
         accept={{ 'image/*': [] }}
-        className="aspect-square"
+        className="aspect-square shadow-none"
       >
         <DropzoneEmptyState />
         <DropzoneContent />
@@ -109,17 +109,19 @@ const examples = [
     name: marquee?.data.title,
     description: marquee?.data.description,
     component: () => (
-      <div className="aspect-square overflow-hidden rounded-xl border">
+      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl border bg-background">
         <Marquee>
           <MarqueeFade side="left" />
           <MarqueeFade side="right" />
           <MarqueeContent>
             {new Array(10).fill(null).map((_, index) => (
-              <MarqueeItem key={index} className="h-32 w-32">
+              <MarqueeItem key={index} className="h-24 w-24">
                 <Image
-                  src={`https://placehold.co/128x128?random=${index}`}
+                  src={`https://placehold.co/96x96?random=${index}`}
                   alt={`Placeholder ${index}`}
                   className="overflow-hidden rounded-full"
+                  width={96}
+                  height={96}
                   unoptimized
                 />
               </MarqueeItem>
@@ -158,8 +160,12 @@ const ExampleCard = ({
     <div
       key={name}
       className={cn(
-        'flex h-full flex-col gap-8 border-l border-dotted p-8',
-        index % 3 === 0 && 'border-l-0',
+        'flex h-full flex-col gap-8 p-8',
+        'sm:[&:nth-child(2n)]:border-r-0',
+        'sm:[&:nth-last-child(2)]:border-b-0',
+        'xl:[&:nth-child(2n)]:border-r',
+        'xl:[&:nth-child(3n)]:border-r-0',
+        'xl:[&:nth-last-child(3)]:border-b-0',
         className
       )}
     >
@@ -198,7 +204,7 @@ export const Components = () => (
         </Link>
       </Button>
     </div>
-    <div className="grid grid-cols-1 divide-y divide-dotted md:grid-cols-3">
+    <div className="grid grid-cols-1 divide-y divide-dotted sm:grid-cols-2 sm:divide-x xl:grid-cols-3">
       {examples.map((example, index) => (
         <ExampleCard key={example.name} index={index} {...example} />
       ))}
