@@ -1,5 +1,6 @@
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { cn } from '@repo/shadcn-ui/lib/utils';
+import { unstable_cache } from 'next/cache';
 import type { ReactElement } from 'react';
 import { octokit } from '../../../../../lib/octokit';
 
@@ -7,23 +8,36 @@ type GitHubButtonProps = {
   className?: string;
 };
 
+const getGitHubData = unstable_cache(
+  async () => {
+    try {
+      const { data } = await octokit.rest.repos.get({
+        owner: 'haydenbleasel',
+        repo: 'kibo',
+      });
+      return {
+        stars: data.stargazers_count,
+        url: data.html_url,
+      };
+    } catch (error) {
+      // biome-ignore lint/suspicious/noConsole: "it's fine"
+      console.error(error);
+      return {
+        stars: 0,
+        url: '',
+      };
+    }
+  },
+  ['github-stats'],
+  {
+    revalidate: 3600, // Cache for 1 hour
+  }
+);
+
 export const GitHubButton = async ({
   className,
 }: GitHubButtonProps): Promise<ReactElement> => {
-  let stars = 0;
-  let url = '';
-
-  try {
-    const { data } = await octokit.rest.repos.get({
-      owner: 'haydenbleasel',
-      repo: 'kibo',
-    });
-    stars = data.stargazers_count;
-    url = data.html_url;
-  } catch (error) {
-    // biome-ignore lint/suspicious/noConsole: "it's fine"
-    console.error(error);
-  }
+  const { stars, url } = await getGitHubData();
 
   return (
     <a

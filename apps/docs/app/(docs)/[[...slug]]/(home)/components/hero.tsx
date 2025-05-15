@@ -1,5 +1,3 @@
-'use client';
-
 import {
   SiLucide,
   SiReact,
@@ -8,16 +6,9 @@ import {
   SiTypescript,
 } from '@icons-pack/react-simple-icons';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { Skeleton } from '@repo/shadcn-ui/components/ui/skeleton';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
-
-const ReactPlayer = dynamic(() => import('react-player/youtube'), {
-  ssr: false,
-  loading: () => (
-    <Skeleton className="relative aspect-[3472/2160] w-full overflow-hidden rounded-xl border bg-background" />
-  ),
-});
+import { DemoVideo } from './demo-video';
+import { GitHubButton } from './github-button';
 
 export const Hero = () => (
   <div className="grid grid-cols-2 items-center gap-16 px-8 py-16">
@@ -33,7 +24,7 @@ export const Hero = () => (
         <Button asChild size="lg">
           <Link href="/docs/components">Browse components</Link>
         </Button>
-        {/* <GitHubButton /> */}
+        <GitHubButton />
       </div>
       <div className="mt-8 flex items-center gap-12 text-muted-foreground">
         <SiReact />
@@ -44,18 +35,7 @@ export const Hero = () => (
       </div>
     </div>
     <div>
-      <div className="relative aspect-[3472/2160] w-full overflow-hidden rounded-xl">
-        <ReactPlayer
-          url="https://youtu.be/uld_n8UH3EE"
-          width="100%"
-          height="100%"
-          controls
-          style={{
-            position: 'absolute',
-            inset: 0,
-          }}
-        />
-      </div>
+      <DemoVideo url="https://youtu.be/uld_n8UH3EE" />
     </div>
   </div>
 );
