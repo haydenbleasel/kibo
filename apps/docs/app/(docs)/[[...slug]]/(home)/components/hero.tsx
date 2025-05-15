@@ -7,24 +7,15 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from '@icons-pack/react-simple-icons';
-import {
-  Announcement,
-  AnnouncementTag,
-  AnnouncementTitle,
-} from '@repo/announcement';
+import {} from '@repo/announcement';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
 import Link from 'next/link';
+import ReactPlayer from 'react-player/youtube';
 
 export const Hero = () => (
-  <div className="flex flex-col gap-16 px-8 py-24 text-center">
-    <div className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-8">
-      <Link href="https://producthunt.com/">
-        <Announcement>
-          <AnnouncementTag>News</AnnouncementTag>
-          <AnnouncementTitle>We're live on ProductHunt!</AnnouncementTitle>
-        </Announcement>
-      </Link>
-      <h1 className="mb-0 text-balance font-semibold text-6xl md:text-7xl xl:text-[5.25rem]">
+  <div className="grid grid-cols-2 items-center gap-16 px-8 py-16">
+    <div className="flex max-w-3xl flex-col gap-6">
+      <h1 className="mb-0 text-balance font-semibold text-6xl">
         The best way to build your website
       </h1>
       <p className="mt-0 mb-0 text-balance text-foreground/80 text-xl">
@@ -35,10 +26,13 @@ export const Hero = () => (
         <Button asChild size="lg">
           <Link href="/docs/components">Browse components</Link>
         </Button>
-        <Button variant="outline" asChild size="lg">
-          <Link href="#" className="no-underline">
-            Learn more
-          </Link>
+        <Button variant="ghost" asChild size="lg">
+          <a
+            href="https://github.com/haydenbleasel/kibo"
+            className="no-underline"
+          >
+            View source code
+          </a>
         </Button>
       </div>
       <div className="mt-8 flex items-center gap-12 text-muted-foreground">
@@ -47,6 +41,20 @@ export const Hero = () => (
         <SiTypescript />
         <SiTailwindcss />
         <SiLucide />
+      </div>
+    </div>
+    <div>
+      <div className="relative aspect-[3472/2160] w-full overflow-hidden rounded-xl">
+        <ReactPlayer
+          url="https://youtu.be/uld_n8UH3EE"
+          width="100%"
+          height="100%"
+          controls
+          style={{
+            position: 'absolute',
+            inset: 0,
+          }}
+        />
       </div>
     </div>
   </div>

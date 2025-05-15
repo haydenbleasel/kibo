@@ -1,5 +1,6 @@
 import { createGenerator } from 'fumadocs-typescript';
 import { AutoTypeTable } from 'fumadocs-typescript/ui';
+import { Banner } from 'fumadocs-ui/components/banner';
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
@@ -30,14 +31,29 @@ const Page = async (props: PageProps) => {
 
   if (!params.slug) {
     return (
-      <DocsLayout
-        {...baseOptions}
-        tree={source.pageTree}
-        sidebar={{ hidden: true, collapsible: false }}
-        nav={{ ...baseOptions.nav, mode: 'top' }}
-      >
-        <Home />
-      </DocsLayout>
+      <>
+        <Banner variant="rainbow">
+          <p>
+            We're live on Product Hunt!{' '}
+            <a
+              className="underline"
+              href="https://www.producthunt.com/posts/kibo-ui"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Come join the converation 😻
+            </a>
+          </p>
+        </Banner>
+        <DocsLayout
+          {...baseOptions}
+          tree={source.pageTree}
+          sidebar={{ hidden: true, collapsible: false }}
+          nav={{ ...baseOptions.nav, mode: 'top' }}
+        >
+          <Home />
+        </DocsLayout>
+      </>
     );
   }
 
