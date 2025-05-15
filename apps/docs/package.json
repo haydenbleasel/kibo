@@ -65,6 +65,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-player": "^2.16.0",
+    "react-tweet": "^3.2.2",
     "require-in-the-middle": "^7.5.2",
     "schema-dts": "^1.1.5",
     "shiki": "^3.3.0",
