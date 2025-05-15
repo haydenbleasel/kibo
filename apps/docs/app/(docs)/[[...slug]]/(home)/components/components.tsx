@@ -9,6 +9,12 @@ import {
 } from '@repo/color-picker';
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@repo/dropzone';
 import { ImageZoom } from '@repo/image-zoom';
+import {
+  Marquee,
+  MarqueeContent,
+  MarqueeFade,
+  MarqueeItem,
+} from '@repo/marquee';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { ArrowRightIcon, type LucideProps, icons } from 'lucide-react';
@@ -24,6 +30,7 @@ const imageZoom = source.getPage(['components', 'image-zoom']);
 const qrCode = source.getPage(['components', 'qr-code']);
 const codeBlock = source.getPage(['components', 'code-block']);
 const dropzone = source.getPage(['components', 'dropzone']);
+const marquee = source.getPage(['components', 'marquee']);
 
 const examples = [
   {
@@ -31,7 +38,7 @@ const examples = [
     name: colorPicker?.data.title,
     description: colorPicker?.data.description,
     component: () => (
-      <ColorPicker className="aspect-square rounded-md border bg-background p-4 shadow-sm">
+      <ColorPicker className="aspect-square rounded-md border bg-background p-4">
         <ColorPickerSelection className="aspect-auto size-full" />
         <div className="flex items-center gap-4">
           <ColorPickerEyeDropper />
@@ -79,7 +86,6 @@ const examples = [
     name: codeBlock?.data.title,
     description: codeBlock?.data.description,
     component: CodeBlockExample,
-    className: 'col-span-2 border-b-0',
   },
   {
     icon: dropzone?.data.icon,
@@ -96,6 +102,31 @@ const examples = [
         <DropzoneEmptyState />
         <DropzoneContent />
       </Dropzone>
+    ),
+  },
+  {
+    icon: marquee?.data.icon,
+    name: marquee?.data.title,
+    description: marquee?.data.description,
+    component: () => (
+      <div className="aspect-square overflow-hidden rounded-xl border">
+        <Marquee>
+          <MarqueeFade side="left" />
+          <MarqueeFade side="right" />
+          <MarqueeContent>
+            {new Array(10).fill(null).map((_, index) => (
+              <MarqueeItem key={index} className="h-32 w-32">
+                <Image
+                  src={`https://placehold.co/128x128?random=${index}`}
+                  alt={`Placeholder ${index}`}
+                  className="overflow-hidden rounded-full"
+                  unoptimized
+                />
+              </MarqueeItem>
+            ))}
+          </MarqueeContent>
+        </Marquee>
+      </div>
     ),
   },
 ];
