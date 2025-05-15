@@ -8,11 +8,15 @@ import {
   SiTypescript,
 } from '@icons-pack/react-simple-icons';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
+import { Skeleton } from '@repo/shadcn-ui/components/ui/skeleton';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 const ReactPlayer = dynamic(() => import('react-player/youtube'), {
   ssr: false,
+  loading: () => (
+    <Skeleton className="relative aspect-[3472/2160] w-full overflow-hidden rounded-xl border bg-background" />
+  ),
 });
 
 export const Hero = () => (
