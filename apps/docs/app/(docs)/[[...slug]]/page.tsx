@@ -9,6 +9,7 @@ import {
   DocsTitle,
 } from 'fumadocs-ui/page';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { Header } from '../../../components/header';
 import { Installer } from '../../../components/installer';
 import { PoweredBy } from '../../../components/powered-by';
@@ -27,7 +28,7 @@ const Page = async (props: PageProps) => {
   const params = await props.params;
   const page = source.getPage(params.slug);
 
-  if (!page) {
+  if (!params.slug) {
     return (
       <DocsLayout
         {...baseOptions}
@@ -38,6 +39,10 @@ const Page = async (props: PageProps) => {
         <Home />
       </DocsLayout>
     );
+  }
+
+  if (!page) {
+    notFound();
   }
 
   const MDX = page.data.body;
@@ -87,12 +92,16 @@ export async function generateMetadata(props: {
   const params = await props.params;
   const page = source.getPage(params.slug);
 
-  if (!page) {
+  if (!params.slug) {
     return {
       title: 'Kibo UI',
       description:
         'Kibo UI is a custom registry of composable, accessible and open source components designed for use with shadcn/ui.',
     };
+  }
+
+  if (!page) {
+    notFound();
   }
 
   return {
