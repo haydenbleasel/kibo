@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player/youtube'), {
   ssr: false,
   loading: () => (
-    <Skeleton className="relative aspect-[3472/2160] w-full overflow-hidden rounded-xl border bg-background" />
+    <Skeleton className="relative aspect-video w-full overflow-hidden bg-background" />
   ),
 });
 
@@ -15,12 +15,22 @@ type DemoVideoProps = {
 };
 
 export const DemoVideo = ({ url }: DemoVideoProps) => (
-  <div className="relative aspect-[3472/2160] w-full overflow-hidden rounded-xl">
+  <div className="pointer-events-none relative aspect-video w-full select-none">
     <ReactPlayer
       url={url}
       width="100%"
       height="100%"
-      controls
+      playing
+      loop
+      playsinline
+      muted
+      config={{
+        playerVars: {
+          rel: 0,
+          showinfo: 0,
+          controls: 0,
+        },
+      }}
       style={{
         position: 'absolute',
         inset: 0,

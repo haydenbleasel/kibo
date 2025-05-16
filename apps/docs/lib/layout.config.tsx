@@ -4,13 +4,9 @@ import Image from 'next/image';
 export const baseOptions: BaseLayoutProps = {
   links: [
     {
-      text: 'Home',
-      url: '/',
-    },
-    {
       text: 'Docs',
-      url: '/overview',
-      active: 'url',
+      url: '/docs',
+      active: 'nested-url',
     },
     {
       text: 'Components',

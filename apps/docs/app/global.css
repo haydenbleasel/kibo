@@ -183,3 +183,23 @@ h1, h2, h3 {
 #nd-subnav [data-active="true"] {
   @apply font-medium text-primary;
 }
+
+#nd-subnav > div {
+  @apply container border-x border-dotted;
+}
+
+#nd-docs-layout {
+  @apply container mx-auto p-0 border-x border-dotted;
+}
+
+#nd-sidebar > div {
+  @apply border-dotted;
+}
+
+#nd-tocnav {
+  @apply translate-y-px border-dotted;
+}
+
+#nd-sidebar [data-hide-if-empty] {
+  @apply hidden;
+}

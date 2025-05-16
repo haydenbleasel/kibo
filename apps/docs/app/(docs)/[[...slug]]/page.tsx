@@ -32,7 +32,10 @@ const Page = async (props: PageProps) => {
   if (!params.slug) {
     return (
       <>
-        <Banner variant="rainbow">
+        <Banner
+          variant="rainbow"
+          className="container mx-auto border-x border-b border-dotted"
+        >
           <p>
             We're live on Product Hunt!{' '}
             <a

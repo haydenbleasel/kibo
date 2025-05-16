@@ -12,6 +12,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@repo/shadcn-ui/components/ui/tooltip';
+import {} from '@repo/video-player';
 import Link from 'next/link';
 import { DemoVideo } from './demo-video';
 import { GitHubButton } from './github-button';
@@ -44,12 +45,12 @@ const icons = [
 ];
 
 export const Hero = () => (
-  <div className="grid items-center gap-16 px-4 py-16 sm:px-8 lg:grid-cols-2">
-    <div className="flex max-w-3xl flex-col gap-6">
-      <h1 className="mb-0 text-balance font-semibold text-5xl xl:text-6xl">
+  <div className="grid divide-x divide-dotted xl:grid-cols-3">
+    <div className="flex max-w-3xl flex-col justify-center gap-6 p-4 sm:p-8">
+      <h1 className="mb-0 text-balance font-semibold text-3xl xl:text-4xl 2xl:text-5xl">
         The best way to build your website
       </h1>
-      <p className="mt-0 mb-0 text-balance text-foreground/80 text-xl">
+      <p className="mt-0 mb-0 text-balance text-foreground/80 xl:text-lg 2xl:text-xl">
         Kibo UI is a custom registry of composable, accessible and open source
         components designed for use with shadcn/ui.
       </p>
@@ -71,8 +72,8 @@ export const Hero = () => (
         ))}
       </div>
     </div>
-    <div>
-      <DemoVideo url="https://youtu.be/uld_n8UH3EE" />
+    <div className="flex xl:col-span-2">
+      <DemoVideo url="https://youtu.be/FqQ9j6bqtf0" />
     </div>
   </div>
 );
