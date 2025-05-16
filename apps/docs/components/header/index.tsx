@@ -1,5 +1,5 @@
 export const Header = () => (
-  <span className="-z-1 pointer-events-none absolute inset-0 flex h-[64rem] select-none justify-center overflow-hidden">
+  <span className="-z-1 pointer-events-none absolute inset-0 flex select-none justify-center overflow-hidden">
     <svg
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 790 718"
