@@ -1,6 +1,6 @@
 import { createGenerator } from 'fumadocs-typescript';
 import { AutoTypeTable } from 'fumadocs-typescript/ui';
-import { Banner } from 'fumadocs-ui/components/banner';
+// import { Banner } from 'fumadocs-ui/components/banner';
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
@@ -32,7 +32,7 @@ const Page = async (props: PageProps) => {
   if (!params.slug) {
     return (
       <>
-        <Banner
+        {/* <Banner
           variant="rainbow"
           className="container mx-auto border-x border-b border-dotted"
         >
@@ -47,7 +47,7 @@ const Page = async (props: PageProps) => {
               Come say hello 😻
             </a>
           </p>
-        </Banner>
+        </Banner> */}
         <DocsLayout
           {...baseOptions}
           tree={source.pageTree}

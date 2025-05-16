@@ -25,12 +25,14 @@ const tweets = [
 export const Tweets = () => (
   <div className="grid divide-y divide-dotted lg:grid-cols-3 lg:divide-x lg:divide-y-0">
     <div className="flex flex-col gap-4 p-4 sm:p-8">
-      <h2 className="max-w-lg font-semibold text-3xl">
-        What people are saying
-      </h2>
-      <p className="max-w-lg text-balance text-foreground/60 text-lg">
-        We're proud to have a community of users who love using Kibo UI.
-      </p>
+      <div className="sticky top-24">
+        <h2 className="max-w-lg font-semibold text-3xl">
+          What people are saying
+        </h2>
+        <p className="max-w-lg text-balance text-foreground/60 text-lg">
+          We're proud to have a community of users who love using Kibo UI.
+        </p>
+      </div>
     </div>
     <div
       className={cn(
