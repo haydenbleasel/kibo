@@ -175,7 +175,7 @@ const ExampleCard = ({
           {name && <p className="font-medium">{name}</p>}
         </div>
         {description && (
-          <p className="text-balance text-foreground/60">{description}</p>
+          <p className="text-balance text-muted-foreground">{description}</p>
         )}
       </div>
       <div className="text-left">
@@ -192,7 +192,7 @@ export const Components = () => (
         <h2 className="max-w-lg font-semibold text-3xl">
           Functional and fully composable
         </h2>
-        <p className="max-w-lg text-balance text-foreground/60 text-lg">
+        <p className="max-w-lg text-balance text-lg text-muted-foreground">
           Kibo UI components are designed to be fully composable so you can
           build, customize and extend them to your own needs.
         </p>

@@ -50,7 +50,7 @@ export const Hero = () => (
       <h1 className="mb-0 text-balance font-semibold text-3xl xl:text-4xl 2xl:text-5xl">
         The best way to build your website
       </h1>
-      <p className="mt-0 mb-0 text-balance text-foreground/80 xl:text-lg 2xl:text-xl">
+      <p className="mt-0 mb-0 text-balance text-muted-foreground xl:text-lg 2xl:text-xl">
         Kibo UI is a custom registry of composable, accessible and open source
         components designed for use with shadcn/ui.
       </p>

@@ -29,7 +29,7 @@ export const Tweets = () => (
         <h2 className="max-w-lg font-semibold text-3xl">
           What people are saying
         </h2>
-        <p className="max-w-lg text-balance text-foreground/60 text-lg">
+        <p className="max-w-lg text-balance text-lg text-muted-foreground">
           We're proud to have a community of users who love using Kibo UI.
         </p>
       </div>

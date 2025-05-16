@@ -82,7 +82,7 @@ const ExampleCard = ({
           {name && <p className="font-medium">{name}</p>}
         </div>
         {description && (
-          <p className="text-balance text-foreground/60">{description}</p>
+          <p className="text-balance text-muted-foreground">{description}</p>
         )}
       </div>
       <div className="overflow-hidden rounded-lg border bg-background text-left">
@@ -99,7 +99,7 @@ export const Blocks = () => (
         <h2 className="max-w-lg font-semibold text-3xl">
           Building blocks for interfaces
         </h2>
-        <p className="max-w-lg text-balance text-foreground/60 text-lg">
+        <p className="max-w-lg text-balance text-lg text-muted-foreground">
           Get your apps and websites up and running quickly with precomposed and
           animated blocks.
         </p>
