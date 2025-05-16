@@ -197,7 +197,7 @@ export const Components = () => (
           build, customize and extend them to your own needs.
         </p>
       </div>
-      <Button asChild>
+      <Button asChild size="lg">
         <Link href="/components">
           <span>Explore components</span>
           <ArrowRightIcon size={16} />

@@ -30,7 +30,7 @@ export const AIMessageContent = ({
 }: AIMessageContentProps) => (
   <div
     className={cn(
-      'flex w-full flex-col gap-2 rounded-lg px-4 py-3 text-sm sm:max-w-[80%]',
+      'flex flex-col gap-2 rounded-lg px-4 py-3 text-sm sm:max-w-[80%]',
       'bg-muted text-foreground',
       'group-[.is-user]:bg-primary group-[.is-user]:text-primary-foreground',
       className
@@ -53,7 +53,7 @@ export const AIMessageAvatar = ({
   ...props
 }: AIMessageAvatarProps) => (
   <Avatar className={cn('size-8', className)} {...props}>
-    <AvatarImage src={src} alt="" />
+    <AvatarImage className="mt-0 mb-0" src={src} alt="" />
     <AvatarFallback>{name?.slice(0, 2) || 'ME'}</AvatarFallback>
   </Avatar>
 );

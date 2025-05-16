@@ -104,7 +104,7 @@ export const Blocks = () => (
           animated blocks.
         </p>
       </div>
-      <Button asChild>
+      <Button asChild size="lg">
         <Link href="/blocks">
           <span>Explore blocks</span>
           <ArrowRightIcon size={16} />
