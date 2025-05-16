@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "description": "General",
+  "pages": [
+    "---Overview---",
+    "index",
+    "benefits",
+    "sponsors",
+    "---Usage---",
+    "setup",
+    "usage",
+    "troubleshooting",
+    "---Contributing---",
+    "how-to-contribute",
+    "new-components",
+    "philosophy"
+  ]
+}
