@@ -12,7 +12,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@repo/shadcn-ui/components/ui/tooltip';
-import {} from '@repo/video-player';
 import Link from 'next/link';
 import { DemoVideo } from './demo-video';
 import { GitHubButton } from './github-button';
