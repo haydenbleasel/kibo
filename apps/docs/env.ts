@@ -15,6 +15,9 @@ export const env = createEnv({
     // Added by Sentry Integration, Vercel Marketplace
     SENTRY_ORG: z.string().min(1).optional(),
     SENTRY_PROJECT: z.string().min(1).optional(),
+
+    // Added by Vercel Redis Integration, Vercel Marketplace
+    REDIS_URL: z.string().min(1).url().optional(),
   },
   client: {
     NEXT_PUBLIC_GA_MEASUREMENT_ID: z
@@ -37,5 +40,6 @@ export const env = createEnv({
     SENTRY_PROJECT: process.env.SENTRY_PROJECT,
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
     NEXT_PUBLIC_LOGO_DEV_TOKEN: process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN,
+    REDIS_URL: process.env.REDIS_URL,
   },
 });
