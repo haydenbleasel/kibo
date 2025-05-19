@@ -111,7 +111,7 @@ const Example = () => {
   }));
 
   return (
-    <div className="relative aspect-[4/3] size-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+    <div className="relative aspect-[4/3] size-full bg-[radial-gradient(var(--color-secondary),transparent_1px)] [background-size:16px_16px]">
       <div className="absolute top-8 right-8">
         <AvatarStack size={32} animate>
           {usersWithPositions.map((user) => (

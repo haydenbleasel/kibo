@@ -96,7 +96,7 @@ export const Preview = async ({
         <TabsContent
           value="preview"
           className={cn(
-            'size-full',
+            'not-fumadocs-codeblock size-full',
             type === 'component' ? 'overflow-hidden' : 'overflow-auto'
           )}
         >

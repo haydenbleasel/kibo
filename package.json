@@ -19,18 +19,18 @@
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^22.15.3",
-    "turbo": "^2.5.2",
+    "@types/node": "^22.15.18",
+    "turbo": "^2.5.3",
     "typescript": "^5.8.3",
-    "ultracite": "^4.2.1"
+    "ultracite": "^4.2.5"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.11.0",
   "type": "module",
   "dependencies": {
-    "tsup": "^8.4.0",
-    "zod": "^3.24.3"
+    "tsup": "^8.5.0",
+    "zod": "^3.24.4"
   }
 }

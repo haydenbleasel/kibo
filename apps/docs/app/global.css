@@ -205,7 +205,9 @@ h3 {
 #nd-sidebar [data-hide-if-empty] {
   @apply hidden;
 }
-
+#nd-subnav button[data-search] + button {
+  @apply hidden!;
+}
 .prose {
   overflow: auto;
 }

@@ -7,10 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  RadioGroupIndicator,
+  RadioGroupItem,
+  type RadioGroupItemProps,
+} from '@radix-ui/react-radio-group';
 import { RadioGroup } from '@repo/shadcn-ui/components/ui/radio-group';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { CircleIcon } from 'lucide-react';
-import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
 import type { ComponentProps, HTMLAttributes } from 'react';
 
 export type ChoiceboxProps = ComponentProps<typeof RadioGroup>;
@@ -19,14 +23,14 @@ export const Choicebox = ({ className, ...props }: ChoiceboxProps) => (
   <RadioGroup className={cn('w-full', className)} {...props} />
 );
 
-export type ChoiceboxItemProps = RadioGroupPrimitive.RadioGroupItemProps;
+export type ChoiceboxItemProps = RadioGroupItemProps;
 
 export const ChoiceboxItem = ({
   className,
   children,
   ...props
 }: ChoiceboxItemProps) => (
-  <RadioGroupPrimitive.Item
+  <RadioGroupItem
     className={cn(
       'text-left',
       '[&[data-state="checked"]]:border-primary',
@@ -35,10 +39,15 @@ export const ChoiceboxItem = ({
     asChild
     {...props}
   >
-    <Card className="cursor-pointer flex-row items-start justify-between rounded-md p-4 shadow-none transition-all">
+    <Card
+      className={cn(
+        'flex cursor-pointer flex-row items-start justify-between rounded-md p-4 shadow-none transition-all',
+        className
+      )}
+    >
       {children}
     </Card>
-  </RadioGroupPrimitive.Item>
+  </RadioGroupItem>
 );
 
 export type ChoiceboxItemHeaderProps = ComponentProps<typeof CardHeader>;
@@ -101,14 +110,14 @@ export const ChoiceboxItemContent = ({
 );
 
 export type ChoiceboxItemIndicatorProps = ComponentProps<
-  typeof RadioGroupPrimitive.Indicator
+  typeof RadioGroupIndicator
 >;
 
 export const ChoiceboxItemIndicator = ({
   className,
   ...props
 }: ChoiceboxItemIndicatorProps) => (
-  <RadioGroupPrimitive.Indicator asChild {...props}>
+  <RadioGroupIndicator asChild {...props}>
     <CircleIcon className={cn('size-2 fill-primary', className)} />
-  </RadioGroupPrimitive.Indicator>
+  </RadioGroupIndicator>
 );

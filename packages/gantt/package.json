@@ -8,9 +8,9 @@
     "@repo/shadcn-ui": "workspace:*",
     "@uidotdev/usehooks": "^2.4.1",
     "date-fns": "^4.1.0",
-    "jotai": "^2.12.3",
+    "jotai": "^2.12.4",
     "lodash.throttle": "^4.1.1",
-    "lucide-react": "^0.503.0",
+    "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

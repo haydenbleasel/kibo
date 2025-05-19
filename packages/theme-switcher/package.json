@@ -5,8 +5,8 @@
   "dependencies": {
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@repo/shadcn-ui": "workspace:*",
-    "lucide-react": "^0.503.0",
-    "motion": "^12.9.4",
+    "lucide-react": "^0.511.0",
+    "motion": "^12.12.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

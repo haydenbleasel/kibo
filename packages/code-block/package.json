@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@icons-pack/react-simple-icons": "^12.7.0",
+    "@icons-pack/react-simple-icons": "^12.8.0",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@repo/shadcn-ui": "workspace:*",
-    "@shikijs/transformers": "^3.3.0",
-    "lucide-react": "^0.503.0",
+    "@shikijs/transformers": "^3.4.2",
+    "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "shiki": "^3.3.0"
+    "shiki": "^3.4.2"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

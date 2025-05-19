@@ -1,0 +1,58 @@
+---
+title: Comparison
+description: A slider-based component for comparing two items in an overlay.
+icon: Columns2
+---
+
+<PoweredBy packages={[
+  { name: 'motion', url: 'https://motion.dev/' },
+  { name: 'Lucide', url: 'https://lucide.dev/' },
+]} />
+
+<Preview path="comparison" />
+
+## Installation
+
+<Installer packageName="comparison" />
+
+## Features
+
+- Compare two items side by side with a draggable slider
+- Support for both hover and drag modes
+- Smooth animations
+- Touch and mouse event support
+- Customizable slider appearance
+- Responsive design that works with any content
+- Context provider for accessing comparison state
+
+## Examples
+
+### Hover mode
+
+<Preview path="comparison-hover" />
+
+### With event handlers
+
+<Preview path="comparison-event-handlers" />
+
+## Props
+
+The comparison component is made up of the following subcomponents:
+
+### Comparison
+
+The Comparison component is the main component that contains the comparison items and the handle.
+
+<AutoTypeTable path="node_modules/@repo/comparison/index.tsx" name="ComparisonProps" />
+
+### ComparisonItem
+
+The ComparisonItem component is the component that contains the item to be compared.
+
+<AutoTypeTable path="node_modules/@repo/comparison/index.tsx" name="ComparisonItemProps" />
+
+### ComparisonHandle
+
+The ComparisonHandle component is the component that contains the handle for the comparison.
+
+<AutoTypeTable path="node_modules/@repo/comparison/index.tsx" name="ComparisonHandleProps" />

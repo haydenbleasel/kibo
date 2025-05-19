@@ -1,13 +1,13 @@
 {
-  "name": "@repo/dropzone",
+  "name": "@repo/comparison",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
     "lucide-react": "^0.511.0",
+    "motion": "^12.12.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-dropzone": "^14.3.8"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
