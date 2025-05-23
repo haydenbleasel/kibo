@@ -81,7 +81,7 @@ export const monthsForLocale = (
     .format;
 
   return [...new Array(12).keys()].map((m) =>
-    format(new Date(Date.UTC(2021, m % 12)))
+    format(new Date(Date.UTC(2021, m, 2)))
   );
 };
 
