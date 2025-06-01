@@ -83,7 +83,7 @@
     "@types/node": "22.15.18",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.4",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3"
   }
