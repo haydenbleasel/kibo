@@ -60,7 +60,7 @@
     "fumadocs-typescript": "^4.0.4",
     "fumadocs-ui": "15.3.3",
     "geist": "^1.4.2",
-    "import-in-the-middle": "^1.13.2",
+    "import-in-the-middle": "^1.14.0",
     "lodash.groupby": "^4.6.0",
     "lucide-react": "^0.511.0",
     "next": "15.3.2",
