@@ -57,7 +57,7 @@
     "@vercel/analytics": "^1.5.0",
     "date-fns": "^4.1.0",
     "fumadocs-core": "15.3.3",
-    "fumadocs-mdx": "11.6.4",
+    "fumadocs-mdx": "11.6.7",
     "fumadocs-typescript": "^4.0.4",
     "fumadocs-ui": "15.3.3",
     "geist": "^1.4.2",
