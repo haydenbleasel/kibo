@@ -423,15 +423,15 @@ importers:
 
   packages/choicebox:
     dependencies:
-      '@radix-ui/react-radio-group':
-        specifier: ^1.3.7
-        version: 1.3.7(@types/react-dom@19.1.6(@types/react@19.1.6))(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@repo/shadcn-ui':
         specifier: workspace:*
         version: link:../shadcn-ui
       lucide-react:
         specifier: ^0.513.0
         version: 0.513.0(react@19.1.0)
+      radix-ui:
+        specifier: ^1.4.2
+        version: 1.4.2(@types/react-dom@19.1.6(@types/react@19.1.6))(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0

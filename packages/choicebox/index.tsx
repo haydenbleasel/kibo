@@ -7,14 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  RadioGroupIndicator,
-  RadioGroupItem,
-  type RadioGroupItemProps,
-} from '@radix-ui/react-radio-group';
 import { RadioGroup } from '@repo/shadcn-ui/components/ui/radio-group';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { CircleIcon } from 'lucide-react';
+import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
 import type { ComponentProps, HTMLAttributes } from 'react';
 
 export type ChoiceboxProps = ComponentProps<typeof RadioGroup>;
@@ -23,14 +19,14 @@ export const Choicebox = ({ className, ...props }: ChoiceboxProps) => (
   <RadioGroup className={cn('w-full', className)} {...props} />
 );
 
-export type ChoiceboxItemProps = RadioGroupItemProps;
+export type ChoiceboxItemProps = RadioGroupPrimitive.RadioGroupItemProps;
 
 export const ChoiceboxItem = ({
   className,
   children,
   ...props
 }: ChoiceboxItemProps) => (
-  <RadioGroupItem
+  <RadioGroupPrimitive.Item
     className={cn(
       'text-left',
       '[&[data-state="checked"]]:border-primary',
@@ -47,7 +43,7 @@ export const ChoiceboxItem = ({
     >
       {children}
     </Card>
-  </RadioGroupItem>
+  </RadioGroupPrimitive.Item>
 );
 
 export type ChoiceboxItemHeaderProps = ComponentProps<typeof CardHeader>;
@@ -110,14 +106,14 @@ export const ChoiceboxItemContent = ({
 );
 
 export type ChoiceboxItemIndicatorProps = ComponentProps<
-  typeof RadioGroupIndicator
+  typeof RadioGroupPrimitive.RadioGroupIndicator
 >;
 
 export const ChoiceboxItemIndicator = ({
   className,
   ...props
 }: ChoiceboxItemIndicatorProps) => (
-  <RadioGroupIndicator asChild {...props}>
+  <RadioGroupPrimitive.Indicator asChild {...props}>
     <CircleIcon className={cn('size-2 fill-primary', className)} />
-  </RadioGroupIndicator>
+  </RadioGroupPrimitive.Indicator>
 );
