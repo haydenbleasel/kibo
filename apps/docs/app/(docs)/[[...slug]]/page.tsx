@@ -49,6 +49,7 @@ const Page = async (props: PageProps) => {
           tree={source.pageTree}
           sidebar={{ hidden: true, collapsible: false }}
           nav={{ ...baseOptions.nav, mode: 'top' }}
+          containerProps={{ className: 'home' }}
         >
           <Home />
         </DocsLayout>
@@ -66,7 +67,23 @@ const Page = async (props: PageProps) => {
     <DocsLayout
       {...baseOptions}
       tree={source.pageTree}
-      sidebar={{ collapsible: false, tabs: false }}
+      sidebar={{
+        collapsible: false,
+        tabs: [
+          {
+            title: 'Docs',
+            url: '/docs',
+          },
+          {
+            title: 'Components',
+            url: '/components',
+          },
+          {
+            title: 'Blocks',
+            url: '/blocks',
+          },
+        ],
+      }}
       nav={{
         ...baseOptions.nav,
         mode: 'top',
