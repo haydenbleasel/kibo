@@ -6,7 +6,7 @@ import { Hero } from './components/hero';
 import { Tweets } from './components/tweets';
 
 const Home = () => (
-  <div className="w-full divide-y divide-dotted px-0 pt-[var(--fd-nav-height)]">
+  <div className="container mx-auto w-full divide-y divide-dotted px-0 pt-[var(--fd-nav-height)]">
     <Hero />
     <Components />
     <Blocks />
