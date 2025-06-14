@@ -9,7 +9,6 @@ import {
 } from 'fumadocs-ui/page';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Header } from '../../../components/header';
 import { Installer } from '../../../components/installer';
 import { PoweredBy } from '../../../components/powered-by';
 import { Preview } from '../../../components/preview';
@@ -89,7 +88,6 @@ const Page = async (props: PageProps) => {
         mode: 'top',
       }}
     >
-      <Header />
       <DocsPage
         toc={page.data.toc}
         full={page.data.full}
