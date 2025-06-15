@@ -205,6 +205,7 @@ export const MiniCalendarDay = ({
 
   return (
     <Button
+      type="button"
       variant={isSelected ? 'default' : 'ghost'}
       size="sm"
       className={cn(

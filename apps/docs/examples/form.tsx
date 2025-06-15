@@ -49,7 +49,7 @@ import {
   TagIcon,
   UsersIcon,
 } from 'lucide-react';
-import { type FormEventHandler, FormEventHandler, useState } from 'react';
+import { type FormEventHandler, useState } from 'react';
 import { toast } from 'sonner';
 
 const eventTypes = [
@@ -241,17 +241,6 @@ const Example = () => {
             </MiniCalendarDays>
             <MiniCalendarNavigation direction="next" />
           </MiniCalendar>
-          {selectedDate && (
-            <p className="text-muted-foreground text-sm">
-              Selected:{' '}
-              {selectedDate.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-          )}
         </div>
 
         {/* Tags Selection */}
