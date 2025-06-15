@@ -123,7 +123,6 @@ export const TagsTrigger = ({
       role="combobox"
       className={cn('h-auto w-full justify-between p-2', className)}
       {...props}
-      p-2
     >
       <div className="flex flex-wrap items-center gap-1">
         {children}

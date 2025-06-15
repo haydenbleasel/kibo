@@ -49,7 +49,8 @@ import {
   TagIcon,
   UsersIcon,
 } from 'lucide-react';
-import { useState } from 'react';
+import { type FormEventHandler, FormEventHandler, useState } from 'react';
+import { toast } from 'sonner';
 
 const eventTypes = [
   {
@@ -114,14 +115,11 @@ const Example = () => {
     setSelectedTags(selectedTags.filter((tag) => tag !== tagToRemove));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({
-      eventType,
-      venue,
-      selectedDate,
-      files,
-      selectedTags,
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
+    toast.success('Event created successfully', {
+      description: `${eventType} event created for ${selectedDate?.toLocaleDateString()} at ${venue}`,
     });
   };
 

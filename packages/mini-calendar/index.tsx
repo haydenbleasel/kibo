@@ -156,6 +156,7 @@ export const MiniCalendarNavigation = ({
 
   return (
     <Button
+      type="button"
       variant={asChild ? undefined : 'ghost'}
       size={asChild ? undefined : 'icon'}
       onClick={handleClick}
@@ -214,7 +215,12 @@ export const MiniCalendarDay = ({
       onClick={() => onDateSelect(date)}
       {...props}
     >
-      <span className="font-medium text-[10px] text-muted-foreground">
+      <span
+        className={cn(
+          'font-medium text-[10px] text-muted-foreground',
+          isSelected && 'text-primary-foreground/70'
+        )}
+      >
         {month}
       </span>
       <span className="font-semibold text-sm">{day}</span>
