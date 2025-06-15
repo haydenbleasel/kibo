@@ -201,6 +201,7 @@ h3 {
 
 /* Remove borders from sidebar and nav */
 #nd-sidebar > div,
-#nd-subnav > div {
+#nd-subnav > div,
+#nd-tocnav {
   @apply border-none!;
 }
