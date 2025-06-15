@@ -6,41 +6,29 @@ import {
   MiniCalendarDays,
   MiniCalendarNavigation,
 } from '@repo/mini-calendar';
+import { Button } from '@repo/shadcn-ui/components/ui/button';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 
-const Example = () => {
-  // Get 5 days starting from today
-  const today = new Date();
-  const days = Array.from({ length: 5 }, (_, i) => {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
-    return date;
-  });
+const Example = () => (
+  <MiniCalendar className="bg-card p-4 shadow-lg">
+    <div className="flex items-center gap-4">
+      <MiniCalendarNavigation direction="prev" asChild>
+        <Button variant="outline" size="icon">
+          <ArrowLeftIcon className="size-4" />
+        </Button>
+      </MiniCalendarNavigation>
 
-  return (
-    <MiniCalendar className="bg-card p-4 shadow-lg">
-      <div className="flex items-center gap-4">
-        <MiniCalendarNavigation
-          direction="prev"
-          className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
-        />
+      <MiniCalendarDays className="gap-2">
+        {(date) => <MiniCalendarDay key={date.toISOString()} date={date} />}
+      </MiniCalendarDays>
 
-        <MiniCalendarDays className="gap-2">
-          {days.map((date) => (
-            <MiniCalendarDay
-              key={date.toISOString()}
-              date={date}
-              className="rounded-xl border-2 border-transparent hover:border-primary/20"
-            />
-          ))}
-        </MiniCalendarDays>
-
-        <MiniCalendarNavigation
-          direction="next"
-          className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
-        />
-      </div>
-    </MiniCalendar>
-  );
-};
+      <MiniCalendarNavigation direction="next" asChild>
+        <Button variant="outline" size="icon">
+          <ArrowRightIcon className="size-4" />
+        </Button>
+      </MiniCalendarNavigation>
+    </div>
+  </MiniCalendar>
+);
 
 export default Example;

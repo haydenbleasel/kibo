@@ -2,22 +2,22 @@
 
 import {
   MiniCalendar,
+  MiniCalendarDay,
   MiniCalendarDays,
   MiniCalendarNavigation,
 } from '@repo/mini-calendar';
 import { useState } from 'react';
 
 const Example = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
 
   return (
     <div className="space-y-4">
-      <MiniCalendar
-        value={selectedDate || undefined}
-        onValueChange={setSelectedDate}
-      >
+      <MiniCalendar value={selectedDate} onValueChange={setSelectedDate}>
         <MiniCalendarNavigation direction="prev" />
-        <MiniCalendarDays />
+        <MiniCalendarDays>
+          {(date) => <MiniCalendarDay key={date.toISOString()} date={date} />}
+        </MiniCalendarDays>
         <MiniCalendarNavigation direction="next" />
       </MiniCalendar>
 

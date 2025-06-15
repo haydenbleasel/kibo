@@ -17,14 +17,15 @@ icon: Calendar
 
 ## Features
 
-- Displays 5 consecutive days in a compact horizontal layout
-- Navigation with chevron buttons to move between date ranges
-- Fully composable with separate components for each part
-- Supports controlled and uncontrolled usage
-- Highlights today's date and selected date
-- Built with accessibility in mind
-- Customizable styling through className props
-- Context-based state management between components
+- Displays a configurable number of consecutive days (default: 5) in a compact horizontal layout
+- Navigation with chevron buttons to move between date ranges by the configured number of days
+- Fully composable with separate components for navigation, days container, and individual days
+- Supports both controlled and uncontrolled usage with value/defaultValue and onValueChange props
+- Highlights today's date with accent background and selected date with default button variant
+- Built with accessibility in mind using semantic HTML and ARIA attributes
+- Customizable styling through className props on all components
+- Context-based state management between components using React Context
+- Supports custom start dates with startDate/defaultStartDate and onStartDateChange props
 
 ## Examples
 
@@ -39,3 +40,7 @@ icon: Calendar
 ### Custom Layout
 
 <Preview path="mini-calendar-custom" />
+
+### Custom Days
+
+<Preview path="mini-calendar-days" />

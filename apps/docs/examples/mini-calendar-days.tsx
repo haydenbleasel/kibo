@@ -8,7 +8,7 @@ import {
 } from '@repo/mini-calendar';
 
 const Example = () => (
-  <MiniCalendar>
+  <MiniCalendar days={7}>
     <MiniCalendarNavigation direction="prev" />
     <MiniCalendarDays>
       {(date) => <MiniCalendarDay key={date.toISOString()} date={date} />}

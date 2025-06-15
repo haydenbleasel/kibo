@@ -1043,6 +1043,9 @@ importers:
 
   packages/mini-calendar:
     dependencies:
+      '@radix-ui/react-use-controllable-state':
+        specifier: ^1.2.2
+        version: 1.2.2(@types/react@19.1.8)(react@19.1.0)
       '@repo/shadcn-ui':
         specifier: workspace:*
         version: link:../shadcn-ui
