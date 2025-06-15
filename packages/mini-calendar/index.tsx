@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { addDays, format, isSameDay, isToday } from 'date-fns';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import {
   type ButtonHTMLAttributes,
@@ -36,17 +37,15 @@ const useMiniCalendar = () => {
 const getFiveDays = (startDate: Date): Date[] => {
   const days: Date[] = [];
   for (let i = 0; i < 5; i++) {
-    const date = new Date(startDate);
-    date.setDate(startDate.getDate() + i);
-    days.push(date);
+    days.push(addDays(startDate, i));
   }
   return days;
 };
 
 // Helper function to format date
 const formatDate = (date: Date) => {
-  const month = date.toLocaleDateString('en-US', { month: 'short' });
-  const day = date.getDate();
+  const month = format(date, 'MMM');
+  const day = format(date, 'd');
 
   return { month, day };
 };
@@ -74,8 +73,7 @@ export const MiniCalendar = ({
   };
 
   const handleNavigate = (direction: 'prev' | 'next') => {
-    const newStartDate = new Date(startDate);
-    newStartDate.setDate(startDate.getDate() + (direction === 'next' ? 5 : -5));
+    const newStartDate = addDays(startDate, direction === 'next' ? 5 : -5);
     setStartDate(newStartDate);
   };
 
@@ -159,16 +157,8 @@ export const MiniCalendarDay = ({
 }: MiniCalendarDayProps) => {
   const { selectedDate, onDateSelect } = useMiniCalendar();
   const { month, day } = formatDate(date);
-  const isSelected =
-    selectedDate &&
-    date.getFullYear() === selectedDate.getFullYear() &&
-    date.getMonth() === selectedDate.getMonth() &&
-    date.getDate() === selectedDate.getDate();
-
-  const isToday =
-    date.getFullYear() === new Date().getFullYear() &&
-    date.getMonth() === new Date().getMonth() &&
-    date.getDate() === new Date().getDate();
+  const isSelected = selectedDate && isSameDay(date, selectedDate);
+  const isTodayDate = isToday(date);
 
   return (
     <Button
@@ -176,7 +166,7 @@ export const MiniCalendarDay = ({
       size="sm"
       className={cn(
         'h-auto min-w-[3rem] flex-col gap-0 p-2 text-xs',
-        isToday && !isSelected && 'bg-accent',
+        isTodayDate && !isSelected && 'bg-accent',
         className
       )}
       onClick={() => onDateSelect(date)}
