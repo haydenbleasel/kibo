@@ -1,5 +1,6 @@
 {
   "name": "@repo/ai",
+  "description": "AI components including message, conversation, input, response, suggestion, sources, tool and branch components for building chat interfaces.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

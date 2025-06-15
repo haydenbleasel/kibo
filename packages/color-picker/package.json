@@ -1,5 +1,6 @@
 {
   "name": "@repo/color-picker",
+  "description": "Allows users to select a color. Modeled after the color picker in Figma.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

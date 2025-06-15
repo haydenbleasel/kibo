@@ -1,5 +1,6 @@
 {
   "name": "@repo/pill",
+  "description": "A flexible badge component designed for a variety of use cases.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

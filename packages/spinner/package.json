@@ -1,5 +1,6 @@
 {
   "name": "@repo/spinner",
+  "description": "A spinner is a visual indicator that shows progress or activity.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/dialog-stack",
+  "description": "Composable stacked dialogs, useful for creating a wizard, nested form or multi-step process. It provides a consistent layout and styling for each dialog, and includes navigation component",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

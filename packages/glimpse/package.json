@@ -1,5 +1,6 @@
 {
   "name": "@repo/glimpse",
+  "description": "A component that shows a preview of a URL when hovering over a link.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/dropzone",
+  "description": "Allows users to drag-and-drop files into a container to upload or process them.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

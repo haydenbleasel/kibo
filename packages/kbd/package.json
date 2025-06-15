@@ -1,5 +1,6 @@
 {
   "name": "@repo/kbd",
+  "description": "A component for displaying keyboard shortcuts and key combinations.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

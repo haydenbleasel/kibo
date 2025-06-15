@@ -1,5 +1,6 @@
 {
   "name": "@repo/status",
+  "description": "Status components are used to display the uptime of a service.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

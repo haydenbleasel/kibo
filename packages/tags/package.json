@@ -1,5 +1,6 @@
 {
   "name": "@repo/tags",
+  "description": "Tags are a way to apply multiple labels to an item.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

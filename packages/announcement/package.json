@@ -1,5 +1,6 @@
 {
   "name": "@repo/announcement",
+  "description": "A compound badge designed to display an announcement.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

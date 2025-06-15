@@ -1,5 +1,6 @@
 {
   "name": "@repo/list",
+  "description": "List views are a great way to show a list of tasks grouped by status and ranked by priority.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

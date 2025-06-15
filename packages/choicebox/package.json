@@ -1,5 +1,6 @@
 {
   "name": "@repo/choicebox",
+  "description": "Choiceboxes are a great way to show radio or checkbox options with a card style.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

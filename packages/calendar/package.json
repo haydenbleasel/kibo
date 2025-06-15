@@ -1,5 +1,6 @@
 {
   "name": "@repo/calendar",
+  "description": "The calendar view displays features on a grid calendar. Specifically it shows the end date of each feature, and groups features by day.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/combobox",
+  "description": "Autocomplete input and command palette with a list of suggestions.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

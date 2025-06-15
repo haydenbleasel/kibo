@@ -1,5 +1,6 @@
 {
   "name": "@repo/comparison",
+  "description": "A slider-based component for comparing two items in an overlay.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/code-block",
+  "description": "Provides syntax highlighting, line numbers, and copy to clipboard functionality for code blocks.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

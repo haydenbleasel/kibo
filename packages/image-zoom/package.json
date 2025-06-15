@@ -1,5 +1,6 @@
 {
   "name": "@repo/image-zoom",
+  "description": "Image zoom is a component that allows you to zoom in on an image.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

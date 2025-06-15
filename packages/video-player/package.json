@@ -1,5 +1,6 @@
 {
   "name": "@repo/video-player",
+  "description": "A composable, shadcn/ui styled video player component that uses the media-chrome library.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

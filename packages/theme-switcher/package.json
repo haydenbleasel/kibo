@@ -1,5 +1,6 @@
 {
   "name": "@repo/theme-switcher",
+  "description": "A component to switch between light, dark and system theme.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

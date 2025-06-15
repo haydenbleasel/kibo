@@ -1,5 +1,6 @@
 {
   "name": "@repo/sandbox",
+  "description": "The sandbox component allows you to preview and test components in a sandboxed environment.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

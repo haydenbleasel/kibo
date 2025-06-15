@@ -1,5 +1,6 @@
 {
   "name": "@repo/relative-time",
+  "description": "A component that displays time in various timezones.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/snippet",
+  "description": "Snippet is a component that allows you to display and copy code in a tabbed interface.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

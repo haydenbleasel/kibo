@@ -1,5 +1,6 @@
 {
   "name": "@repo/qr-code",
+  "description": "QR Code is a component that generates a QR code from a string.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

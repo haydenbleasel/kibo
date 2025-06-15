@@ -1,5 +1,6 @@
 {
   "name": "@repo/kanban",
+  "description": "A kanban board is a visual tool that helps you manage and visualize your work. It is a board with columns, and each column represents a status, e.g. \"Backlog\", \"In Progress\", \"Done\".",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

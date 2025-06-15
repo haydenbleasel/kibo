@@ -1,5 +1,6 @@
 {
   "name": "@repo/rating",
+  "description": "A star rating component with keyboard navigation and hover effects.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/banner",
+  "description": "A banner is a full-width component that can be used to show a message and action to the user.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/avatar-stack",
+  "description": "Avatar Stack is a component that allows you to stack and overlap avatars.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 {
   "name": "@repo/table",
+  "description": "Table views are used to display data in a tabular format. They are useful for displaying large amounts of data in a structured way.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
