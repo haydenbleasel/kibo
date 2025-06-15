@@ -24,6 +24,11 @@
     "---Code---",
     "code-block",
     "snippet",
+    "---Forms---",
+    "choicebox",
+    "combobox",
+    "dropzone",
+    "tags",
     "---Other---",
     "..."
   ]
