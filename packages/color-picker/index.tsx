@@ -133,7 +133,8 @@ export const ColorPickerSelection = ({
 }: ColorPickerSelectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [positionX, setPositionX] = useState(0);
+  const [positionY, setPositionY] = useState(0);
   const { hue, setSaturation, setLightness } = useColorPicker();
 
   const handlePointerMove = useCallback(
@@ -150,7 +151,8 @@ export const ColorPickerSelection = ({
         0,
         Math.min(1, (event.clientY - rect.top) / rect.height)
       );
-      setPosition({ x, y });
+      setPositionX(x);
+      setPositionY(y);
       setSaturation(x * 100);
       const topLightness = x < 0.01 ? 100 : 50 + 50 * (1 - x);
       const lightness = topLightness * (1 - y);
@@ -193,8 +195,8 @@ export const ColorPickerSelection = ({
       <div
         className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white"
         style={{
-          left: `${position.x * 100}%`,
-          top: `${position.y * 100}%`,
+          left: `${positionX * 100}%`,
+          top: `${positionY * 100}%`,
           boxShadow: '0 0 0 1px rgba(0,0,0,0.5)',
         }}
       />
