@@ -36,6 +36,7 @@ import throttle from 'lodash.throttle';
 import { PlusIcon, TrashIcon } from 'lucide-react';
 import {
   createContext,
+  memo,
   useCallback,
   useContext,
   useEffect,
@@ -834,14 +835,23 @@ export const GanttFeatureItem: FC<GanttFeatureItemProps> = ({
 }) => {
   const [scrollX] = useGanttScrollX();
   const gantt = useContext(GanttContext);
-  const timelineStartDate = useMemo(() => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1), [gantt.timelineData]);
+  const timelineStartDate = useMemo(
+    () => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1),
+    [gantt.timelineData]
+  );
   const [startAt, setStartAt] = useState<Date>(feature.startAt);
   const [endAt, setEndAt] = useState<Date | null>(feature.endAt);
-  
+
   // Memoize expensive calculations
-  const width = useMemo(() => getWidth(startAt, endAt, gantt), [startAt, endAt, gantt]);
-  const offset = useMemo(() => getOffset(startAt, timelineStartDate, gantt), [startAt, timelineStartDate, gantt]);
-  
+  const width = useMemo(
+    () => getWidth(startAt, endAt, gantt),
+    [startAt, endAt, gantt]
+  );
+  const offset = useMemo(
+    () => getOffset(startAt, timelineStartDate, gantt),
+    [startAt, timelineStartDate, gantt]
+  );
+
   const addRange = useMemo(() => getAddRange(gantt.range), [gantt.range]);
   const [mousePosition] = useMouse<HTMLDivElement>();
 
@@ -875,8 +885,11 @@ export const GanttFeatureItem: FC<GanttFeatureItemProps> = ({
     setEndAt(newEndDate);
   }, [gantt, mousePosition.x, previousMouseX, previousStartAt, previousEndAt]);
 
-  const onDragEnd = useCallback(() => onMove?.(feature.id, startAt, endAt), [onMove, feature.id, startAt, endAt]);
-  
+  const onDragEnd = useCallback(
+    () => onMove?.(feature.id, startAt, endAt),
+    [onMove, feature.id, startAt, endAt]
+  );
+
   const handleLeftDragMove = useCallback(() => {
     const ganttRect = gantt.ref?.current?.getBoundingClientRect();
     const x =
@@ -885,7 +898,7 @@ export const GanttFeatureItem: FC<GanttFeatureItemProps> = ({
 
     setStartAt(newStartAt);
   }, [gantt, mousePosition.x, scrollX]);
-  
+
   const handleRightDragMove = useCallback(() => {
     const ganttRect = gantt.ref?.current?.getBoundingClientRect();
     const x =
@@ -990,19 +1003,32 @@ export const GanttMarker: FC<
     onRemove?: (id: string) => void;
     className?: string;
   }
-> = ({ label, date, id, onRemove, className }) => {
+> = memo(({ label, date, id, onRemove, className }) => {
   const gantt = useContext(GanttContext);
-  const differenceIn = useMemo(() => getDifferenceIn(gantt.range), [gantt.range]);
-  const timelineStartDate = useMemo(() => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1), [gantt.timelineData]);
-  
+  const differenceIn = useMemo(
+    () => getDifferenceIn(gantt.range),
+    [gantt.range]
+  );
+  const timelineStartDate = useMemo(
+    () => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1),
+    [gantt.timelineData]
+  );
+
   // Memoize expensive calculations
-  const offset = useMemo(() => differenceIn(date, timelineStartDate), [differenceIn, date, timelineStartDate]);
-  const innerOffset = useMemo(() => calculateInnerOffset(
-    date,
-    gantt.range,
-    (gantt.columnWidth * gantt.zoom) / 100
-  ), [date, gantt.range, gantt.columnWidth, gantt.zoom]);
-  
+  const offset = useMemo(
+    () => differenceIn(date, timelineStartDate),
+    [differenceIn, date, timelineStartDate]
+  );
+  const innerOffset = useMemo(
+    () =>
+      calculateInnerOffset(
+        date,
+        gantt.range,
+        (gantt.columnWidth * gantt.zoom) / 100
+      ),
+    [date, gantt.range, gantt.columnWidth, gantt.zoom]
+  );
+
   const handleRemove = useCallback(() => onRemove?.(id), [onRemove, id]);
 
   return (
@@ -1042,7 +1068,9 @@ export const GanttMarker: FC<
       <div className={cn('h-full w-px bg-card', className)} />
     </div>
   );
-};
+});
+
+GanttMarker.displayName = 'GanttMarker';
 
 export type GanttProviderProps = {
   range?: Range;
@@ -1064,7 +1092,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
     createInitialTimelineData(new Date())
   );
   const [, setScrollX] = useGanttScrollX();
-  
+
   const sidebarElement = scrollRef.current?.querySelector(
     '[data-roadmap-ui="gantt-sidebar"]'
   );
@@ -1081,13 +1109,17 @@ export const GanttProvider: FC<GanttProviderProps> = ({
   }
 
   // Memoize CSS variables to prevent unnecessary re-renders
-  const cssVariables = useMemo(() => ({
-    '--gantt-zoom': `${zoom}`,
-    '--gantt-column-width': `${(zoom / 100) * columnWidth}px`,
-    '--gantt-header-height': `${headerHeight}px`,
-    '--gantt-row-height': `${rowHeight}px`,
-    '--gantt-sidebar-width': `${sidebarWidth}px`,
-  } as CSSProperties), [zoom, columnWidth, headerHeight, rowHeight, sidebarWidth]);
+  const cssVariables = useMemo(
+    () =>
+      ({
+        '--gantt-zoom': `${zoom}`,
+        '--gantt-column-width': `${(zoom / 100) * columnWidth}px`,
+        '--gantt-header-height': `${headerHeight}px`,
+        '--gantt-row-height': `${rowHeight}px`,
+        '--gantt-sidebar-width': `${sidebarWidth}px`,
+      }) as CSSProperties,
+    [zoom, columnWidth, sidebarWidth]
+  );
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -1095,7 +1127,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         scrollRef.current.scrollWidth / 2 - scrollRef.current.clientWidth / 2;
       setScrollX(scrollRef.current.scrollLeft);
     }
-  }, [range, zoom, setScrollX]);
+  }, []);
 
   // Fix the useCallback to include all dependencies
   const handleScroll = useCallback(
@@ -1163,7 +1195,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         setScrollX(scrollElement.scrollLeft);
       }
     }, 100),
-    [timelineData, setScrollX]
+    []
   );
 
   useEffect(() => {
@@ -1240,16 +1272,29 @@ export const GanttToday: FC<GanttTodayProps> = ({ className }) => {
   const label = 'Today';
   const date = useMemo(() => new Date(), []);
   const gantt = useContext(GanttContext);
-  const differenceIn = useMemo(() => getDifferenceIn(gantt.range), [gantt.range]);
-  const timelineStartDate = useMemo(() => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1), [gantt.timelineData]);
-  
+  const differenceIn = useMemo(
+    () => getDifferenceIn(gantt.range),
+    [gantt.range]
+  );
+  const timelineStartDate = useMemo(
+    () => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1),
+    [gantt.timelineData]
+  );
+
   // Memoize expensive calculations
-  const offset = useMemo(() => differenceIn(date, timelineStartDate), [differenceIn, date, timelineStartDate]);
-  const innerOffset = useMemo(() => calculateInnerOffset(
-    date,
-    gantt.range,
-    (gantt.columnWidth * gantt.zoom) / 100
-  ), [date, gantt.range, gantt.columnWidth, gantt.zoom]);
+  const offset = useMemo(
+    () => differenceIn(date, timelineStartDate),
+    [differenceIn, date, timelineStartDate]
+  );
+  const innerOffset = useMemo(
+    () =>
+      calculateInnerOffset(
+        date,
+        gantt.range,
+        (gantt.columnWidth * gantt.zoom) / 100
+      ),
+    [date, gantt.range, gantt.columnWidth, gantt.zoom]
+  );
 
   return (
     <div

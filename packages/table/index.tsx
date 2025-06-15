@@ -32,7 +32,7 @@ import {
 } from '@tanstack/react-table';
 import { atom, useAtom } from 'jotai';
 import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from 'lucide-react';
-import { createContext, useCallback, useContext } from 'react';
+import { createContext, memo, useCallback, useContext } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
 export type { ColumnDef } from '@tanstack/react-table';
@@ -97,13 +97,15 @@ export type TableHeadProps = {
   className?: string;
 };
 
-export const TableHead = ({ header, className }: TableHeadProps) => (
+export const TableHead = memo(({ header, className }: TableHeadProps) => (
   <TableHeadRaw key={header.id} className={className}>
     {header.isPlaceholder
       ? null
       : flexRender(header.column.columnDef.header, header.getContext())}
   </TableHeadRaw>
-);
+));
+
+TableHead.displayName = 'TableHead';
 
 export type TableHeaderGroupProps = {
   headerGroup: HeaderGroup<unknown>;

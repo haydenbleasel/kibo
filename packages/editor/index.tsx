@@ -1704,15 +1704,18 @@ export const EditorTableColumnDelete = () => {
 export const EditorTableRowDelete = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().deleteRow().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <DropdownMenuItem
-      className="flex items-center gap-2"
-      onClick={() => editor.chain().focus().deleteRow().run()}
-    >
+    <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
       <TrashIcon size={16} className="text-destructive" />
       <span>Delete row</span>
     </DropdownMenuItem>
@@ -1721,6 +1724,12 @@ export const EditorTableRowDelete = () => {
 
 export const EditorTableHeaderColumnToggle = () => {
   const { editor } = useCurrentEditor();
+
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().toggleHeaderColumn().run();
+    }
+  }, [editor]);
 
   if (!editor) {
     return null;
@@ -1733,7 +1742,7 @@ export const EditorTableHeaderColumnToggle = () => {
           variant="ghost"
           size="icon"
           className="flex items-center gap-2 rounded-full"
-          onClick={() => editor.chain().focus().toggleHeaderColumn().run()}
+          onClick={handleClick}
         >
           <ColumnsIcon size={16} className="text-muted-foreground" />
         </Button>
@@ -1748,6 +1757,12 @@ export const EditorTableHeaderColumnToggle = () => {
 export const EditorTableHeaderRowToggle = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().toggleHeaderRow().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
@@ -1759,7 +1774,7 @@ export const EditorTableHeaderRowToggle = () => {
           variant="ghost"
           size="icon"
           className="flex items-center gap-2 rounded-full"
-          onClick={() => editor.chain().focus().toggleHeaderRow().run()}
+          onClick={handleClick}
         >
           <RowsIcon size={16} className="text-muted-foreground" />
         </Button>
@@ -1774,6 +1789,12 @@ export const EditorTableHeaderRowToggle = () => {
 export const EditorTableDelete = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().deleteTable().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
@@ -1785,7 +1806,7 @@ export const EditorTableDelete = () => {
           variant="ghost"
           size="icon"
           className="flex items-center gap-2 rounded-full"
-          onClick={() => editor.chain().focus().deleteTable().run()}
+          onClick={handleClick}
         >
           <TrashIcon size={16} className="text-destructive" />
         </Button>
@@ -1800,6 +1821,12 @@ export const EditorTableDelete = () => {
 export const EditorTableMergeCells = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().mergeCells().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
@@ -1811,7 +1838,7 @@ export const EditorTableMergeCells = () => {
           variant="ghost"
           size="icon"
           className="flex items-center gap-2 rounded-full"
-          onClick={() => editor.chain().focus().mergeCells().run()}
+          onClick={handleClick}
         >
           <TableCellsMergeIcon size={16} className="text-muted-foreground" />
         </Button>
@@ -1826,6 +1853,12 @@ export const EditorTableMergeCells = () => {
 export const EditorTableSplitCell = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().splitCell().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
@@ -1837,7 +1870,7 @@ export const EditorTableSplitCell = () => {
           variant="ghost"
           size="icon"
           className="flex items-center gap-2 rounded-full"
-          onClick={() => editor.chain().focus().splitCell().run()}
+          onClick={handleClick}
         >
           <TableColumnsSplitIcon size={16} className="text-muted-foreground" />
         </Button>
@@ -1852,6 +1885,12 @@ export const EditorTableSplitCell = () => {
 export const EditorTableFix = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().fixTables().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
@@ -1863,7 +1902,7 @@ export const EditorTableFix = () => {
           variant="ghost"
           size="icon"
           className="flex items-center gap-2 rounded-full"
-          onClick={() => editor.chain().focus().fixTables().run()}
+          onClick={handleClick}
         >
           <BoltIcon size={16} className="text-muted-foreground" />
         </Button>
