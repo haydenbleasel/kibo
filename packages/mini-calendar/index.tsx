@@ -19,6 +19,7 @@ type MiniCalendarContextType = {
   onDateSelect: (date: Date) => void;
   startDate: Date;
   onNavigate: (direction: 'prev' | 'next') => void;
+  days: number;
 };
 
 const MiniCalendarContext = createContext<MiniCalendarContextType | null>(null);
@@ -33,10 +34,10 @@ const useMiniCalendar = () => {
   return context;
 };
 
-// Helper function to get array of 5 consecutive dates
-const getFiveDays = (startDate: Date): Date[] => {
+// Helper function to get array of consecutive dates
+const getDays = (startDate: Date, count: number): Date[] => {
   const days: Date[] = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < count; i++) {
     days.push(addDays(startDate, i));
   }
   return days;
@@ -54,12 +55,14 @@ export type MiniCalendarProps = HTMLAttributes<HTMLDivElement> & {
   value?: Date;
   onValueChange?: (date: Date) => void;
   defaultDate?: Date;
+  days?: number;
 };
 
 export const MiniCalendar = ({
   value,
   onValueChange,
   defaultDate = new Date(),
+  days = 5,
   className,
   children,
   ...props
@@ -73,7 +76,10 @@ export const MiniCalendar = ({
   };
 
   const handleNavigate = (direction: 'prev' | 'next') => {
-    const newStartDate = addDays(startDate, direction === 'next' ? 5 : -5);
+    const newStartDate = addDays(
+      startDate,
+      direction === 'next' ? days : -days
+    );
     setStartDate(newStartDate);
   };
 
@@ -82,6 +88,7 @@ export const MiniCalendar = ({
     onDateSelect: handleDateSelect,
     startDate,
     onNavigate: handleNavigate,
+    days,
   };
 
   return (
@@ -133,8 +140,8 @@ export const MiniCalendarDays = ({
   children,
   ...props
 }: MiniCalendarDaysProps) => {
-  const { startDate } = useMiniCalendar();
-  const days = getFiveDays(startDate);
+  const { startDate, days: dayCount } = useMiniCalendar();
+  const days = getDays(startDate, dayCount);
 
   return (
     <div className={cn('flex items-center gap-1', className)} {...props}>
