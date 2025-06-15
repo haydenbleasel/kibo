@@ -19,7 +19,14 @@ import { getDay, getDaysInMonth, isSameDay } from 'date-fns';
 import { atom, useAtom } from 'jotai';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { Check, ChevronsUpDown } from 'lucide-react';
-import { type ReactNode, createContext, useContext, useState } from 'react';
+import {
+  type ReactNode,
+  createContext,
+  memo,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 
 export type CalendarState = {
   month: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -347,30 +354,30 @@ export const CalendarDatePagination = ({
   const [month, setMonth] = useCalendarMonth();
   const [year, setYear] = useCalendarYear();
 
-  const handlePreviousMonth = () => {
+  const handlePreviousMonth = useCallback(() => {
     if (month === 0) {
       setMonth(11);
       setYear(year - 1);
     } else {
       setMonth((month - 1) as CalendarState['month']);
     }
-  };
+  }, [month, year, setMonth, setYear]);
 
-  const handleNextMonth = () => {
+  const handleNextMonth = useCallback(() => {
     if (month === 11) {
       setMonth(0);
       setYear(year + 1);
     } else {
       setMonth((month + 1) as CalendarState['month']);
     }
-  };
+  }, [month, year, setMonth, setYear]);
 
   return (
     <div className={cn('flex items-center gap-2', className)}>
-      <Button onClick={() => handlePreviousMonth()} variant="ghost" size="icon">
+      <Button onClick={handlePreviousMonth} variant="ghost" size="icon">
         <ChevronLeftIcon size={16} />
       </Button>
-      <Button onClick={() => handleNextMonth()} variant="ghost" size="icon">
+      <Button onClick={handleNextMonth} variant="ghost" size="icon">
         <ChevronRightIcon size={16} />
       </Button>
     </div>
@@ -408,17 +415,21 @@ export type CalendarItemProps = {
   className?: string;
 };
 
-export const CalendarItem = ({ feature, className }: CalendarItemProps) => (
-  <div className={cn('flex items-center gap-2', className)} key={feature.id}>
-    <div
-      className="h-2 w-2 shrink-0 rounded-full"
-      style={{
-        backgroundColor: feature.status.color,
-      }}
-    />
-    <span className="truncate">{feature.name}</span>
-  </div>
+export const CalendarItem = memo(
+  ({ feature, className }: CalendarItemProps) => (
+    <div className={cn('flex items-center gap-2', className)} key={feature.id}>
+      <div
+        className="h-2 w-2 shrink-0 rounded-full"
+        style={{
+          backgroundColor: feature.status.color,
+        }}
+      />
+      <span className="truncate">{feature.name}</span>
+    </div>
+  )
 );
+
+CalendarItem.displayName = 'CalendarItem';
 
 export type CalendarProviderProps = {
   locale?: Intl.LocalesArgument;

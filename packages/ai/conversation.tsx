@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
 import { ArrowDownIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
+import { useCallback } from 'react';
 import { StickToBottom, useStickToBottomContext } from 'use-stick-to-bottom';
 
 export type AIConversationProps = ComponentProps<typeof StickToBottom>;
@@ -35,6 +36,10 @@ export const AIConversationContent = ({
 export const AIConversationScrollButton = () => {
   const { isAtBottom, scrollToBottom } = useStickToBottomContext();
 
+  const handleScrollToBottom = useCallback(() => {
+    scrollToBottom();
+  }, [scrollToBottom]);
+
   return (
     !isAtBottom && (
       <Button
@@ -42,7 +47,7 @@ export const AIConversationScrollButton = () => {
         variant="outline"
         size="icon"
         className="absolute bottom-4 left-[50%] translate-x-[-50%] rounded-full"
-        onClick={() => scrollToBottom()}
+        onClick={handleScrollToBottom}
       >
         <ArrowDownIcon className="size-4" />
       </Button>

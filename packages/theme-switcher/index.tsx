@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const themes = [
   {
@@ -44,6 +44,13 @@ export const ThemeSwitcher = ({
   });
   const [mounted, setMounted] = useState(false);
 
+  const handleThemeClick = useCallback(
+    (themeKey: 'light' | 'dark' | 'system') => {
+      setTheme(themeKey);
+    },
+    [setTheme]
+  );
+
   // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
@@ -68,7 +75,7 @@ export const ThemeSwitcher = ({
             type="button"
             key={key}
             className="relative h-6 w-6 rounded-full"
-            onClick={() => setTheme(key as 'light' | 'dark' | 'system')}
+            onClick={() => handleThemeClick(key as 'light' | 'dark' | 'system')}
             aria-label={label}
           >
             {isActive && (

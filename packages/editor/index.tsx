@@ -94,7 +94,7 @@ import {
   TrashIcon,
   UnderlineIcon,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FormEventHandler, HTMLAttributes, ReactNode } from 'react';
 import tippy, { type Instance as TippyInstance } from 'tippy.js';
 
@@ -1599,15 +1599,18 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
 export const EditorTableColumnBefore = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().addColumnBefore().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <DropdownMenuItem
-      className="flex items-center gap-2"
-      onClick={() => editor.chain().focus().addColumnBefore().run()}
-    >
+    <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
       <ArrowLeftIcon size={16} className="text-muted-foreground" />
       <span>Add column before</span>
     </DropdownMenuItem>
@@ -1617,15 +1620,18 @@ export const EditorTableColumnBefore = () => {
 export const EditorTableColumnAfter = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().addColumnAfter().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <DropdownMenuItem
-      className="flex items-center gap-2"
-      onClick={() => editor.chain().focus().addColumnAfter().run()}
-    >
+    <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
       <ArrowRightIcon size={16} className="text-muted-foreground" />
       <span>Add column after</span>
     </DropdownMenuItem>
@@ -1635,15 +1641,18 @@ export const EditorTableColumnAfter = () => {
 export const EditorTableRowBefore = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().addRowBefore().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <DropdownMenuItem
-      className="flex items-center gap-2"
-      onClick={() => editor.chain().focus().addRowBefore().run()}
-    >
+    <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
       <ArrowUpIcon size={16} className="text-muted-foreground" />
       <span>Add row before</span>
     </DropdownMenuItem>
@@ -1653,15 +1662,18 @@ export const EditorTableRowBefore = () => {
 export const EditorTableRowAfter = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().addRowAfter().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <DropdownMenuItem
-      className="flex items-center gap-2"
-      onClick={() => editor.chain().focus().addRowAfter().run()}
-    >
+    <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
       <ArrowDownIcon size={16} className="text-muted-foreground" />
       <span>Add row after</span>
     </DropdownMenuItem>
@@ -1671,15 +1683,18 @@ export const EditorTableRowAfter = () => {
 export const EditorTableColumnDelete = () => {
   const { editor } = useCurrentEditor();
 
+  const handleClick = useCallback(() => {
+    if (editor) {
+      editor.chain().focus().deleteColumn().run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <DropdownMenuItem
-      className="flex items-center gap-2"
-      onClick={() => editor.chain().focus().deleteColumn().run()}
-    >
+    <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
       <TrashIcon size={16} className="text-destructive" />
       <span>Delete column</span>
     </DropdownMenuItem>

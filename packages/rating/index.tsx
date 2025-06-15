@@ -69,14 +69,35 @@ export const RatingButton = ({
     tabIndex = value === index + 1 ? 0 : -1;
   }
 
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      handleValueChange(event, index + 1);
+    },
+    [handleValueChange, index]
+  );
+
+  const handleMouseEnter = useCallback(() => {
+    if (!readOnly) {
+      setHoverValue(index + 1);
+    }
+  }, [readOnly, setHoverValue, index]);
+
+  const handleFocus = useCallback(() => {
+    setFocusedStar(index + 1);
+  }, [setFocusedStar, index]);
+
+  const handleBlur = useCallback(() => {
+    setFocusedStar(null);
+  }, [setFocusedStar]);
+
   return (
     <button
       type="button"
-      onClick={(event) => handleValueChange(event, index + 1)}
-      onMouseEnter={() => !readOnly && setHoverValue(index + 1)}
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
       onKeyDown={handleKeyDown}
-      onFocus={() => setFocusedStar(index + 1)}
-      onBlur={() => setFocusedStar(null)}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       disabled={readOnly}
       className={cn(
         'rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',

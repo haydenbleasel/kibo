@@ -16,8 +16,10 @@ import { Slider } from 'radix-ui';
 import {
   type ComponentProps,
   type HTMLAttributes,
+  memo,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -127,82 +129,87 @@ export const ColorPicker = ({
 
 export type ColorPickerSelectionProps = HTMLAttributes<HTMLDivElement>;
 
-export const ColorPickerSelection = ({
-  className,
-  ...props
-}: ColorPickerSelectionProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [positionX, setPositionX] = useState(0);
-  const [positionY, setPositionY] = useState(0);
-  const { hue, setSaturation, setLightness } = useColorPicker();
+export const ColorPickerSelection = memo(
+  ({ className, ...props }: ColorPickerSelectionProps) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [positionX, setPositionX] = useState(0);
+    const [positionY, setPositionY] = useState(0);
+    const { hue, setSaturation, setLightness } = useColorPicker();
 
-  const handlePointerMove = useCallback(
-    (event: PointerEvent) => {
-      if (!isDragging || !containerRef.current) {
-        return;
+    const backgroundGradient = useMemo(() => {
+      return `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
+            linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)),
+            hsl(${hue}, 100%, 50%)`;
+    }, [hue]);
+
+    const handlePointerMove = useCallback(
+      (event: PointerEvent) => {
+        if (!isDragging || !containerRef.current) {
+          return;
+        }
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = Math.max(
+          0,
+          Math.min(1, (event.clientX - rect.left) / rect.width)
+        );
+        const y = Math.max(
+          0,
+          Math.min(1, (event.clientY - rect.top) / rect.height)
+        );
+        setPositionX(x);
+        setPositionY(y);
+        setSaturation(x * 100);
+        const topLightness = x < 0.01 ? 100 : 50 + 50 * (1 - x);
+        const lightness = topLightness * (1 - y);
+
+        setLightness(lightness);
+      },
+      [isDragging, setSaturation, setLightness]
+    );
+
+    useEffect(() => {
+      const handlePointerUp = () => setIsDragging(false);
+
+      if (isDragging) {
+        window.addEventListener('pointermove', handlePointerMove);
+        window.addEventListener('pointerup', handlePointerUp);
       }
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = Math.max(
-        0,
-        Math.min(1, (event.clientX - rect.left) / rect.width)
-      );
-      const y = Math.max(
-        0,
-        Math.min(1, (event.clientY - rect.top) / rect.height)
-      );
-      setPositionX(x);
-      setPositionY(y);
-      setSaturation(x * 100);
-      const topLightness = x < 0.01 ? 100 : 50 + 50 * (1 - x);
-      const lightness = topLightness * (1 - y);
 
-      setLightness(lightness);
-    },
-    [isDragging, setSaturation, setLightness]
-  );
+      return () => {
+        window.removeEventListener('pointermove', handlePointerMove);
+        window.removeEventListener('pointerup', handlePointerUp);
+      };
+    }, [isDragging, handlePointerMove]);
 
-  useEffect(() => {
-    const handlePointerUp = () => setIsDragging(false);
-
-    if (isDragging) {
-      window.addEventListener('pointermove', handlePointerMove);
-      window.addEventListener('pointerup', handlePointerUp);
-    }
-
-    return () => {
-      window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('pointerup', handlePointerUp);
-    };
-  }, [isDragging, handlePointerMove]);
-
-  return (
-    <div
-      ref={containerRef}
-      className={cn('relative size-full cursor-crosshair rounded', className)}
-      style={{
-        background: `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
-                     linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)),
-                     hsl(${hue}, 100%, 50%)`,
-      }}
-      onPointerDown={(e) => {
-        e.preventDefault();
-        setIsDragging(true);
-        handlePointerMove(e.nativeEvent);
-      }}
-      {...props}
-    >
+    return (
       <div
-        className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white"
+        ref={containerRef}
+        className={cn('relative size-full cursor-crosshair rounded', className)}
         style={{
-          left: `${positionX * 100}%`,
-          top: `${positionY * 100}%`,
-          boxShadow: '0 0 0 1px rgba(0,0,0,0.5)',
+          background: backgroundGradient,
         }}
-      />
-    </div>
-  );
-};
+        onPointerDown={(e) => {
+          e.preventDefault();
+          setIsDragging(true);
+          handlePointerMove(e.nativeEvent);
+        }}
+        {...props}
+      >
+        <div
+          className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white"
+          style={{
+            left: `${positionX * 100}%`,
+            top: `${positionY * 100}%`,
+            boxShadow: '0 0 0 1px rgba(0,0,0,0.5)',
+          }}
+        />
+      </div>
+    );
+  }
+);
+
+ColorPickerSelection.displayName = 'ColorPickerSelection';
 
 export type ColorPickerHueProps = ComponentProps<typeof Slider.Root>;
 
