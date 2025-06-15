@@ -15,7 +15,7 @@ type DemoVideoProps = {
 };
 
 export const DemoVideo = ({ url }: DemoVideoProps) => (
-  <div className="pointer-events-none relative aspect-video w-full select-none">
+  <div className="pointer-events-none relative aspect-video w-full select-none overflow-hidden sm:rounded-lg sm:ring-1 sm:ring-border">
     <ReactPlayer
       url={url}
       width="100%"

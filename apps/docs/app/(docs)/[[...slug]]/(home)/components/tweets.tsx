@@ -22,8 +22,8 @@ const tweets = [
 ];
 
 export const Tweets = () => (
-  <div className="grid divide-y divide-dotted lg:grid-cols-3 lg:divide-x lg:divide-y-0">
-    <div className="flex flex-col gap-4 p-4 sm:p-8">
+  <div className="grid gap-4 lg:grid-cols-3">
+    <div className="flex flex-col gap-4 py-4 sm:py-8">
       <div className="sticky top-24">
         <h2 className="max-w-lg font-semibold text-3xl">
           What people are saying
@@ -35,7 +35,7 @@ export const Tweets = () => (
     </div>
     <div
       className={cn(
-        'p-4 sm:p-8 lg:col-span-2 lg:columns-2',
+        'py-4 sm:py-8 lg:col-span-2 lg:columns-2',
         '[&_.react-tweet-theme]:mt-0!'
       )}
     >

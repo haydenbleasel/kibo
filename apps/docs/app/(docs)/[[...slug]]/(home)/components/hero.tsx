@@ -44,8 +44,8 @@ const icons = [
 ];
 
 export const Hero = () => (
-  <div className="grid divide-x divide-dotted xl:grid-cols-3">
-    <div className="flex max-w-3xl flex-col justify-center gap-6 p-4 sm:p-8">
+  <div className="grid gap-8 xl:grid-cols-[28rem_1fr]">
+    <div className="flex max-w-3xl flex-col justify-center gap-6 py-4 sm:py-8">
       <h1 className="mb-0 text-balance font-semibold text-3xl xl:text-4xl 2xl:text-5xl">
         The best way to build your website
       </h1>
@@ -71,7 +71,7 @@ export const Hero = () => (
         ))}
       </div>
     </div>
-    <div className="flex xl:col-span-2">
+    <div className="flex">
       <DemoVideo url="https://youtu.be/FqQ9j6bqtf0" />
     </div>
   </div>

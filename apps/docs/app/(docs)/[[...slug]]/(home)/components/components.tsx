@@ -138,14 +138,12 @@ const ExampleCard = ({
   name,
   description,
   component: Component,
-  index,
   className,
 }: {
   icon: string | undefined;
   name: string | undefined;
   description: string | undefined;
   component: ComponentType;
-  index: number;
   className?: string;
 }) => {
   const Icon =
@@ -160,12 +158,7 @@ const ExampleCard = ({
     <div
       key={name}
       className={cn(
-        'flex h-full flex-col gap-8 p-4 sm:p-8',
-        'sm:[&:nth-child(2n)]:border-r-0',
-        'sm:[&:nth-last-child(2)]:border-b-0',
-        'xl:[&:nth-child(2n)]:border-r',
-        'xl:[&:nth-child(3n)]:border-r-0',
-        'xl:[&:nth-last-child(3)]:border-b-0',
+        'flex h-full flex-col gap-8 rounded-lg bg-secondary p-4 sm:p-8',
         className
       )}
     >
@@ -187,7 +180,7 @@ const ExampleCard = ({
 
 export const Components = () => (
   <>
-    <div className="flex w-full flex-col items-start justify-between gap-4 px-4 py-16 sm:px-8 md:flex-row">
+    <div className="flex w-full flex-col items-start justify-between gap-4 py-16 md:flex-row">
       <div className="grid gap-4">
         <h2 className="max-w-lg font-semibold text-3xl">
           Functional and fully composable
@@ -204,9 +197,9 @@ export const Components = () => (
         </Link>
       </Button>
     </div>
-    <div className="grid grid-cols-1 divide-y divide-dotted sm:grid-cols-2 sm:divide-x xl:grid-cols-3">
-      {examples.map((example, index) => (
-        <ExampleCard key={example.name} index={index} {...example} />
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      {examples.map((example) => (
+        <ExampleCard key={example.name} {...example} />
       ))}
     </div>
   </>
