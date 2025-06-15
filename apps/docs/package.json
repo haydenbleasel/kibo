@@ -38,6 +38,7 @@
     "@repo/kbd": "workspace:*",
     "@repo/list": "workspace:*",
     "@repo/marquee": "workspace:*",
+    "@repo/mini-calendar": "workspace:*",
     "@repo/pill": "workspace:*",
     "@repo/qr-code": "workspace:*",
     "@repo/rating": "workspace:*",
