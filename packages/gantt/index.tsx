@@ -1127,7 +1127,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         scrollRef.current.scrollWidth / 2 - scrollRef.current.clientWidth / 2;
       setScrollX(scrollRef.current.scrollLeft);
     }
-  }, []);
+  }, [setScrollX]);
 
   // Fix the useCallback to include all dependencies
   const handleScroll = useCallback(
