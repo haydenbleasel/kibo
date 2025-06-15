@@ -461,7 +461,7 @@ export type CalendarItemProps = {
 
 export const CalendarItem = memo(
   ({ feature, className }: CalendarItemProps) => (
-    <div className={cn('flex items-center gap-2', className)} key={feature.id}>
+    <div className={cn('flex items-center gap-2', className)}>
       <div
         className="h-2 w-2 shrink-0 rounded-full"
         style={{
