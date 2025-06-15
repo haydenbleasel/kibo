@@ -24,9 +24,11 @@ const MiniCalendarContext = createContext<MiniCalendarContextType | null>(null);
 
 const useMiniCalendar = () => {
   const context = useContext(MiniCalendarContext);
+
   if (!context) {
     throw new Error('MiniCalendar components must be used within MiniCalendar');
   }
+
   return context;
 };
 
@@ -45,6 +47,7 @@ const getFiveDays = (startDate: Date): Date[] => {
 const formatDate = (date: Date) => {
   const month = date.toLocaleDateString('en-US', { month: 'short' });
   const day = date.getDate();
+
   return { month, day };
 };
 
@@ -106,23 +109,21 @@ export type MiniCalendarNavigationProps =
 export const MiniCalendarNavigation = ({
   direction,
   className,
+  children,
   ...props
 }: MiniCalendarNavigationProps) => {
   const { onNavigate } = useMiniCalendar();
+  const Icon = direction === 'prev' ? ChevronLeftIcon : ChevronRightIcon;
 
   return (
     <Button
       variant="ghost"
       size="sm"
-      className={cn('h-8 w-8 p-0', className)}
+      className={cn('size-8 p-0', className)}
       onClick={() => onNavigate(direction)}
       {...props}
     >
-      {direction === 'prev' ? (
-        <ChevronLeftIcon className="h-4 w-4" />
-      ) : (
-        <ChevronRightIcon className="h-4 w-4" />
-      )}
+      {children ?? <Icon className="h-4 w-4" />}
     </Button>
   );
 };
@@ -139,7 +140,7 @@ export const MiniCalendarDays = ({
 
   return (
     <div className={cn('flex items-center gap-1', className)} {...props}>
-      {children ||
+      {children ??
         days.map((date) => (
           <MiniCalendarDay key={date.toISOString()} date={date} />
         ))}
