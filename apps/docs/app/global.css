@@ -181,3 +181,26 @@ h3 {
 [data-theme-toggle] svg {
   @apply fill-none;
 }
+
+/* Hide tabs on desktop */
+#nd-sidebar [data-hide-if-empty] {
+  @apply hidden;
+}
+
+/* Hide collapse sidebar button on desktop */
+#nd-subnav button[aria-label="Collapse Sidebar"] {
+  @apply hidden!;
+}
+
+/* Hide navbar links on mobile */
+#nd-sidebar-mobile a[href="/docs"],
+#nd-sidebar-mobile a[href="/blocks"],
+#nd-sidebar-mobile a[href="/components"] {
+  @apply hidden!;
+}
+
+/* Remove borders from sidebar and nav */
+#nd-sidebar > div,
+#nd-subnav > div {
+  @apply border-none!;
+}
