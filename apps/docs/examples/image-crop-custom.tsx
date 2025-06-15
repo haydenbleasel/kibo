@@ -8,7 +8,6 @@ import {
 } from '@repo/image-crop';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
 import { Input } from '@repo/shadcn-ui/components/ui/input';
-import { XIcon } from 'lucide-react';
 import Image from 'next/image';
 import { type ChangeEvent, useState } from 'react';
 
@@ -50,8 +49,8 @@ const Example = () => {
           height={100}
           unoptimized
         />
-        <Button type="button" onClick={handleReset} variant="ghost" size="icon">
-          <XIcon className="size-4" />
+        <Button type="button" onClick={handleReset} variant="outline" size="sm">
+          Start Over
         </Button>
       </div>
     );
@@ -69,15 +68,23 @@ const Example = () => {
       >
         <ImageCropContent className="max-w-md" />
         <div className="flex items-center gap-2">
-          <ImageCropApply />
-          <ImageCropReset />
+          <ImageCropApply asChild>
+            <Button variant="outline" size="sm">
+              Apply Crop
+            </Button>
+          </ImageCropApply>
+          <ImageCropReset asChild>
+            <Button variant="outline" size="sm">
+              Reset
+            </Button>
+          </ImageCropReset>
           <Button
             type="button"
             onClick={handleReset}
-            variant="ghost"
-            size="icon"
+            variant="outline"
+            size="sm"
           >
-            <XIcon className="size-4" />
+            Start Over
           </Button>
         </div>
       </ImageCrop>

@@ -49,6 +49,7 @@ const Example = () => {
           width={100}
           height={100}
           unoptimized
+          className="overflow-hidden rounded-full"
         />
         <Button type="button" onClick={handleReset} variant="ghost" size="icon">
           <XIcon className="size-4" />
@@ -62,6 +63,7 @@ const Example = () => {
       <ImageCrop
         file={selectedFile}
         aspect={1}
+        circularCrop
         maxImageSize={1024 * 1024} // 1MB
         onChange={console.log}
         onComplete={console.log}
