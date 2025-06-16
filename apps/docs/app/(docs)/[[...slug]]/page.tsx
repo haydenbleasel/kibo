@@ -28,9 +28,13 @@ const Page = async (props: PageProps) => {
       <DocsLayout
         {...baseOptions}
         tree={source.pageTree}
-        sidebar={{ hidden: true, collapsible: false }}
+        // Alternative: don't show the sidebar at all in the landing page on mobile.
+        // in this case, set:
+        // 1. in /(docs)/[[...slug]]/page.tsx: sidebar={{ hidden: true, collapsible: false }}
+        // 2. in /global.css: .landing-page #nd-subnav button[data-search] + button { @apply hidden; }
+        sidebar={{ hidden: false, collapsible: false }}
         nav={{ ...baseOptions.nav, mode: 'top' }}
-        containerProps={{ className: 'home' }}
+        containerProps={{ className: 'landing-page' }}
       >
         <Home />
       </DocsLayout>

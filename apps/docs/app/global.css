@@ -187,16 +187,18 @@ h3 {
   @apply hidden;
 }
 
-/* Hide collapse sidebar button on desktop */
-#nd-subnav button[aria-label="Collapse Sidebar"] {
-  @apply hidden!;
+/* Hide navbar links on mobile */
+#nd-sidebar-mobile a[href="/docs"].lg\:hidden,
+#nd-sidebar-mobile a[href="/blocks"].lg\:hidden,
+#nd-sidebar-mobile a[href="/components"].lg\:hidden {
+  @apply hidden;
 }
 
-/* Hide navbar links on mobile */
-#nd-sidebar-mobile a[href="/docs"],
-#nd-sidebar-mobile a[href="/blocks"],
-#nd-sidebar-mobile a[href="/components"] {
-  @apply hidden!;
+/* Ensure tabs are hidden on desktop */
+#nd-sidebar a[href="/docs"].lg\:hidden,
+#nd-sidebar a[href="/blocks"].lg\:hidden,
+#nd-sidebar a[href="/components"].lg\:hidden {
+  @apply hidden;
 }
 
 /* Remove borders from sidebar and nav */
@@ -205,3 +207,14 @@ h3 {
 #nd-tocnav {
   @apply border-none!;
 }
+
+/* Hide the sidebar on the landing page on desktop */
+.landing-page #nd-sidebar {
+  @apply md:hidden;
+}
+
+/* Alternative:don't show the sidebar at all in the landing page on mobile.
+in this case, set:
+1. in /(docs)/[[...slug]]/page.tsx: sidebar={{ hidden: true, collapsible: false }
+2. in /global.css: .landing-page #nd-subnav button[data-search] + button { @apply hidden; }
+*/
