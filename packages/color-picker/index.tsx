@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -8,14 +10,16 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { Range, Root, Thumb, Track } from '@radix-ui/react-slider';
 import Color from 'color';
 import { PipetteIcon } from 'lucide-react';
+import { Slider } from 'radix-ui';
 import {
   type ComponentProps,
   type HTMLAttributes,
+  memo,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -125,82 +129,89 @@ export const ColorPicker = ({
 
 export type ColorPickerSelectionProps = HTMLAttributes<HTMLDivElement>;
 
-export const ColorPickerSelection = ({
-  className,
-  ...props
-}: ColorPickerSelectionProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const { hue, setSaturation, setLightness } = useColorPicker();
+export const ColorPickerSelection = memo(
+  ({ className, ...props }: ColorPickerSelectionProps) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [positionX, setPositionX] = useState(0);
+    const [positionY, setPositionY] = useState(0);
+    const { hue, setSaturation, setLightness } = useColorPicker();
 
-  const handlePointerMove = useCallback(
-    (event: PointerEvent) => {
-      if (!isDragging || !containerRef.current) {
-        return;
+    const backgroundGradient = useMemo(() => {
+      return `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
+            linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)),
+            hsl(${hue}, 100%, 50%)`;
+    }, [hue]);
+
+    const handlePointerMove = useCallback(
+      (event: PointerEvent) => {
+        if (!isDragging || !containerRef.current) {
+          return;
+        }
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = Math.max(
+          0,
+          Math.min(1, (event.clientX - rect.left) / rect.width)
+        );
+        const y = Math.max(
+          0,
+          Math.min(1, (event.clientY - rect.top) / rect.height)
+        );
+        setPositionX(x);
+        setPositionY(y);
+        setSaturation(x * 100);
+        const topLightness = x < 0.01 ? 100 : 50 + 50 * (1 - x);
+        const lightness = topLightness * (1 - y);
+
+        setLightness(lightness);
+      },
+      [isDragging, setSaturation, setLightness]
+    );
+
+    useEffect(() => {
+      const handlePointerUp = () => setIsDragging(false);
+
+      if (isDragging) {
+        window.addEventListener('pointermove', handlePointerMove);
+        window.addEventListener('pointerup', handlePointerUp);
       }
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = Math.max(
-        0,
-        Math.min(1, (event.clientX - rect.left) / rect.width)
-      );
-      const y = Math.max(
-        0,
-        Math.min(1, (event.clientY - rect.top) / rect.height)
-      );
-      setPosition({ x, y });
-      setSaturation(x * 100);
-      const topLightness = x < 0.01 ? 100 : 50 + 50 * (1 - x);
-      const lightness = topLightness * (1 - y);
 
-      setLightness(lightness);
-    },
-    [isDragging, setSaturation, setLightness]
-  );
+      return () => {
+        window.removeEventListener('pointermove', handlePointerMove);
+        window.removeEventListener('pointerup', handlePointerUp);
+      };
+    }, [isDragging, handlePointerMove]);
 
-  useEffect(() => {
-    const handlePointerUp = () => setIsDragging(false);
-
-    if (isDragging) {
-      window.addEventListener('pointermove', handlePointerMove);
-      window.addEventListener('pointerup', handlePointerUp);
-    }
-
-    return () => {
-      window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('pointerup', handlePointerUp);
-    };
-  }, [isDragging, handlePointerMove]);
-
-  return (
-    <div
-      ref={containerRef}
-      className={cn('relative size-full cursor-crosshair rounded', className)}
-      style={{
-        background: `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
-                     linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)),
-                     hsl(${hue}, 100%, 50%)`,
-      }}
-      onPointerDown={(e) => {
-        e.preventDefault();
-        setIsDragging(true);
-        handlePointerMove(e.nativeEvent);
-      }}
-      {...props}
-    >
+    return (
       <div
-        className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white"
+        ref={containerRef}
+        className={cn('relative size-full cursor-crosshair rounded', className)}
         style={{
-          left: `${position.x * 100}%`,
-          top: `${position.y * 100}%`,
-          boxShadow: '0 0 0 1px rgba(0,0,0,0.5)',
+          background: backgroundGradient,
         }}
-      />
-    </div>
-  );
-};
+        onPointerDown={(e) => {
+          e.preventDefault();
+          setIsDragging(true);
+          handlePointerMove(e.nativeEvent);
+        }}
+        {...props}
+      >
+        <div
+          className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white"
+          style={{
+            left: `${positionX * 100}%`,
+            top: `${positionY * 100}%`,
+            boxShadow: '0 0 0 1px rgba(0,0,0,0.5)',
+          }}
+        />
+      </div>
+    );
+  }
+);
 
-export type ColorPickerHueProps = ComponentProps<typeof Root>;
+ColorPickerSelection.displayName = 'ColorPickerSelection';
+
+export type ColorPickerHueProps = ComponentProps<typeof Slider.Root>;
 
 export const ColorPickerHue = ({
   className,
@@ -209,7 +220,7 @@ export const ColorPickerHue = ({
   const { hue, setHue } = useColorPicker();
 
   return (
-    <Root
+    <Slider.Root
       value={[hue]}
       max={360}
       step={1}
@@ -217,15 +228,15 @@ export const ColorPickerHue = ({
       onValueChange={([hue]) => setHue(hue)}
       {...props}
     >
-      <Track className="relative my-0.5 h-3 w-full grow rounded-full bg-[linear-gradient(90deg,#FF0000,#FFFF00,#00FF00,#00FFFF,#0000FF,#FF00FF,#FF0000)]">
-        <Range className="absolute h-full" />
-      </Track>
-      <Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
-    </Root>
+      <Slider.Track className="relative my-0.5 h-3 w-full grow rounded-full bg-[linear-gradient(90deg,#FF0000,#FFFF00,#00FF00,#00FFFF,#0000FF,#FF00FF,#FF0000)]">
+        <Slider.Range className="absolute h-full" />
+      </Slider.Track>
+      <Slider.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+    </Slider.Root>
   );
 };
 
-export type ColorPickerAlphaProps = ComponentProps<typeof Root>;
+export type ColorPickerAlphaProps = ComponentProps<typeof Slider.Root>;
 
 export const ColorPickerAlpha = ({
   className,
@@ -234,7 +245,7 @@ export const ColorPickerAlpha = ({
   const { alpha, setAlpha } = useColorPicker();
 
   return (
-    <Root
+    <Slider.Root
       value={[alpha]}
       max={100}
       step={1}
@@ -242,7 +253,7 @@ export const ColorPickerAlpha = ({
       onValueChange={([alpha]) => setAlpha(alpha)}
       {...props}
     >
-      <Track
+      <Slider.Track
         className="relative my-0.5 h-3 w-full grow rounded-full"
         style={{
           background:
@@ -250,10 +261,10 @@ export const ColorPickerAlpha = ({
         }}
       >
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent to-black/50" />
-        <Range className="absolute h-full rounded-full bg-transparent" />
-      </Track>
-      <Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
-    </Root>
+        <Slider.Range className="absolute h-full rounded-full bg-transparent" />
+      </Slider.Track>
+      <Slider.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+    </Slider.Root>
   );
 };
 
@@ -328,6 +339,7 @@ const PercentageInput = ({ className, ...props }: PercentageInputProps) => {
     <div className="relative">
       <Input
         type="text"
+        readOnly
         {...props}
         className={cn(
           'h-8 w-[3.25rem] rounded-l-none bg-secondary px-2 text-xs shadow-none',
@@ -364,6 +376,7 @@ export const ColorPickerFormat = ({
         <Input
           type="text"
           value={hex}
+          readOnly
           className="h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none"
         />
         <PercentageInput value={alpha} />

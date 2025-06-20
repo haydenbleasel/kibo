@@ -23,23 +23,29 @@ export const AvatarStack = ({
     )}
     {...props}
   >
-    {Children.map(children, (child, index) => (
-      <div
-        className={cn(
-          'size-full shrink-0 overflow-hidden rounded-full',
-          '[&_[data-slot="avatar"]]:size-full',
-          className
-        )}
-        style={{
-          width: size,
-          height: size,
-          maskImage: index
-            ? `radial-gradient(circle ${size / 2}px at -${size / 4 + size / 10}px 50%, transparent 99%, white 100%)`
-            : '',
-        }}
-      >
-        {child}
-      </div>
-    ))}
+    {Children.map(children, (child, index) => {
+      if (!child) {
+        return null;
+      }
+
+      return (
+        <div
+          className={cn(
+            'size-full shrink-0 overflow-hidden rounded-full',
+            '[&_[data-slot="avatar"]]:size-full',
+            className
+          )}
+          style={{
+            width: size,
+            height: size,
+            maskImage: index
+              ? `radial-gradient(circle ${size / 2}px at -${size / 4 + size / 10}px 50%, transparent 99%, white 100%)`
+              : '',
+          }}
+        >
+          {child}
+        </div>
+      );
+    })}
   </div>
 );

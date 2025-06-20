@@ -44,7 +44,7 @@ export const GET = async (request: NextRequest) => {
       <div tw="absolute left-96 top-24 z-10 w-12 h-12 bg-white opacity-10" />
       <div tw="absolute left-144 top-36 z-10 w-12 h-12 bg-white opacity-10" />
       <div tw="absolute left-192 top-48 z-10 w-12 h-12 bg-white opacity-10" />
-      <div tw="absolute left-240 top-28 z-10 w-12 h-12 bg-white opacity-10" />
+      <div tw="absolute left-240 top-24 z-10 w-12 h-12 bg-white opacity-10" />
       <div tw="absolute left-288 top-72 z-10 w-12 h-12 bg-white opacity-10" />
       <div tw="absolute left-48 top-60 z-10 w-12 h-12 bg-white opacity-10" />
 

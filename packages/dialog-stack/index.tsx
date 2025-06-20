@@ -1,12 +1,13 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import * as Portal from '@radix-ui/react-portal';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
+import { Portal } from 'radix-ui';
 import {
   Children,
   cloneElement,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -161,9 +162,9 @@ export const DialogStackOverlay = ({
     throw new Error('DialogStackOverlay must be used within a DialogStack');
   }
 
-  if (!context.isOpen) {
-    return null;
-  }
+  const handleClick = useCallback(() => {
+    context.setIsOpen(false);
+  }, [context.setIsOpen]);
 
   return (
     // biome-ignore lint/nursery/noStaticElementInteractions: "This is a clickable overlay"
@@ -174,7 +175,7 @@ export const DialogStackOverlay = ({
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
         className
       )}
-      onClick={() => context.setIsOpen(false)}
+      onClick={handleClick}
       {...props}
     />
   );

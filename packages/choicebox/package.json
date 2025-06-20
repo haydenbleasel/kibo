@@ -1,18 +1,19 @@
 {
   "name": "@repo/choicebox",
+  "description": "Choiceboxes are a great way to show radio or checkbox options with a card style.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
-    "lucide-react": "^0.503.0",
-    "radix-ui": "^1.3.4",
+    "lucide-react": "^0.515.0",
+    "radix-ui": "^1.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "typescript": "^5"
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.8.3"
   }
 }

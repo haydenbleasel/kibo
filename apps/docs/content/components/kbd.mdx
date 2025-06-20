@@ -1,0 +1,34 @@
+---
+title: kbd
+description: A component for displaying keyboard shortcuts and key combinations.
+icon: Keyboard
+---
+
+<PoweredBy packages={[
+  { name: 'ts-key-enum', url: 'https://www.npmjs.com/package/ts-key-enum' },
+]} />
+
+<Preview path="kbd" />
+
+## Installation
+
+<Installer packageName="kbd" />
+
+## Features
+
+- Compound component for displaying keyboard shortcuts
+- Aria label intellisense for modifier keys
+- Customizable separator between keys
+- Monospace font styling for consistent key display
+- Flexible styling through className props
+- Support for both single keys and key combinations
+
+## Examples
+
+### In Text
+
+<Preview path="kbd-text" />
+
+### With Custom Separator
+
+<Preview path="kbd-custom-separator" />

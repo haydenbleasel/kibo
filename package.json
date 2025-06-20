@@ -12,25 +12,25 @@
     "format": "ultracite format",
     "test": "turbo test",
     "analyze": "turbo analyze",
-    "bump-deps": "npx npm-check-updates --deep -u -x react-day-picker && pnpm install",
+    "bump-deps": "npx npm-check-updates --deep -u -x shiki,fumadocs-* && pnpm install",
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/shadcn-ui",
     "clean": "git clean -xdf node_modules"
   },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^22.15.3",
-    "turbo": "^2.5.2",
+    "@types/node": "^24.0.1",
+    "turbo": "^2.5.4",
     "typescript": "^5.8.3",
-    "ultracite": "^4.2.1"
+    "ultracite": "^4.2.10"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.12.1",
   "type": "module",
   "dependencies": {
-    "tsup": "^8.4.0",
-    "zod": "^3.24.3"
+    "tsup": "^8.5.0",
+    "zod": "^3.25.64"
   }
 }

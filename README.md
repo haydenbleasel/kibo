@@ -18,6 +18,14 @@ While shadcn/ui focuses on wrapping primitives from Radix UI, Kibo UI is designe
 
 [Read the docs](https://www.kibo-ui.com/)
 
+## Contributors
+
+<a href="https://github.com/haydenbleasel/kibo/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=haydenbleasel/kibo" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
 ## Sponsors
 
 Thank you to all our sponsors!

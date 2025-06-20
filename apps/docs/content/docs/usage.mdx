@@ -1,0 +1,48 @@
+---
+title: Usage
+description: Learn how to use Kibo UI components in your application.
+---
+
+Once a Kibo UI component is installed, you can import it and use it in your application like any other React component. The components are added as part of your codebase (not hidden in a library), so the usage feels very natural.
+
+## Example
+
+Let’s say you just added an Announcement component (a simple dismissible banner for notifications). You might use it as follows:
+
+```tsx title="Hero.tsx"
+'use client';
+
+import {
+  Announcement,
+  AnnouncementTag,
+  AnnouncementTitle,
+} from '@/components/ui/kibo-ui/announcement';
+import { ArrowUpRightIcon } from 'lucide-react';
+
+const Hero = () => (
+  <>
+    <Announcement>
+      <AnnouncementTag>Latest update</AnnouncementTag>
+      <AnnouncementTitle>
+        New feature added
+        <ArrowUpRightIcon size={16} className="shrink-0 text-muted-foreground" />
+      </AnnouncementTitle>
+    </Announcement>
+    {/* The rest of your page... */}
+  </>
+);
+
+export default Hero;
+```
+
+In the example above, we import the Announcement components from our Kibo UI directory and include it in our JSX. Then, we compose the component with the `AnnouncementTag` and `AnnouncementTitle` subcomponents. You can style or configure the component just as you would if you wrote it yourself – since the code lives in your project, you can even open the component file to see how it works or make custom modifications.
+
+Feel free to add as many Kibo UI components as you need. Because components are added on-demand, you’re not including code for features you aren’t using. This keeps your app lean. Each component is isolated, so adding one won’t bloat another – yet they all share the same design tokens (colors, fonts, etc.) from shadcn’s theme.
+
+## Extensibility
+
+All Kibo UI components take as many primitive attributes as possible. For example, the `AnnouncementTag` component extends `HTMLAttributes<HTMLDivElement>`, so you can pass any props that a `div` supports. This makes it easy to extend the component with your own styles or functionality.
+
+## Customization
+
+After installation, no additional setup is needed. The component’s styles (Tailwind CSS classes) and scripts are already integrated. You can start interacting with the component in your app immediately.

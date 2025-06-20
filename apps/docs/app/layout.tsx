@@ -8,7 +8,7 @@ import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import { RootProvider } from 'fumadocs-ui/provider';
 import type { ReactNode } from 'react';
 import { env } from '../env';
-import { fonts } from './lib/fonts';
+import { fonts } from '../lib/fonts';
 
 type LayoutProps = {
   readonly children: ReactNode;

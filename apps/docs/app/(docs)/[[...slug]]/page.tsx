@@ -1,5 +1,4 @@
-import { createGenerator } from 'fumadocs-typescript';
-import { AutoTypeTable } from 'fumadocs-typescript/ui';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   DocsBody,
@@ -9,21 +8,34 @@ import {
 } from 'fumadocs-ui/page';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Header } from '../../../components/header';
 import { Installer } from '../../../components/installer';
 import { PoweredBy } from '../../../components/powered-by';
 import { Preview } from '../../../components/preview';
+import { baseOptions } from '../../../lib/layout.config';
 import { source } from '../../../lib/source';
+import Home from './(home)';
 
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
 };
 
-const generator = createGenerator();
-
 const Page = async (props: PageProps) => {
   const params = await props.params;
   const page = source.getPage(params.slug);
+
+  if (!params.slug) {
+    return (
+      <DocsLayout
+        {...baseOptions}
+        tree={source.pageTree}
+        sidebar={{ hidden: true, collapsible: false }}
+        nav={{ ...baseOptions.nav, mode: 'top' }}
+        containerProps={{ className: 'home' }}
+      >
+        <Home />
+      </DocsLayout>
+    );
+  }
 
   if (!page) {
     notFound();
@@ -32,8 +44,31 @@ const Page = async (props: PageProps) => {
   const MDX = page.data.body;
 
   return (
-    <>
-      <Header />
+    <DocsLayout
+      {...baseOptions}
+      tree={source.pageTree}
+      sidebar={{
+        collapsible: false,
+        tabs: [
+          {
+            title: 'Docs',
+            url: '/docs',
+          },
+          {
+            title: 'Components',
+            url: '/components',
+          },
+          {
+            title: 'Blocks',
+            url: '/blocks',
+          },
+        ],
+      }}
+      nav={{
+        ...baseOptions.nav,
+        mode: 'top',
+      }}
+    >
       <DocsPage
         toc={page.data.toc}
         full={page.data.full}
@@ -48,14 +83,11 @@ const Page = async (props: PageProps) => {
               Installer,
               Preview,
               PoweredBy,
-              AutoTypeTable: (props) => (
-                <AutoTypeTable {...props} generator={generator} />
-              ),
             }}
           />
         </DocsBody>
       </DocsPage>
-    </>
+    </DocsLayout>
   );
 };
 
@@ -66,6 +98,14 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const params = await props.params;
   const page = source.getPage(params.slug);
+
+  if (!params.slug) {
+    return {
+      title: 'Kibo UI',
+      description:
+        'Kibo UI is a custom registry of composable, accessible and open source components designed for use with shadcn/ui.',
+    };
+  }
 
   if (!page) {
     notFound();

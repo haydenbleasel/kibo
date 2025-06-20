@@ -49,12 +49,6 @@ const sentryConfig = {
 const config = {
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        hostname: 'img.logo.dev',
-        protocol: 'https',
-      },
-    ],
   },
 
   // biome-ignore lint/suspicious/useAwait: "headers is async"
@@ -73,10 +67,29 @@ const config = {
   // biome-ignore lint/suspicious/useAwait: "redirects is async"
   async redirects() {
     return [
-      { source: '/', destination: '/overview', permanent: false },
+      {
+        source: '/overview',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/setup',
+        destination: '/docs/setup',
+        permanent: true,
+      },
+      {
+        source: '/sponsors',
+        destination: '/docs/sponsors',
+        permanent: true,
+      },
       {
         source: '/components',
         destination: '/components/announcement',
+        permanent: false,
+      },
+      {
+        source: '/blocks',
+        destination: '/blocks/ai-chatbot',
         permanent: false,
       },
       { source: '/ai', destination: '/components/ai', permanent: true },

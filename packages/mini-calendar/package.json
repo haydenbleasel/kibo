@@ -1,0 +1,21 @@
+{
+  "name": "@repo/mini-calendar",
+  "description": "A composable mini calendar component for picking dates close to today.",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@radix-ui/react-use-controllable-state": "^1.2.2",
+    "@repo/shadcn-ui": "workspace:*",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.515.0",
+    "radix-ui": "^1.4.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.8.3"
+  }
+}

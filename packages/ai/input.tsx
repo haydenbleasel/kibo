@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
+import { Loader2Icon, SendIcon, SquareIcon, XIcon } from 'lucide-react';
 import { Children, useCallback, useEffect, useRef } from 'react';
 import type {
   ComponentProps,
@@ -119,6 +120,8 @@ export const AIInputTextarea = ({
       ref={textareaRef}
       className={cn(
         'w-full resize-none rounded-none border-none p-3 shadow-none outline-none ring-0',
+        'bg-transparent dark:bg-transparent',
+        'focus-visible:ring-0',
         className
       )}
       onChange={(e) => {
@@ -146,7 +149,14 @@ export const AIInputToolbar = ({
 export type AIInputToolsProps = HTMLAttributes<HTMLDivElement>;
 
 export const AIInputTools = ({ className, ...props }: AIInputToolsProps) => (
-  <div className={cn('flex items-center gap-1', className)} {...props} />
+  <div
+    className={cn(
+      'flex items-center gap-1',
+      '[&_button:first-child]:rounded-bl-xl',
+      className
+    )}
+    {...props}
+  />
 );
 
 export type AIInputButtonProps = ComponentProps<typeof Button>;
@@ -166,7 +176,8 @@ export const AIInputButton = ({
       variant={variant}
       size={newSize}
       className={cn(
-        'shrink-0 gap-1.5 text-muted-foreground',
+        'shrink-0 gap-1.5 rounded-lg',
+        variant === 'ghost' && 'text-muted-foreground',
         newSize === 'default' && 'px-3',
         className
       )}
@@ -175,22 +186,40 @@ export const AIInputButton = ({
   );
 };
 
-export type AIInputSubmitProps = ComponentProps<typeof Button>;
+export type AIInputSubmitProps = ComponentProps<typeof Button> & {
+  status?: 'submitted' | 'streaming' | 'ready' | 'error';
+};
 
 export const AIInputSubmit = ({
   className,
-  variant = 'ghost',
+  variant = 'default',
   size = 'icon',
+  status,
+  children,
   ...props
-}: AIInputSubmitProps) => (
-  <Button
-    type="submit"
-    variant={variant}
-    size={size}
-    className={cn('gap-1.5 text-muted-foreground', className)}
-    {...props}
-  />
-);
+}: AIInputSubmitProps) => {
+  let Icon = <SendIcon />;
+
+  if (status === 'submitted') {
+    Icon = <Loader2Icon className="animate-spin" />;
+  } else if (status === 'streaming') {
+    Icon = <SquareIcon />;
+  } else if (status === 'error') {
+    Icon = <XIcon />;
+  }
+
+  return (
+    <Button
+      type="submit"
+      variant={variant}
+      size={size}
+      className={cn('gap-1.5 rounded-lg rounded-br-xl', className)}
+      {...props}
+    >
+      {children ?? Icon}
+    </Button>
+  );
+};
 
 export type AIInputModelSelectProps = ComponentProps<typeof Select>;
 

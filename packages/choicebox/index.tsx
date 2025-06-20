@@ -35,7 +35,12 @@ export const ChoiceboxItem = ({
     asChild
     {...props}
   >
-    <Card className="cursor-pointer flex-row items-start justify-between rounded-md p-4 shadow-none transition-all">
+    <Card
+      className={cn(
+        'flex cursor-pointer flex-row items-start justify-between rounded-md p-4 shadow-none transition-all',
+        className
+      )}
+    >
       {children}
     </Card>
   </RadioGroupPrimitive.Item>
@@ -101,7 +106,7 @@ export const ChoiceboxItemContent = ({
 );
 
 export type ChoiceboxItemIndicatorProps = ComponentProps<
-  typeof RadioGroupPrimitive.Indicator
+  typeof RadioGroupPrimitive.RadioGroupIndicator
 >;
 
 export const ChoiceboxItemIndicator = ({

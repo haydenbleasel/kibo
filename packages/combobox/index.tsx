@@ -154,16 +154,23 @@ export const ComboboxTrigger = ({
   );
 };
 
-export type ComboboxContentProps = ComponentProps<typeof Command>;
+export type ComboboxContentProps = ComponentProps<typeof Command> & {
+  popoverOptions?: ComponentProps<typeof PopoverContent>;
+};
 
 export const ComboboxContent = ({
   className,
+  popoverOptions,
   ...props
 }: ComboboxContentProps) => {
   const { width } = useContext(ComboboxContext);
 
   return (
-    <PopoverContent className={cn('p-0', className)} style={{ width }}>
+    <PopoverContent
+      className={cn('p-0', className)}
+      style={{ width }}
+      {...popoverOptions}
+    >
       <Command {...props} />
     </PopoverContent>
   );
@@ -202,12 +209,12 @@ export const ComboboxGroup = (props: ComboboxGroupProps) => (
 export type ComboboxItemProps = ComponentProps<typeof CommandItem>;
 
 export const ComboboxItem = (props: ComboboxItemProps) => {
-  const { value, onValueChange, onOpenChange } = useContext(ComboboxContext);
+  const { onValueChange, onOpenChange } = useContext(ComboboxContext);
 
   return (
     <CommandItem
       onSelect={(currentValue) => {
-        onValueChange(currentValue === value ? '' : currentValue);
+        onValueChange(currentValue);
         onOpenChange(false);
       }}
       {...props}

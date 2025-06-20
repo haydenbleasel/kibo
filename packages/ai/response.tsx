@@ -29,7 +29,6 @@ export type AIResponseProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const components: Options['components'] = {
-  pre: ({ children }) => <div>{children}</div>,
   ol: ({ node, children, className, ...props }) => (
     <ol className={cn('ml-4 list-outside list-decimal', className)} {...props}>
       {children}
@@ -99,24 +98,34 @@ const components: Options['components'] = {
       {children}
     </h6>
   ),
-  code: ({ node, className, children }) => {
+  pre: ({ node, className, children }) => {
     let language = 'javascript';
 
     if (typeof node?.properties?.className === 'string') {
       language = node.properties.className.replace('language-', '');
     }
 
+    const childrenIsCode =
+      typeof children === 'object' &&
+      children !== null &&
+      'type' in children &&
+      children.type === 'code';
+
+    if (!childrenIsCode) {
+      return <pre>{children}</pre>;
+    }
+
     const data: CodeBlockProps['data'] = [
       {
         language,
         filename: 'index.js',
-        code: children as string,
+        code: (children.props as { children: string }).children,
       },
     ];
 
     return (
       <CodeBlock
-        className={cn('my-4', className)}
+        className={cn('my-4 h-auto', className)}
         data={data}
         defaultValue={data[0].language}
       >

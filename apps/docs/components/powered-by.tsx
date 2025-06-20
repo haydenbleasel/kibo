@@ -7,6 +7,10 @@ type PoweredByProps = {
 };
 
 const getHostname = (url: string) => {
+  if (url.startsWith('/')) {
+    return new URL(url, 'https://www.kibo-ui.com').hostname.replace('www.', '');
+  }
+
   const parsedUrl = new URL(url);
 
   return parsedUrl.hostname.replace('www.', '');
@@ -33,6 +37,7 @@ export const PoweredBy = ({ packages }: PoweredByProps) => (
             width={14}
             height={14}
             className="h-3.5 w-3.5 overflow-hidden rounded-sm object-cover"
+            unoptimized
           />
           <p className="text-muted-foreground text-sm">{name}</p>
         </a>

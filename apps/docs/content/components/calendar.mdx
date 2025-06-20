@@ -1,0 +1,33 @@
+---
+title: Calendar
+description: The calendar view displays features on a grid calendar. Specifically it shows the end date of each feature, and groups features by day.
+icon: CalendarRange
+---
+
+<PoweredBy packages={[
+  { name: 'dnd kit', url: 'https://dndkit.com/' },
+  { name: 'Jotai', url: 'https://jotai.org/' },
+  { name: 'date-fns', url: 'https://date-fns.org/' },
+  { name: 'Lucide', url: 'https://lucide.dev/' },
+]} />
+
+<Preview path="calendar" />
+
+## Installation
+
+<Installer packageName="calendar" />
+
+## Features
+
+- Features are grouped by day
+- Features are color-coded by their status
+- Features are truncated if there are too many to fit in the grid cell
+- Selectable date range
+- Pagination of dates
+- Internationalization through `locale` prop
+
+## Examples
+
+### Without a date picker
+
+<Preview path="calendar-headless" />

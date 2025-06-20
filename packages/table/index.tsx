@@ -32,8 +32,8 @@ import {
 } from '@tanstack/react-table';
 import { atom, useAtom } from 'jotai';
 import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from 'lucide-react';
+import { createContext, memo, useCallback, useContext } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
-import { createContext, useContext } from 'react';
 
 export type { ColumnDef } from '@tanstack/react-table';
 
@@ -97,13 +97,15 @@ export type TableHeadProps = {
   className?: string;
 };
 
-export const TableHead = ({ header, className }: TableHeadProps) => (
+export const TableHead = memo(({ header, className }: TableHeadProps) => (
   <TableHeadRaw key={header.id} className={className}>
     {header.isPlaceholder
       ? null
       : flexRender(header.column.columnDef.header, header.getContext())}
   </TableHeadRaw>
-);
+));
+
+TableHead.displayName = 'TableHead';
 
 export type TableHeaderGroupProps = {
   headerGroup: HeaderGroup<unknown>;
@@ -145,6 +147,15 @@ export function TableColumnHeader<TData, TValue>({
   title,
   className,
 }: TableColumnHeaderProps<TData, TValue>) {
+  // Extract inline event handlers to prevent unnecessary re-renders
+  const handleSortAsc = useCallback(() => {
+    column.toggleSorting(false);
+  }, [column]);
+
+  const handleSortDesc = useCallback(() => {
+    column.toggleSorting(true);
+  }, [column]);
+
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>;
   }
@@ -169,11 +180,11 @@ export function TableColumnHeader<TData, TValue>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
-          <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+          <DropdownMenuItem onClick={handleSortAsc}>
             <ArrowUpIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Asc
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+          <DropdownMenuItem onClick={handleSortDesc}>
             <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Desc
           </DropdownMenuItem>

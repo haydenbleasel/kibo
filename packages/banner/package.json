@@ -1,18 +1,19 @@
 {
   "name": "@repo/banner",
+  "description": "A banner is a full-width component that can be used to show a message and action to the user.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@repo/shadcn-ui": "workspace:*",
-    "lucide-react": "^0.503.0",
+    "lucide-react": "^0.515.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "typescript": "^5"
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.8.3"
   }
 }

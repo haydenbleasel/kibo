@@ -13,8 +13,9 @@ export type AIMessageProps = HTMLAttributes<HTMLDivElement> & {
 export const AIMessage = ({ className, from, ...props }: AIMessageProps) => (
   <div
     className={cn(
-      'flex w-full items-end justify-end gap-2 py-4',
+      'group flex w-full items-end justify-end gap-2 py-4',
       from === 'user' ? 'is-user' : 'is-assistant flex-row-reverse justify-end',
+      '[&>div]:max-w-[80%]',
       className
     )}
     {...props}
@@ -30,9 +31,9 @@ export const AIMessageContent = ({
 }: AIMessageContentProps) => (
   <div
     className={cn(
-      'flex max-w-[80%] flex-col gap-2 rounded-lg px-4 py-3 text-sm',
+      'flex flex-col gap-2 rounded-lg px-4 py-3 text-sm',
       'bg-muted text-foreground',
-      'is-user:bg-primary is-user:text-primary-foreground',
+      'group-[.is-user]:bg-primary group-[.is-user]:text-primary-foreground',
       className
     )}
     {...props}
@@ -53,7 +54,7 @@ export const AIMessageAvatar = ({
   ...props
 }: AIMessageAvatarProps) => (
   <Avatar className={cn('size-8', className)} {...props}>
-    <AvatarImage src={src} alt="" />
+    <AvatarImage className="mt-0 mb-0" src={src} alt="" />
     <AvatarFallback>{name?.slice(0, 2) || 'ME'}</AvatarFallback>
   </Avatar>
 );

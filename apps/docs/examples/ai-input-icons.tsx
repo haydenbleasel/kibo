@@ -13,7 +13,7 @@ import {
   AIInputToolbar,
   AIInputTools,
 } from '@repo/ai/input';
-import { GlobeIcon, MicIcon, PlusIcon, SendIcon } from 'lucide-react';
+import { GlobeIcon, MicIcon, PlusIcon } from 'lucide-react';
 import { type FormEventHandler, useState } from 'react';
 
 const models = [
@@ -29,18 +29,33 @@ const models = [
 ];
 
 const Example = () => {
+  const [text, setText] = useState<string>('');
   const [model, setModel] = useState<string>(models[0].id);
+  const [status, setStatus] = useState<
+    'submitted' | 'streaming' | 'ready' | 'error'
+  >('ready');
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const message = formData.get('message');
-    console.log('Submitted message:', message);
+
+    if (!text) {
+      return;
+    }
+
+    setStatus('submitted');
+
+    setTimeout(() => {
+      setStatus('streaming');
+    }, 200);
+
+    setTimeout(() => {
+      setStatus('ready');
+    }, 2000);
   };
 
   return (
     <AIInput onSubmit={handleSubmit}>
-      <AIInputTextarea />
+      <AIInputTextarea value={text} onChange={(e) => setText(e.target.value)} />
       <AIInputToolbar>
         <AIInputTools>
           <AIInputButton>
@@ -73,9 +88,7 @@ const Example = () => {
             </AIInputModelSelectContent>
           </AIInputModelSelect>
         </AIInputTools>
-        <AIInputSubmit>
-          <SendIcon size={16} />
-        </AIInputSubmit>
+        <AIInputSubmit status={status} disabled={!text} />
       </AIInputToolbar>
     </AIInput>
   );

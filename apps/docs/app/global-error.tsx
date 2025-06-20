@@ -4,7 +4,7 @@ import { Button } from '@repo/shadcn-ui/components/ui/button';
 import { captureException } from '@sentry/nextjs';
 import type NextError from 'next/error';
 import { useEffect } from 'react';
-import { fonts } from './lib/fonts';
+import { fonts } from '../lib/fonts';
 
 type GlobalErrorProperties = {
   readonly error: NextError & { digest?: string };

@@ -1,5 +1,6 @@
 {
   "name": "@repo/marquee",
+  "description": "Marquees are a great way to show a list of items in a horizontal scrolling motion.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
@@ -10,8 +11,8 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "typescript": "^5"
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.8.3"
   }
 }
