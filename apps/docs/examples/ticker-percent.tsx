@@ -32,14 +32,17 @@ const items: {
   },
 ];
 
-const Example = () =>
-  items.map((i) => (
-    <Ticker key={i.symbol}>
-      <TickerIcon src={i.src} symbol={i.symbol} />
-      <TickerSymbol symbol={i.symbol} />
-      <TickerPrice price={i.price} />
-      <TickerPriceChange change={i.change} isPercent />
-    </Ticker>
-  ));
+const Example = () => (
+  <>
+    {items.map((i) => (
+      <Ticker key={i.symbol}>
+        <TickerIcon src={i.src} symbol={i.symbol} />
+        <TickerSymbol symbol={i.symbol} />
+        <TickerPrice price={i.price} />
+        <TickerPriceChange change={i.change} isPercent />
+      </Ticker>
+    ))}
+  </>
+);
 
 export default Example;

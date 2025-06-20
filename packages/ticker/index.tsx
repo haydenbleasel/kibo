@@ -109,73 +109,70 @@ export type TickerPriceProps = HTMLAttributes<HTMLSpanElement> & {
   price: number;
 };
 
-export const TickerPrice = ({
-  price,
-  className,
-  ...props
-}: TickerPriceProps) => {
-  const context = useTickerContext();
+export const TickerPrice = memo(
+  ({ price, className, ...props }: TickerPriceProps) => {
+    const context = useTickerContext();
 
-  const formattedPrice = useMemo(
-    () => context.formatter.format(price),
-    [price, context]
-  );
+    const formattedPrice = useMemo(
+      () => context.formatter.format(price),
+      [price, context]
+    );
 
-  return (
-    <span className={cn('text-muted-foreground', className)} {...props}>
-      {formattedPrice}
-    </span>
-  );
-};
+    return (
+      <span className={cn('text-muted-foreground', className)} {...props}>
+        {formattedPrice}
+      </span>
+    );
+  }
+);
+TickerPrice.displayName = 'TickerPrice';
 
 export type TickerPriceChangeProps = HTMLAttributes<HTMLSpanElement> & {
   change: number;
   isPercent?: boolean;
 };
 
-export const TickerPriceChange = ({
-  change,
-  isPercent,
-  className,
-  ...props
-}: TickerPriceChangeProps) => {
-  const isPositiveChange = useMemo(() => change >= 0, [change]);
-  const context = useTickerContext();
+export const TickerPriceChange = memo(
+  ({ change, isPercent, className, ...props }: TickerPriceChangeProps) => {
+    const isPositiveChange = useMemo(() => change >= 0, [change]);
+    const context = useTickerContext();
 
-  const changeFormatted = useMemo(() => {
-    if (isPercent) {
-      return `${change.toFixed(2)}%`;
-    }
-    return context.formatter.format(change);
-  }, [change, isPercent, context]);
+    const changeFormatted = useMemo(() => {
+      if (isPercent) {
+        return `${change.toFixed(2)}%`;
+      }
+      return context.formatter.format(change);
+    }, [change, isPercent, context]);
 
-  return (
-    <span
-      className={cn(
-        'flex items-center gap-0.5',
-        isPositiveChange
-          ? 'text-green-600 dark:text-green-500'
-          : 'text-red-600 dark:text-red-500',
-        className
-      )}
-      {...props}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        role="img"
-        aria-labelledby="ticker-change-icon-title"
-        className={isPositiveChange ? '' : 'rotate-180'}
+    return (
+      <span
+        className={cn(
+          'flex items-center gap-0.5',
+          isPositiveChange
+            ? 'text-green-600 dark:text-green-500'
+            : 'text-red-600 dark:text-red-500',
+          className
+        )}
+        {...props}
       >
-        <title id="ticker-change-icon-title">
-          {isPositiveChange ? 'Up icon' : 'Down icon'}
-        </title>
-        <path d="M24 22h-24l12-20z" />
-      </svg>
-      {changeFormatted}
-    </span>
-  );
-};
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          role="img"
+          aria-labelledby="ticker-change-icon-title"
+          className={isPositiveChange ? '' : 'rotate-180'}
+        >
+          <title id="ticker-change-icon-title">
+            {isPositiveChange ? 'Up icon' : 'Down icon'}
+          </title>
+          <path d="M24 22h-24l12-20z" />
+        </svg>
+        {changeFormatted}
+      </span>
+    );
+  }
+);
+TickerPriceChange.displayName = 'TickerPriceChange';
