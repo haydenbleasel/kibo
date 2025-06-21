@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@icons-pack/react-simple-icons": "^12.7.0",
     "@repo/shadcn-ui": "workspace:*",
     "lucide-react": "^0.515.0",
-    "motion": "^12.18.1",
     "react": "^19.1.0",
+    "react-card-network-icons": "^1.0.3",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {

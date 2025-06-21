@@ -608,21 +608,18 @@ importers:
 
   packages/credit-card:
     dependencies:
-      '@icons-pack/react-simple-icons':
-        specifier: ^12.7.0
-        version: 12.9.0(react@19.1.0)
       '@repo/shadcn-ui':
         specifier: workspace:*
         version: link:../shadcn-ui
       lucide-react:
         specifier: ^0.515.0
         version: 0.515.0(react@19.1.0)
-      motion:
-        specifier: ^12.18.1
-        version: 12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
+      react-card-network-icons:
+        specifier: ^1.0.3
+        version: 1.0.3
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
@@ -2142,11 +2139,6 @@ packages:
     resolution: {integrity: sha512-J/NVING3LMAEvexJkyTLjruSm7aOFx7QX21pzkiJfMoNG0wl5aFEjLTl7ay7IQb9EWY6AkrBy7tHL2Alijpdcg==}
     peerDependencies:
       react-hook-form: ^7.55.0
-
-  '@icons-pack/react-simple-icons@12.9.0':
-    resolution: {integrity: sha512-GLb2ayO78ZjjmI7GMpCDlXcELEr3DPO89nordI/JC8dMiJDMzuPb3qeOTt+SWcFOyJ+SAh9C/feUCpiBSM8ZLQ==}
-    peerDependencies:
-      react: ^16.13 || ^17 || ^18 || ^19
 
   '@icons-pack/react-simple-icons@13.1.0':
     resolution: {integrity: sha512-BrBHWxWM1X2pCdFmQfYnwkfwwm9Ta5NMdvSNe/ns2e9rhVK863rRAF6AhDjsvUIDKXSkRG1HfXZiSX/Uij0kxg==}
@@ -6881,6 +6873,9 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
+  react-card-network-icons@1.0.3:
+    resolution: {integrity: sha512-m6aH8nv8pPWAVHQnCky80BoC0yXvS9SJPYKy3+Hp8S/Pjo6Aoy8mC8KR0r0mi0wSkqweDFsE3FZPHE+DUSmISQ==}
+
   react-day-picker@9.7.0:
     resolution: {integrity: sha512-urlK4C9XJZVpQ81tmVgd2O7lZ0VQldZeHzNejbwLWZSkzHH498KnArT0EHNfKBOWwKc935iMLGZdxXPRISzUxQ==}
     engines: {node: '>=18'}
@@ -7000,6 +6995,10 @@ packages:
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
+
+  react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+    engines: {node: '>=0.10.0'}
 
   react@19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
@@ -8516,10 +8515,6 @@ snapshots:
     dependencies:
       '@standard-schema/utils': 0.3.0
       react-hook-form: 7.57.0(react@19.1.0)
-
-  '@icons-pack/react-simple-icons@12.9.0(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
 
   '@icons-pack/react-simple-icons@13.1.0(react@19.1.0)':
     dependencies:
@@ -13886,6 +13881,10 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
+  react-card-network-icons@1.0.3:
+    dependencies:
+      react: 18.3.1
+
   react-day-picker@9.7.0(react@19.1.0):
     dependencies:
       '@date-fns/tz': 1.2.0
@@ -14018,6 +14017,10 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       swr: 2.3.3(react@19.1.0)
+
+  react@18.3.1:
+    dependencies:
+      loose-envify: 1.4.0
 
   react@19.1.0: {}
 
