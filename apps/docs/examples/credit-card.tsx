@@ -4,12 +4,14 @@ import {
   CreditCardChip,
   CreditCardCvv,
   CreditCardExpiry,
+  CreditCardFlipper,
   CreditCardFront,
   CreditCardLogo,
   CreditCardMagStripe,
   CreditCardName,
   CreditCardNumber,
-  CreditCardProvider,
+  CreditCardRevealButton,
+  CreditCardServiceProvider,
 } from '@repo/credit-card';
 import type { HTMLAttributes } from 'react';
 
@@ -48,29 +50,27 @@ const ChaseMark = (props: HTMLAttributes<SVGElement>) => (
 
 const Example = () => (
   <>
-    <CreditCard className="h-full bg-[#002658]">
-      <CreditCardFront>
-        <ChaseLogo className="absolute top-[5%] left-[5%] h-[7%] text-white" />
-        <CreditCardLogo>
-          <ChaseMark className="size-full text-[#005EB8]" />
-        </CreditCardLogo>
-        <CreditCardChip className="text-white" withNfcIcon />
-        <CreditCardProvider type="visa" className="text-white" />
-        <CreditCardName className="text-white">John R. Doe</CreditCardName>
-      </CreditCardFront>
-      <CreditCardBack>
-        <CreditCardMagStripe />
-        <CreditCardName className="bottom-[20%] text-white">
-          John R. Doe
-        </CreditCardName>
-        <CreditCardNumber className="text-white">
-          0123 4567 8901 2345
-        </CreditCardNumber>
-        <div className="grid grid-cols-3">
-          <CreditCardExpiry>01/24</CreditCardExpiry>
-          <CreditCardCvv>123</CreditCardCvv>
-        </div>
-      </CreditCardBack>
+    <CreditCard>
+      <CreditCardFlipper>
+        <CreditCardFront className="bg-[#063573]">
+          <ChaseLogo className="absolute top-0 left-0 h-1/12" />
+          <CreditCardLogo>
+            <ChaseMark className="size-full text-[#0e72d1]" />
+          </CreditCardLogo>
+          <CreditCardChip className="" withNfcIcon />
+          <CreditCardServiceProvider type="visa" />
+          <CreditCardName>John R. Doe</CreditCardName>
+        </CreditCardFront>
+        <CreditCardBack className="bg-[#063573]">
+          <CreditCardMagStripe />
+          <CreditCardRevealButton />
+          <CreditCardNumber>0123 4567 8901 2345</CreditCardNumber>
+          <div className="-translate-y-1/2 absolute top-1/2 flex gap-4">
+            <CreditCardExpiry>01/24</CreditCardExpiry>
+            <CreditCardCvv>123</CreditCardCvv>
+          </div>
+        </CreditCardBack>
+      </CreditCardFlipper>
     </CreditCard>
   </>
 );
