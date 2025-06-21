@@ -618,8 +618,8 @@ importers:
         specifier: ^19.1.0
         version: 19.1.0
       react-card-network-icons:
-        specifier: ^1.0.2
-        version: 1.0.2
+        specifier: ^1.0.3
+        version: 1.0.3
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
@@ -6873,8 +6873,8 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-card-network-icons@1.0.2:
-    resolution: {integrity: sha512-tf7r1+EG6kTMGUlbpymF4qec4U0bQk7IcvqIw83Hfig5Eg3JDMrC675inSnM5xZx4JeFwgEZeQaWIjd/4ZMdgA==}
+  react-card-network-icons@1.0.3:
+    resolution: {integrity: sha512-m6aH8nv8pPWAVHQnCky80BoC0yXvS9SJPYKy3+Hp8S/Pjo6Aoy8mC8KR0r0mi0wSkqweDFsE3FZPHE+DUSmISQ==}
 
   react-day-picker@9.7.0:
     resolution: {integrity: sha512-urlK4C9XJZVpQ81tmVgd2O7lZ0VQldZeHzNejbwLWZSkzHH498KnArT0EHNfKBOWwKc935iMLGZdxXPRISzUxQ==}
@@ -13881,7 +13881,7 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-card-network-icons@1.0.2:
+  react-card-network-icons@1.0.3:
     dependencies:
       react: 18.3.1
 
