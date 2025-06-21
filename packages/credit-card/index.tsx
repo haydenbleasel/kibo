@@ -23,6 +23,18 @@ import {
   Visa,
 } from 'react-card-network-icons';
 
+const useSupportsHover = () => {
+  const [supportsHover, setSupportsHover] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(hover: hover)');
+    const handler = (e: MediaQueryListEvent) => setSupportsHover(e.matches);
+    setSupportsHover(mql.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+  return supportsHover;
+};
+
 export type CreditCardProps = HTMLAttributes<HTMLDivElement>;
 
 export const CreditCard = ({ className, ...props }: CreditCardProps) => (
@@ -41,16 +53,32 @@ export type CreditCardFlipperProps = HTMLAttributes<HTMLDivElement>;
 export const CreditCardFlipper = ({
   className,
   ...props
-}: CreditCardFlipperProps) => (
-  <div
-    className={cn(
-      'h-full w-full rounded-2xl transition duration-700 ease-in-out',
-      'group-hover/kibo-credit-card:-rotate-y-180 transform-3d group-hover/kibo-credit-card:shadow-lg',
-      className
-    )}
-    {...props}
-  />
-);
+}: CreditCardFlipperProps) => {
+  const supportsHover = useSupportsHover();
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleClick = () => {
+    if (!supportsHover) {
+      setIsFlipped((prev) => !prev);
+    }
+  };
+
+  return (
+    // biome-ignore lint/nursery/noStaticElementInteractions: tap to flip for touch devices
+    <div
+      onClick={handleClick}
+      className={cn(
+        'h-full w-full rounded-2xl transition duration-700 ease-in-out',
+        'transform-3d',
+        supportsHover &&
+          'group-hover/kibo-credit-card:-rotate-y-180 group-hover/kibo-credit-card:shadow-lg',
+        !supportsHover && isFlipped && '-rotate-y-180 shadow-lg',
+        className
+      )}
+      {...props}
+    />
+  );
+};
 CreditCardFlipper.displayName = 'CreditCardFlipper';
 
 export type CreditCardNameProps = HTMLAttributes<HTMLParagraphElement>;
@@ -409,7 +437,13 @@ export const CreditCardRevealButton = ({
           : 'top-0 right-0',
         className
       )}
-      onClick={() => context.setHideInformation(!context.hideInformation)}
+      onClick={(e) => {
+        if (context === null) {
+          return;
+        }
+        e.stopPropagation();
+        context.setHideInformation(!context.hideInformation);
+      }}
       {...props}
     >
       {(children ?? context.hideInformation) ? 'Reveal' : 'Hide'}
