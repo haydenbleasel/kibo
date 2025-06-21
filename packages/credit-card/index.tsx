@@ -2,14 +2,6 @@
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import {
-  SiAmericanexpress,
-  SiDinersclub,
-  SiDiscover,
-  SiJcb,
-  SiMastercard,
-  SiVisa,
-} from '@icons-pack/react-simple-icons';
 import { NfcIcon } from 'lucide-react';
 import {
   type HTMLAttributes,
@@ -18,6 +10,18 @@ import {
   useEffect,
   useState,
 } from 'react';
+import {
+  Amex,
+  type CardNetworkIcon,
+  type CardNetworkIconProps,
+  type CardNetworkIconType,
+  Diners,
+  Discover,
+  JCB,
+  Mastercard,
+  UnionPay,
+  Visa,
+} from 'react-card-network-icons';
 
 export type CreditCardProps = HTMLAttributes<HTMLDivElement>;
 
@@ -160,8 +164,8 @@ export const CreditCardChip = ({
           y2="91"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F2F2F2" />
-          <stop offset="1" stop-color="#BFBFBF" />
+          <stop stopColor="#F2F2F2" />
+          <stop offset="1" stopColor="#BFBFBF" />
         </linearGradient>
       </defs>
     </svg>
@@ -213,45 +217,41 @@ export const CreditCardFront = ({
 CreditCardFront.displayName = 'CreditCardFront';
 
 export type CreditCardServiceProviderProps = HTMLAttributes<HTMLDivElement> & {
-  type?:
-    | 'visa'
-    | 'mastercard'
-    | 'american-express'
-    | 'discover'
-    | 'diners-club'
-    | 'jcb';
+  referenceHeight?: CardNetworkIconProps['referenceHeight'];
+  type?: CardNetworkIconType;
 };
 
 const icons: Record<
   NonNullable<CreditCardServiceProviderProps['type']>,
-  typeof SiVisa
+  CardNetworkIcon
 > = {
-  visa: SiVisa,
-  mastercard: SiMastercard,
-  'american-express': SiAmericanexpress,
-  discover: SiDiscover,
-  'diners-club': SiDinersclub,
-  jcb: SiJcb,
+  visa: Visa,
+  mastercard: Mastercard,
+  amex: Amex,
+  discover: Discover,
+  diners: Diners,
+  jcb: JCB,
+  'union-pay': UnionPay,
 };
 
 export const CreditCardServiceProvider = ({
   className,
   children,
-  type,
+  type = 'visa',
+  referenceHeight,
   ...props
 }: CreditCardServiceProviderProps) => {
-  const Icon = type ? icons[type] : 'div';
+  const Icon = icons[type];
 
+  if (children) {
+    return children;
+  }
   return (
-    <div
-      className={cn(
-        'absolute right-0 bottom-0 h-full max-h-[25%] w-auto',
-        className
-      )}
+    <Icon
+      className={cn('absolute right-0 bottom-0 max-h-[25%]', className)}
+      referenceHeight={referenceHeight}
       {...props}
-    >
-      {children ?? <Icon className="size-full" />}
-    </div>
+    />
   );
 };
 

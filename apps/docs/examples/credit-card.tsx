@@ -58,7 +58,7 @@ const Example = () => (
             <ChaseMark className="size-full text-[#0e72d1]" />
           </CreditCardLogo>
           <CreditCardChip className="" withNfcIcon />
-          <CreditCardServiceProvider type="visa" />
+          <CreditCardServiceProvider type="visa" referenceHeight={50} />
           <CreditCardName>John R. Doe</CreditCardName>
         </CreditCardFront>
         <CreditCardBack className="bg-[#063573]">
