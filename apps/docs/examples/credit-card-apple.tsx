@@ -138,7 +138,7 @@ const Example = () => (
   <>
     <CreditCard>
       <CreditCardFlipper>
-        <CreditCardFront className="bg-[#F2F2F2] text-[#909090]">
+        <CreditCardFront safeArea={24} className="bg-[#F2F2F2] text-[#909090]">
           <CreditCardLogo className="absolute top-0 right-auto left-0">
             <AppleLogo className="h-12" />
           </CreditCardLogo>
