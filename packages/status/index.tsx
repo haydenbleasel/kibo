@@ -1,6 +1,6 @@
+import type { ComponentProps, HTMLAttributes } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import type { ComponentProps, HTMLAttributes } from 'react';
 
 export type StatusProps = ComponentProps<typeof Badge> & {
   status: 'online' | 'offline' | 'maintenance' | 'degraded';
@@ -8,8 +8,8 @@ export type StatusProps = ComponentProps<typeof Badge> & {
 
 export const Status = ({ className, status, ...props }: StatusProps) => (
   <Badge
-    variant="secondary"
     className={cn('flex items-center gap-2', 'group', status, className)}
+    variant="secondary"
     {...props}
   />
 );

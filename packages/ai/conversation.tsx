@@ -1,11 +1,11 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
 import { ArrowDownIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
 import { useCallback } from 'react';
 import { StickToBottom, useStickToBottomContext } from 'use-stick-to-bottom';
+import { cn } from '@/lib/utils';
 
 export type AIConversationProps = ComponentProps<typeof StickToBottom>;
 
@@ -15,8 +15,8 @@ export const AIConversation = ({
 }: AIConversationProps) => (
   <StickToBottom
     className={cn('relative flex-1 overflow-y-auto', className)}
-    resize="smooth"
     initial="smooth"
+    resize="smooth"
     role="log"
     {...props}
   />
@@ -43,11 +43,11 @@ export const AIConversationScrollButton = () => {
   return (
     !isAtBottom && (
       <Button
-        type="button"
-        variant="outline"
-        size="icon"
         className="absolute bottom-4 left-[50%] translate-x-[-50%] rounded-full"
         onClick={handleScrollToBottom}
+        size="icon"
+        type="button"
+        variant="outline"
       >
         <ArrowDownIcon className="size-4" />
       </Button>

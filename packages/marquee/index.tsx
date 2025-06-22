@@ -1,9 +1,9 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import type { HTMLAttributes } from 'react';
-import FastMarquee from 'react-fast-marquee';
 import type { MarqueeProps as FastMarqueeProps } from 'react-fast-marquee';
+import FastMarquee from 'react-fast-marquee';
+import { cn } from '@/lib/utils';
 
 export type MarqueeProps = HTMLAttributes<HTMLDivElement>;
 
@@ -23,8 +23,8 @@ export const MarqueeContent = ({
   ...props
 }: MarqueeContentProps) => (
   <FastMarquee
-    loop={loop}
     autoFill={autoFill}
+    loop={loop}
     pauseOnHover={pauseOnHover}
     {...props}
   />

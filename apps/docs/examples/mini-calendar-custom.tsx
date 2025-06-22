@@ -12,18 +12,18 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 const Example = () => (
   <MiniCalendar className="bg-card p-4 shadow-lg">
     <div className="flex items-center gap-4">
-      <MiniCalendarNavigation direction="prev" asChild>
-        <Button variant="outline" size="icon">
+      <MiniCalendarNavigation asChild direction="prev">
+        <Button size="icon" variant="outline">
           <ArrowLeftIcon className="size-4" />
         </Button>
       </MiniCalendarNavigation>
 
       <MiniCalendarDays className="gap-2">
-        {(date) => <MiniCalendarDay key={date.toISOString()} date={date} />}
+        {(date) => <MiniCalendarDay date={date} key={date.toISOString()} />}
       </MiniCalendarDays>
 
-      <MiniCalendarNavigation direction="next" asChild>
-        <Button variant="outline" size="icon">
+      <MiniCalendarNavigation asChild direction="next">
+        <Button size="icon" variant="outline">
           <ArrowRightIcon className="size-4" />
         </Button>
       </MiniCalendarNavigation>

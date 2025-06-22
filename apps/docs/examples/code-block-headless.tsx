@@ -1,12 +1,12 @@
 'use client';
 
+import type { BundledLanguage } from '@repo/code-block';
 import {
   CodeBlock,
   CodeBlockBody,
   CodeBlockContent,
   CodeBlockItem,
 } from '@repo/code-block';
-import type { BundledLanguage } from '@repo/code-block';
 
 const code = [
   {

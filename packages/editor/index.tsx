@@ -1,5 +1,32 @@
 'use client';
 
+import type { Editor, Range } from '@tiptap/core';
+import { mergeAttributes, Node } from '@tiptap/core';
+import CharacterCount from '@tiptap/extension-character-count';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import Placeholder from '@tiptap/extension-placeholder';
+import Subscript from '@tiptap/extension-subscript';
+import Superscript from '@tiptap/extension-superscript';
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
+import { TaskItem } from '@tiptap/extension-task-item';
+import { TaskList } from '@tiptap/extension-task-list';
+import TextStyle from '@tiptap/extension-text-style';
+import Typography from '@tiptap/extension-typography';
+import type { DOMOutputSpec, Node as ProseMirrorNode } from '@tiptap/pm/model';
+import { PluginKey } from '@tiptap/pm/state';
+import {
+  BubbleMenu,
+  type BubbleMenuProps,
+  FloatingMenu,
+  type FloatingMenuProps,
+  ReactRenderer,
+  EditorProvider as TiptapEditorProvider,
+  type EditorProviderProps as TiptapEditorProviderProps,
+  useCurrentEditor,
+} from '@tiptap/react';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -26,34 +53,9 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import type { Editor, Range } from '@tiptap/core';
-import { Node, mergeAttributes } from '@tiptap/core';
-import CharacterCount from '@tiptap/extension-character-count';
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
-import Placeholder from '@tiptap/extension-placeholder';
-import Subscript from '@tiptap/extension-subscript';
-import Superscript from '@tiptap/extension-superscript';
-import Table from '@tiptap/extension-table';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
-import TableRow from '@tiptap/extension-table-row';
-import { TaskItem } from '@tiptap/extension-task-item';
-import { TaskList } from '@tiptap/extension-task-list';
-import TextStyle from '@tiptap/extension-text-style';
-import Typography from '@tiptap/extension-typography';
-import type { DOMOutputSpec, Node as ProseMirrorNode } from '@tiptap/pm/model';
-import { PluginKey } from '@tiptap/pm/state';
-import {
-  BubbleMenu,
-  type BubbleMenuProps,
-  FloatingMenu,
-  type FloatingMenuProps,
-  ReactRenderer,
-  EditorProvider as TiptapEditorProvider,
-  type EditorProviderProps as TiptapEditorProviderProps,
-  useCurrentEditor,
-} from '@tiptap/react';
+
 export type { Editor, JSONContent } from '@tiptap/react';
+
 import StarterKit from '@tiptap/starter-kit';
 import Suggestion, { type SuggestionOptions } from '@tiptap/suggestion';
 import Fuse from 'fuse.js';
@@ -94,8 +96,8 @@ import {
   TrashIcon,
   UnderlineIcon,
 } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FormEventHandler, HTMLAttributes, ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import tippy, { type Instance as TippyInstance } from 'tippy.js';
 
 interface SlashNodeAttrs {
@@ -446,8 +448,8 @@ type EditorSlashMenuProps = {
 
 const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
   <Command
-    id="slash-command"
     className="border shadow"
+    id="slash-command"
     onKeyDown={(e) => {
       e.stopPropagation();
     }}
@@ -458,12 +460,12 @@ const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
     <CommandList>
       {items.map((item) => (
         <CommandItem
+          className="flex items-center gap-3 pr-3"
           key={item.title}
           onSelect={() => item.command({ editor, range })}
-          className="flex items-center gap-3 pr-3"
         >
           <div className="flex size-9 shrink-0 items-center justify-center rounded border bg-secondary">
-            <item.icon size={16} className="text-muted-foreground" />
+            <item.icon className="text-muted-foreground" size={16} />
           </div>
           <div className="flex flex-col">
             <span className="font-medium text-sm">{item.title}</span>
@@ -643,7 +645,7 @@ export const EditorProvider = ({
                 return true;
               }
 
-              return handleCommandNavigation(props.event) || false;
+              return handleCommandNavigation(props.event);
             },
 
             onExit() {
@@ -702,12 +704,12 @@ export const EditorProvider = ({
     <TooltipProvider>
       <div className={cn(className, '[&_.ProseMirror-focused]:outline-none')}>
         <TiptapEditorProvider
-          extensions={[...defaultExtensions, ...(extensions ?? [])]}
           editorProps={{
             handleKeyDown: (_view, event) => {
               handleCommandNavigation(event);
             },
           }}
+          extensions={[...defaultExtensions, ...(extensions ?? [])]}
           {...props}
         />
       </div>
@@ -723,10 +725,10 @@ export const EditorFloatingMenu = ({
 }: EditorFloatingMenuProps) => (
   <FloatingMenu
     className={cn('flex items-center bg-secondary', className)}
+    editor={null}
     tippyOptions={{
       offset: [32, 0],
     }}
-    editor={null}
     {...props}
   />
 );
@@ -745,10 +747,10 @@ export const EditorBubbleMenu = ({
       '[&>*:last-child]:rounded-r-[9px]',
       className
     )}
+    editor={null}
     tippyOptions={{
       maxWidth: 'none',
     }}
-    editor={null}
     {...props}
   >
     {children && Array.isArray(children)
@@ -781,15 +783,15 @@ const BubbleMenuButton = ({
   hideName,
 }: EditorButtonProps) => (
   <Button
-    onClick={() => command()}
-    variant="ghost"
     className="flex w-full gap-4"
+    onClick={() => command()}
     size="sm"
+    variant="ghost"
   >
-    <Icon size={12} className="shrink-0 text-muted-foreground" />
+    <Icon className="shrink-0 text-muted-foreground" size={12} />
     {!hideName && <span className="flex-1 text-left">{name}</span>}
     {isActive() ? (
-      <CheckIcon size={12} className="shrink-0 text-muted-foreground" />
+      <CheckIcon className="shrink-0 text-muted-foreground" size={12} />
     ) : null}
   </Button>
 );
@@ -808,9 +810,9 @@ export const EditorClearFormatting = ({
   return (
     <BubbleMenuButton
       command={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}
+      hideName={hideName}
       icon={RemoveFormattingIcon}
       isActive={() => false}
-      hideName={hideName}
       name="Clear Formatting"
     />
   );
@@ -829,11 +831,12 @@ export const EditorNodeText = ({
 
   return (
     <BubbleMenuButton
-      name="Text"
       command={() =>
         editor.chain().focus().toggleNode('paragraph', 'paragraph').run()
       }
+      hideName={hideName}
       // I feel like there has to be a more efficient way to do this – feel free to PR if you know how!
+      icon={TextIcon}
       isActive={() =>
         (editor &&
           !editor.isActive('paragraph') &&
@@ -841,8 +844,7 @@ export const EditorNodeText = ({
           !editor.isActive('orderedList')) ??
         false
       }
-      icon={TextIcon}
-      hideName={hideName}
+      name="Text"
     />
   );
 };
@@ -860,11 +862,11 @@ export const EditorNodeHeading1 = ({
 
   return (
     <BubbleMenuButton
-      name="Heading 1"
       command={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+      hideName={hideName}
       icon={Heading1Icon}
       isActive={() => editor.isActive('heading', { level: 1 }) ?? false}
-      hideName={hideName}
+      name="Heading 1"
     />
   );
 };
@@ -882,11 +884,11 @@ export const EditorNodeHeading2 = ({
 
   return (
     <BubbleMenuButton
-      name="Heading 2"
       command={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+      hideName={hideName}
       icon={Heading2Icon}
       isActive={() => editor.isActive('heading', { level: 2 }) ?? false}
-      hideName={hideName}
+      name="Heading 2"
     />
   );
 };
@@ -904,11 +906,11 @@ export const EditorNodeHeading3 = ({
 
   return (
     <BubbleMenuButton
-      name="Heading 3"
       command={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+      hideName={hideName}
       icon={Heading3Icon}
       isActive={() => editor.isActive('heading', { level: 3 }) ?? false}
-      hideName={hideName}
+      name="Heading 3"
     />
   );
 };
@@ -926,11 +928,11 @@ export const EditorNodeBulletList = ({
 
   return (
     <BubbleMenuButton
-      name="Bullet List"
       command={() => editor.chain().focus().toggleBulletList().run()}
+      hideName={hideName}
       icon={ListIcon}
       isActive={() => editor.isActive('bulletList') ?? false}
-      hideName={hideName}
+      name="Bullet List"
     />
   );
 };
@@ -948,11 +950,11 @@ export const EditorNodeOrderedList = ({
 
   return (
     <BubbleMenuButton
-      name="Numbered List"
       command={() => editor.chain().focus().toggleOrderedList().run()}
+      hideName={hideName}
       icon={ListOrderedIcon}
       isActive={() => editor.isActive('orderedList') ?? false}
-      hideName={hideName}
+      name="Numbered List"
     />
   );
 };
@@ -970,11 +972,11 @@ export const EditorNodeTaskList = ({
 
   return (
     <BubbleMenuButton
-      name="To-do List"
       command={() => editor.chain().focus().toggleTaskList().run()}
+      hideName={hideName}
       icon={CheckSquareIcon}
       isActive={() => editor.isActive('taskItem') ?? false}
-      hideName={hideName}
+      name="To-do List"
     />
   );
 };
@@ -992,7 +994,6 @@ export const EditorNodeQuote = ({
 
   return (
     <BubbleMenuButton
-      name="Quote"
       command={() =>
         editor
           .chain()
@@ -1001,9 +1002,10 @@ export const EditorNodeQuote = ({
           .toggleBlockquote()
           .run()
       }
+      hideName={hideName}
       icon={TextQuoteIcon}
       isActive={() => editor.isActive('blockquote') ?? false}
-      hideName={hideName}
+      name="Quote"
     />
   );
 };
@@ -1021,11 +1023,11 @@ export const EditorNodeCode = ({
 
   return (
     <BubbleMenuButton
-      name="Code"
       command={() => editor.chain().focus().toggleCodeBlock().run()}
+      hideName={hideName}
       icon={CodeIcon}
       isActive={() => editor.isActive('codeBlock') ?? false}
-      hideName={hideName}
+      name="Code"
     />
   );
 };
@@ -1043,7 +1045,6 @@ export const EditorNodeTable = ({
 
   return (
     <BubbleMenuButton
-      name="Table"
       command={() =>
         editor
           .chain()
@@ -1051,9 +1052,10 @@ export const EditorNodeTable = ({
           .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
           .run()
       }
+      hideName={hideName}
       icon={TableIcon}
       isActive={() => editor.isActive('table') ?? false}
-      hideName={hideName}
+      name="Table"
     />
   );
 };
@@ -1079,21 +1081,21 @@ export const EditorSelector = ({
   }
 
   return (
-    <Popover modal open={open} onOpenChange={onOpenChange}>
+    <Popover modal onOpenChange={onOpenChange} open={open}>
       <PopoverTrigger asChild>
         <Button
+          className="gap-2 rounded-none border-none"
           size="sm"
           variant="ghost"
-          className="gap-2 rounded-none border-none"
         >
           <span className="whitespace-nowrap text-xs">{title}</span>
           <ChevronDownIcon size={12} />
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        sideOffset={5}
         align="start"
         className={cn('w-48 p-1', className)}
+        sideOffset={5}
         {...props}
       >
         {children}
@@ -1115,11 +1117,11 @@ export const EditorFormatBold = ({
 
   return (
     <BubbleMenuButton
-      name="Bold"
-      isActive={() => editor.isActive('bold') ?? false}
       command={() => editor.chain().focus().toggleBold().run()}
-      icon={BoldIcon}
       hideName={hideName}
+      icon={BoldIcon}
+      isActive={() => editor.isActive('bold') ?? false}
+      name="Bold"
     />
   );
 };
@@ -1137,11 +1139,11 @@ export const EditorFormatItalic = ({
 
   return (
     <BubbleMenuButton
-      name="Italic"
-      isActive={() => editor.isActive('italic') ?? false}
       command={() => editor.chain().focus().toggleItalic().run()}
-      icon={ItalicIcon}
       hideName={hideName}
+      icon={ItalicIcon}
+      isActive={() => editor.isActive('italic') ?? false}
+      name="Italic"
     />
   );
 };
@@ -1159,11 +1161,11 @@ export const EditorFormatStrike = ({
 
   return (
     <BubbleMenuButton
-      name="Strikethrough"
-      isActive={() => editor.isActive('strike') ?? false}
       command={() => editor.chain().focus().toggleStrike().run()}
-      icon={StrikethroughIcon}
       hideName={hideName}
+      icon={StrikethroughIcon}
+      isActive={() => editor.isActive('strike') ?? false}
+      name="Strikethrough"
     />
   );
 };
@@ -1181,11 +1183,11 @@ export const EditorFormatCode = ({
 
   return (
     <BubbleMenuButton
-      name="Code"
-      isActive={() => editor.isActive('code') ?? false}
       command={() => editor.chain().focus().toggleCode().run()}
-      icon={CodeIcon}
       hideName={hideName}
+      icon={CodeIcon}
+      isActive={() => editor.isActive('code') ?? false}
+      name="Code"
     />
   );
 };
@@ -1203,11 +1205,11 @@ export const EditorFormatSubscript = ({
 
   return (
     <BubbleMenuButton
-      name="Subscript"
-      isActive={() => editor.isActive('subscript') ?? false}
       command={() => editor.chain().focus().toggleSubscript().run()}
-      icon={SubscriptIcon}
       hideName={hideName}
+      icon={SubscriptIcon}
+      isActive={() => editor.isActive('subscript') ?? false}
+      name="Subscript"
     />
   );
 };
@@ -1225,11 +1227,11 @@ export const EditorFormatSuperscript = ({
 
   return (
     <BubbleMenuButton
-      name="Superscript"
-      isActive={() => editor.isActive('superscript') ?? false}
       command={() => editor.chain().focus().toggleSuperscript().run()}
-      icon={SuperscriptIcon}
       hideName={hideName}
+      icon={SuperscriptIcon}
+      isActive={() => editor.isActive('superscript') ?? false}
+      name="Superscript"
     />
   );
 };
@@ -1247,12 +1249,12 @@ export const EditorFormatUnderline = ({
 
   return (
     <BubbleMenuButton
-      name="Underline"
-      isActive={() => editor.isActive('underline') ?? false}
-      // @ts-expect-error "TipTap extensions are not typed"
       command={() => editor.chain().focus().toggleUnderline().run()}
-      icon={UnderlineIcon}
       hideName={hideName}
+      // @ts-expect-error "TipTap extensions are not typed"
+      icon={UnderlineIcon}
+      isActive={() => editor.isActive('underline') ?? false}
+      name="Underline"
     />
   );
 };
@@ -1317,12 +1319,12 @@ export const EditorLinkSelector = ({
   const defaultValue = (editor.getAttributes('link') as { href?: string }).href;
 
   return (
-    <Popover modal open={open} onOpenChange={onOpenChange}>
+    <Popover modal onOpenChange={onOpenChange} open={open}>
       <PopoverTrigger asChild>
         <Button
+          className="gap-2 rounded-none border-none"
           size="sm"
           variant="ghost"
-          className="gap-2 rounded-none border-none"
         >
           <ExternalLinkIcon size={12} />
           <p
@@ -1338,33 +1340,33 @@ export const EditorLinkSelector = ({
         </Button>
       </PopoverTrigger>
       <PopoverContent align="start" className="w-60 p-0" sideOffset={10}>
-        <form onSubmit={handleSubmit} className="flex p-1">
+        <form className="flex p-1" onSubmit={handleSubmit}>
           <input
             aria-label="Link URL"
-            ref={inputReference}
-            type="text"
-            placeholder="Paste a link"
             className="flex-1 bg-background p-1 text-sm outline-none"
             defaultValue={defaultValue ?? ''}
-            value={url}
             onChange={(event) => setUrl(event.target.value)}
+            placeholder="Paste a link"
+            ref={inputReference}
+            type="text"
+            value={url}
           />
           {editor.getAttributes('link').href ? (
             <Button
-              size="icon"
-              variant="outline"
-              type="button"
               className="flex h-8 items-center rounded-sm p-1 text-destructive transition-all hover:bg-destructive-foreground dark:hover:bg-destructive"
               onClick={() => {
                 // @ts-expect-error "TipTap extensions are not typed"
                 editor.chain().focus().unsetLink().run();
                 onOpenChange?.(false);
               }}
+              size="icon"
+              type="button"
+              variant="outline"
             >
               <TrashIcon size={12} />
             </Button>
           ) : (
-            <Button size="icon" variant="secondary" className="h-8">
+            <Button className="h-8" size="icon" variant="secondary">
               <CheckIcon size={12} />
             </Button>
           )}
@@ -1450,7 +1452,7 @@ export const EditorTableGlobalMenu = ({
       className={cn(
         '-translate-x-1/2 absolute flex translate-y-1/2 items-center rounded-full border bg-background shadow-xl',
         {
-          hidden: !left && !top,
+          hidden: !(left || top),
         }
       )}
       style={{ top, left }}
@@ -1515,13 +1517,13 @@ export const EditorTableColumnMenu = ({
         className={cn(
           '-translate-x-1/2 -translate-y-1/2 absolute flex h-4 w-7 overflow-hidden rounded-md border bg-background shadow-xl',
           {
-            hidden: !left && !top,
+            hidden: !(left || top),
           }
         )}
         style={{ top, left }}
       >
-        <Button variant="ghost" size="icon">
-          <EllipsisIcon size={16} className="text-muted-foreground" />
+        <Button size="icon" variant="ghost">
+          <EllipsisIcon className="text-muted-foreground" size={16} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>{children}</DropdownMenuContent>
@@ -1578,17 +1580,17 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           className={cn(
             '-translate-x-1/2 -translate-y-1/2 absolute flex h-7 w-4 overflow-hidden rounded-md border bg-background shadow-xl',
             {
-              hidden: !left && !top,
+              hidden: !(left || top),
             }
           )}
+          size="icon"
           style={{ top, left }}
+          variant="ghost"
         >
-          <EllipsisVerticalIcon size={12} className="text-muted-foreground" />
+          <EllipsisVerticalIcon className="text-muted-foreground" size={12} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>{children}</DropdownMenuContent>
@@ -1611,7 +1613,7 @@ export const EditorTableColumnBefore = () => {
 
   return (
     <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
-      <ArrowLeftIcon size={16} className="text-muted-foreground" />
+      <ArrowLeftIcon className="text-muted-foreground" size={16} />
       <span>Add column before</span>
     </DropdownMenuItem>
   );
@@ -1632,7 +1634,7 @@ export const EditorTableColumnAfter = () => {
 
   return (
     <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
-      <ArrowRightIcon size={16} className="text-muted-foreground" />
+      <ArrowRightIcon className="text-muted-foreground" size={16} />
       <span>Add column after</span>
     </DropdownMenuItem>
   );
@@ -1653,7 +1655,7 @@ export const EditorTableRowBefore = () => {
 
   return (
     <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
-      <ArrowUpIcon size={16} className="text-muted-foreground" />
+      <ArrowUpIcon className="text-muted-foreground" size={16} />
       <span>Add row before</span>
     </DropdownMenuItem>
   );
@@ -1674,7 +1676,7 @@ export const EditorTableRowAfter = () => {
 
   return (
     <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
-      <ArrowDownIcon size={16} className="text-muted-foreground" />
+      <ArrowDownIcon className="text-muted-foreground" size={16} />
       <span>Add row after</span>
     </DropdownMenuItem>
   );
@@ -1695,7 +1697,7 @@ export const EditorTableColumnDelete = () => {
 
   return (
     <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
-      <TrashIcon size={16} className="text-destructive" />
+      <TrashIcon className="text-destructive" size={16} />
       <span>Delete column</span>
     </DropdownMenuItem>
   );
@@ -1716,7 +1718,7 @@ export const EditorTableRowDelete = () => {
 
   return (
     <DropdownMenuItem className="flex items-center gap-2" onClick={handleClick}>
-      <TrashIcon size={16} className="text-destructive" />
+      <TrashIcon className="text-destructive" size={16} />
       <span>Delete row</span>
     </DropdownMenuItem>
   );
@@ -1739,12 +1741,12 @@ export const EditorTableHeaderColumnToggle = () => {
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           className="flex items-center gap-2 rounded-full"
           onClick={handleClick}
+          size="icon"
+          variant="ghost"
         >
-          <ColumnsIcon size={16} className="text-muted-foreground" />
+          <ColumnsIcon className="text-muted-foreground" size={16} />
         </Button>
       </TooltipTrigger>
       <TooltipContent>
@@ -1771,12 +1773,12 @@ export const EditorTableHeaderRowToggle = () => {
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           className="flex items-center gap-2 rounded-full"
           onClick={handleClick}
+          size="icon"
+          variant="ghost"
         >
-          <RowsIcon size={16} className="text-muted-foreground" />
+          <RowsIcon className="text-muted-foreground" size={16} />
         </Button>
       </TooltipTrigger>
       <TooltipContent>
@@ -1803,12 +1805,12 @@ export const EditorTableDelete = () => {
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           className="flex items-center gap-2 rounded-full"
           onClick={handleClick}
+          size="icon"
+          variant="ghost"
         >
-          <TrashIcon size={16} className="text-destructive" />
+          <TrashIcon className="text-destructive" size={16} />
         </Button>
       </TooltipTrigger>
       <TooltipContent>
@@ -1835,12 +1837,12 @@ export const EditorTableMergeCells = () => {
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           className="flex items-center gap-2 rounded-full"
           onClick={handleClick}
+          size="icon"
+          variant="ghost"
         >
-          <TableCellsMergeIcon size={16} className="text-muted-foreground" />
+          <TableCellsMergeIcon className="text-muted-foreground" size={16} />
         </Button>
       </TooltipTrigger>
       <TooltipContent>
@@ -1867,12 +1869,12 @@ export const EditorTableSplitCell = () => {
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           className="flex items-center gap-2 rounded-full"
           onClick={handleClick}
+          size="icon"
+          variant="ghost"
         >
-          <TableColumnsSplitIcon size={16} className="text-muted-foreground" />
+          <TableColumnsSplitIcon className="text-muted-foreground" size={16} />
         </Button>
       </TooltipTrigger>
       <TooltipContent>
@@ -1899,12 +1901,12 @@ export const EditorTableFix = () => {
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           className="flex items-center gap-2 rounded-full"
           onClick={handleClick}
+          size="icon"
+          variant="ghost"
         >
-          <BoltIcon size={16} className="text-muted-foreground" />
+          <BoltIcon className="text-muted-foreground" size={16} />
         </Button>
       </TooltipTrigger>
       <TooltipContent>

@@ -60,7 +60,7 @@ const Example = () => {
 
   return (
     <div className="w-full p-4">
-      <AIReasoning isStreaming={isStreaming} className="w-full">
+      <AIReasoning className="w-full" isStreaming={isStreaming}>
         <AIReasoningTrigger />
         <AIReasoningContent>{content}</AIReasoningContent>
       </AIReasoning>

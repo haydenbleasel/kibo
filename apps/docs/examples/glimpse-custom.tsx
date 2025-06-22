@@ -14,17 +14,17 @@ const Example = async () => {
   return (
     <div>
       Check out{' '}
-      <Glimpse openDelay={0} closeDelay={0}>
+      <Glimpse closeDelay={0} openDelay={0}>
         <GlimpseTrigger asChild>
           <a
-            href="https://github.com/haydenbleasel/kibo"
             className="font-medium text-primary underline"
+            href="https://github.com/haydenbleasel/kibo"
           >
             Kibo UI
           </a>
         </GlimpseTrigger>
         <GlimpseContent className="w-80 bg-secondary">
-          <GlimpseImage src={data.image ?? ''} className="shadow-lg" />
+          <GlimpseImage className="shadow-lg" src={data.image ?? ''} />
           <GlimpseTitle className="line-clamp-2 font-semibold text-lg">
             {data.title}
           </GlimpseTitle>

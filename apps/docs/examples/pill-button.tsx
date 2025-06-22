@@ -6,7 +6,7 @@ import { XIcon } from 'lucide-react';
 const Example = () => (
   <Pill>
     #kibo-ui
-    <PillButton variant="ghost" size="icon">
+    <PillButton size="icon" variant="ghost">
       <XIcon size={12} />
     </PillButton>
   </Pill>

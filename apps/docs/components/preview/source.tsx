@@ -1,19 +1,19 @@
 'use client';
 
+import { SiReact } from '@icons-pack/react-simple-icons';
+import {
+  type BundledLanguage,
+  CodeBlock,
+  CodeBlockBody,
+  CodeBlockContent,
+  CodeBlockItem,
+} from '@repo/code-block';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { SiReact } from '@icons-pack/react-simple-icons';
-import {
-  type BundledLanguage,
-  CodeBlockContent,
-  CodeBlockItem,
-} from '@repo/code-block';
-import { CodeBlockBody } from '@repo/code-block';
-import { CodeBlock } from '@repo/code-block';
 
 type PreviewSourceProps = {
   source: { name: string; source: string }[];
@@ -25,9 +25,9 @@ const parseCode = (code: string) =>
     .replace(/@repo\//g, '@/components/ui/kibo-ui/');
 
 export const PreviewSource = ({ source }: PreviewSourceProps) => (
-  <Accordion type="single" collapsible defaultValue={source.at(0)?.name}>
+  <Accordion collapsible defaultValue={source.at(0)?.name} type="single">
     {source.map(({ name, source }) => (
-      <AccordionItem value={name} key={name}>
+      <AccordionItem key={name} value={name}>
         <AccordionTrigger className="rounded-none bg-secondary px-4">
           <div className="flex items-center gap-2 text-sm">
             <SiReact className="size-4 text-muted-foreground" />
@@ -36,6 +36,7 @@ export const PreviewSource = ({ source }: PreviewSourceProps) => (
         </AccordionTrigger>
         <AccordionContent>
           <CodeBlock
+            className="overflow-auto rounded-none border-none"
             data={[
               {
                 language: 'tsx',
@@ -44,7 +45,6 @@ export const PreviewSource = ({ source }: PreviewSourceProps) => (
               },
             ]}
             defaultValue="tsx"
-            className="overflow-auto rounded-none border-none"
           >
             <CodeBlockBody>
               {(item) => (

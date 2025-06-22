@@ -68,10 +68,10 @@ const Example = () => {
           <TagsEmpty />
           <TagsGroup>
             {tags.map((tag) => (
-              <TagsItem key={tag.id} value={tag.id} onSelect={handleSelect}>
+              <TagsItem key={tag.id} onSelect={handleSelect} value={tag.id}>
                 {tag.label}
                 {selected.includes(tag.id) && (
-                  <CheckIcon size={14} className="text-muted-foreground" />
+                  <CheckIcon className="text-muted-foreground" size={14} />
                 )}
               </TagsItem>
             ))}

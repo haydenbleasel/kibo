@@ -1,6 +1,7 @@
 'use client';
 
 import { faker } from '@faker-js/faker';
+import type { DragEndEvent } from '@repo/kanban';
 import {
   KanbanBoard,
   KanbanCard,
@@ -8,7 +9,6 @@ import {
   KanbanHeader,
   KanbanProvider,
 } from '@repo/kanban';
-import type { DragEndEvent } from '@repo/kanban';
 import { useState } from 'react';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -66,17 +66,17 @@ const Example = () => {
   };
 
   return (
-    <KanbanProvider onDragEnd={handleDragEnd} columns={columns} data={features}>
+    <KanbanProvider columns={columns} data={features} onDragEnd={handleDragEnd}>
       {(column) => (
-        <KanbanBoard key={column.id} id={column.id}>
+        <KanbanBoard id={column.id} key={column.id}>
           <KanbanHeader>{column.name}</KanbanHeader>
           <KanbanCards id={column.id}>
             {(feature) => (
               <KanbanCard
-                key={feature.id}
-                id={feature.id}
-                name={feature.name}
                 column={column.name}
+                id={feature.id}
+                key={feature.id}
+                name={feature.name}
               />
             )}
           </KanbanCards>

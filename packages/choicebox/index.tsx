@@ -1,5 +1,10 @@
 'use client';
 
+import { RadioGroup } from '@repo/shadcn-ui/components/ui/radio-group';
+import { cn } from '@repo/shadcn-ui/lib/utils';
+import { CircleIcon } from 'lucide-react';
+import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
+import type { ComponentProps, HTMLAttributes } from 'react';
 import {
   Card,
   CardContent,
@@ -7,11 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { RadioGroup } from '@repo/shadcn-ui/components/ui/radio-group';
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import { CircleIcon } from 'lucide-react';
-import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
-import type { ComponentProps, HTMLAttributes } from 'react';
 
 export type ChoiceboxProps = ComponentProps<typeof RadioGroup>;
 
@@ -27,12 +27,12 @@ export const ChoiceboxItem = ({
   ...props
 }: ChoiceboxItemProps) => (
   <RadioGroupPrimitive.Item
+    asChild
     className={cn(
       'text-left',
       '[&[data-state="checked"]]:border-primary',
       '[&[data-state="checked"]]:bg-primary-foreground'
     )}
-    asChild
     {...props}
   >
     <Card

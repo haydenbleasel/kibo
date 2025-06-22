@@ -40,7 +40,7 @@ export const Tweets = () => (
       )}
     >
       {tweets.map((tweet) => (
-        <Tweet key={tweet} id={tweet} />
+        <Tweet id={tweet} key={tweet} />
       ))}
     </div>
   </div>

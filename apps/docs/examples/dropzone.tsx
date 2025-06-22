@@ -13,13 +13,13 @@ const Example = () => {
 
   return (
     <Dropzone
+      accept={{ 'image/*': [] }}
+      maxFiles={10}
       maxSize={1024 * 1024 * 10}
       minSize={1024}
-      maxFiles={10}
-      accept={{ 'image/*': [] }}
       onDrop={handleDrop}
-      src={files}
       onError={console.error}
+      src={files}
     >
       <DropzoneEmptyState />
       <DropzoneContent />

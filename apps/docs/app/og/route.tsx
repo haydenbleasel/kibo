@@ -33,12 +33,12 @@ export const GET = async (request: NextRequest) => {
   return new ImageResponse(
     <div tw="bg-[#1D4ED8] relative flex flex-col justify-between w-full h-full">
       <div
-        tw="flex absolute left-0 top-0 w-full h-full opacity-10"
         style={{
           backgroundSize: '48px 48px',
           backgroundImage:
             'linear-gradient(to right, #FFF 1px, transparent 1px), linear-gradient(to bottom, #FFF 1px, transparent 1px)',
         }}
+        tw="flex absolute left-0 top-0 w-full h-full opacity-10"
       />
       <div tw="absolute left-36 top-12 z-10 w-12 h-12 bg-white opacity-10" />
       <div tw="absolute left-96 top-24 z-10 w-12 h-12 bg-white opacity-10" />
@@ -66,13 +66,13 @@ export const GET = async (request: NextRequest) => {
         </svg>
       </div>
       <div
-        tw="flex flex-col bottom-0 left-0 right-0 relative z-10 p-12"
         style={{ fontFamily: 'Geist' }}
+        tw="flex flex-col bottom-0 left-0 right-0 relative z-10 p-12"
       >
         <p tw="text-lg m-0 text-white/80 font-semibold">Kibo UI</p>
         <h1
-          tw="my-4 text-6xl font-bold text-white"
           style={{ fontFamily: 'Geist Semibold' }}
+          tw="my-4 text-6xl font-bold text-white"
         >
           {page.data.title}
         </h1>

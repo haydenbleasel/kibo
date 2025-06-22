@@ -46,9 +46,9 @@ const exampleCode = [
 
 export const CodeBlockExample = () => (
   <CodeBlock
+    className="aspect-square"
     data={exampleCode}
     defaultValue={exampleCode[0].language}
-    className="aspect-square"
   >
     <CodeBlockHeader>
       <CodeBlockFiles>
@@ -75,13 +75,13 @@ export const CodeBlockExample = () => (
     <CodeBlockBody className="h-full">
       {(item) => (
         <CodeBlockItem
+          className="h-full"
           key={item.language}
           value={item.language}
-          className="h-full"
         >
           <CodeBlockContent
-            language={item.language as BundledLanguage}
             className="h-full"
+            language={item.language as BundledLanguage}
           >
             {item.code}
           </CodeBlockContent>

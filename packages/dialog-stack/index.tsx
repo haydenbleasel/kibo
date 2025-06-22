@@ -1,17 +1,7 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { Portal } from 'radix-ui';
-import {
-  Children,
-  cloneElement,
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
 import type {
   ButtonHTMLAttributes,
   Dispatch,
@@ -21,6 +11,16 @@ import type {
   ReactElement,
   SetStateAction,
 } from 'react';
+import {
+  Children,
+  cloneElement,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { cn } from '@/lib/utils';
 
 type DialogStackContextType = {
   activeIndex: number;
@@ -34,11 +34,11 @@ type DialogStackContextType = {
 
 const DialogStackContext = createContext<DialogStackContextType>({
   activeIndex: 0,
-  setActiveIndex: () => {},
+  setActiveIndex: () => { },
   totalDialogs: 0,
-  setTotalDialogs: () => {},
+  setTotalDialogs: () => { },
   isOpen: false,
-  setIsOpen: () => {},
+  setIsOpen: () => { },
   clickable: false,
 });
 
@@ -81,7 +81,7 @@ export const DialogStack = ({
         activeIndex,
         setActiveIndex,
         totalDialogs: 0,
-        setTotalDialogs: () => {},
+        setTotalDialogs: () => { },
         isOpen: isOpen ?? false,
         setIsOpen: (value) => setIsOpen(Boolean(value)),
         clickable,
@@ -134,7 +134,6 @@ export const DialogStackTrigger = ({
 
   return (
     <button
-      onClick={handleClick}
       className={cn(
         'inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium text-sm',
         'ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2',
@@ -143,6 +142,7 @@ export const DialogStackTrigger = ({
         'h-10 px-4 py-2',
         className
       )}
+      onClick={handleClick}
       {...props}
     >
       {children}
@@ -171,7 +171,8 @@ export const DialogStackOverlay = ({
   }
 
   return (
-    // biome-ignore lint/nursery/noStaticElementInteractions: "This is a clickable overlay"
+    // biome-ignore lint/a11y/noStaticElementInteractions: "This is a clickable overlay"
+    // biome-ignore lint/a11y/useKeyWithClickEvents: "This is a clickable overlay"
     <div
       className={cn(
         'fixed inset-0 z-50 bg-black/80',
@@ -187,8 +188,8 @@ export const DialogStackOverlay = ({
 
 export type DialogStackBodyProps = HTMLAttributes<HTMLDivElement> & {
   children:
-    | ReactElement<DialogStackChildProps>[]
-    | ReactElement<DialogStackChildProps>;
+  | ReactElement<DialogStackChildProps>[]
+  | ReactElement<DialogStackChildProps>;
 };
 
 export const DialogStackBody = ({
@@ -278,14 +279,14 @@ export const DialogStackContent = ({
       : `${Math.abs(distanceFromActive) * offset}px`;
 
   return (
-    // biome-ignore lint/nursery/noStaticElementInteractions: "This is a clickable dialog"
+    // biome-ignore lint/a11y/noStaticElementInteractions: "This is a clickable dialog"
+    // biome-ignore lint/a11y/useKeyWithClickEvents: "This is a clickable dialog"
     <div
-      onClick={handleClick}
       className={cn(
         'h-auto w-full rounded-lg border bg-background p-6 shadow-lg transition-all duration-300',
-
         className
       )}
+      onClick={handleClick}
       style={{
         top: 0,
         transform: `translateY(${translateY})`,
@@ -304,7 +305,7 @@ export const DialogStackContent = ({
         className={cn(
           'h-full w-full transition-all duration-300',
           context.activeIndex !== index &&
-            'pointer-events-none select-none opacity-0'
+          'pointer-events-none select-none opacity-0'
         )}
       >
         {children}
@@ -413,13 +414,13 @@ export const DialogStackNext = ({
 
   return (
     <button
-      type="button"
-      onClick={handleNext}
       className={cn(
         'inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
         className
       )}
       disabled={context.activeIndex >= context.totalDialogs - 1}
+      onClick={handleNext}
+      type="button"
       {...props}
     >
       {children || 'Next'}
@@ -468,13 +469,13 @@ export const DialogStackPrevious = ({
 
   return (
     <button
-      type="button"
-      onClick={handlePrevious}
       className={cn(
         'inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
         className
       )}
       disabled={context.activeIndex <= 0}
+      onClick={handlePrevious}
+      type="button"
       {...props}
     >
       {children || 'Previous'}

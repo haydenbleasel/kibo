@@ -21,7 +21,7 @@ const Example = () => (
     <AISourcesTrigger count={sources.length} />
     <AISourcesContent>
       {sources.map((source) => (
-        <AISource key={source.href} href={source.href} title={source.title} />
+        <AISource href={source.href} key={source.href} title={source.title} />
       ))}
     </AISourcesContent>
   </AISources>

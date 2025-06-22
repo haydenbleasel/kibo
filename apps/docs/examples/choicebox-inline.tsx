@@ -29,7 +29,7 @@ const Example = () => (
     }}
   >
     {options.map((option) => (
-      <ChoiceboxItem value={option.id} key={option.id}>
+      <ChoiceboxItem key={option.id} value={option.id}>
         <ChoiceboxItemHeader>
           <ChoiceboxItemTitle>{option.label}</ChoiceboxItemTitle>
           <ChoiceboxItemDescription>

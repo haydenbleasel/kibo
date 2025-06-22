@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
 import QR from 'qrcode';
 import type { HTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
 
 export type QRCodeProps = HTMLAttributes<HTMLDivElement> & {
   data: string;

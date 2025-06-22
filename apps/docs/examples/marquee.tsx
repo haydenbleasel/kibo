@@ -14,11 +14,11 @@ const Example = () => (
       <MarqueeFade side="right" />
       <MarqueeContent>
         {new Array(10).fill(null).map((_, index) => (
-          <MarqueeItem key={index} className="h-32 w-32">
+          <MarqueeItem className="h-32 w-32" key={index}>
             <img
-              src={`https://placehold.co/128x128?random=${index}`}
               alt={`Placeholder ${index}`}
               className="overflow-hidden rounded-full"
+              src={`https://placehold.co/128x128?random=${index}`}
             />
           </MarqueeItem>
         ))}

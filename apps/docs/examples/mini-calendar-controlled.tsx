@@ -13,10 +13,10 @@ const Example = () => {
 
   return (
     <div className="space-y-4">
-      <MiniCalendar value={selectedDate} onValueChange={setSelectedDate}>
+      <MiniCalendar onValueChange={setSelectedDate} value={selectedDate}>
         <MiniCalendarNavigation direction="prev" />
         <MiniCalendarDays>
-          {(date) => <MiniCalendarDay key={date.toISOString()} date={date} />}
+          {(date) => <MiniCalendarDay date={date} key={date.toISOString()} />}
         </MiniCalendarDays>
         <MiniCalendarNavigation direction="next" />
       </MiniCalendar>

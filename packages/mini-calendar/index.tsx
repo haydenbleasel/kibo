@@ -1,7 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { addDays, format, isSameDay, isToday } from 'date-fns';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
@@ -9,12 +7,14 @@ import { Slot } from 'radix-ui';
 import {
   type ButtonHTMLAttributes,
   type ComponentProps,
+  createContext,
   type HTMLAttributes,
   type MouseEventHandler,
   type ReactNode,
-  createContext,
   useContext,
 } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 // Context for sharing state between components
 type MiniCalendarContextType = {
@@ -156,10 +156,10 @@ export const MiniCalendarNavigation = ({
 
   return (
     <Button
+      onClick={handleClick}
+      size={asChild ? undefined : 'icon'}
       type="button"
       variant={asChild ? undefined : 'ghost'}
-      size={asChild ? undefined : 'icon'}
-      onClick={handleClick}
       {...props}
     >
       {children ?? <Icon className="size-4" />}
@@ -205,15 +205,15 @@ export const MiniCalendarDay = ({
 
   return (
     <Button
-      type="button"
-      variant={isSelected ? 'default' : 'ghost'}
-      size="sm"
       className={cn(
         'h-auto min-w-[3rem] flex-col gap-0 p-2 text-xs',
         isTodayDate && !isSelected && 'bg-accent',
         className
       )}
       onClick={() => onDateSelect(date)}
+      size="sm"
+      type="button"
+      variant={isSelected ? 'default' : 'ghost'}
       {...props}
     >
       <span

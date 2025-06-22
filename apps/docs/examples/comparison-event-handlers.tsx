@@ -6,27 +6,27 @@ import Image from 'next/image';
 const Example = () => (
   <Comparison
     className="aspect-video"
-    onDragStart={() => console.log('drag start')}
     onDragEnd={() => console.log('drag end')}
+    onDragStart={() => console.log('drag start')}
   >
-    <ComparisonItem position="left" className="bg-red-500">
+    <ComparisonItem className="bg-red-500" position="left">
       <Image
-        src="https://placehold.co/1920x1080?random=1"
         alt="Placeholder 1"
         className="opacity-50"
-        width={1920}
         height={1080}
+        src="https://placehold.co/1920x1080?random=1"
         unoptimized
+        width={1920}
       />
     </ComparisonItem>
-    <ComparisonItem position="right" className="bg-blue-500">
+    <ComparisonItem className="bg-blue-500" position="right">
       <Image
-        src="https://placehold.co/2560x1440?random=2"
         alt="Placeholder 2"
         className="opacity-50"
-        width={2560}
         height={1440}
+        src="https://placehold.co/2560x1440?random=2"
         unoptimized
+        width={2560}
       />
     </ComparisonItem>
     <ComparisonHandle />

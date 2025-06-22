@@ -1,12 +1,6 @@
 'use client';
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
   AIBranch,
   AIBranchMessages,
   AIBranchNext,
@@ -66,6 +60,12 @@ import {
 import Image from 'next/image';
 import { type FormEventHandler, useState } from 'react';
 import { toast } from 'sonner';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const messages: {
   from: 'user' | 'assistant';
@@ -358,10 +358,10 @@ const Example = () => {
       <AIConversation>
         <AIConversationContent>
           {messages.map(({ versions, ...message }, index) => (
-            <AIBranch key={index} defaultBranch={0}>
+            <AIBranch defaultBranch={0} key={index}>
               <AIBranchMessages>
                 {versions.map((version) => (
-                  <AIMessage key={version.id} from={message.from}>
+                  <AIMessage from={message.from} key={version.id}>
                     <div>
                       {message.sources?.length && (
                         <AISources>
@@ -369,8 +369,8 @@ const Example = () => {
                           <AISourcesContent>
                             {message.sources.map((source) => (
                               <AISource
-                                key={source.href}
                                 href={source.href}
+                                key={source.href}
                                 title={source.title}
                               />
                             ))}
@@ -380,8 +380,8 @@ const Example = () => {
                       {message.tools?.map((toolCall) => (
                         <AITool key={toolCall.name}>
                           <AIToolHeader
-                            name={`Called MCP tool: ${toolCall.name}`}
                             description={toolCall.description}
+                            name={`Called MCP tool: ${toolCall.name}`}
                             status={toolCall.status}
                           />
                           <AIToolContent>
@@ -390,8 +390,8 @@ const Example = () => {
                             />
                             {(toolCall.result || toolCall.error) && (
                               <AIToolResult
-                                result={toolCall.result}
                                 error={toolCall.error}
+                                result={toolCall.result}
                               />
                             )}
                           </AIToolContent>
@@ -409,7 +409,7 @@ const Example = () => {
                         <AIResponse>{version.content}</AIResponse>
                       </AIMessageContent>
                     </div>
-                    <AIMessageAvatar src={message.avatar} name={message.name} />
+                    <AIMessageAvatar name={message.name} src={message.avatar} />
                   </AIMessage>
                 ))}
               </AIBranchMessages>
@@ -430,16 +430,16 @@ const Example = () => {
           {suggestions.map((suggestion) => (
             <AISuggestion
               key={suggestion}
-              suggestion={suggestion}
               onClick={() => handleSuggestionClick(suggestion)}
+              suggestion={suggestion}
             />
           ))}
         </AISuggestions>
         <div className="w-full px-4 pb-4">
           <AIInput onSubmit={handleSubmit}>
             <AIInputTextarea
-              value={text}
               onChange={(event) => setText(event.target.value)}
+              value={text}
             />
             <AIInputToolbar>
               <AIInputTools>
@@ -454,25 +454,25 @@ const Example = () => {
                     <DropdownMenuItem
                       onClick={() => handleFileAction('upload-file')}
                     >
-                      <FileIcon size={16} className="mr-2" />
+                      <FileIcon className="mr-2" size={16} />
                       Upload file
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => handleFileAction('upload-photo')}
                     >
-                      <ImageIcon size={16} className="mr-2" />
+                      <ImageIcon className="mr-2" size={16} />
                       Upload photo
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => handleFileAction('take-screenshot')}
                     >
-                      <ScreenShareIcon size={16} className="mr-2" />
+                      <ScreenShareIcon className="mr-2" size={16} />
                       Take screenshot
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => handleFileAction('take-photo')}
                     >
-                      <CameraIcon size={16} className="mr-2" />
+                      <CameraIcon className="mr-2" size={16} />
                       Take photo
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -491,7 +491,7 @@ const Example = () => {
                   <GlobeIcon size={16} />
                   <span>Search</span>
                 </AIInputButton>
-                <AIInputModelSelect value={model} onValueChange={setModel}>
+                <AIInputModelSelect onValueChange={setModel} value={model}>
                   <AIInputModelSelectTrigger>
                     <AIInputModelSelectValue />
                   </AIInputModelSelectTrigger>
@@ -499,12 +499,12 @@ const Example = () => {
                     {models.map((model) => (
                       <AIInputModelSelectItem key={model.id} value={model.id}>
                         <Image
-                          src={`https://img.logo.dev/${model.provider}?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
                           alt={model.provider}
                           className="inline-flex size-4"
-                          width={16}
                           height={16}
+                          src={`https://img.logo.dev/${model.provider}?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
                           unoptimized
+                          width={16}
                         />
                         {model.name}
                       </AIInputModelSelectItem>
@@ -512,7 +512,7 @@ const Example = () => {
                   </AIInputModelSelectContent>
                 </AIInputModelSelect>
               </AIInputTools>
-              <AIInputSubmit status={status} disabled={!text} />
+              <AIInputSubmit disabled={!text} status={status} />
             </AIInputToolbar>
           </AIInput>
         </div>

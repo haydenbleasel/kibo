@@ -39,16 +39,16 @@ const toolCall: {
 const Example = () => (
   <AITool key={toolCall.name}>
     <AIToolHeader
-      name={toolCall.name}
       description={toolCall.description}
+      name={toolCall.name}
       status={toolCall.status}
     />
     <AIToolContent>
       <AIToolParameters parameters={toolCall.parameters} />
       {(toolCall.result || toolCall.error) && (
         <AIToolResult
-          result={<AIResponse>{toolCall.result}</AIResponse>}
           error={toolCall.error}
+          result={<AIResponse>{toolCall.result}</AIResponse>}
         />
       )}
     </AIToolContent>

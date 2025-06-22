@@ -1,19 +1,3 @@
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
-  TableBody as TableBodyRaw,
-  TableCell as TableCellRaw,
-  TableHead as TableHeadRaw,
-  TableHeader as TableHeaderRaw,
-  Table as TableRaw,
-  TableRow as TableRowRaw,
-} from '@/components/ui/table';
-import { cn } from '@/lib/utils';
 import type {
   Cell,
   Column,
@@ -32,8 +16,24 @@ import {
 } from '@tanstack/react-table';
 import { atom, useAtom } from 'jotai';
 import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from 'lucide-react';
-import { createContext, memo, useCallback, useContext } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { createContext, memo, useCallback, useContext } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  TableBody as TableBodyRaw,
+  TableCell as TableCellRaw,
+  TableHeader as TableHeaderRaw,
+  TableHead as TableHeadRaw,
+  Table as TableRaw,
+  TableRow as TableRowRaw,
+} from '@/components/ui/table';
+import { cn } from '@/lib/utils';
 
 export type { ColumnDef } from '@tanstack/react-table';
 
@@ -98,7 +98,7 @@ export type TableHeadProps = {
 };
 
 export const TableHead = memo(({ header, className }: TableHeadProps) => (
-  <TableHeadRaw key={header.id} className={className}>
+  <TableHeadRaw className={className} key={header.id}>
     {header.isPlaceholder
       ? null
       : flexRender(header.column.columnDef.header, header.getContext())}
@@ -165,9 +165,9 @@ export function TableColumnHeader<TData, TValue>({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            variant="ghost"
-            size="sm"
             className="-ml-3 h-8 data-[state=open]:bg-accent"
+            size="sm"
+            variant="ghost"
           >
             <span>{title}</span>
             {column.getIsSorted() === 'desc' ? (
@@ -213,9 +213,9 @@ export type TableRowProps = {
 
 export const TableRow = ({ row, children, className }: TableRowProps) => (
   <TableRowRaw
-    key={row.id}
-    data-state={row.getIsSelected() && 'selected'}
     className={className}
+    data-state={row.getIsSelected() && 'selected'}
+    key={row.id}
   >
     {row.getVisibleCells().map((cell) => children({ cell }))}
   </TableRowRaw>
@@ -236,7 +236,7 @@ export const TableBody = ({ children, className }: TableBodyProps) => {
         rows.map((row) => children({ row }))
       ) : (
         <TableRowRaw>
-          <TableCellRaw colSpan={columns.length} className="h-24 text-center">
+          <TableCellRaw className="h-24 text-center" colSpan={columns.length}>
             No results.
           </TableCellRaw>
         </TableRowRaw>

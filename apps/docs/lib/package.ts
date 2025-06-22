@@ -1,5 +1,4 @@
-import { promises as fs } from 'node:fs';
-import { readdirSync } from 'node:fs';
+import { promises as fs, readdirSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 

@@ -1,5 +1,22 @@
 'use client';
 
+import { getDay, getDaysInMonth, isSameDay } from 'date-fns';
+import { atom, useAtom } from 'jotai';
+import {
+  Check,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsUpDown,
+} from 'lucide-react';
+import {
+  createContext,
+  memo,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -15,19 +32,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { getDay, getDaysInMonth, isSameDay } from 'date-fns';
-import { atom, useAtom } from 'jotai';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import {
-  type ReactNode,
-  createContext,
-  memo,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
 
 export type CalendarState = {
   month: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -120,12 +124,12 @@ const Combobox = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
           aria-expanded={open}
           className={cn('w-40 justify-between capitalize', className)}
+          variant="outline"
         >
           {value
             ? data.find((item) => item.value === value)?.label
@@ -147,13 +151,13 @@ const Combobox = ({
             <CommandGroup>
               {data.map((item) => (
                 <CommandItem
+                  className="capitalize"
                   key={item.value}
-                  value={item.value}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? '' : currentValue);
                     setOpen(false);
                   }}
-                  className="capitalize"
+                  value={item.value}
                 >
                   <Check
                     className={cn(
@@ -184,9 +188,7 @@ const OutOfBoundsDay = ({ day }: OutOfBoundsDayProps) => (
 
 export type CalendarBodyProps = {
   features: Feature[];
-  children: (props: {
-    feature: Feature;
-  }) => ReactNode;
+  children: (props: { feature: Feature }) => ReactNode;
 };
 
 export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
@@ -252,7 +254,7 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
       ];
 
     if (day) {
-      days.push(<OutOfBoundsDay key={`prev-${i}`} day={day} />);
+      days.push(<OutOfBoundsDay day={day} key={`prev-${i}`} />);
     }
   }
 
@@ -261,8 +263,8 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
 
     days.push(
       <div
-        key={day}
         className="relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs"
+        key={day}
       >
         {day}
         <div>
@@ -283,7 +285,7 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
       const day = nextMonthData.nextMonthDaysArray[i];
 
       if (day) {
-        days.push(<OutOfBoundsDay key={`next-${i}`} day={day} />);
+        days.push(<OutOfBoundsDay day={day} key={`next-${i}`} />);
       }
     }
   }
@@ -292,11 +294,11 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
     <div className="grid flex-grow grid-cols-7">
       {days.map((day, index) => (
         <div
-          key={index}
           className={cn(
             'relative aspect-square overflow-hidden border-t border-r',
             index % 7 === 6 && 'border-r-0'
           )}
+          key={index}
         >
           {day}
         </div>
@@ -338,16 +340,16 @@ export const CalendarMonthPicker = ({
   return (
     <Combobox
       className={className}
-      value={month.toString()}
-      setValue={(value) =>
-        setMonth(Number.parseInt(value) as CalendarState['month'])
-      }
       data={monthData}
       labels={{
         button: 'Select month',
         empty: 'No month found',
         search: 'Search month',
       }}
+      setValue={(value) =>
+        setMonth(Number.parseInt(value) as CalendarState['month'])
+      }
+      value={month.toString()}
     />
   );
 };
@@ -368,8 +370,6 @@ export const CalendarYearPicker = ({
   return (
     <Combobox
       className={className}
-      value={year.toString()}
-      setValue={(value) => setYear(Number.parseInt(value))}
       data={Array.from({ length: end - start + 1 }, (_, i) => ({
         value: (start + i).toString(),
         label: (start + i).toString(),
@@ -379,6 +379,8 @@ export const CalendarYearPicker = ({
         empty: 'No year found',
         search: 'Search year',
       }}
+      setValue={(value) => setYear(Number.parseInt(value))}
+      value={year.toString()}
     />
   );
 };
@@ -413,10 +415,10 @@ export const CalendarDatePagination = ({
 
   return (
     <div className={cn('flex items-center gap-2', className)}>
-      <Button onClick={handlePreviousMonth} variant="ghost" size="icon">
+      <Button onClick={handlePreviousMonth} size="icon" variant="ghost">
         <ChevronLeftIcon size={16} />
       </Button>
-      <Button onClick={handleNextMonth} variant="ghost" size="icon">
+      <Button onClick={handleNextMonth} size="icon" variant="ghost">
         <ChevronRightIcon size={16} />
       </Button>
     </div>
@@ -446,7 +448,7 @@ export const CalendarHeader = ({ className }: CalendarHeaderProps) => {
   return (
     <div className={cn('grid flex-grow grid-cols-7', className)}>
       {daysData.map((day) => (
-        <div key={day} className="p-3 text-right text-muted-foreground text-xs">
+        <div className="p-3 text-right text-muted-foreground text-xs" key={day}>
           {day}
         </div>
       ))}

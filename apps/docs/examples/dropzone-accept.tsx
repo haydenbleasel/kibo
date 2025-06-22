@@ -15,8 +15,8 @@ const Example = () => {
     <Dropzone
       accept={{ 'image/*': [] }}
       onDrop={handleDrop}
-      src={files}
       onError={console.error}
+      src={files}
     >
       <DropzoneEmptyState />
       <DropzoneContent />

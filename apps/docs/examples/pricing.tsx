@@ -1,6 +1,5 @@
 'use client';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import NumberFlow from '@number-flow/react';
 import { Badge } from '@repo/shadcn-ui/components/ui/badge';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
@@ -13,9 +12,9 @@ import {
   CardTitle,
 } from '@repo/shadcn-ui/components/ui/card';
 import { cn } from '@repo/shadcn-ui/lib/utils';
-import { BadgeCheck } from 'lucide-react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BadgeCheck } from 'lucide-react';
 import { useState } from 'react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const plans = [
   {
@@ -98,11 +97,11 @@ const Example = () => {
         <div className="mt-8 grid w-full max-w-4xl gap-4 lg:grid-cols-3">
           {plans.map((plan) => (
             <Card
-              key={plan.id}
               className={cn(
                 'relative w-full text-left',
                 plan.popular && 'ring-2 ring-primary'
               )}
+              key={plan.id}
             >
               {plan.popular && (
                 <Badge className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-1/2 rounded-full">
@@ -141,8 +140,8 @@ const Example = () => {
               <CardContent className="grid gap-2">
                 {plan.features.map((feature, index) => (
                   <div
-                    key={index}
                     className="flex items-center gap-2 text-muted-foreground text-sm"
+                    key={index}
                   >
                     <BadgeCheck className="h-4 w-4" />
                     {feature}
@@ -151,8 +150,8 @@ const Example = () => {
               </CardContent>
               <CardFooter>
                 <Button
-                  variant={plan.popular ? 'default' : 'secondary'}
                   className="w-full"
+                  variant={plan.popular ? 'default' : 'secondary'}
                 >
                   {plan.cta}
                   <ArrowRight className="ml-2 h-4 w-4" />

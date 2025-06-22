@@ -3,8 +3,8 @@ import { cn } from '@repo/shadcn-ui/lib/utils';
 import type { LucideProps } from 'lucide-react';
 import { ArrowRightIcon, icons } from 'lucide-react';
 import Link from 'next/link';
-import { createElement } from 'react';
 import type { ComponentType } from 'react';
+import { createElement } from 'react';
 import AIInputExample from '../../../../../examples/ai-chatbot';
 import CollaborativeCanvasExample from '../../../../../examples/collaborative-canvas';
 import PricingPageExample from '../../../../../examples/pricing';
@@ -67,15 +67,15 @@ const ExampleCard = ({
 
   return (
     <div
-      key={name}
       className={cn(
         'flex h-full flex-col gap-8 rounded-lg bg-secondary p-4 sm:p-8',
         className
       )}
+      key={name}
     >
       <div className="grid gap-4">
         <div className="flex items-center gap-2">
-          {Icon && <Icon size={16} className="text-muted-foreground" />}
+          {Icon && <Icon className="text-muted-foreground" size={16} />}
           {name && <p className="font-medium">{name}</p>}
         </div>
         {description && (

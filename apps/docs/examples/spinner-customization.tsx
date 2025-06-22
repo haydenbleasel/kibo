@@ -2,6 +2,6 @@
 
 import { Spinner } from '@repo/spinner';
 
-const Example = () => <Spinner size={64} className="text-blue-500" />;
+const Example = () => <Spinner className="text-blue-500" size={64} />;
 
 export default Example;

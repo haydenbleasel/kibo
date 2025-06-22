@@ -1,10 +1,10 @@
 'use client';
 
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import { createContext, useContext, useEffect, useState } from 'react';
-import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
 
 type AIBranchContextType = {
   currentBranch: number;
@@ -94,11 +94,11 @@ export const AIBranchMessages = ({ children }: AIBranchMessagesProps) => {
 
   return childrenArray.map((branch, index) => (
     <div
-      key={index}
       className={cn(
         'grid gap-2 [&>div]:pb-0',
         index === currentBranch ? 'block' : 'hidden'
       )}
+      key={index}
     >
       {branch}
     </div>
@@ -146,11 +146,6 @@ export const AIBranchPrevious = ({
 
   return (
     <Button
-      type="button"
-      variant="ghost"
-      size="icon"
-      onClick={goToPrevious}
-      disabled={totalBranches <= 1}
       aria-label="Previous branch"
       className={cn(
         'size-7 shrink-0 rounded-full text-muted-foreground transition-colors',
@@ -158,6 +153,11 @@ export const AIBranchPrevious = ({
         'disabled:pointer-events-none disabled:opacity-50',
         className
       )}
+      disabled={totalBranches <= 1}
+      onClick={goToPrevious}
+      size="icon"
+      type="button"
+      variant="ghost"
     >
       {children ?? <ChevronLeftIcon size={14} />}
     </Button>
@@ -174,11 +174,6 @@ export const AIBranchNext = ({ className, children }: AIBranchNextProps) => {
 
   return (
     <Button
-      type="button"
-      variant="ghost"
-      size="icon"
-      onClick={goToNext}
-      disabled={totalBranches <= 1}
       aria-label="Next branch"
       className={cn(
         'size-7 shrink-0 rounded-full text-muted-foreground transition-colors',
@@ -186,6 +181,11 @@ export const AIBranchNext = ({ className, children }: AIBranchNextProps) => {
         'disabled:pointer-events-none disabled:opacity-50',
         className
       )}
+      disabled={totalBranches <= 1}
+      onClick={goToNext}
+      size="icon"
+      type="button"
+      variant="ghost"
     >
       {children ?? <ChevronRightIcon size={14} />}
     </Button>

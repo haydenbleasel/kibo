@@ -1,5 +1,16 @@
 'use client';
 
+import { XIcon } from 'lucide-react';
+import {
+  type ComponentProps,
+  createContext,
+  type MouseEventHandler,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,17 +27,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { XIcon } from 'lucide-react';
-import {
-  type ComponentProps,
-  type MouseEventHandler,
-  type ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
 
 type TagsContextType = {
   value?: string;
@@ -41,7 +41,7 @@ const TagsContext = createContext<TagsContextType>({
   value: undefined,
   setValue: undefined,
   open: false,
-  onOpenChange: () => {},
+  onOpenChange: () => { },
   width: undefined,
   setWidth: undefined,
 });
@@ -100,7 +100,7 @@ export const Tags = ({
     <TagsContext.Provider
       value={{ value, setValue, open, onOpenChange, width, setWidth }}
     >
-      <Popover open={open} onOpenChange={onOpenChange}>
+      <Popover onOpenChange={onOpenChange} open={open}>
         <div className={cn('relative w-full', className)} ref={ref}>
           {children}
         </div>
@@ -118,10 +118,10 @@ export const TagsTrigger = ({
 }: TagsTriggerProps) => (
   <PopoverTrigger asChild>
     <Button
-      variant="outline"
+      className={cn('h-auto w-full justify-between p-2', className)}
       // biome-ignore lint/a11y/useSemanticElements: "Required"
       role="combobox"
-      className={cn('h-auto w-full justify-between p-2', className)}
+      variant="outline"
       {...props}
     >
       <div className="flex flex-wrap items-center gap-1">
@@ -152,11 +152,11 @@ export const TagsValue = ({
     <Badge className={cn('flex items-center gap-2', className)} {...props}>
       {children}
       {onRemove && (
-        // biome-ignore lint/nursery/noStaticElementInteractions: <explanation>
-        // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+        // biome-ignore lint/a11y/noStaticElementInteractions: "This is a clickable badge"
+        // biome-ignore lint/a11y/useKeyWithClickEvents: "This is a clickable badge"
         <div
-          onClick={handleRemove}
           className="size-auto cursor-pointer hover:text-muted-foreground"
+          onClick={handleRemove}
         >
           <XIcon size={12} />
         </div>

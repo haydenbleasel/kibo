@@ -47,7 +47,7 @@ const items: {
 
 const Example = () =>
   items.map((i) => (
-    <Ticker key={i.symbol} currency={i.currency} locale={i.locale}>
+    <Ticker currency={i.currency} key={i.symbol} locale={i.locale}>
       <TickerIcon src={i.src} symbol={i.symbol} />
       <TickerSymbol symbol={i.symbol} />
       <TickerPrice price={i.price} />

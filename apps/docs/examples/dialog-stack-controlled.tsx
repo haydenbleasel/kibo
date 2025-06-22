@@ -20,11 +20,11 @@ const Example = () => {
 
   return (
     <>
-      <Button variant="outline" onClick={() => setOpen(!open)}>
+      <Button onClick={() => setOpen(!open)} variant="outline">
         Toggle Dialog
       </Button>
 
-      <DialogStack open={open} onOpenChange={setOpen}>
+      <DialogStack onOpenChange={setOpen} open={open}>
         <DialogStackOverlay />
         <DialogStackBody>
           <DialogStackContent>

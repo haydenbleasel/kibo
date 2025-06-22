@@ -6,7 +6,7 @@ import { CheckCircleIcon } from 'lucide-react';
 const Example = () => (
   <Pill>
     <PillStatus>
-      <CheckCircleIcon size={12} className="text-emerald-500" />
+      <CheckCircleIcon className="text-emerald-500" size={12} />
       Passed
     </PillStatus>
     Approval Status

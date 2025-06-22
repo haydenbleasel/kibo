@@ -1,6 +1,5 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { faker } from '@faker-js/faker';
 import {
   KanbanBoard,
@@ -10,6 +9,7 @@ import {
   KanbanProvider,
 } from '@repo/kanban';
 import { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -54,12 +54,12 @@ const Example = () => {
 
   return (
     <KanbanProvider
-      onDataChange={setFeatures}
       columns={columns}
       data={features}
+      onDataChange={setFeatures}
     >
       {(column) => (
-        <KanbanBoard key={column.id} id={column.id}>
+        <KanbanBoard id={column.id} key={column.id}>
           <KanbanHeader>
             <div className="flex items-center gap-2">
               <div
@@ -72,10 +72,10 @@ const Example = () => {
           <KanbanCards id={column.id}>
             {(feature: (typeof features)[number]) => (
               <KanbanCard
-                key={feature.id}
-                id={feature.id}
-                name={feature.name}
                 column={column.id}
+                id={feature.id}
+                key={feature.id}
+                name={feature.name}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex flex-col gap-1">

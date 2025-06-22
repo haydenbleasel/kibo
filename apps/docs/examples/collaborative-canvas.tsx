@@ -1,6 +1,5 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AvatarStack } from '@repo/avatar-stack';
 import {
   Cursor,
@@ -12,6 +11,7 @@ import {
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const users = [
   {
@@ -113,7 +113,7 @@ const Example = () => {
   return (
     <div className="relative aspect-[4/3] size-full bg-[radial-gradient(var(--color-secondary),transparent_1px)] [background-size:16px_16px]">
       <div className="absolute top-8 right-8">
-        <AvatarStack size={32} animate>
+        <AvatarStack animate size={32}>
           {usersWithPositions.map((user) => (
             <Avatar key={user.id}>
               <AvatarImage className="mt-0 mb-0" src={user.avatar} />
@@ -124,8 +124,8 @@ const Example = () => {
       </div>
       {usersWithPositions.map((user, index) => (
         <Cursor
-          key={user.id}
           className="absolute transition-all duration-1000"
+          key={user.id}
           style={{
             top: `${user.position.y}%`,
             left: `${user.position.x}%`,
@@ -143,12 +143,12 @@ const Example = () => {
           >
             <div className="flex items-center gap-2 opacity-100!">
               <Image
-                src={user.avatar}
                 alt={user.name}
                 className="mt-0 mb-0 size-4 rounded-full"
-                width={16}
                 height={16}
+                src={user.avatar}
                 unoptimized
+                width={16}
               />
               <CursorName>{user.name}</CursorName>
             </div>

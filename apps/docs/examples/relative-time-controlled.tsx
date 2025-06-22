@@ -27,7 +27,7 @@ const Example = () => {
 
   return (
     <div className="rounded-md border bg-background p-4">
-      <RelativeTime time={time} onTimeChange={setTime}>
+      <RelativeTime onTimeChange={setTime} time={time}>
         {timezones.map(({ zone, label }) => (
           <RelativeTimeZone key={zone} zone={zone}>
             <RelativeTimeZoneLabel>{label}</RelativeTimeZoneLabel>

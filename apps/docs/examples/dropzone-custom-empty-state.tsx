@@ -13,7 +13,7 @@ const Example = () => {
   };
 
   return (
-    <Dropzone onDrop={handleDrop} src={files} onError={console.error}>
+    <Dropzone onDrop={handleDrop} onError={console.error} src={files}>
       <DropzoneEmptyState>
         <div className="flex w-full items-center gap-4 p-8">
           <div className="flex size-16 items-center justify-center rounded-lg bg-muted text-muted-foreground">

@@ -69,39 +69,39 @@ export const Preview = async ({
         className
       )}
     >
-      <Tabs defaultValue="preview" className="size-full gap-0">
+      <Tabs className="size-full gap-0" defaultValue="preview">
         <TabsList className="w-full rounded-none border-b">
           <TabsTrigger value="source">
-            <BoxIcon size={16} className="text-muted-foreground" />
+            <BoxIcon className="text-muted-foreground" size={16} />
             Source
           </TabsTrigger>
           <TabsTrigger value="code">
-            <CodeIcon size={16} className="text-muted-foreground" />
+            <CodeIcon className="text-muted-foreground" size={16} />
             Code
           </TabsTrigger>
           <TabsTrigger value="preview">
-            <EyeIcon size={16} className="text-muted-foreground" />
+            <EyeIcon className="text-muted-foreground" size={16} />
             Preview
           </TabsTrigger>
         </TabsList>
         <TabsContent
-          value="source"
           className="not-prose size-full overflow-y-auto bg-background"
+          value="source"
         >
           <PreviewSource source={sourceComponents} />
         </TabsContent>
         <TabsContent
-          value="code"
           className="size-full overflow-y-auto bg-background"
+          value="code"
         >
-          <PreviewCode code={parsedCode} language="tsx" filename="index.tsx" />
+          <PreviewCode code={parsedCode} filename="index.tsx" language="tsx" />
         </TabsContent>
         <TabsContent
-          value="preview"
           className={cn(
             'not-fumadocs-codeblock size-full',
             type === 'component' ? 'overflow-hidden' : 'overflow-auto'
           )}
+          value="preview"
         >
           {type === 'block' ? (
             <Component />

@@ -1,14 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { cn } from '@/lib/utils';
 import {
   type IconType,
   SiAstro,
@@ -107,6 +98,16 @@ import {
   type CodeOptionsMultipleThemes,
   codeToHtml,
 } from 'shiki';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { cn } from '@/lib/utils';
+
 export type { BundledLanguage } from 'shiki';
 
 const filenameIconMap = {
@@ -419,7 +420,7 @@ export type CodeBlockSelectProps = ComponentProps<typeof Select>;
 export const CodeBlockSelect = (props: CodeBlockSelectProps) => {
   const { value, onValueChange } = useContext(CodeBlockContext);
 
-  return <Select value={value} onValueChange={onValueChange} {...props} />;
+  return <Select onValueChange={onValueChange} value={value} {...props} />;
 };
 
 export type CodeBlockSelectTriggerProps = ComponentProps<typeof SelectTrigger>;
@@ -515,13 +516,13 @@ export const CodeBlockCopyButton = ({
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
-      onClick={copyToClipboard}
       className={cn('shrink-0', className)}
+      onClick={copyToClipboard}
+      size="icon"
+      variant="ghost"
       {...props}
     >
-      {children ?? <Icon size={14} className="text-muted-foreground" />}
+      {children ?? <Icon className="text-muted-foreground" size={14} />}
     </Button>
   );
 };
@@ -536,7 +537,7 @@ const CodeBlockFallback = ({ children, ...props }: CodeBlockFallbackProps) => (
           ?.toString()
           .split('\n')
           .map((line, i) => (
-            <span key={i} className="line">
+            <span className="line" key={i}>
               {line}
             </span>
           ))}
@@ -618,10 +619,11 @@ export const CodeBlockContent = ({
 
     highlight(children as string, language, themes)
       .then(setHtml)
+      // biome-ignore lint/suspicious/noConsole: "it's fine"
       .catch(console.error);
   }, [children, themes, syntaxHighlighting, language]);
 
-  if (!syntaxHighlighting || !html) {
+  if (!(syntaxHighlighting && html)) {
     return <CodeBlockFallback>{children}</CodeBlockFallback>;
   }
 

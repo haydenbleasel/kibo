@@ -1,10 +1,10 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useCallback, useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 const themes = [
   {
@@ -72,16 +72,16 @@ export const ThemeSwitcher = ({
 
         return (
           <button
-            type="button"
-            key={key}
-            className="relative h-6 w-6 rounded-full"
-            onClick={() => handleThemeClick(key as 'light' | 'dark' | 'system')}
             aria-label={label}
+            className="relative h-6 w-6 rounded-full"
+            key={key}
+            onClick={() => handleThemeClick(key as 'light' | 'dark' | 'system')}
+            type="button"
           >
             {isActive && (
               <motion.div
-                layoutId="activeTheme"
                 className="absolute inset-0 rounded-full bg-secondary"
+                layoutId="activeTheme"
                 transition={{ type: 'spring', duration: 0.5 }}
               />
             )}

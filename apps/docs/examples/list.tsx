@@ -1,7 +1,7 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { faker } from '@faker-js/faker';
+import type { DragEndEvent } from '@repo/list';
 import {
   ListGroup,
   ListHeader,
@@ -9,8 +9,8 @@ import {
   ListItems,
   ListProvider,
 } from '@repo/list';
-import type { DragEndEvent } from '@repo/list';
 import { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -69,18 +69,18 @@ const Example = () => {
   return (
     <ListProvider onDragEnd={handleDragEnd}>
       {statuses.map((status) => (
-        <ListGroup key={status.name} id={status.name}>
-          <ListHeader name={status.name} color={status.color} />
+        <ListGroup id={status.name} key={status.name}>
+          <ListHeader color={status.color} name={status.name} />
           <ListItems>
             {features
               .filter((feature) => feature.status.name === status.name)
               .map((feature, index) => (
                 <ListItem
-                  key={feature.id}
                   id={feature.id}
+                  index={index}
+                  key={feature.id}
                   name={feature.name}
                   parent={feature.status.name}
-                  index={index}
                 >
                   <div
                     className="h-2 w-2 shrink-0 rounded-full"

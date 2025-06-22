@@ -1,17 +1,16 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
 import { CropIcon, RotateCcwIcon } from 'lucide-react';
 import { Slot } from 'radix-ui';
 import {
-  type CSSProperties,
   type ComponentProps,
+  type CSSProperties,
+  createContext,
   type MouseEvent,
   type ReactNode,
   type RefObject,
   type SyntheticEvent,
-  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -21,10 +20,11 @@ import {
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
-  type ReactCropProps,
   type PercentCrop,
   type PixelCrop,
+  type ReactCropProps,
 } from 'react-image-crop';
+import { cn } from '@/lib/utils';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -183,7 +183,7 @@ export const ImageCrop = ({
   };
 
   const applyCrop = async () => {
-    if (!imgRef.current || !completedCrop) {
+    if (!(imgRef.current && completedCrop)) {
       return;
     }
 
@@ -253,20 +253,20 @@ export const ImageCropContent = ({
 
   return (
     <ReactCrop
+      className={cn('max-h-[277px] max-w-full', className)}
       crop={crop}
       onChange={handleChange}
       onComplete={handleComplete}
       style={{ ...shadcnStyle, ...style }}
-      className={cn('max-h-[277px] max-w-full', className)}
       {...reactCropProps}
     >
       {imgSrc && (
         <img
-          ref={imgRef}
           alt="crop"
-          src={imgSrc}
           className="size-full"
           onLoad={onImageLoad}
+          ref={imgRef}
+          src={imgSrc}
         />
       )}
     </ReactCrop>
@@ -299,7 +299,7 @@ export const ImageCropApply = ({
   }
 
   return (
-    <Button variant="ghost" size="icon" onClick={handleClick} {...props}>
+    <Button onClick={handleClick} size="icon" variant="ghost" {...props}>
       {children ?? <CropIcon className="size-4" />}
     </Button>
   );
@@ -331,7 +331,7 @@ export const ImageCropReset = ({
   }
 
   return (
-    <Button variant="ghost" size="icon" onClick={handleClick} {...props}>
+    <Button onClick={handleClick} size="icon" variant="ghost" {...props}>
       {children ?? <RotateCcwIcon className="size-4" />}
     </Button>
   );
@@ -358,11 +358,11 @@ export const Cropper = ({
   <ImageCrop
     file={file}
     maxImageSize={maxImageSize}
-    onCrop={onCrop}
     onChange={onChange}
     onComplete={onComplete}
+    onCrop={onCrop}
     {...props}
   >
-    <ImageCropContent style={style} className={className} />
+    <ImageCropContent className={className} style={style} />
   </ImageCrop>
 );

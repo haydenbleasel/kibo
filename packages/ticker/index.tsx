@@ -1,9 +1,9 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils';
 import type { HTMLAttributes, ReactNode } from 'react';
 import { createContext, memo, useContext, useMemo } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { cn } from '@/lib/utils';
 
 type TickerContextValue = {
   formatter: Intl.NumberFormat;
@@ -54,11 +54,11 @@ export const Ticker = memo(
     return (
       <TickerContext.Provider value={{ formatter }}>
         <button
-          type="button"
           className={cn(
             'inline-flex items-center gap-1.5 whitespace-nowrap align-middle',
             className
           )}
+          type="button"
           {...props}
         >
           {children}
@@ -157,14 +157,14 @@ export const TickerPriceChange = memo(
         {...props}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          role="img"
           aria-labelledby="ticker-change-icon-title"
           className={isPositiveChange ? '' : 'rotate-180'}
+          fill="currentColor"
+          height="12"
+          role="img"
+          viewBox="0 0 24 24"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <title id="ticker-change-icon-title">
             {isPositiveChange ? 'Up icon' : 'Down icon'}

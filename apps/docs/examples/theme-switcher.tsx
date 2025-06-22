@@ -7,7 +7,7 @@ const Example = () => {
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
 
   return (
-    <ThemeSwitcher defaultValue="system" value={theme} onChange={setTheme} />
+    <ThemeSwitcher defaultValue="system" onChange={setTheme} value={theme} />
   );
 };
 

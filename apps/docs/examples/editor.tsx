@@ -1,5 +1,6 @@
 'use client';
 
+import type { Editor, JSONContent } from '@repo/editor';
 import {
   EditorBubbleMenu,
   EditorCharacterCount,
@@ -42,7 +43,6 @@ import {
   EditorTableRowMenu,
   EditorTableSplitCell,
 } from '@repo/editor';
-import type { Editor, JSONContent } from '@repo/editor';
 import { useState } from 'react';
 
 const Example = () => {
@@ -328,10 +328,10 @@ const Example = () => {
 
   return (
     <EditorProvider
-      content={content}
-      placeholder="Start typing..."
       className="h-full w-full overflow-y-auto rounded-lg border bg-background p-4"
+      content={content}
       onUpdate={handleUpdate}
+      placeholder="Start typing..."
     >
       <EditorFloatingMenu>
         <EditorNodeHeading1 hideName />

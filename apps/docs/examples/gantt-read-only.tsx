@@ -101,12 +101,12 @@ const Example = () => {
   );
 
   return (
-    <GanttProvider range="monthly" zoom={100} className="border">
+    <GanttProvider className="border" range="monthly" zoom={100}>
       <GanttSidebar>
         {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
           <GanttSidebarGroup key={group} name={group}>
             {features.map((feature) => (
-              <GanttSidebarItem key={feature.id} feature={feature} />
+              <GanttSidebarItem feature={feature} key={feature.id} />
             ))}
           </GanttSidebarGroup>
         ))}

@@ -34,7 +34,7 @@ const Example = () => {
   const activeCommand = commands.find((command) => command.label === value);
 
   return (
-    <Snippet value={value} onValueChange={setValue}>
+    <Snippet onValueChange={setValue} value={value}>
       <SnippetHeader>
         <SnippetTabsList>
           {commands.map((command) => (
@@ -45,7 +45,6 @@ const Example = () => {
         </SnippetTabsList>
         {activeCommand && (
           <SnippetCopyButton
-            value={activeCommand.code}
             onCopy={() =>
               console.log(`Copied "${activeCommand.code}" to clipboard`)
             }
@@ -54,6 +53,7 @@ const Example = () => {
                 `Failed to copy "${activeCommand.code}" to clipboard`
               )
             }
+            value={activeCommand.code}
           />
         )}
       </SnippetHeader>

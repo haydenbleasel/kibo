@@ -1,19 +1,5 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
-import {
-  DndContext,
-  DragOverlay,
-  KeyboardSensor,
-  MouseSensor,
-  TouchSensor,
-  closestCenter,
-  useDroppable,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
 import type {
   Announcements,
   DndContextProps,
@@ -21,17 +7,31 @@ import type {
   DragOverEvent,
   DragStartEvent,
 } from '@dnd-kit/core';
-import { SortableContext, arrayMove, useSortable } from '@dnd-kit/sortable';
+import {
+  closestCenter,
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useDroppable,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import {
+  createContext,
   type HTMLAttributes,
   type ReactNode,
-  createContext,
   useContext,
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
 import tunnel from 'tunnel-rat';
+import { Card } from '@/components/ui/card';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
 
 const t = tunnel();
 
@@ -236,7 +236,7 @@ export const KanbanProvider = <
     const activeItem = data.find((item) => item.id === active.id);
     const overItem = data.find((item) => item.id === over.id);
 
-    if (!activeItem || !overItem) {
+    if (!(activeItem && overItem)) {
       return;
     }
 
@@ -306,12 +306,12 @@ export const KanbanProvider = <
   return (
     <KanbanContext.Provider value={{ columns, data, activeCardId }}>
       <DndContext
-        sensors={sensors}
+        accessibility={{ announcements }}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
-        onDragStart={handleDragStart}
         onDragOver={handleDragOver}
-        accessibility={{ announcements }}
+        onDragStart={handleDragStart}
+        sensors={sensors}
         {...props}
       >
         <div

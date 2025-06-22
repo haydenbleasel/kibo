@@ -1,16 +1,16 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { type LucideIcon, XIcon } from 'lucide-react';
 import {
   type ComponentProps,
+  createContext,
   type HTMLAttributes,
   type MouseEventHandler,
-  createContext,
   useContext,
 } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 type BannerContextProps = {
   show: boolean;
@@ -99,12 +99,12 @@ export const BannerAction = ({
   ...props
 }: BannerActionProps) => (
   <Button
-    variant={variant}
-    size={size}
     className={cn(
       'shrink-0 bg-transparent hover:bg-background/10 hover:text-background',
       className
     )}
+    size={size}
+    variant={variant}
     {...props}
   />
 );
@@ -127,13 +127,13 @@ export const BannerClose = ({
 
   return (
     <Button
-      variant={variant}
-      size={size}
-      onClick={handleClick}
       className={cn(
         'shrink-0 bg-transparent hover:bg-background/10 hover:text-background',
         className
       )}
+      onClick={handleClick}
+      size={size}
+      variant={variant}
       {...props}
     >
       <XIcon size={18} />

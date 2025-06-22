@@ -24,19 +24,19 @@ const Example = () => {
 
   return (
     <Dropzone
-      onDrop={handleDrop}
-      src={files}
-      onError={console.error}
       accept={{ 'image/*': ['.png', '.jpg', '.jpeg'] }}
+      onDrop={handleDrop}
+      onError={console.error}
+      src={files}
     >
       <DropzoneEmptyState />
       <DropzoneContent>
         {filePreview && (
           <div className="h-[102px] w-full">
             <img
-              src={filePreview}
               alt="Preview"
               className="absolute top-0 left-0 h-full w-full object-cover"
+              src={filePreview}
             />
           </div>
         )}

@@ -5,7 +5,7 @@ import { Pill, PillIndicator } from '@repo/pill';
 const Example = () => (
   <>
     <Pill>
-      <PillIndicator variant="success" pulse />
+      <PillIndicator pulse variant="success" />
       Active
     </Pill>
     <Pill>

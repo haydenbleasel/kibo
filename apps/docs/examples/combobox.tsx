@@ -41,9 +41,9 @@ const frameworks = [
 const Example = () => (
   <Combobox
     data={frameworks}
-    type="framework"
     onOpenChange={(open) => console.log('Combobox is open?', open)}
     onValueChange={(newValue) => console.log('Combobox value:', newValue)}
+    type="framework"
   >
     <ComboboxTrigger />
     <ComboboxContent>

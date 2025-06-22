@@ -1,6 +1,11 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import type {
+  CodeEditorProps,
+  PreviewProps,
+  SandpackLayoutProps,
+  SandpackProviderProps,
+} from '@codesandbox/sandpack-react';
 import {
   SandpackCodeEditor,
   SandpackConsole,
@@ -8,12 +13,6 @@ import {
   SandpackLayout,
   SandpackPreview,
   SandpackProvider,
-} from '@codesandbox/sandpack-react';
-import type {
-  CodeEditorProps,
-  PreviewProps,
-  SandpackLayoutProps,
-  SandpackProviderProps,
 } from '@codesandbox/sandpack-react';
 import type {
   ButtonHTMLAttributes,
@@ -28,6 +27,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { cn } from '@/lib/utils';
 
 export type SandboxProviderProps = SandpackProviderProps;
 
@@ -158,16 +158,15 @@ export const SandboxTabsTrigger = ({
   }, [setSelectedTab, value]);
 
   return (
-    // biome-ignore lint/nursery/useAriaPropsSupportedByRole: <explanation>
     <button
-      role="tab"
       aria-selected={selectedTab === value}
-      data-state={selectedTab === value ? 'active' : 'inactive'}
-      onClick={handleClick}
       className={cn(
         'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1 font-medium text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow',
         className
       )}
+      data-state={selectedTab === value ? 'active' : 'inactive'}
+      onClick={handleClick}
+      role="tab"
       {...props}
     />
   );
@@ -186,9 +185,7 @@ export const SandboxTabsContent = ({
 
   return (
     <div
-      role="tabpanel"
       aria-hidden={selectedTab !== value}
-      data-state={selectedTab === value ? 'active' : 'inactive'}
       className={cn(
         'flex-1 overflow-y-auto ring-offset-background transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         selectedTab === value
@@ -196,6 +193,8 @@ export const SandboxTabsContent = ({
           : 'pointer-events-none absolute h-0 w-0 opacity-0',
         className
       )}
+      data-state={selectedTab === value ? 'active' : 'inactive'}
+      role="tabpanel"
       {...props}
     />
   );
@@ -245,8 +244,8 @@ export const SandboxFileExplorer = ({
   ...props
 }: SandboxFileExplorerProps): ReactNode => (
   <SandpackFileExplorer
-    className={cn('h-full', className)}
     autoHiddenFiles={autoHiddenFiles}
+    className={cn('h-full', className)}
     {...props}
   />
 );

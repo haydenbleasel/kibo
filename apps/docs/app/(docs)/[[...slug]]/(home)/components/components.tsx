@@ -17,7 +17,7 @@ import {
 } from '@repo/marquee';
 import { Button } from '@repo/shadcn-ui/components/ui/button';
 import { cn } from '@repo/shadcn-ui/lib/utils';
-import { ArrowRightIcon, type LucideProps, icons } from 'lucide-react';
+import { ArrowRightIcon, icons, type LucideProps } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type ComponentType, createElement } from 'react';
@@ -62,11 +62,11 @@ const examples = [
       <ImageZoom>
         <Image
           alt="Placeholder image"
-          src="https://images.unsplash.com/photo-1704895644430-4236a6140656?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          width={1200}
-          height={1200}
-          unoptimized
           className="h-auto w-full rounded-xl border"
+          height={1200}
+          src="https://images.unsplash.com/photo-1704895644430-4236a6140656?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          unoptimized
+          width={1200}
         />
       </ImageZoom>
     ),
@@ -93,11 +93,11 @@ const examples = [
     description: dropzone?.data.description,
     component: () => (
       <Dropzone
-        maxSize={1024 * 1024 * 10}
-        minSize={1024}
-        maxFiles={10}
         accept={{ 'image/*': [] }}
         className="aspect-square shadow-none"
+        maxFiles={10}
+        maxSize={1024 * 1024 * 10}
+        minSize={1024}
       >
         <DropzoneEmptyState />
         <DropzoneContent />
@@ -115,14 +115,14 @@ const examples = [
           <MarqueeFade side="right" />
           <MarqueeContent>
             {new Array(10).fill(null).map((_, index) => (
-              <MarqueeItem key={index} className="h-24 w-24">
+              <MarqueeItem className="h-24 w-24" key={index}>
                 <Image
-                  src={`https://placehold.co/96x96?random=${index}`}
                   alt={`Placeholder ${index}`}
                   className="overflow-hidden rounded-full"
-                  width={96}
                   height={96}
+                  src={`https://placehold.co/96x96?random=${index}`}
                   unoptimized
+                  width={96}
                 />
               </MarqueeItem>
             ))}
@@ -156,15 +156,15 @@ const ExampleCard = ({
 
   return (
     <div
-      key={name}
       className={cn(
         'flex h-full flex-col gap-8 rounded-lg bg-secondary p-4 sm:p-8',
         className
       )}
+      key={name}
     >
       <div className="grid gap-4">
         <div className="flex items-center gap-2">
-          {Icon && <Icon size={16} className="text-muted-foreground" />}
+          {Icon && <Icon className="text-muted-foreground" size={16} />}
           {name && <p className="font-medium">{name}</p>}
         </div>
         {description && (

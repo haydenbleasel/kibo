@@ -55,7 +55,7 @@ const Example = () => {
 
   return (
     <AIInput onSubmit={handleSubmit}>
-      <AIInputTextarea value={text} onChange={(e) => setText(e.target.value)} />
+      <AIInputTextarea onChange={(e) => setText(e.target.value)} value={text} />
       <AIInputToolbar>
         <AIInputTools>
           <AIInputButton>
@@ -68,7 +68,7 @@ const Example = () => {
             <GlobeIcon size={16} />
             <span>Search</span>
           </AIInputButton>
-          <AIInputModelSelect value={model} onValueChange={setModel}>
+          <AIInputModelSelect onValueChange={setModel} value={model}>
             <AIInputModelSelectTrigger>
               <AIInputModelSelectValue />
             </AIInputModelSelectTrigger>
@@ -76,11 +76,11 @@ const Example = () => {
               {models.map((model) => (
                 <AIInputModelSelectItem key={model.id} value={model.id}>
                   <img
-                    src={`https://img.logo.dev/${model.provider}?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
                     alt={model.provider}
                     className="inline-flex size-4"
-                    width={16}
                     height={16}
+                    src={`https://img.logo.dev/${model.provider}?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
+                    width={16}
                   />
                   {model.name}
                 </AIInputModelSelectItem>
@@ -88,7 +88,7 @@ const Example = () => {
             </AIInputModelSelectContent>
           </AIInputModelSelect>
         </AIInputTools>
-        <AIInputSubmit status={status} disabled={!text} />
+        <AIInputSubmit disabled={!text} status={status} />
       </AIInputToolbar>
     </AIInput>
   );

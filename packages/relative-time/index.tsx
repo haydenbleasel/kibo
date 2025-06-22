@@ -1,13 +1,13 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import {
-  type HTMLAttributes,
   createContext,
+  type HTMLAttributes,
   useContext,
   useEffect,
 } from 'react';
+import { cn } from '@/lib/utils';
 
 const formatDate = (
   date: Date,
@@ -79,7 +79,7 @@ export const RelativeTime = ({
 
   useEffect(() => {
     if (controlledTime) {
-      return undefined;
+      return;
     }
 
     const interval = setInterval(() => {

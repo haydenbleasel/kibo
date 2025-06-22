@@ -53,11 +53,11 @@ const Example = () => {
       <AIBranch defaultBranch={0} onBranchChange={handleBranchChange}>
         <AIBranchMessages>
           {userMessages.map((message) => (
-            <AIMessage key={message.id} from="user">
+            <AIMessage from="user" key={message.id}>
               <AIMessageContent>{message.content}</AIMessageContent>
               <AIMessageAvatar
-                src="https://github.com/haydenbleasel.png"
                 name="Hayden Bleasel"
+                src="https://github.com/haydenbleasel.png"
               />
             </AIMessage>
           ))}
@@ -72,9 +72,9 @@ const Example = () => {
       <AIBranch defaultBranch={0} onBranchChange={handleBranchChange}>
         <AIBranchMessages>
           {assistantMessages.map((message) => (
-            <AIMessage key={message.id} from="assistant">
+            <AIMessage from="assistant" key={message.id}>
               <AIMessageContent>{message.content}</AIMessageContent>
-              <AIMessageAvatar src="https://github.com/openai.png" name="AI" />
+              <AIMessageAvatar name="AI" src="https://github.com/openai.png" />
             </AIMessage>
           ))}
         </AIBranchMessages>

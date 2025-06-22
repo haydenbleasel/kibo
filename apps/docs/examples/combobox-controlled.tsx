@@ -46,11 +46,11 @@ const Example = () => {
   return (
     <Combobox
       data={plants}
-      type="plant"
-      open={open}
       onOpenChange={setOpen}
-      value={value}
       onValueChange={setValue}
+      open={open}
+      type="plant"
+      value={value}
     >
       <ComboboxTrigger />
       <ComboboxContent>

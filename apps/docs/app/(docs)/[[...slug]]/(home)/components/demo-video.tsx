@@ -17,13 +17,6 @@ type DemoVideoProps = {
 export const DemoVideo = ({ url }: DemoVideoProps) => (
   <div className="pointer-events-none relative aspect-video w-full select-none overflow-hidden sm:rounded-lg sm:ring-1 sm:ring-border">
     <ReactPlayer
-      url={url}
-      width="100%"
-      height="100%"
-      playing
-      loop
-      playsinline
-      muted
       config={{
         playerVars: {
           rel: 0,
@@ -31,10 +24,17 @@ export const DemoVideo = ({ url }: DemoVideoProps) => (
           controls: 0,
         },
       }}
+      height="100%"
+      loop
+      muted
+      playing
+      playsinline
       style={{
         position: 'absolute',
         inset: 0,
       }}
+      url={url}
+      width="100%"
     />
   </div>
 );

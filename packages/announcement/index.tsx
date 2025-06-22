@@ -1,6 +1,6 @@
+import type { ComponentProps, HTMLAttributes } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import type { ComponentProps, HTMLAttributes } from 'react';
 
 export type AnnouncementProps = ComponentProps<typeof Badge> & {
   themed?: boolean;
@@ -13,13 +13,13 @@ export const Announcement = ({
   ...props
 }: AnnouncementProps) => (
   <Badge
-    variant={variant}
     className={cn(
       'group max-w-full gap-2 rounded-full bg-background px-3 py-0.5 font-medium shadow-sm transition-all',
       'hover:shadow-md',
       themed && 'announcement-themed border-foreground/5',
       className
     )}
+    variant={variant}
     {...props}
   />
 );

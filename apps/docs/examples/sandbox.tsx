@@ -37,13 +37,13 @@ const Example = () => (
             Console
           </SandboxTabsTrigger>
         </SandboxTabsList>
-        <SandboxTabsContent value="code" className="overflow-hidden">
+        <SandboxTabsContent className="overflow-hidden" value="code">
           <ResizablePanelGroup direction="horizontal">
             <ResizablePanel
-              defaultSize={25}
-              minSize={20}
-              maxSize={40}
               className="overflow-y-auto"
+              defaultSize={25}
+              maxSize={40}
+              minSize={20}
             >
               <SandboxFileExplorer />
             </ResizablePanel>

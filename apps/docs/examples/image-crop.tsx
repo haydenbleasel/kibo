@@ -32,10 +32,10 @@ const Example = () => {
   if (!selectedFile) {
     return (
       <Input
-        type="file"
         accept="image/*"
-        onChange={handleFileChange}
         className="w-fit"
+        onChange={handleFileChange}
+        type="file"
       />
     );
   }
@@ -44,13 +44,13 @@ const Example = () => {
     return (
       <div className="space-y-4">
         <Image
-          src={croppedImage}
           alt="Cropped"
-          width={100}
           height={100}
+          src={croppedImage}
           unoptimized
+          width={100}
         />
-        <Button type="button" onClick={handleReset} variant="ghost" size="icon">
+        <Button onClick={handleReset} size="icon" type="button" variant="ghost">
           <XIcon className="size-4" />
         </Button>
       </div>
@@ -60,8 +60,8 @@ const Example = () => {
   return (
     <div className="space-y-4">
       <ImageCrop
-        file={selectedFile}
         aspect={1}
+        file={selectedFile}
         maxImageSize={1024 * 1024} // 1MB
         onChange={console.log}
         onComplete={console.log}
@@ -72,10 +72,10 @@ const Example = () => {
           <ImageCropApply />
           <ImageCropReset />
           <Button
-            type="button"
             onClick={handleReset}
-            variant="ghost"
             size="icon"
+            type="button"
+            variant="ghost"
           >
             <XIcon className="size-4" />
           </Button>

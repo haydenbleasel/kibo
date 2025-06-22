@@ -37,9 +37,9 @@ const messages: {
 const Example = () => (
   <>
     {messages.map(({ content, ...message }, index) => (
-      <AIMessage key={index} from={message.from}>
+      <AIMessage from={message.from} key={index}>
         <AIMessageContent>{content}</AIMessageContent>
-        <AIMessageAvatar src={message.avatar} name={message.name} />
+        <AIMessageAvatar name={message.name} src={message.avatar} />
       </AIMessage>
     ))}
   </>

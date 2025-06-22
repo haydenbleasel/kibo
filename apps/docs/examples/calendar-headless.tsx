@@ -30,7 +30,7 @@ const Example = () => (
   <CalendarProvider>
     <CalendarHeader />
     <CalendarBody features={exampleFeatures}>
-      {({ feature }) => <CalendarItem key={feature.id} feature={feature} />}
+      {({ feature }) => <CalendarItem feature={feature} key={feature.id} />}
     </CalendarBody>
   </CalendarProvider>
 );

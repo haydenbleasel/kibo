@@ -1,13 +1,13 @@
 'use client';
 
+import { BookIcon, ChevronDownIcon } from 'lucide-react';
+import type { ComponentProps } from 'react';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { cn } from '@/lib/utils';
-import { BookIcon, ChevronDownIcon } from 'lucide-react';
-import type { ComponentProps } from 'react';
 
 export type AISourcesProps = ComponentProps<'div'>;
 
@@ -61,10 +61,10 @@ export const AISource = ({
   ...props
 }: AISourceProps) => (
   <a
-    href={href}
     className="flex items-center gap-2"
-    target="_blank"
+    href={href}
     rel="noreferrer"
+    target="_blank"
     {...props}
   >
     {children ?? (

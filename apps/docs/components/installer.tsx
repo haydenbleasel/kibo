@@ -35,27 +35,26 @@ export const Installer = ({ packageName }: InstallerProps) => {
 
   return (
     <Snippet
-      value={value}
-      onValueChange={setValue}
       className="not-prose shiki shiki-themes github-light github-dark"
+      onValueChange={setValue}
+      value={value}
     >
       <SnippetHeader>
         <SnippetTabsList>
           {Object.entries(commands).map(([key, command]) => (
             <SnippetTabsTrigger key={key} value={key}>
               <Image
-                src={command.image}
                 alt=""
-                width={14}
-                height={14}
                 className="dark:invert"
+                height={14}
+                src={command.image}
+                width={14}
               />
               {key}
             </SnippetTabsTrigger>
           ))}
         </SnippetTabsList>
         <SnippetCopyButton
-          value={commands[value as keyof typeof commands].code}
           onCopy={() => {
             toast.success('Copied to clipboard');
             track('Copy installer code', {
@@ -64,6 +63,7 @@ export const Installer = ({ packageName }: InstallerProps) => {
             });
           }}
           onError={() => toast.error('Failed to copy to clipboard')}
+          value={commands[value as keyof typeof commands].code}
         />
       </SnippetHeader>
       {Object.entries(commands).map(([key, command]) => (

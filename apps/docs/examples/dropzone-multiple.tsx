@@ -13,10 +13,10 @@ const Example = () => {
 
   return (
     <Dropzone
-      onDrop={handleDrop}
-      src={files}
       maxFiles={3}
+      onDrop={handleDrop}
       onError={console.error}
+      src={files}
     >
       <DropzoneEmptyState />
       <DropzoneContent />

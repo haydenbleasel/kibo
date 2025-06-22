@@ -134,7 +134,7 @@ const Example = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form className="space-y-8" onSubmit={handleSubmit}>
         {/* Basic Information */}
         <div className="space-y-4">
           <h2 className="flex items-center gap-2 font-semibold text-xl">
@@ -175,7 +175,7 @@ const Example = () => {
             <UsersIcon className="size-5" />
             Event Type
           </h2>
-          <Choicebox value={eventType} onValueChange={setEventType}>
+          <Choicebox onValueChange={setEventType} value={eventType}>
             {eventTypes.map((type) => (
               <ChoiceboxItem key={type.value} value={type.value}>
                 <ChoiceboxItemHeader>
@@ -200,9 +200,9 @@ const Example = () => {
           </h2>
           <Combobox
             data={venues}
+            onValueChange={setVenue}
             type="venue"
             value={venue}
-            onValueChange={setVenue}
           >
             <ComboboxTrigger className="w-full" />
             <ComboboxContent>
@@ -228,15 +228,15 @@ const Example = () => {
             Select Date
           </h2>
           <MiniCalendar
-            value={selectedDate}
-            onValueChange={setSelectedDate}
-            days={7}
             className="w-fit"
+            days={7}
+            onValueChange={setSelectedDate}
+            value={selectedDate}
           >
             <MiniCalendarNavigation direction="prev" />
             <MiniCalendarDays>
               {(date) => (
-                <MiniCalendarDay key={date.toISOString()} date={date} />
+                <MiniCalendarDay date={date} key={date.toISOString()} />
               )}
             </MiniCalendarDays>
             <MiniCalendarNavigation direction="next" />

@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { UploadIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { createContext, useContext } from 'react';
-import { useDropzone } from 'react-dropzone';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 type DropzoneContextType = {
   src?: File[];
@@ -82,14 +82,14 @@ export const Dropzone = ({
       value={{ src, accept, maxSize, minSize, maxFiles }}
     >
       <Button
-        type="button"
-        disabled={disabled}
-        variant="outline"
         className={cn(
           'relative h-auto w-full flex-col overflow-hidden p-8',
           isDragActive && 'outline-none ring-1 ring-ring',
           className
         )}
+        disabled={disabled}
+        type="button"
+        variant="outline"
         {...getRootProps()}
       >
         <input {...getInputProps()} disabled={disabled} />

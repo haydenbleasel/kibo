@@ -12,13 +12,13 @@ const Example = () => (
     <Marquee>
       <MarqueeFade side="left" />
       <MarqueeFade side="right" />
-      <MarqueeContent loop={1} autoFill={false} pauseOnHover={false}>
+      <MarqueeContent autoFill={false} loop={1} pauseOnHover={false}>
         {new Array(10).fill(null).map((_, index) => (
-          <MarqueeItem key={index} className="h-16 w-16">
+          <MarqueeItem className="h-16 w-16" key={index}>
             <img
-              src={`https://placehold.co/64x64?random=${index}`}
               alt={`Placeholder ${index}`}
               className="overflow-hidden rounded-full"
+              src={`https://placehold.co/64x64?random=${index}`}
             />
           </MarqueeItem>
         ))}

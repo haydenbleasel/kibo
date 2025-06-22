@@ -1,10 +1,10 @@
-import { cn } from '@/lib/utils';
 import {
   LoaderCircleIcon,
   LoaderIcon,
   LoaderPinwheelIcon,
   type LucideProps,
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 type SpinnerVariantProps = Omit<SpinnerProps, 'variant'>;
 
@@ -44,43 +44,43 @@ const CircleFilled = ({
 const Ellipsis = ({ size = 24, ...props }: SpinnerVariantProps) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
       height={size}
       viewBox="0 0 24 24"
+      width={size}
+      xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <title>Loading...</title>
-      <circle cx="4" cy="12" r="2" fill="currentColor">
+      <circle cx="4" cy="12" fill="currentColor" r="2">
         <animate
-          id="ellipsis1"
+          attributeName="cy"
           begin="0;ellipsis3.end+0.25s"
-          attributeName="cy"
           calcMode="spline"
           dur="0.6s"
-          values="12;6;12"
+          id="ellipsis1"
           keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          values="12;6;12"
         />
       </circle>
-      <circle cx="12" cy="12" r="2" fill="currentColor">
+      <circle cx="12" cy="12" fill="currentColor" r="2">
         <animate
+          attributeName="cy"
           begin="ellipsis1.begin+0.1s"
-          attributeName="cy"
           calcMode="spline"
           dur="0.6s"
-          values="12;6;12"
           keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          values="12;6;12"
         />
       </circle>
-      <circle cx="20" cy="12" r="2" fill="currentColor">
+      <circle cx="20" cy="12" fill="currentColor" r="2">
         <animate
-          id="ellipsis3"
-          begin="ellipsis1.begin+0.2s"
           attributeName="cy"
+          begin="ellipsis1.begin+0.2s"
           calcMode="spline"
           dur="0.6s"
-          values="12;6;12"
+          id="ellipsis3"
           keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          values="12;6;12"
         />
       </circle>
     </svg>
@@ -89,11 +89,11 @@ const Ellipsis = ({ size = 24, ...props }: SpinnerVariantProps) => {
 
 const Ring = ({ size = 24, ...props }: SpinnerVariantProps) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
     height={size}
-    viewBox="0 0 44 44"
     stroke="currentColor"
+    viewBox="0 0 44 44"
+    width={size}
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <title>Loading...</title>
@@ -102,44 +102,44 @@ const Ring = ({ size = 24, ...props }: SpinnerVariantProps) => (
         <animate
           attributeName="r"
           begin="0s"
-          dur="1.8s"
-          values="1; 20"
           calcMode="spline"
-          keyTimes="0; 1"
+          dur="1.8s"
           keySplines="0.165, 0.84, 0.44, 1"
+          keyTimes="0; 1"
           repeatCount="indefinite"
+          values="1; 20"
         />
         <animate
           attributeName="stroke-opacity"
           begin="0s"
-          dur="1.8s"
-          values="1; 0"
           calcMode="spline"
-          keyTimes="0; 1"
+          dur="1.8s"
           keySplines="0.3, 0.61, 0.355, 1"
+          keyTimes="0; 1"
           repeatCount="indefinite"
+          values="1; 0"
         />
       </circle>
       <circle cx="22" cy="22" r="1">
         <animate
           attributeName="r"
           begin="-0.9s"
-          dur="1.8s"
-          values="1; 20"
           calcMode="spline"
-          keyTimes="0; 1"
+          dur="1.8s"
           keySplines="0.165, 0.84, 0.44, 1"
+          keyTimes="0; 1"
           repeatCount="indefinite"
+          values="1; 20"
         />
         <animate
           attributeName="stroke-opacity"
           begin="-0.9s"
-          dur="1.8s"
-          values="1; 0"
           calcMode="spline"
-          keyTimes="0; 1"
+          dur="1.8s"
           keySplines="0.3, 0.61, 0.355, 1"
+          keyTimes="0; 1"
           repeatCount="indefinite"
+          values="1; 0"
         />
       </circle>
     </g>
@@ -148,10 +148,10 @@ const Ring = ({ size = 24, ...props }: SpinnerVariantProps) => (
 
 const Bars = ({ size = 24, ...props }: SpinnerVariantProps) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
     height={size}
     viewBox="0 0 24 24"
+    width={size}
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <title>Loading...</title>
@@ -180,48 +180,48 @@ const Bars = ({ size = 24, ...props }: SpinnerVariantProps) => (
     `}</style>
     <rect
       className="spinner-bar"
+      fill="currentColor"
+      height="22"
+      width="6"
       x="1"
       y="1"
-      width="6"
-      height="22"
-      fill="currentColor"
     />
     <rect
       className="spinner-bar spinner-bars-2"
+      fill="currentColor"
+      height="22"
+      width="6"
       x="9"
       y="1"
-      width="6"
-      height="22"
-      fill="currentColor"
     />
     <rect
       className="spinner-bar spinner-bars-3"
+      fill="currentColor"
+      height="22"
+      width="6"
       x="17"
       y="1"
-      width="6"
-      height="22"
-      fill="currentColor"
     />
   </svg>
 );
 
 const Infinite = ({ size = 24, ...props }: SpinnerVariantProps) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
     height={size}
-    viewBox="0 0 100 100"
     preserveAspectRatio="xMidYMid"
+    viewBox="0 0 100 100"
+    width={size}
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <title>Loading...</title>
     <path
+      d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z"
       fill="none"
       stroke="currentColor"
-      strokeWidth="10"
       strokeDasharray="205.271142578125 51.317785644531256"
-      d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z"
       strokeLinecap="round"
+      strokeWidth="10"
       style={{
         transform: 'scale(0.8)',
         transformOrigin: '50px 50px',
@@ -229,9 +229,9 @@ const Infinite = ({ size = 24, ...props }: SpinnerVariantProps) => (
     >
       <animate
         attributeName="stroke-dashoffset"
-        repeatCount="indefinite"
         dur="2s"
         keyTimes="0;1"
+        repeatCount="indefinite"
         values="0;256.58892822265625"
       />
     </path>

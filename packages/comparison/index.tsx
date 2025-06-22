@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { GripVerticalIcon } from 'lucide-react';
 import {
   type MotionValue,
@@ -11,14 +10,15 @@ import {
 } from 'motion/react';
 import {
   type ComponentProps,
+  createContext,
   type HTMLAttributes,
   type MouseEventHandler,
   type ReactNode,
   type TouchEventHandler,
-  createContext,
   useContext,
   useState,
 } from 'react';
+import { cn } from '@/lib/utils';
 
 type ImageComparisonContextType = {
   sliderPosition: number;
@@ -115,23 +115,23 @@ export const Comparison = ({
       value={{ sliderPosition, setSliderPosition, motionSliderPosition, mode }}
     >
       <div
+        aria-label="Comparison slider"
+        aria-valuemax={100}
+        aria-valuemin={0}
+        aria-valuenow={sliderPosition}
         className={cn(
           'relative isolate w-full select-none overflow-hidden',
           className
         )}
-        onMouseMove={handleMouseDrag}
         onMouseDown={handleDragStart}
-        onMouseUp={handleDragEnd}
         onMouseLeave={handleDragEnd}
+        onMouseMove={handleMouseDrag}
+        onMouseUp={handleDragEnd}
+        onTouchEnd={handleDragEnd}
         onTouchMove={handleTouchDrag}
         onTouchStart={handleDragStart}
-        onTouchEnd={handleDragEnd}
         role="slider"
         tabIndex={0}
-        aria-label="Comparison slider"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={sliderPosition}
         {...props}
       />
     </ImageComparisonContext.Provider>
@@ -159,12 +159,12 @@ export const ComparisonItem = ({
 
   return (
     <motion.div
+      aria-hidden="true"
       className={cn('absolute inset-0 h-full w-full object-cover', className)}
+      role="img"
       style={{
         clipPath: position === 'left' ? leftClipPath : rightClipPath,
       }}
-      role="img"
-      aria-hidden="true"
       {...props}
     />
   );
@@ -184,14 +184,14 @@ export const ComparisonHandle = ({
 
   return (
     <motion.div
+      aria-hidden="true"
       className={cn(
         '-translate-x-1/2 absolute top-0 z-50 flex h-full w-10 items-center justify-center',
         mode === 'drag' && 'cursor-grab active:cursor-grabbing',
         className
       )}
-      style={{ left }}
       role="presentation"
-      aria-hidden="true"
+      style={{ left }}
       {...props}
     >
       {children ?? (

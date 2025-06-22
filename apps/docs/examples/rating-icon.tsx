@@ -6,7 +6,7 @@ import { HeartIcon } from 'lucide-react';
 const Example = () => (
   <Rating defaultValue={3}>
     {Array.from({ length: 5 }).map((_, index) => (
-      <RatingButton key={index} icon={<HeartIcon />} />
+      <RatingButton icon={<HeartIcon />} key={index} />
     ))}
   </Rating>
 );

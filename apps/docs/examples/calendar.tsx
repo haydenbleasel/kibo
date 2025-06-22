@@ -48,13 +48,13 @@ const Example = () => (
     <CalendarDate>
       <CalendarDatePicker>
         <CalendarMonthPicker />
-        <CalendarYearPicker start={earliestYear} end={latestYear} />
+        <CalendarYearPicker end={latestYear} start={earliestYear} />
       </CalendarDatePicker>
       <CalendarDatePagination />
     </CalendarDate>
     <CalendarHeader />
     <CalendarBody features={exampleFeatures}>
-      {({ feature }) => <CalendarItem key={feature.id} feature={feature} />}
+      {({ feature }) => <CalendarItem feature={feature} key={feature.id} />}
     </CalendarBody>
   </CalendarProvider>
 );

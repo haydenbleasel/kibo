@@ -62,7 +62,7 @@ const Example = () => {
     <AIConversation className="relative size-full rounded-lg border">
       <AIConversationContent>
         {visibleMessages.map((message, index) => (
-          <AIMessage key={index} from={index % 2 === 0 ? 'user' : 'assistant'}>
+          <AIMessage from={index % 2 === 0 ? 'user' : 'assistant'} key={index}>
             <AIMessageContent>{message}</AIMessageContent>
           </AIMessage>
         ))}

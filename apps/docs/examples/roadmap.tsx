@@ -1,13 +1,5 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from '@/components/ui/context-menu';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { faker } from '@faker-js/faker';
 import {
   CalendarBody,
@@ -49,6 +41,7 @@ import {
   ListItems,
   ListProvider,
 } from '@repo/list';
+import type { ColumnDef } from '@repo/table';
 import {
   TableBody,
   TableCell,
@@ -59,18 +52,27 @@ import {
   TableProvider,
   TableRow,
 } from '@repo/table';
-import type { ColumnDef } from '@repo/table';
 import groupBy from 'lodash.groupby';
-import { ChevronRightIcon } from 'lucide-react';
 import {
   CalendarIcon,
+  ChevronRightIcon,
+  EyeIcon,
   GanttChartSquareIcon,
   KanbanSquareIcon,
+  LinkIcon,
   ListIcon,
   TableIcon,
+  TrashIcon,
 } from 'lucide-react';
-import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
 import { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -190,18 +192,18 @@ const GanttView = () => {
 
   return (
     <GanttProvider
+      className="rounded-none"
       onAddItem={handleAddFeature}
       range="monthly"
       zoom={100}
-      className="rounded-none"
     >
       <GanttSidebar>
         {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
           <GanttSidebarGroup key={group} name={group}>
             {features.map((feature) => (
               <GanttSidebarItem
-                key={feature.id}
                 feature={feature}
+                key={feature.id}
                 onSelectItem={handleViewFeature}
               />
             ))}
@@ -218,8 +220,8 @@ const GanttView = () => {
                   <ContextMenu>
                     <ContextMenuTrigger asChild>
                       <button
-                        type="button"
                         onClick={() => handleViewFeature(feature.id)}
+                        type="button"
                       >
                         <GanttFeatureItem
                           onMove={handleMoveFeature}
@@ -244,14 +246,14 @@ const GanttView = () => {
                         className="flex items-center gap-2"
                         onClick={() => handleViewFeature(feature.id)}
                       >
-                        <EyeIcon size={16} className="text-muted-foreground" />
+                        <EyeIcon className="text-muted-foreground" size={16} />
                         View feature
                       </ContextMenuItem>
                       <ContextMenuItem
                         className="flex items-center gap-2"
                         onClick={() => handleCopyLink(feature.id)}
                       >
-                        <LinkIcon size={16} className="text-muted-foreground" />
+                        <LinkIcon className="text-muted-foreground" size={16} />
                         Copy link
                       </ContextMenuItem>
                       <ContextMenuItem
@@ -299,13 +301,13 @@ const CalendarView = () => (
     <CalendarDate>
       <CalendarDatePicker>
         <CalendarMonthPicker />
-        <CalendarYearPicker start={earliestYear} end={latestYear} />
+        <CalendarYearPicker end={latestYear} start={earliestYear} />
       </CalendarDatePicker>
       <CalendarDatePagination />
     </CalendarDate>
     <CalendarHeader />
     <CalendarBody features={exampleFeatures}>
-      {({ feature }) => <CalendarItem key={feature.id} feature={feature} />}
+      {({ feature }) => <CalendarItem feature={feature} key={feature.id} />}
     </CalendarBody>
   </CalendarProvider>
 );
@@ -338,20 +340,20 @@ const ListView = () => {
   };
 
   return (
-    <ListProvider onDragEnd={handleDragEnd} className="overflow-auto">
+    <ListProvider className="overflow-auto" onDragEnd={handleDragEnd}>
       {statuses.map((status) => (
-        <ListGroup key={status.name} id={status.name}>
-          <ListHeader name={status.name} color={status.color} />
+        <ListGroup id={status.name} key={status.name}>
+          <ListHeader color={status.color} name={status.name} />
           <ListItems>
             {features
               .filter((feature) => feature.status.name === status.name)
               .map((feature, index) => (
                 <ListItem
-                  key={feature.id}
                   id={feature.id}
+                  index={index}
+                  key={feature.id}
                   name={feature.name}
                   parent={feature.status.name}
-                  index={index}
                 >
                   <div
                     className="h-2 w-2 shrink-0 rounded-full"
@@ -422,21 +424,21 @@ const KanbanView = () => {
 
   return (
     <KanbanProvider
-      onDragEnd={handleDragEnd}
       className="p-4"
       columns={statuses}
       data={features}
+      onDragEnd={handleDragEnd}
     >
       {(column) => (
-        <KanbanBoard key={column.id} id={column.id}>
+        <KanbanBoard id={column.id} key={column.id}>
           <KanbanHeader>{column.name}</KanbanHeader>
           <KanbanCards id={column.id}>
             {(feature: (typeof features)[number]) => (
               <KanbanCard
-                key={feature.id}
-                id={feature.id}
-                name={feature.name}
                 column={column.id}
+                id={feature.id}
+                key={feature.id}
+                name={feature.name}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex flex-col gap-1">
@@ -539,15 +541,15 @@ const TableView = () => {
       <TableProvider columns={columns} data={exampleFeatures}>
         <TableHeader>
           {({ headerGroup }) => (
-            <TableHeaderGroup key={headerGroup.id} headerGroup={headerGroup}>
-              {({ header }) => <TableHead key={header.id} header={header} />}
+            <TableHeaderGroup headerGroup={headerGroup} key={headerGroup.id}>
+              {({ header }) => <TableHead header={header} key={header.id} />}
             </TableHeaderGroup>
           )}
         </TableHeader>
         <TableBody>
           {({ row }) => (
             <TableRow key={row.id} row={row}>
-              {({ cell }) => <TableCell key={cell.id} cell={cell} />}
+              {({ cell }) => <TableCell cell={cell} key={cell.id} />}
             </TableRow>
           )}
         </TableBody>
@@ -591,7 +593,7 @@ const Example = () => {
   ];
 
   return (
-    <Tabs defaultValue="gantt" className="not-prose size-full gap-0 divide-y">
+    <Tabs className="not-prose size-full gap-0 divide-y" defaultValue="gantt">
       <div className="flex items-center justify-between gap-4 p-4">
         <p className="font-medium">Roadmap</p>
         <TabsList>
@@ -604,7 +606,7 @@ const Example = () => {
         </TabsList>
       </div>
       {views.map((view) => (
-        <TabsContent key={view.id} value={view.id} className="overflow-hidden">
+        <TabsContent className="overflow-hidden" key={view.id} value={view.id}>
           <view.component />
         </TabsContent>
       ))}

@@ -27,7 +27,7 @@ const options = [
 const Example = () => (
   <Choicebox defaultValue="1">
     {options.map((option) => (
-      <ChoiceboxItem value={option.id} key={option.id}>
+      <ChoiceboxItem key={option.id} value={option.id}>
         <ChoiceboxItemHeader>
           <ChoiceboxItemTitle>
             {option.label}

@@ -1,6 +1,6 @@
-import { env } from '@/env';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import Image from 'next/image';
+import { env } from '@/env';
 
 type PoweredByProps = {
   packages: { name: string; url: string }[];
@@ -22,22 +22,22 @@ export const PoweredBy = ({ packages }: PoweredByProps) => (
     <div className="flex flex-row flex-wrap items-center gap-2">
       {packages.map(({ name, url }) => (
         <a
-          href={url}
-          key={name}
-          target="_blank"
-          rel="noopener noreferrer"
           className={cn(
             'flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 transition-all',
             'hover:bg-secondary/80'
           )}
+          href={url}
+          key={name}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <Image
-            src={`https://img.logo.dev/${getHostname(url)}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
             alt={name}
-            width={14}
-            height={14}
             className="h-3.5 w-3.5 overflow-hidden rounded-sm object-cover"
+            height={14}
+            src={`https://img.logo.dev/${getHostname(url)}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
             unoptimized
+            width={14}
           />
           <p className="text-muted-foreground text-sm">{name}</p>
         </a>

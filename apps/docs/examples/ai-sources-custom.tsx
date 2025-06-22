@@ -25,7 +25,7 @@ const Example = () => (
     </AISourcesTrigger>
     <AISourcesContent>
       {sources.map((source) => (
-        <AISource key={source.href} href={source.href}>
+        <AISource href={source.href} key={source.href}>
           {source.title}
           <ExternalLinkIcon className="h-4 w-4" />
         </AISource>

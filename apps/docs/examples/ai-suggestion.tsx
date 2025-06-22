@@ -23,8 +23,8 @@ const Example = () => {
       {suggestions.map((suggestion) => (
         <AISuggestion
           key={suggestion}
-          suggestion={suggestion}
           onClick={handleSuggestionClick}
+          suggestion={suggestion}
         />
       ))}
     </AISuggestions>

@@ -1,6 +1,7 @@
 'use client';
 
 import { faker } from '@faker-js/faker';
+import type { ColumnDef } from '@repo/table';
 import {
   TableBody,
   TableCell,
@@ -11,7 +12,6 @@ import {
   TableProvider,
   TableRow,
 } from '@repo/table';
-import type { ColumnDef } from '@repo/table';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -120,15 +120,15 @@ const Example = () => {
     <TableProvider columns={columns} data={exampleFeatures}>
       <TableHeader>
         {({ headerGroup }) => (
-          <TableHeaderGroup key={headerGroup.id} headerGroup={headerGroup}>
-            {({ header }) => <TableHead key={header.id} header={header} />}
+          <TableHeaderGroup headerGroup={headerGroup} key={headerGroup.id}>
+            {({ header }) => <TableHead header={header} key={header.id} />}
           </TableHeaderGroup>
         )}
       </TableHeader>
       <TableBody>
         {({ row }) => (
           <TableRow key={row.id} row={row}>
-            {({ cell }) => <TableCell key={cell.id} cell={cell} />}
+            {({ cell }) => <TableCell cell={cell} key={cell.id} />}
           </TableRow>
         )}
       </TableBody>

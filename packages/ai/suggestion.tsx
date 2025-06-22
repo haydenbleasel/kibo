@@ -1,9 +1,9 @@
 'use client';
 
+import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import type { ComponentProps } from 'react';
 
 export type AISuggestionsProps = ComponentProps<typeof ScrollArea>;
 
@@ -43,11 +43,11 @@ export const AISuggestion = ({
 
   return (
     <Button
-      type="button"
-      variant={variant}
-      size={size}
       className={cn('cursor-pointer rounded-full px-4', className)}
       onClick={handleClick}
+      size={size}
+      type="button"
+      variant={variant}
       {...props}
     >
       {children || suggestion}

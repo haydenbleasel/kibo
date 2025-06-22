@@ -26,9 +26,9 @@ export const PreviewCode = ({ code, language, filename }: PreviewCodeProps) => {
 
   return (
     <CodeBlock
+      className="overflow-auto rounded-none border-none"
       data={data}
       defaultValue={data[0].language}
-      className="overflow-auto rounded-none border-none"
     >
       <CodeBlockBody>
         {(item) => (

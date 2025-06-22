@@ -55,7 +55,7 @@ const Example = () => {
 
   return (
     <AIInput onSubmit={handleSubmit}>
-      <AIInputTextarea value={text} onChange={(e) => setText(e.target.value)} />
+      <AIInputTextarea onChange={(e) => setText(e.target.value)} value={text} />
       <AIInputToolbar>
         <AIInputTools>
           <AIInputButton>
@@ -68,7 +68,7 @@ const Example = () => {
             <GlobeIcon size={16} />
             <span>Search</span>
           </AIInputButton>
-          <AIInputModelSelect value={model} onValueChange={setModel}>
+          <AIInputModelSelect onValueChange={setModel} value={model}>
             <AIInputModelSelectTrigger>
               <AIInputModelSelectValue />
             </AIInputModelSelectTrigger>
@@ -81,7 +81,7 @@ const Example = () => {
             </AIInputModelSelectContent>
           </AIInputModelSelect>
         </AIInputTools>
-        <AIInputSubmit status={status} disabled={!text} />
+        <AIInputSubmit disabled={!text} status={status} />
       </AIInputToolbar>
     </AIInput>
   );

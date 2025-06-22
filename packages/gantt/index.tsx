@@ -1,13 +1,5 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from '@/components/ui/context-menu';
-import { cn } from '@/lib/utils';
 import {
   DndContext,
   MouseSensor,
@@ -16,9 +8,6 @@ import {
 } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { useMouse, useThrottle, useWindowScroll } from '@uidotdev/usehooks';
-import { formatDate, getDate } from 'date-fns';
-import { formatDistance, isSameDay } from 'date-fns';
-import { format } from 'date-fns';
 import {
   addDays,
   addMonths,
@@ -27,13 +16,26 @@ import {
   differenceInMonths,
   endOfDay,
   endOfMonth,
+  format,
+  formatDate,
+  formatDistance,
+  getDate,
   getDaysInMonth,
+  isSameDay,
   startOfDay,
   startOfMonth,
 } from 'date-fns';
 import { atom, useAtom } from 'jotai';
 import throttle from 'lodash.throttle';
 import { PlusIcon, TrashIcon } from 'lucide-react';
+import type {
+  CSSProperties,
+  FC,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  ReactNode,
+  RefObject,
+} from 'react';
 import {
   createContext,
   memo,
@@ -45,14 +47,14 @@ import {
   useRef,
   useState,
 } from 'react';
-import type {
-  CSSProperties,
-  FC,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  ReactNode,
-  RefObject,
-} from 'react';
+import { Card } from '@/components/ui/card';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu';
+import { cn } from '@/lib/utils';
 
 const draggingAtom = atom(false);
 const scrollXAtom = atom(0);
@@ -335,8 +337,8 @@ export const GanttContentHeader: FC<GanttContentHeaderProps> = ({
       >
         {Array.from({ length: columns }).map((_, index) => (
           <div
-            key={`${id}-${index}`}
             className="shrink-0 border-border/50 border-b py-1 text-center text-xs"
+            key={`${id}-${index}`}
           >
             {renderHeaderItem(index)}
           </div>
@@ -355,7 +357,6 @@ const DailyHeader: FC = () => {
       .map((month, index) => (
         <div className="relative flex flex-col" key={`${year.year}-${index}`}>
           <GanttContentHeader
-            title={format(new Date(year.year, index, 1), 'MMMM yyyy')}
             columns={month.days}
             renderHeaderItem={(item: number) => (
               <div className="flex items-center justify-center gap-1">
@@ -370,6 +371,7 @@ const DailyHeader: FC = () => {
                 </p>
               </div>
             )}
+            title={format(new Date(year.year, index, 1), 'MMMM yyyy')}
           />
           <GanttColumns
             columns={month.days}
@@ -390,11 +392,11 @@ const MonthlyHeader: FC = () => {
   return gantt.timelineData.map((year) => (
     <div className="relative flex flex-col" key={year.year}>
       <GanttContentHeader
-        title={`${year.year}`}
         columns={year.quarters.flatMap((quarter) => quarter.months).length}
         renderHeaderItem={(item: number) => (
           <p>{format(new Date(year.year, item, 1), 'MMM')}</p>
         )}
+        title={`${year.year}`}
       />
       <GanttColumns
         columns={year.quarters.flatMap((quarter) => quarter.months).length}
@@ -413,13 +415,13 @@ const QuarterlyHeader: FC = () => {
         key={`${year.year}-${quarterIndex}`}
       >
         <GanttContentHeader
-          title={`Q${quarterIndex + 1} ${year.year}`}
           columns={quarter.months.length}
           renderHeaderItem={(item: number) => (
             <p>
               {format(new Date(year.year, quarterIndex * 3 + item, 1), 'MMM')}
             </p>
           )}
+          title={`Q${quarterIndex + 1} ${year.year}`}
         />
         <GanttColumns columns={quarter.months.length} />
       </div>
@@ -486,19 +488,19 @@ export const GanttSidebarItem: FC<GanttSidebarItemProps> = ({
 
   return (
     <div
-      // biome-ignore lint/a11y/useSemanticElements: <explanation>
-      role="button"
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      key={feature.id}
       className={cn(
         'relative flex items-center gap-2.5 p-2.5 text-xs',
         className
       )}
+      key={feature.id}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      // biome-ignore lint/a11y/useSemanticElements: "This is a clickable item"
+      role="button"
       style={{
         height: 'var(--gantt-row-height)',
       }}
+      tabIndex={0}
     >
       {/* <Checkbox onCheckedChange={handleCheck} className="shrink-0" /> */}
       <div
@@ -539,8 +541,8 @@ export const GanttSidebarGroup: FC<GanttSidebarGroupProps> = ({
 }) => (
   <div className={className}>
     <p
-      style={{ height: 'var(--gantt-row-height)' }}
       className="w-full truncate p-2.5 text-left font-medium text-muted-foreground text-xs"
+      style={{ height: 'var(--gantt-row-height)' }}
     >
       {name}
     </p>
@@ -558,11 +560,11 @@ export const GanttSidebar: FC<GanttSidebarProps> = ({
   className,
 }) => (
   <div
-    data-roadmap-ui="gantt-sidebar"
     className={cn(
       'sticky left-0 z-30 h-max min-h-full overflow-clip border-border/50 border-r bg-background/90 backdrop-blur-md',
       className
     )}
+    data-roadmap-ui="gantt-sidebar"
   >
     <GanttSidebarHeader />
     <div className="space-y-4">{children}</div>
@@ -594,20 +596,20 @@ export const GanttAddFeatureHelper: FC<GanttAddFeatureHelperProps> = ({
   return (
     <div
       className={cn('absolute top-0 w-full px-0.5', className)}
+      ref={mouseRef}
       style={{
         marginTop: -gantt.rowHeight / 2,
         transform: `translateY(${top}px)`,
       }}
-      ref={mouseRef}
     >
       <button
+        className="flex h-full w-full items-center justify-center rounded-md border border-dashed p-2"
         onClick={handleClick}
         type="button"
-        className="flex h-full w-full items-center justify-center rounded-md border border-dashed p-2"
       >
         <PlusIcon
-          size={16}
           className="pointer-events-none select-none text-muted-foreground"
+          size={16}
         />
       </button>
     </div>
@@ -634,21 +636,22 @@ export const GanttColumn: FC<GanttColumnProps> = ({
 
   const top = useThrottle(
     mousePosition.y -
-      (mouseRef.current?.getBoundingClientRect().y ?? 0) -
-      (windowScroll.y ?? 0),
+    (mouseRef.current?.getBoundingClientRect().y ?? 0) -
+    (windowScroll.y ?? 0),
     10
   );
 
   return (
-    // biome-ignore lint/nursery/noStaticElementInteractions: <explanation>
+    // biome-ignore lint/a11y/noStaticElementInteractions: "This is a clickable column"
+    // biome-ignore lint/nursery/noNoninteractiveElementInteractions: "This is a clickable column"
     <div
       className={cn(
         'group relative h-full overflow-hidden',
         isColumnSecondary?.(index) ? 'bg-secondary' : ''
       )}
-      ref={mouseRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      ref={mouseRef}
     >
       {!dragging && hovering && gantt.onAddItem ? (
         <GanttAddFeatureHelper top={top} />
@@ -677,9 +680,9 @@ export const GanttColumns: FC<GanttColumnsProps> = ({
     >
       {Array.from({ length: columns }).map((_, index) => (
         <GanttColumn
-          key={`${id}-${index}`}
           index={index}
           isColumnSecondary={isColumnSecondary}
+          key={`${id}-${index}`}
         />
       ))}
     </div>
@@ -700,8 +703,8 @@ export const GanttCreateMarkerTrigger: FC<GanttCreateMarkerTriggerProps> = ({
   const [windowScroll] = useWindowScroll();
   const x = useThrottle(
     mousePosition.x -
-      (mouseRef.current?.getBoundingClientRect().x ?? 0) -
-      (windowScroll.x ?? 0),
+    (mouseRef.current?.getBoundingClientRect().x ?? 0) -
+    (windowScroll.x ?? 0),
     10
   );
 
@@ -722,11 +725,11 @@ export const GanttCreateMarkerTrigger: FC<GanttCreateMarkerTriggerProps> = ({
         style={{ transform: `translateX(${x}px)` }}
       >
         <button
-          type="button"
           className="z-50 inline-flex h-4 w-4 items-center justify-center rounded-full bg-card"
           onClick={handleClick}
+          type="button"
         >
-          <PlusIcon size={12} className="text-muted-foreground" />
+          <PlusIcon className="text-muted-foreground" size={12} />
         </button>
         <div className="whitespace-nowrap rounded-full border border-border/50 bg-background/90 px-2 py-1 text-foreground text-xs backdrop-blur-lg">
           {formatDate(date, 'MMM dd, yyyy')}
@@ -923,24 +926,24 @@ export const GanttFeatureItem: FC<GanttFeatureItemProps> = ({
       >
         {onMove && (
           <DndContext
-            sensors={[mouseSensor]}
             modifiers={[restrictToHorizontalAxis]}
-            onDragMove={handleLeftDragMove}
             onDragEnd={onDragEnd}
+            onDragMove={handleLeftDragMove}
+            sensors={[mouseSensor]}
           >
             <GanttFeatureDragHelper
+              date={startAt}
               direction="left"
               featureId={feature.id}
-              date={startAt}
             />
           </DndContext>
         )}
         <DndContext
-          sensors={[mouseSensor]}
           modifiers={[restrictToHorizontalAxis]}
-          onDragStart={handleItemDragStart}
-          onDragMove={handleItemDragMove}
           onDragEnd={onDragEnd}
+          onDragMove={handleItemDragMove}
+          onDragStart={handleItemDragStart}
+          sensors={[mouseSensor]}
         >
           <GanttFeatureItemCard id={feature.id}>
             {children ?? (
@@ -950,15 +953,15 @@ export const GanttFeatureItem: FC<GanttFeatureItemProps> = ({
         </DndContext>
         {onMove && (
           <DndContext
-            sensors={[mouseSensor]}
             modifiers={[restrictToHorizontalAxis]}
-            onDragMove={handleRightDragMove}
             onDragEnd={onDragEnd}
+            onDragMove={handleRightDragMove}
+            sensors={[mouseSensor]}
           >
             <GanttFeatureDragHelper
+              date={endAt ?? addRange(startAt, 2)}
               direction="right"
               featureId={feature.id}
-              date={endAt ?? addRange(startAt, 2)}
             />
           </DndContext>
         )}
@@ -1233,11 +1236,11 @@ export const GanttProvider: FC<GanttProviderProps> = ({
           range,
           className
         )}
+        ref={scrollRef}
         style={{
           ...cssVariables,
           gridTemplateColumns: 'var(--gantt-sidebar-width) 1fr',
         }}
-        ref={scrollRef}
       >
         {children}
       </div>

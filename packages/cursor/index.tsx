@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
 import { Children, type HTMLAttributes, type SVGProps } from 'react';
+import { cn } from '@/lib/utils';
 
 export type CursorProps = HTMLAttributes<HTMLSpanElement>;
 
@@ -17,18 +17,18 @@ export type CursorPointerProps = SVGProps<SVGSVGElement>;
 export const CursorPointer = ({ className, ...props }: CursorPointerProps) => (
   <svg
     aria-hidden="true"
-    focusable="false"
     className={cn('size-3.5', className)}
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
     fill="none"
+    focusable="false"
+    height="20"
     viewBox="0 0 20 20"
+    width="20"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
-      fill="currentColor"
       d="M19.438 6.716 1.115.05A.832.832 0 0 0 .05 1.116L6.712 19.45a.834.834 0 0 0 1.557.025l3.198-8 7.995-3.2a.833.833 0 0 0 0-1.559h-.024Z"
+      fill="currentColor"
     />
   </svg>
 );

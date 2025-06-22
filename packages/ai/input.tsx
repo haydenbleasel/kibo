@@ -1,5 +1,12 @@
 'use client';
 
+import { Loader2Icon, SendIcon, SquareIcon, XIcon } from 'lucide-react';
+import type {
+  ComponentProps,
+  HTMLAttributes,
+  KeyboardEventHandler,
+} from 'react';
+import { Children, useCallback, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -10,13 +17,6 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { Loader2Icon, SendIcon, SquareIcon, XIcon } from 'lucide-react';
-import { Children, useCallback, useEffect, useRef } from 'react';
-import type {
-  ComponentProps,
-  HTMLAttributes,
-  KeyboardEventHandler,
-} from 'react';
 
 type UseAutoResizeTextareaProps = {
   minHeight: number;
@@ -115,20 +115,20 @@ export const AIInputTextarea = ({
 
   return (
     <Textarea
-      name="message"
-      placeholder={placeholder}
-      ref={textareaRef}
       className={cn(
         'w-full resize-none rounded-none border-none p-3 shadow-none outline-none ring-0',
         'bg-transparent dark:bg-transparent',
         'focus-visible:ring-0',
         className
       )}
+      name="message"
       onChange={(e) => {
         adjustHeight();
         onChange?.(e);
       }}
       onKeyDown={handleKeyDown}
+      placeholder={placeholder}
+      ref={textareaRef}
       {...props}
     />
   );
@@ -172,15 +172,15 @@ export const AIInputButton = ({
 
   return (
     <Button
-      type="button"
-      variant={variant}
-      size={newSize}
       className={cn(
         'shrink-0 gap-1.5 rounded-lg',
         variant === 'ghost' && 'text-muted-foreground',
         newSize === 'default' && 'px-3',
         className
       )}
+      size={newSize}
+      type="button"
+      variant={variant}
       {...props}
     />
   );
@@ -210,10 +210,10 @@ export const AIInputSubmit = ({
 
   return (
     <Button
+      className={cn('gap-1.5 rounded-lg rounded-br-xl', className)}
+      size={size}
       type="submit"
       variant={variant}
-      size={size}
-      className={cn('gap-1.5 rounded-lg rounded-br-xl', className)}
       {...props}
     >
       {children ?? Icon}

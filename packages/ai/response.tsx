@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import {
   type BundledLanguage,
   CodeBlock,
@@ -18,10 +17,11 @@ import {
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
 } from '@repo/code-block';
-import { memo } from 'react';
 import type { HTMLAttributes } from 'react';
+import { memo } from 'react';
 import ReactMarkdown, { type Options } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { cn } from '@/lib/utils';
 
 export type AIResponseProps = HTMLAttributes<HTMLDivElement> & {
   options?: Options;
@@ -52,8 +52,8 @@ const components: Options['components'] = {
   a: ({ node, children, className, ...props }) => (
     <a
       className={cn('font-medium text-primary underline', className)}
-      target="_blank"
       rel="noreferrer"
+      target="_blank"
       {...props}
     >
       {children}
@@ -178,8 +178,8 @@ export const AIResponse = memo(
       {...props}
     >
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
         components={components}
+        remarkPlugins={[remarkGfm]}
         {...options}
       >
         {children}

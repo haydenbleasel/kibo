@@ -16,11 +16,11 @@ import {
 const Example = () => (
   <VideoPlayer className="overflow-hidden rounded-lg border">
     <VideoPlayerContent
+      crossOrigin=""
+      muted
+      preload="auto"
       slot="media"
       src="https://stream.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/high.mp4"
-      preload="auto"
-      muted
-      crossOrigin=""
     />
     <VideoPlayerControlBar>
       <VideoPlayerPlayButton />

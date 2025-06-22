@@ -9,18 +9,18 @@ const Example = () => {
 
   return (
     <>
-      <Rating value={value} onValueChange={setValue}>
+      <Rating onValueChange={setValue} value={value}>
         {Array.from({ length: 5 }).map((_, index) => (
           <RatingButton key={index} />
         ))}
       </Rating>
       <Input
-        min={0}
-        max={5}
-        type="number"
         className="w-32 bg-background"
-        value={value}
+        max={5}
+        min={0}
         onChange={(e) => setValue(Number(e.target.value))}
+        type="number"
+        value={value}
       />
     </>
   );

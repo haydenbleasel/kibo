@@ -22,12 +22,12 @@ export const baseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/haydenbleasel/kibo',
   nav: {
     title: (
-      <Button variant="ghost" size="icon">
+      <Button size="icon" variant="ghost">
         <svg
+          className="h-[18px] w-auto"
           fill="none"
           viewBox="0 0 116 116"
           xmlns="http://www.w3.org/2000/svg"
-          className="h-[18px] w-auto"
         >
           <title>Kibo UI</title>
           <g fill="currentColor">

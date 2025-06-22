@@ -11,7 +11,7 @@ const Example = () => (
   <MiniCalendar days={7}>
     <MiniCalendarNavigation direction="prev" />
     <MiniCalendarDays>
-      {(date) => <MiniCalendarDay key={date.toISOString()} date={date} />}
+      {(date) => <MiniCalendarDay date={date} key={date.toISOString()} />}
     </MiniCalendarDays>
     <MiniCalendarNavigation direction="next" />
   </MiniCalendar>

@@ -57,15 +57,15 @@ const Example = () => {
         {suggestions.map((suggestion) => (
           <AISuggestion
             key={suggestion}
-            suggestion={suggestion}
             onClick={() => setText(suggestion)}
+            suggestion={suggestion}
           />
         ))}
       </AISuggestions>
       <AIInput onSubmit={handleSubmit}>
         <AIInputTextarea
-          value={text}
           onChange={(event) => setText(event.target.value)}
+          value={text}
         />
         <AIInputToolbar>
           <AIInputTools>
@@ -79,7 +79,7 @@ const Example = () => {
               <GlobeIcon size={16} />
               <span>Search</span>
             </AIInputButton>
-            <AIInputModelSelect value={model} onValueChange={setModel}>
+            <AIInputModelSelect onValueChange={setModel} value={model}>
               <AIInputModelSelectTrigger>
                 <AIInputModelSelectValue />
               </AIInputModelSelectTrigger>

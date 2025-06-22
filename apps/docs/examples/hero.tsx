@@ -94,8 +94,8 @@ const Example = () => (
         <Button asChild>
           <Link href="#">Get started</Link>
         </Button>
-        <Button variant="outline" asChild>
-          <Link href="#" className="no-underline">
+        <Button asChild variant="outline">
+          <Link className="no-underline" href="#">
             Learn more
           </Link>
         </Button>
@@ -107,11 +107,11 @@ const Example = () => (
       </p>
       <div className="flex size-full items-center justify-center">
         <Marquee>
-          <MarqueeFade side="left" className="from-secondary" />
-          <MarqueeFade side="right" className="from-secondary" />
+          <MarqueeFade className="from-secondary" side="left" />
+          <MarqueeFade className="from-secondary" side="right" />
           <MarqueeContent pauseOnHover={false}>
             {logos.map((logo) => (
-              <MarqueeItem key={logo.name} className="mx-16 size-12">
+              <MarqueeItem className="mx-16 size-12" key={logo.name}>
                 <Link href={logo.url}>
                   <logo.icon className="size-full" />
                 </Link>
@@ -123,11 +123,11 @@ const Example = () => (
     </section>
     <VideoPlayer className="overflow-hidden rounded-lg border">
       <VideoPlayerContent
+        crossOrigin=""
+        muted
+        preload="auto"
         slot="media"
         src="https://stream.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/high.mp4"
-        preload="auto"
-        muted
-        crossOrigin=""
       />
       <VideoPlayerControlBar>
         <VideoPlayerPlayButton />

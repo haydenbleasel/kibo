@@ -1,12 +1,5 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import { cn } from '@/lib/utils';
 import {
   CheckCircleIcon,
   ChevronDownIcon,
@@ -16,6 +9,13 @@ import {
   XCircleIcon,
 } from 'lucide-react';
 import type { ComponentProps, ReactNode } from 'react';
+import { Badge } from '@/components/ui/badge';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { cn } from '@/lib/utils';
 
 export type AIToolStatus = 'pending' | 'running' | 'completed' | 'error';
 
@@ -56,7 +56,7 @@ const getStatusBadge = (status: AIToolStatus) => {
   } as const;
 
   return (
-    <Badge variant="secondary" className="rounded-full text-xs">
+    <Badge className="rounded-full text-xs" variant="secondary">
       {icons[status]}
       {labels[status]}
     </Badge>
@@ -127,7 +127,7 @@ export const AIToolResult = ({
   error,
   ...props
 }: AIToolResultProps) => {
-  if (!result && !error) {
+  if (!(result || error)) {
     return null;
   }
 

@@ -65,14 +65,14 @@ const Example = () => {
         ))}
       </TagsTrigger>
       <TagsContent>
-        <TagsInput placeholder="Search tag..." onValueChange={setNewTag} />
+        <TagsInput onValueChange={setNewTag} placeholder="Search tag..." />
         <TagsList>
           <TagsEmpty />
           <TagsGroup>
             {tags
               .filter((tag) => !selected.includes(tag.id))
               .map((tag) => (
-                <TagsItem key={tag.id} value={tag.id} onSelect={handleSelect}>
+                <TagsItem key={tag.id} onSelect={handleSelect} value={tag.id}>
                   {tag.label}
                 </TagsItem>
               ))}

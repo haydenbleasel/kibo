@@ -7,7 +7,7 @@ const Example = () => (
   <Announcement>
     <AnnouncementTitle>
       New feature added
-      <ArrowUpRightIcon size={16} className="shrink-0 text-muted-foreground" />
+      <ArrowUpRightIcon className="shrink-0 text-muted-foreground" size={16} />
     </AnnouncementTitle>
   </Announcement>
 );

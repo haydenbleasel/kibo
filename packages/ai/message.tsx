@@ -1,10 +1,10 @@
-import { cn } from '@/lib/utils';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@repo/shadcn-ui/components/ui/avatar';
 import type { ComponentProps, HTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
 
 export type AIMessageProps = HTMLAttributes<HTMLDivElement> & {
   from: 'user' | 'assistant';
@@ -54,7 +54,7 @@ export const AIMessageAvatar = ({
   ...props
 }: AIMessageAvatarProps) => (
   <Avatar className={cn('size-8', className)} {...props}>
-    <AvatarImage className="mt-0 mb-0" src={src} alt="" />
+    <AvatarImage alt="" className="mt-0 mb-0" src={src} />
     <AvatarFallback>{name?.slice(0, 2) || 'ME'}</AvatarFallback>
   </Avatar>
 );

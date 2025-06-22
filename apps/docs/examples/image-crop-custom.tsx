@@ -31,10 +31,10 @@ const Example = () => {
   if (!selectedFile) {
     return (
       <Input
-        type="file"
         accept="image/*"
-        onChange={handleFileChange}
         className="w-fit"
+        onChange={handleFileChange}
+        type="file"
       />
     );
   }
@@ -43,13 +43,13 @@ const Example = () => {
     return (
       <div className="space-y-4">
         <Image
-          src={croppedImage}
           alt="Cropped"
-          width={100}
           height={100}
+          src={croppedImage}
           unoptimized
+          width={100}
         />
-        <Button type="button" onClick={handleReset} variant="outline" size="sm">
+        <Button onClick={handleReset} size="sm" type="button" variant="outline">
           Start Over
         </Button>
       </div>
@@ -59,8 +59,8 @@ const Example = () => {
   return (
     <div className="space-y-4">
       <ImageCrop
-        file={selectedFile}
         aspect={1}
+        file={selectedFile}
         maxImageSize={1024 * 1024} // 1MB
         onChange={console.log}
         onComplete={console.log}
@@ -69,20 +69,20 @@ const Example = () => {
         <ImageCropContent className="max-w-md" />
         <div className="flex items-center gap-2">
           <ImageCropApply asChild>
-            <Button variant="outline" size="sm">
+            <Button size="sm" variant="outline">
               Apply Crop
             </Button>
           </ImageCropApply>
           <ImageCropReset asChild>
-            <Button variant="outline" size="sm">
+            <Button size="sm" variant="outline">
               Reset
             </Button>
           </ImageCropReset>
           <Button
-            type="button"
             onClick={handleReset}
-            variant="outline"
             size="sm"
+            type="button"
+            variant="outline"
           >
             Start Over
           </Button>

@@ -1,12 +1,5 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from '@/components/ui/context-menu';
 import { faker } from '@faker-js/faker';
 import {
   GanttCreateMarkerTrigger,
@@ -22,6 +15,13 @@ import {
 import groupBy from 'lodash.groupby';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
 import { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -140,10 +140,10 @@ const Example = () => {
 
   return (
     <GanttProvider
+      className="border"
       onAddItem={handleAddFeature}
       range="monthly"
       zoom={100}
-      className="border"
     >
       <GanttTimeline>
         <GanttHeader />
@@ -155,8 +155,8 @@ const Example = () => {
                   <ContextMenu>
                     <ContextMenuTrigger asChild>
                       <button
-                        type="button"
                         onClick={() => handleViewFeature(feature.id)}
+                        type="button"
                       >
                         <GanttFeatureItem
                           onMove={handleMoveFeature}
@@ -181,14 +181,14 @@ const Example = () => {
                         className="flex items-center gap-2"
                         onClick={() => handleViewFeature(feature.id)}
                       >
-                        <EyeIcon size={16} className="text-muted-foreground" />
+                        <EyeIcon className="text-muted-foreground" size={16} />
                         View feature
                       </ContextMenuItem>
                       <ContextMenuItem
                         className="flex items-center gap-2"
                         onClick={() => handleCopyLink(feature.id)}
                       >
-                        <LinkIcon size={16} className="text-muted-foreground" />
+                        <LinkIcon className="text-muted-foreground" size={16} />
                         Copy link
                       </ContextMenuItem>
                       <ContextMenuItem
