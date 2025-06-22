@@ -105,18 +105,18 @@ interface SlashNodeAttrs {
   label?: string | null;
 }
 
-type SlashOptions<SuggestionItem = unknown, Attrs = SlashNodeAttrs> = {
+type SlashOptions<SlashOptionSuggestionItem = unknown, Attrs = SlashNodeAttrs> = {
   HTMLAttributes: Record<string, unknown>;
   renderText: (props: {
-    options: SlashOptions<SuggestionItem, Attrs>;
+    options: SlashOptions<SlashOptionSuggestionItem, Attrs>;
     node: ProseMirrorNode;
   }) => string;
   renderHTML: (props: {
-    options: SlashOptions<SuggestionItem, Attrs>;
+    options: SlashOptions<SlashOptionSuggestionItem, Attrs>;
     node: ProseMirrorNode;
   }) => DOMOutputSpec;
   deleteTriggerWithBackspace: boolean;
-  suggestion: Omit<SuggestionOptions<SuggestionItem, Attrs>, 'editor'>;
+  suggestion: Omit<SuggestionOptions<SlashOptionSuggestionItem, Attrs>, 'editor'>;
 };
 
 const SlashPluginKey = new PluginKey('slash');
@@ -759,6 +759,7 @@ export const EditorBubbleMenu = ({
           return [child];
         }
 
+        // biome-ignore lint/suspicious/noArrayIndexKey: "only iterator we have"
         acc.push(<Separator key={index} orientation="vertical" />);
         acc.push(child);
         return acc;
