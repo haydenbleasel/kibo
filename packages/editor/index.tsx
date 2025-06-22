@@ -610,15 +610,15 @@ export const EditorProvider = ({
           let popup: TippyInstance;
 
           return {
-            onStart: (props) => {
+            onStart: (onStartProps) => {
               component = new ReactRenderer(EditorSlashMenu, {
-                props,
-                editor: props.editor,
+                props: onStartProps,
+                editor: onStartProps.editor,
               });
 
               popup = tippy(document.body, {
                 getReferenceClientRect: () =>
-                  props.clientRect?.() || new DOMRect(),
+                  onStartProps.clientRect?.() || new DOMRect(),
                 appendTo: () => document.body,
                 content: component.element,
                 showOnCreate: true,
@@ -628,24 +628,24 @@ export const EditorProvider = ({
               });
             },
 
-            onUpdate(props) {
-              component.updateProps(props);
+            onUpdate(onUpdateProps) {
+              component.updateProps(onUpdateProps);
 
               popup.setProps({
                 getReferenceClientRect: () =>
-                  props.clientRect?.() || new DOMRect(),
+                  onUpdateProps.clientRect?.() || new DOMRect(),
               });
             },
 
-            onKeyDown(props) {
-              if (props.event.key === 'Escape') {
+            onKeyDown(onKeyDownProps) {
+              if (onKeyDownProps.event.key === 'Escape') {
                 popup.hide();
                 component.destroy();
 
                 return true;
               }
 
-              return handleCommandNavigation(props.event);
+              return handleCommandNavigation(onKeyDownProps.event) ?? false;
             },
 
             onExit() {
@@ -755,14 +755,14 @@ export const EditorBubbleMenu = ({
   >
     {children && Array.isArray(children)
       ? children.reduce((acc: ReactNode[], child, index) => {
-          if (index === 0) {
-            return [child];
-          }
+        if (index === 0) {
+          return [child];
+        }
 
-          acc.push(<Separator key={index} orientation="vertical" />);
-          acc.push(child);
-          return acc;
-        }, [])
+        acc.push(<Separator key={index} orientation="vertical" />);
+        acc.push(child);
+        return acc;
+      }, [])
       : children}
   </BubbleMenu>
 );
@@ -1249,9 +1249,9 @@ export const EditorFormatUnderline = ({
 
   return (
     <BubbleMenuButton
+      // @ts-expect-error "TipTap extensions are not typed"
       command={() => editor.chain().focus().toggleUnderline().run()}
       hideName={hideName}
-      // @ts-expect-error "TipTap extensions are not typed"
       icon={UnderlineIcon}
       isActive={() => editor.isActive('underline') ?? false}
       name="Underline"
