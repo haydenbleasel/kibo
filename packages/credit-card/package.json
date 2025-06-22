@@ -5,7 +5,6 @@
   "private": true,
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
-    "lucide-react": "^0.515.0",
     "react": "^19.1.0",
     "react-card-network-icons": "^1.0.3",
     "react-dom": "^19.1.0"
