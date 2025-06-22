@@ -4,7 +4,9 @@
   "bin": {
     "kibo-ui": "dist/index.js"
   },
-  "files": ["dist/index.js"],
+  "files": [
+    "dist/index.js"
+  ],
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -18,11 +20,11 @@
   },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.0.0",
     "@types/node": "^24.0.1",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3",
-    "ultracite": "^4.2.10"
+    "ultracite": "^5.0.3"
   },
   "engines": {
     "node": ">=18"
