@@ -105,7 +105,10 @@ interface SlashNodeAttrs {
   label?: string | null;
 }
 
-type SlashOptions<SlashOptionSuggestionItem = unknown, Attrs = SlashNodeAttrs> = {
+type SlashOptions<
+  SlashOptionSuggestionItem = unknown,
+  Attrs = SlashNodeAttrs,
+> = {
   HTMLAttributes: Record<string, unknown>;
   renderText: (props: {
     options: SlashOptions<SlashOptionSuggestionItem, Attrs>;
@@ -116,7 +119,10 @@ type SlashOptions<SlashOptionSuggestionItem = unknown, Attrs = SlashNodeAttrs> =
     node: ProseMirrorNode;
   }) => DOMOutputSpec;
   deleteTriggerWithBackspace: boolean;
-  suggestion: Omit<SuggestionOptions<SlashOptionSuggestionItem, Attrs>, 'editor'>;
+  suggestion: Omit<
+    SuggestionOptions<SlashOptionSuggestionItem, Attrs>,
+    'editor'
+  >;
 };
 
 const SlashPluginKey = new PluginKey('slash');
@@ -1330,7 +1336,7 @@ export const EditorLinkSelector = ({
           <ExternalLinkIcon size={12} />
           <p
             className={cn(
-              'underline decoration-text-muted underline-offset-4',
+              'text-xs underline decoration-text-muted underline-offset-4',
               {
                 'text-primary': editor.isActive('link'),
               }
