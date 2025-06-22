@@ -59,7 +59,6 @@ const Example = () => (
           </CreditCardLogo>
           <CreditCardChip />
           <CreditCardServiceProvider
-            type="visa"
             referenceHeight={50}
             className="fill-white"
           />

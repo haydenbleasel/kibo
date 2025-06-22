@@ -219,14 +219,14 @@ export const CreditCardServiceProvider = ({
 
   if (children) {
     return (
-      <div className={cn('absolute right-0 bottom-0 max-h-[25%]', className)}>
+      <div className={cn('absolute right-0 bottom-0', className)}>
         {children}
       </div>
     );
   }
   return (
     <Icon
-      className={cn('absolute right-0 bottom-0 max-h-[25%]', className)}
+      className={cn('absolute right-0 bottom-0', className)}
       referenceHeight={referenceHeight}
       {...props}
     />
@@ -312,10 +312,10 @@ export const CreditCardMagStripe = ({
         '-translate-x-1/2 absolute top-[3%] left-1/2 h-1/4 bg-gray-900',
         className
       )}
-      {...props}
       style={{
         width: `calc(100% + 2 * ${context.safeArea}px)`,
       }}
+      {...props}
     />
   );
 };
