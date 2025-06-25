@@ -66,7 +66,7 @@ const Example = () => {
       value={value}
     >
       <ComboboxTrigger />
-      <ComboboxContent>
+      <ComboboxContent popoverOptions={{ style: { width: 300 } }}>
         <ComboboxInput />
         <ComboboxEmpty>
           <ComboboxCreateNew onCreateNew={handleCreateNew} />

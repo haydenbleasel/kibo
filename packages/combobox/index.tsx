@@ -176,7 +176,7 @@ export const ComboboxContent = ({
   return (
     <PopoverContent
       className={cn('p-0', className)}
-      style={{ minWidth: width }}
+      style={{ width }}
       {...popoverOptions}
     >
       <Command {...props} />
