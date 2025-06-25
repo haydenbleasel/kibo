@@ -1247,8 +1247,8 @@ export const GanttProvider: FC<GanttProviderProps> = ({
       ref: scrollRef,
     });
 
-    // Scroll to the feature position with some padding to center it
-    const targetScrollLeft = Math.max(0, offset - scrollElement.clientWidth / 2);
+    // Scroll to align the feature's start with the right side of the sidebar
+    const targetScrollLeft = Math.max(0, offset);
     
     scrollElement.scrollTo({
       left: targetScrollLeft,
