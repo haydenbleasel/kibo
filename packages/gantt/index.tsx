@@ -104,6 +104,7 @@ export type GanttContextProps = {
   placeholderLength: number;
   timelineData: TimelineData;
   ref: RefObject<HTMLDivElement | null> | null;
+  scrollToFeature?: (feature: GanttFeature) => void;
 };
 
 const getsDaysIn = (range: Range) => {
@@ -299,6 +300,7 @@ const GanttContext = createContext<GanttContextProps>({
   placeholderLength: 2,
   timelineData: [],
   ref: null,
+  scrollToFeature: undefined,
 });
 
 export type GanttContentHeaderProps = {
@@ -466,6 +468,7 @@ export const GanttSidebarItem: FC<GanttSidebarItemProps> = ({
   onSelectItem,
   className,
 }) => {
+  const gantt = useContext(GanttContext);
   const tempEndAt =
     feature.endAt && isSameDay(feature.startAt, feature.endAt)
       ? addDays(feature.endAt, 1)
@@ -476,12 +479,18 @@ export const GanttSidebarItem: FC<GanttSidebarItemProps> = ({
 
   const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (event.target === event.currentTarget) {
+      // Scroll to the feature in the timeline
+      gantt.scrollToFeature?.(feature);
+      // Call the original onSelectItem callback
       onSelectItem?.(feature.id);
     }
   };
 
   const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (event.key === 'Enter') {
+      // Scroll to the feature in the timeline  
+      gantt.scrollToFeature?.(feature);
+      // Call the original onSelectItem callback
       onSelectItem?.(feature.id);
     }
   };
@@ -1215,6 +1224,38 @@ export const GanttProvider: FC<GanttProviderProps> = ({
     };
   }, [handleScroll]);
 
+  const scrollToFeature = useCallback((feature: GanttFeature) => {
+    const scrollElement = scrollRef.current;
+    if (!scrollElement) {
+      return;
+    }
+
+    // Calculate timeline start date from timelineData
+    const timelineStartDate = new Date(timelineData[0].year, 0, 1);
+    
+    // Calculate the horizontal offset for the feature's start date
+    const offset = getOffset(feature.startAt, timelineStartDate, {
+      zoom,
+      range,
+      columnWidth,
+      sidebarWidth,
+      headerHeight,
+      rowHeight,
+      onAddItem,
+      placeholderLength: 2,
+      timelineData,
+      ref: scrollRef,
+    });
+
+    // Scroll to the feature position with some padding to center it
+    const targetScrollLeft = Math.max(0, offset - scrollElement.clientWidth / 2);
+    
+    scrollElement.scrollTo({
+      left: targetScrollLeft,
+      behavior: 'smooth',
+    });
+  }, [timelineData, zoom, range, columnWidth, sidebarWidth, headerHeight, rowHeight, onAddItem]);
+
   return (
     <GanttContext.Provider
       value={{
@@ -1228,6 +1269,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         timelineData,
         placeholderLength: 2,
         ref: scrollRef,
+        scrollToFeature,
       }}
     >
       <div
