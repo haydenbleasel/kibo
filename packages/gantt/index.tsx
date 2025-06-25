@@ -636,8 +636,8 @@ export const GanttColumn: FC<GanttColumnProps> = ({
 
   const top = useThrottle(
     mousePosition.y -
-    (mouseRef.current?.getBoundingClientRect().y ?? 0) -
-    (windowScroll.y ?? 0),
+      (mouseRef.current?.getBoundingClientRect().y ?? 0) -
+      (windowScroll.y ?? 0),
     10
   );
 
@@ -703,8 +703,8 @@ export const GanttCreateMarkerTrigger: FC<GanttCreateMarkerTriggerProps> = ({
   const [windowScroll] = useWindowScroll();
   const x = useThrottle(
     mousePosition.x -
-    (mouseRef.current?.getBoundingClientRect().x ?? 0) -
-    (windowScroll.x ?? 0),
+      (mouseRef.current?.getBoundingClientRect().x ?? 0) -
+      (windowScroll.x ?? 0),
     10
   );
 
@@ -1095,13 +1095,9 @@ export const GanttProvider: FC<GanttProviderProps> = ({
     createInitialTimelineData(new Date())
   );
   const [, setScrollX] = useGanttScrollX();
-
-  const sidebarElement = scrollRef.current?.querySelector(
-    '[data-roadmap-ui="gantt-sidebar"]'
-  );
+  const [sidebarWidth, setSidebarWidth] = useState(0);
 
   const headerHeight = 60;
-  const sidebarWidth = sidebarElement ? 300 : 0;
   const rowHeight = 36;
   let columnWidth = 50;
 
@@ -1131,6 +1127,33 @@ export const GanttProvider: FC<GanttProviderProps> = ({
       setScrollX(scrollRef.current.scrollLeft);
     }
   }, [setScrollX]);
+
+  // Update sidebar width when DOM is ready
+  useEffect(() => {
+    const updateSidebarWidth = () => {
+      const sidebarElement = scrollRef.current?.querySelector(
+        '[data-roadmap-ui="gantt-sidebar"]'
+      );
+      const newWidth = sidebarElement ? 300 : 0;
+      setSidebarWidth(newWidth);
+    };
+
+    // Update immediately
+    updateSidebarWidth();
+
+    // Also update on resize or when children change
+    const observer = new MutationObserver(updateSidebarWidth);
+    if (scrollRef.current) {
+      observer.observe(scrollRef.current, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   // Fix the useCallback to include all dependencies
   const handleScroll = useCallback(
