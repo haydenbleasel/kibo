@@ -18,43 +18,25 @@ import { useState } from 'react';
 const statuses = [
   { id: faker.string.uuid(), name: 'Active', color: '#10B981' },
   { id: faker.string.uuid(), name: 'Pending', color: '#F59E0B' },
+  { id: faker.string.uuid(), name: 'Completed', color: '#6366F1' },
 ];
 
 // Simple example showing multiple items on the same row
-const sampleItems = [
-  {
-    id: '1',
-    name: 'Task A',
-    startAt: new Date('2024-02-01'),
-    endAt: new Date('2024-02-05'),
-    status: statuses[0],
-    lane: 'row1', // Same lane = same row
-  },
-  {
-    id: '2',
-    name: 'Task B',
-    startAt: new Date('2024-02-07'), // Non-overlapping
-    endAt: new Date('2024-02-12'),
-    status: statuses[1],
-    lane: 'row1', // Same lane = same row
-  },
-  {
-    id: '3',
-    name: 'Task C',
-    startAt: new Date('2024-02-03'), // Overlapping with Task A
-    endAt: new Date('2024-02-08'),
-    status: statuses[0],
-    lane: 'row1', // Same lane = same row
-  },
-  {
-    id: '4',
-    name: 'Solo Task',
-    startAt: new Date('2024-02-01'),
-    endAt: new Date('2024-02-15'),
-    status: statuses[1],
-    lane: 'row2', // Different lane = different row
-  },
-];
+const sampleItems = Array.from({ length: 6 })
+  .fill(null)
+  .map(() => {
+    const startDate = faker.date.future({ years: 0.2, refDate: new Date() });
+    const endDate = faker.date.future({ years: 0.1, refDate: startDate });
+    
+    return {
+      id: faker.string.uuid(),
+      name: faker.company.buzzPhrase(),
+      startAt: startDate,
+      endAt: endDate,
+      status: faker.helpers.arrayElement(statuses),
+      lane: faker.helpers.arrayElement(['row1', 'row1', 'row1', 'row2']), // More items in row1 to demonstrate multi-item functionality
+    };
+  });
 
 const Example = () => {
   const [items, setItems] = useState(sampleItems);
