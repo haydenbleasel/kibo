@@ -184,16 +184,36 @@ export const ComboboxContent = ({
   );
 };
 
-export type ComboboxInputProps = ComponentProps<typeof CommandInput>;
+export type ComboboxInputProps = ComponentProps<typeof CommandInput> & {
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+};
 
-export const ComboboxInput = (props: ComboboxInputProps) => {
+export const ComboboxInput = ({
+  value: controlledValue,
+  defaultValue,
+  onValueChange: controlledOnValueChange,
+  ...props
+}: ComboboxInputProps) => {
   const { type, inputValue, setInputValue } = useContext(ComboboxContext);
+
+  const [value, onValueChange] = useControllableState({
+    defaultProp: defaultValue ?? inputValue,
+    prop: controlledValue,
+    onChange: (newValue) => {
+      // Sync with context state
+      setInputValue(newValue);
+      // Call external onChange if provided
+      controlledOnValueChange?.(newValue);
+    },
+  });
 
   return (
     <CommandInput
-      onValueChange={setInputValue}
+      onValueChange={onValueChange}
       placeholder={`Search ${type}...`}
-      value={inputValue}
+      value={value}
       {...props}
     />
   );
