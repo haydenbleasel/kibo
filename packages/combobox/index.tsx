@@ -1,10 +1,11 @@
 'use client';
 
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
-import { ChevronsUpDownIcon } from 'lucide-react';
+import { ChevronsUpDownIcon, PlusIcon } from 'lucide-react';
 import {
   type ComponentProps,
   createContext,
+  type ReactNode,
   useContext,
   useEffect,
   useRef,
@@ -41,6 +42,8 @@ type ComboboxContextType = {
   onOpenChange: (open: boolean) => void;
   width: number;
   setWidth: (width: number) => void;
+  inputValue: string;
+  setInputValue: (value: string) => void;
 };
 
 const ComboboxContext = createContext<ComboboxContextType>({
@@ -52,6 +55,8 @@ const ComboboxContext = createContext<ComboboxContextType>({
   onOpenChange: () => {},
   width: 200,
   setWidth: () => {},
+  inputValue: '',
+  setInputValue: () => {},
 });
 
 export type ComboboxProps = ComponentProps<typeof Popover> & {
@@ -86,6 +91,7 @@ export const Combobox = ({
     onChange: controlledOnOpenChange,
   });
   const [width, setWidth] = useState(200);
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <ComboboxContext.Provider
@@ -98,6 +104,8 @@ export const Combobox = ({
         data,
         width,
         setWidth,
+        inputValue,
+        setInputValue,
       }}
     >
       <Popover {...props} onOpenChange={onOpenChange} open={open} />
@@ -179,9 +187,16 @@ export const ComboboxContent = ({
 export type ComboboxInputProps = ComponentProps<typeof CommandInput>;
 
 export const ComboboxInput = (props: ComboboxInputProps) => {
-  const { type } = useContext(ComboboxContext);
+  const { type, inputValue, setInputValue } = useContext(ComboboxContext);
 
-  return <CommandInput placeholder={`Search ${type}...`} {...props} />;
+  return (
+    <CommandInput
+      onValueChange={setInputValue}
+      placeholder={`Search ${type}...`}
+      value={inputValue}
+      {...props}
+    />
+  );
 };
 
 export type ComboboxListProps = ComponentProps<typeof CommandList>;
@@ -227,3 +242,50 @@ export type ComboboxSeparatorProps = ComponentProps<typeof CommandSeparator>;
 export const ComboboxSeparator = (props: ComboboxSeparatorProps) => (
   <CommandSeparator {...props} />
 );
+
+export type ComboboxCreateNewProps = {
+  onCreateNew: (value: string) => void;
+  children?: (inputValue: string) => ReactNode;
+  className?: string;
+};
+
+export const ComboboxCreateNew = ({
+  onCreateNew,
+  children,
+  className,
+}: ComboboxCreateNewProps) => {
+  const { inputValue, type, onValueChange, onOpenChange } =
+    useContext(ComboboxContext);
+
+  if (!inputValue.trim()) {
+    return null;
+  }
+
+  const handleCreateNew = () => {
+    onCreateNew(inputValue.trim());
+    onValueChange(inputValue.trim());
+    onOpenChange(false);
+  };
+
+  return (
+    <button
+      className={cn(
+        'relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+        className
+      )}
+      onClick={handleCreateNew}
+      type="button"
+    >
+      {children ? (
+        children(inputValue)
+      ) : (
+        <>
+          <PlusIcon className="h-4 w-4 text-muted-foreground" />
+          <span>
+            Create new {type}: "{inputValue}"
+          </span>
+        </>
+      )}
+    </button>
+  );
+};
