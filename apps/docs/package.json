@@ -22,6 +22,7 @@
     "@repo/banner": "workspace:*",
     "@repo/calendar": "workspace:*",
     "@repo/choicebox": "workspace:*",
+    "@repo/credit-card": "workspace:*",
     "@repo/code-block": "workspace:*",
     "@repo/color-picker": "workspace:*",
     "@repo/combobox": "workspace:*",
