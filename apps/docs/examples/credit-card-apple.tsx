@@ -139,10 +139,10 @@ const Example = () => (
     <CreditCard>
       <CreditCardFlipper>
         <CreditCardFront safeArea={24} className="bg-[#F2F2F2] text-[#909090]">
-          <CreditCardLogo className="absolute top-0 right-auto left-0">
-            <AppleLogo className="h-12" />
+          <CreditCardLogo className="absolute top-0 right-auto left-0 size-1/8">
+            <AppleLogo />
           </CreditCardLogo>
-          <CreditCardChip className="right-2 left-auto w-1/5">
+          <CreditCardChip className="right-1 left-auto w-1/5">
             <AppleChip />
           </CreditCardChip>
           <CreditCardName className="-translate-y-1/2 absolute top-1/2 mt-4">
@@ -154,8 +154,8 @@ const Example = () => (
           hideInformation={false}
           className="bg-[#F2F2F2] text-[#909090]"
         >
-          <CreditCardServiceProvider className="top-6 right-6">
-            <MastercardLogo className="h-14" />
+          <CreditCardServiceProvider className="top-6 right-6 max-h-1/4 max-w-1/4">
+            <MastercardLogo className="w-full" />
           </CreditCardServiceProvider>
           <CreditCardMagStripe className="top-auto bottom-0 bg-[#BEBEC0]" />
         </CreditCardBack>
