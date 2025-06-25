@@ -572,12 +572,10 @@ export const GanttSidebar: FC<GanttSidebarProps> = ({
 );
 
 export type GanttAddFeatureHelperProps = {
-  top: number;
   className?: string;
 };
 
 export const GanttAddFeatureHelper: FC<GanttAddFeatureHelperProps> = ({
-  top,
   className,
 }) => {
   const [scrollX] = useGanttScrollX();
@@ -595,12 +593,8 @@ export const GanttAddFeatureHelper: FC<GanttAddFeatureHelperProps> = ({
 
   return (
     <div
-      className={cn('absolute top-0 w-full px-0.5', className)}
+      className={cn('absolute top-1/2 w-full px-0.5 -translate-y-1/2', className)}
       ref={mouseRef}
-      style={{
-        marginTop: -gantt.rowHeight / 2,
-        transform: `translateY(${top}px)`,
-      }}
     >
       <button
         className="flex h-full w-full items-center justify-center rounded-md border border-dashed p-2"
@@ -627,19 +621,10 @@ export const GanttColumn: FC<GanttColumnProps> = ({
 }) => {
   const gantt = useContext(GanttContext);
   const [dragging] = useGanttDragging();
-  const [mousePosition, mouseRef] = useMouse<HTMLDivElement>();
   const [hovering, setHovering] = useState(false);
-  const [windowScroll] = useWindowScroll();
 
   const handleMouseEnter = () => setHovering(true);
   const handleMouseLeave = () => setHovering(false);
-
-  const top = useThrottle(
-    mousePosition.y -
-    (mouseRef.current?.getBoundingClientRect().y ?? 0) -
-    (windowScroll.y ?? 0),
-    10
-  );
 
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: "This is a clickable column"
@@ -651,10 +636,9 @@ export const GanttColumn: FC<GanttColumnProps> = ({
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      ref={mouseRef}
     >
       {!dragging && hovering && gantt.onAddItem ? (
-        <GanttAddFeatureHelper top={top} />
+        <GanttAddFeatureHelper />
       ) : null}
     </div>
   );
