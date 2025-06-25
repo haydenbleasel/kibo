@@ -13,7 +13,6 @@ import {
 import {
   Amex,
   type CardNetworkIcon,
-  type CardNetworkIconProps,
   type CardNetworkIconType,
   Diners,
   Discover,
@@ -40,7 +39,8 @@ export type CreditCardProps = HTMLAttributes<HTMLDivElement>;
 export const CreditCard = ({ className, ...props }: CreditCardProps) => (
   <div
     className={cn(
-      'group/kibo-credit-card perspective-distant aspect-[8560/5398] w-96 text-white',
+      'group/kibo-credit-card perspective-distant aspect-[8560/5398] w-full max-w-96 text-white',
+      '@container',
       className
     )}
     {...props}
@@ -72,7 +72,8 @@ export const CreditCardFlipper = ({
       <div
         onClick={handleClick}
         className={cn(
-          'h-full w-full rounded-2xl',
+          'h-full w-full',
+          '@xs:rounded-2xl rounded-lg',
           'transform-3d transition duration-700 ease-in-out',
           supportsHover &&
             'group-hover/kibo-credit-card:-rotate-y-180 group-hover/kibo-credit-card:shadow-lg',
@@ -92,9 +93,17 @@ export type CreditCardNameProps = HTMLAttributes<HTMLParagraphElement>;
 
 export const CreditCardName = ({
   className,
+  style,
   ...props
 }: CreditCardNameProps) => (
-  <p className={cn('font-semibold uppercase', className)} {...props} />
+  <p
+    className={cn('font-semibold uppercase', className)}
+    style={{
+      lineHeight: '100%',
+      ...style,
+    }}
+    {...props}
+  />
 );
 CreditCardName.displayName = 'CreditCardName';
 
@@ -157,7 +166,10 @@ export const CreditCardLogo = ({
   className,
   ...props
 }: CreditCardLogoProps) => (
-  <div className={cn('absolute top-0 right-0', className)} {...props} />
+  <div
+    className={cn('absolute top-0 right-0 size-1/6', className)}
+    {...props}
+  />
 );
 CreditCardLogo.displayName = 'CreditCardLogo';
 
@@ -173,7 +185,8 @@ export const CreditCardFront = ({
 }: CreditCardFrontProps) => (
   <div
     className={cn(
-      'backface-hidden absolute inset-0 flex overflow-hidden rounded-2xl bg-foreground/90',
+      'backface-hidden absolute inset-0 flex overflow-hidden bg-foreground/90',
+      '@xs:rounded-2xl rounded-lg',
       className
     )}
     {...props}
@@ -191,7 +204,6 @@ export const CreditCardFront = ({
 CreditCardFront.displayName = 'CreditCardFront';
 
 export type CreditCardServiceProviderProps = HTMLAttributes<HTMLDivElement> & {
-  referenceHeight?: CardNetworkIconProps['referenceHeight'];
   type?: CardNetworkIconType;
 };
 
@@ -212,22 +224,30 @@ export const CreditCardServiceProvider = ({
   className,
   children,
   type = 'visa',
-  referenceHeight,
   ...props
 }: CreditCardServiceProviderProps) => {
   const Icon = icons[type];
 
   if (children) {
     return (
-      <div className={cn('absolute right-0 bottom-0', className)}>
+      <div
+        className={cn(
+          'absolute right-0 bottom-0',
+          'max-h-1/3 max-w-1/3',
+          className
+        )}
+      >
         {children}
       </div>
     );
   }
   return (
     <Icon
-      className={cn('absolute right-0 bottom-0', className)}
-      referenceHeight={referenceHeight}
+      className={cn(
+        'absolute right-0 bottom-0',
+        'max-h-1/3 max-w-1/3',
+        className
+      )}
       {...props}
     />
   );
@@ -277,7 +297,8 @@ export const CreditCardBack = ({
     >
       <div
         className={cn(
-          'backface-hidden absolute inset-0 flex overflow-hidden rounded-2xl bg-foreground/90',
+          'backface-hidden absolute inset-0 flex overflow-hidden bg-foreground/90',
+          '@xs:rounded-2xl rounded-lg',
           isInsideFlipper && 'rotate-y-180',
           className
         )}
@@ -326,6 +347,7 @@ export type CreditCardNumberProps = HTMLAttributes<HTMLParagraphElement>;
 export const CreditCardNumber = ({
   className,
   children,
+  style,
   ...props
 }: CreditCardNumberProps) => {
   const context = useContext(CreditCardBackContext);
@@ -334,7 +356,14 @@ export const CreditCardNumber = ({
     return null;
   }
   return (
-    <p className={cn('font-mono text-2xl', className)} {...props}>
+    <p
+      className={cn('font-mono', '@xs:text-2xl', className)}
+      style={{
+        lineHeight: '100%',
+        ...style,
+      }}
+      {...props}
+    >
       {children}
     </p>
   );
@@ -345,6 +374,7 @@ export type CreditCardExpiryProps = HTMLAttributes<HTMLParagraphElement>;
 
 export const CreditCardExpiry = ({
   className,
+  style,
   ...props
 }: CreditCardExpiryProps) => {
   const context = useContext(CreditCardBackContext);
@@ -352,19 +382,41 @@ export const CreditCardExpiry = ({
   if (context.hideInformation) {
     return null;
   }
-  return <p className={cn('font-mono', className)} {...props} />;
+  return (
+    <p
+      className={cn('font-mono', className)}
+      style={{
+        lineHeight: '100%',
+        ...style,
+      }}
+      {...props}
+    />
+  );
 };
 CreditCardExpiry.displayName = 'CreditCardExpiry';
 
 export type CreditCardCvvProps = HTMLAttributes<HTMLParagraphElement>;
 
-export const CreditCardCvv = ({ className, ...props }: CreditCardCvvProps) => {
+export const CreditCardCvv = ({
+  className,
+  style,
+  ...props
+}: CreditCardCvvProps) => {
   const context = useContext(CreditCardBackContext);
 
   if (context.hideInformation) {
     return null;
   }
-  return <p className={cn('font-mono', className)} {...props} />;
+  return (
+    <p
+      className={cn('font-mono', className)}
+      style={{
+        lineHeight: '100%',
+        ...style,
+      }}
+      {...props}
+    />
+  );
 };
 CreditCardCvv.displayName = 'CreditCardCvv';
 

@@ -73,15 +73,11 @@ const Example = () => (
       <CreditCardFlipper>
         <CreditCardFront className="bg-[#321419]">
           <ScotiabankLogo className="absolute top-0 left-0 h-1/10" />
-          <CreditCardLogo>
-            <ScenePlusMark className="h-8 text-[#0e72d1]" />
+          <CreditCardLogo className="size-1/4">
+            <ScenePlusMark className="text-[#0e72d1]" />
           </CreditCardLogo>
           <CreditCardChip />
-          <CreditCardServiceProvider
-            type="amex"
-            referenceHeight={50}
-            className="fill-white"
-          />
+          <CreditCardServiceProvider type="amex" className="fill-white" />
           <CreditCardName className="absolute bottom-0 left-0">
             John R. Doe
           </CreditCardName>
