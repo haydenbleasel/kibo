@@ -26,8 +26,19 @@ icon: SquareChartGantt
 - Today marker to highlight the current date
 - Create marker trigger to create a new marker
 - Grouping of features
+- **Multiple items per row** for scenarios like hotel reservations, resource booking, etc.
 
 ## Examples
+
+### Multiple items on one row
+
+Perfect for hotel reservations, resource scheduling, or any scenario where multiple items share the same category but have different time periods.
+
+<Preview path="gantt-hotel-reservations" />
+
+### Simple multi-item example
+
+<Preview path="gantt-multi-items" />
 
 ### Without a sidebar
 
@@ -36,3 +47,65 @@ icon: SquareChartGantt
 ### Read-only version
 
 <Preview path="gantt-read-only" />
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import { GanttProvider, GanttFeatureList, GanttFeatureListGroup, GanttFeatureItem } from '@repo/gantt';
+
+// Standard single-item-per-row usage
+<GanttFeatureListGroup>
+  {features.map((feature) => (
+    <GanttFeatureItem key={feature.id} {...feature} />
+  ))}
+</GanttFeatureListGroup>
+```
+
+### Multiple Items Per Row
+
+```tsx
+import { GanttFeatureRow } from '@repo/gantt';
+
+// Group features by lane (e.g., room, resource, category)
+const groupedByLane = features.reduce((acc, feature) => {
+  if (!acc[feature.lane]) acc[feature.lane] = [];
+  acc[feature.lane].push(feature);
+  return acc;
+}, {});
+
+// Render multiple items per row
+<GanttFeatureListGroup>
+  {Object.entries(groupedByLane).map(([lane, laneFeatures]) => (
+    <GanttFeatureRow
+      key={lane}
+      features={laneFeatures}
+      onMove={handleMoveFeature}
+    >
+      {(feature) => (
+        <div className="flex items-center gap-2">
+          <span>{feature.name}</span>
+        </div>
+      )}
+    </GanttFeatureRow>
+  ))}
+</GanttFeatureListGroup>
+```
+
+### Feature Properties
+
+The `GanttFeature` type includes an optional `lane` property for grouping:
+
+```tsx
+type GanttFeature = {
+  id: string;
+  name: string;
+  startAt: Date;
+  endAt: Date;
+  status: GanttStatus;
+  lane?: string; // Optional: features with the same lane share a row
+};
+```
+
+When features with the same `lane` have overlapping time periods, they are automatically stacked in sub-rows to prevent visual conflicts.
