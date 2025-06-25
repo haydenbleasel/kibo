@@ -71,6 +71,7 @@ export const CreditCardFlipper = ({
       {/* biome-ignore lint/nursery/noStaticElementInteractions: tap to flip for touch devices */}
       <div
         onClick={handleClick}
+        aria-label="Flip credit card"
         className={cn(
           'h-full w-full',
           '@xs:rounded-2xl rounded-lg',
@@ -263,7 +264,9 @@ export type CreditCardBackContextValue = {
 
 const CreditCardBackContext = createContext<CreditCardBackContextValue>({
   hideInformation: true,
-  setHideInformation: () => {},
+  setHideInformation: () => {
+    throw new Error('CreditCardBackContext must be used within CreditCardBack');
+  },
   safeArea: 20,
 });
 
@@ -432,6 +435,8 @@ export const CreditCardRevealButton = ({
 }: CreditCardRevealButtonProps) => {
   const context = useContext(CreditCardBackContext);
 
+  const defaultChildren = context.hideInformation ? 'Reveal' : 'Hide';
+
   return (
     <Button
       variant={variant}
@@ -443,15 +448,12 @@ export const CreditCardRevealButton = ({
         className
       )}
       onClick={(e) => {
-        if (context === null) {
-          return;
-        }
         e.stopPropagation();
         context.setHideInformation(!context.hideInformation);
       }}
       {...props}
     >
-      {(children ?? context.hideInformation) ? 'Reveal' : 'Hide'}
+      {children ?? defaultChildren}
     </Button>
   );
 };
