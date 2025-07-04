@@ -27,6 +27,7 @@ icon: SquareChartGantt
 - Create marker trigger to create a new marker
 - Grouping of features
 - **Multiple items per row** for scenarios like hotel reservations, resource booking, etc.
+- **Feature dependencies** with validation and conflict detection
 
 ## Examples
 
@@ -43,5 +44,104 @@ Perfect for hotel reservations, resource scheduling, or any scenario where multi
 ### Read-only version
 
 <Preview path="gantt-read-only" />
+
+### Feature dependencies
+
+Manage complex project timelines with interdependent features. Features can depend on other features, with automatic validation and conflict detection.
+
+<Preview path="gantt-dependencies" />
+
+## Feature Dependencies
+
+The Gantt component supports feature dependencies, enabling you to model complex project relationships where features depend on others being completed first.
+
+### Enhanced Feature Type
+
+```typescript
+export type GanttFeature = {
+  id: string;
+  name: string;
+  startAt: Date;
+  endAt: Date;
+  status: GanttStatus;
+  lane?: string;
+  dependencies?: string[]; // Array of feature IDs this feature depends on
+};
+```
+
+### Dependency Management Functions
+
+```typescript
+import { 
+  getDependentFeatures,
+  getBlockingFeatures,
+  validateDependencies,
+  getDependencySummary,
+  hasCyclicDependency
+} from '@repo/gantt';
+
+// Get features that a given feature depends on
+const dependencies = getDependentFeatures(feature, allFeatures);
+
+// Get features that depend on a given feature
+const blocking = getBlockingFeatures(feature, allFeatures);
+
+// Validate dependencies for timing conflicts
+const validation = validateDependencies(feature, allFeatures);
+if (!validation.isValid) {
+  console.warn('Conflicts:', validation.conflicts);
+}
+
+// Get comprehensive dependency overview
+const summary = getDependencySummary(allFeatures);
+
+// Check for circular dependencies
+const cyclicCheck = hasCyclicDependency(allFeatures);
+```
+
+### Visual Indicators
+
+- **🔗 GitBranch icon**: Shows features with dependencies
+- **⚠️ AlertTriangle icon**: Highlights features with dependency conflicts
+- **Context menu integration**: Right-click features to view dependency details
+- **Real-time validation**: Automatic conflict detection when moving features
+
+### Usage Example
+
+```typescript
+const features = [
+  {
+    id: 'auth',
+    name: 'User Authentication',
+    startAt: new Date(2024, 0, 1),
+    endAt: new Date(2024, 0, 15),
+    status: { name: 'Done', color: '#10B981' },
+    // No dependencies - foundational feature
+  },
+  {
+    id: 'dashboard',
+    name: 'User Dashboard',
+    startAt: new Date(2024, 0, 16),
+    endAt: new Date(2024, 1, 1),
+    status: { name: 'In Progress', color: '#F59E0B' },
+    dependencies: ['auth'], // Depends on authentication
+  }
+];
+
+// Validate when moving features
+const handleMoveFeature = (id: string, startAt: Date, endAt: Date) => {
+  const updatedFeatures = features.map(f => 
+    f.id === id ? { ...f, startAt, endAt } : f
+  );
+  
+  const movedFeature = updatedFeatures.find(f => f.id === id);
+  const validation = validateDependencies(movedFeature, updatedFeatures);
+  
+  if (!validation.isValid) {
+    // Handle conflicts - show warnings, prevent move, etc.
+    console.warn('Dependency conflicts:', validation.conflicts);
+  }
+};
+```
 
 
