@@ -300,6 +300,7 @@ export const ColorPickerEyeDropper = ({
       onClick={handleEyeDropper}
       size="icon"
       variant="outline"
+      type="button"
       {...props}
     >
       <PipetteIcon size={16} />
