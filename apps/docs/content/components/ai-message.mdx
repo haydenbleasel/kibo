@@ -18,6 +18,7 @@ icon: MessageSquareCode
 - Automatically aligns user and assistant messages on opposite sides.
 - Uses different background colors for user and assistant messages.
 - Accepts any React node as message content.
+- **NEW**: Support for interactive message actions (copy, like, dislike, retry, delete, share, etc.)
 
 ## Notes
 
@@ -25,8 +26,72 @@ Always render the `AIMessageContent` first, then the `AIMessageAvatar`. The `AIM
 
 ## Examples
 
+### Basic Actions
+
+Add interactive actions to messages with the `AIMessageActions` component.
+
+<Preview path="ai-message-actions" />
+
+### Advanced Actions
+
+Explore different positioning, display options, and combinations with timestamps.
+
+<Preview path="ai-message-actions-advanced" />
+
 ### Render Markdown
 
 We can use the [`AIResponse`](/components/ai-response) component to render markdown content.
 
 <Preview path="ai-message-markdown" />
+
+## API Reference
+
+### AIMessage
+
+The main container component for messages.
+
+### AIMessageContent
+
+The content area of the message that can contain text, markdown, or any React content.
+
+### AIMessageAvatar
+
+Avatar component for displaying user or assistant profile images.
+
+### AIMessageActions
+
+Container for message actions with flexible positioning and display options.
+
+#### Props
+
+- `actions`: Array of action configurations
+- `position`: `'top' | 'bottom'` - Position relative to message content (default: `'bottom'`)
+- `display`: `'always' | 'hover'` - When to show actions (default: `'hover'`)
+- `align`: `'left' | 'right'` - Horizontal alignment (default: `'right'`)
+- `message`: Optional message text to pass to action handlers
+
+### AIMessageAction
+
+Individual action button component.
+
+#### Built-in Action Types
+
+- `copy`: Copy message to clipboard
+- `like`: Like/upvote message  
+- `dislike`: Dislike/downvote message
+- `retry`: Retry message generation
+- `delete`: Delete message
+- `share`: Share message using Web Share API
+- `custom`: Custom action with your own icon and handler
+
+#### Action Configuration
+
+```typescript
+interface AIMessageActionConfig {
+  type: AIMessageActionType;
+  icon?: ReactNode;           // Custom icon (for custom actions)
+  label?: string;             // Accessibility label
+  handler?: AIMessageActionHandler; // Click handler function
+  disabled?: boolean;         // Disable the action
+}
+```
