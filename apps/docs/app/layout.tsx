@@ -2,7 +2,6 @@ import './global.css';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Toaster } from '@repo/shadcn-ui/components/ui/sonner';
 import { TooltipProvider } from '@repo/shadcn-ui/components/ui/tooltip';
-import { cn } from '@repo/shadcn-ui/lib/utils';
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import { RootProvider } from 'fumadocs-ui/provider';
 import type { ReactNode } from 'react';
@@ -15,8 +14,8 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => (
-  <html lang="en" suppressHydrationWarning>
-    <body className={cn('flex min-h-screen flex-col', fonts)}>
+  <html lang="en" className={fonts} suppressHydrationWarning>
+    <body className="flex min-h-screen flex-col">
       <ThemeProvider>
         <RootProvider>
           <TooltipProvider>{children}</TooltipProvider>
