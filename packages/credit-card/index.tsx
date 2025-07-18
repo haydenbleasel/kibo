@@ -10,7 +10,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { PaymentIcon } from 'react-svg-credit-card-payment-icons';
+import { PaymentIcon } from 'react-svg-credit-card-payment-icons/dist/index.mjs';
 
 const useSupportsHover = () => {
   const [supportsHover, setSupportsHover] = useState(false);
