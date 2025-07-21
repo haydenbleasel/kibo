@@ -96,7 +96,15 @@ export const Preview = async ({
         >
           <PreviewCode code={parsedCode} filename="index.tsx" language="tsx" />
         </TabsContent>
-        <PreviewContent Component={Component} type={type} />
+        <TabsContent
+          className={cn(
+            'not-fumadocs-codeblock size-full',
+            type === 'component' ? 'overflow-hidden' : 'overflow-auto'
+          )}
+          value="preview"
+        >
+          <PreviewContent Component={Component} type={type} />
+        </TabsContent>
       </Tabs>
     </div>
   );
