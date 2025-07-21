@@ -9,8 +9,8 @@ import {
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { BoxIcon, CodeIcon, EyeIcon } from 'lucide-react';
 import { PreviewCode } from './code';
-import { PreviewRender } from './render';
 import { PreviewSource } from './source';
+import { PreviewContent } from './content';
 
 type PreviewProps = {
   path: string;
@@ -96,21 +96,7 @@ export const Preview = async ({
         >
           <PreviewCode code={parsedCode} filename="index.tsx" language="tsx" />
         </TabsContent>
-        <TabsContent
-          className={cn(
-            'not-fumadocs-codeblock size-full',
-            type === 'component' ? 'overflow-hidden' : 'overflow-auto'
-          )}
-          value="preview"
-        >
-          {type === 'block' ? (
-            <Component />
-          ) : (
-            <PreviewRender>
-              <Component />
-            </PreviewRender>
-          )}
-        </TabsContent>
+        <PreviewContent Component={Component} type={type} />
       </Tabs>
     </div>
   );
