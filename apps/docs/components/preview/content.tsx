@@ -5,39 +5,32 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '@repo/shadcn-ui/components/ui/resizable';
-import { PreviewRender } from './render';
+import type { ReactNode } from 'react';
 
 type PreviewContentProps = {
-  Component: React.ComponentType;
-  type: 'component' | 'block';
+  children: ReactNode;
 };
 
-export const PreviewContent = ({ Component, type }: PreviewContentProps) => {
+export const PreviewContent = ({ children }: PreviewContentProps) => {
   return (
-    <ResizablePanelGroup 
-      direction="horizontal" 
-      className="size-full"
-    >
+    <ResizablePanelGroup className="size-full" direction="horizontal">
       <ResizablePanel
-        defaultSize={100}
-        minSize={40}
-        maxSize={100}
         className="peer"
+        defaultSize={100}
+        maxSize={100}
+        minSize={40}
       >
-        {type === 'block' ? (
-          <Component />
-        ) : (
-          <PreviewRender>
-            <Component />
-          </PreviewRender>
-        )}
+        {children}
       </ResizablePanel>
-      <ResizableHandle withHandle className="peer-data-[panel-size=100.0]:w-0" />
+      <ResizableHandle
+        className="peer-data-[panel-size=100.0]:w-0"
+        withHandle
+      />
       <ResizablePanel
+        className="border-none bg-background"
         defaultSize={0}
-        minSize={0}
         maxSize={70}
-        className="bg-background border-none"
+        minSize={0}
       />
     </ResizablePanelGroup>
   );
