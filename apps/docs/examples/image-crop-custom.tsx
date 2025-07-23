@@ -32,7 +32,7 @@ const Example = () => {
     return (
       <Input
         accept="image/*"
-        className="w-fit"
+        className="w-fit max-w-full"
         onChange={handleFileChange}
         type="file"
       />
