@@ -76,7 +76,7 @@ const Example = () => {
   const [frequency, setFrequency] = useState<string>('monthly');
 
   return (
-    <div className="not-prose flex flex-col gap-16 px-8 py-24 text-center">
+    <div className="not-prose flex flex-col gap-16 px-8 py-24 text-center @container">
       <div className="flex flex-col items-center justify-center gap-8">
         <h1 className="mb-0 text-balance font-medium text-5xl tracking-tighter!">
           Simple, transparent pricing
@@ -94,7 +94,7 @@ const Example = () => {
             </TabsTrigger>
           </TabsList>
         </Tabs>
-        <div className="mt-8 grid w-full max-w-4xl gap-4 lg:grid-cols-3">
+        <div className="mt-8 grid w-full max-w-4xl gap-4 @2xl:grid-cols-3">
           {plans.map((plan) => (
             <Card
               className={cn(

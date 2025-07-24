@@ -104,7 +104,7 @@ export const Preview = async ({
           )}
           value="preview"
         >
-          <PreviewContent>
+          <PreviewContent type={type}>
             {type === 'block' ? (
               <Component />
             ) : (
