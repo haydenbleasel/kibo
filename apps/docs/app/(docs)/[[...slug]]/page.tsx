@@ -1,4 +1,3 @@
-import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   DocsBody,
@@ -11,7 +10,6 @@ import { notFound } from 'next/navigation';
 import { Installer } from '../../../components/installer';
 import { PoweredBy } from '../../../components/powered-by';
 import { Preview } from '../../../components/preview';
-import { baseOptions } from '../../../lib/layout.config';
 import { source } from '../../../lib/source';
 import Home from './(home)';
 
@@ -24,21 +22,7 @@ const Page = async (props: PageProps) => {
   const page = source.getPage(params.slug);
 
   if (!params.slug) {
-    return (
-      <DocsLayout
-        {...baseOptions}
-        containerProps={{ className: 'landing-page' }}
-        // Alternative: don't show the sidebar at all in the landing page on mobile.
-        // in this case, set:
-        // 1. in /(docs)/[[...slug]]/page.tsx: sidebar={{ hidden: true, collapsible: false }}
-        // 2. in /global.css: .landing-page #nd-subnav button[data-search] + button { @apply hidden; }
-        nav={{ ...baseOptions.nav, mode: 'top' }}
-        sidebar={{ hidden: false, collapsible: false }}
-        tree={source.pageTree}
-      >
-        <Home />
-      </DocsLayout>
-    );
+    return <Home />;
   }
 
   if (!page) {
@@ -48,50 +32,24 @@ const Page = async (props: PageProps) => {
   const MDX = page.data.body;
 
   return (
-    <DocsLayout
-      {...baseOptions}
-      nav={{
-        ...baseOptions.nav,
-        mode: 'top',
-      }}
-      sidebar={{
-        collapsible: false,
-        tabs: [
-          {
-            title: 'Docs',
-            url: '/docs',
-          },
-          {
-            title: 'Components',
-            url: '/components',
-          },
-          {
-            title: 'Blocks',
-            url: '/blocks',
-          },
-        ],
-      }}
-      tree={source.pageTree}
+    <DocsPage
+      full={page.data.full}
+      tableOfContent={{ style: 'clerk' }}
+      toc={page.data.toc}
     >
-      <DocsPage
-        full={page.data.full}
-        tableOfContent={{ style: 'clerk' }}
-        toc={page.data.toc}
-      >
-        <DocsTitle>{page.data.title}</DocsTitle>
-        <DocsDescription>{page.data.description}</DocsDescription>
-        <DocsBody>
-          <MDX
-            components={{
-              ...defaultMdxComponents,
-              Installer,
-              Preview,
-              PoweredBy,
-            }}
-          />
-        </DocsBody>
-      </DocsPage>
-    </DocsLayout>
+      <DocsTitle>{page.data.title}</DocsTitle>
+      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsBody>
+        <MDX
+          components={{
+            ...defaultMdxComponents,
+            Installer,
+            Preview,
+            PoweredBy,
+          }}
+        />
+      </DocsBody>
+    </DocsPage>
   );
 };
 
