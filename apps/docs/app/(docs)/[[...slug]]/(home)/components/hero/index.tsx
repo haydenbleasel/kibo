@@ -99,7 +99,7 @@ export const Hero = () => (
             ))}
           </div>
         </h1>
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <p className="mt-0 mb-0 text-muted-foreground lg:text-lg xl:text-xl 2xl:text-2xl">
             Kibo UI is a custom registry of composable, accessible and
             extensible components designed for use with shadcn/ui. Free and open

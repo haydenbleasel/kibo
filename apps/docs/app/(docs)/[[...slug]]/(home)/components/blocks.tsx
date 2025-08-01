@@ -7,12 +7,12 @@ import type { ComponentType } from 'react';
 import { createElement } from 'react';
 import AIInputExample from '../../../../../examples/ai-chatbot';
 import CollaborativeCanvasExample from '../../../../../examples/collaborative-canvas';
-import PricingPageExample from '../../../../../examples/pricing';
+import FormExample from '../../../../../examples/form';
 import { source } from '../../../../../lib/source';
 
 const aiChatbot = source.getPage(['blocks', 'ai-chatbot']);
 const collaborativeCanvas = source.getPage(['blocks', 'collaborative-canvas']);
-const pricing = source.getPage(['blocks', 'pricing']);
+const form = source.getPage(['blocks', 'form']);
 
 const examples = [
   {
@@ -36,10 +36,14 @@ const examples = [
     ),
   },
   {
-    icon: pricing?.data.icon,
-    name: pricing?.data.title,
-    description: pricing?.data.description,
-    component: PricingPageExample,
+    icon: form?.data.icon,
+    name: form?.data.title,
+    description: form?.data.description,
+    component: () => (
+      <div className="max-h-[40rem] overflow-y-auto">
+        <FormExample />
+      </div>
+    ),
     className: 'lg:col-span-2',
   },
 ];
