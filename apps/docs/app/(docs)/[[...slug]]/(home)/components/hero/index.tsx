@@ -2,7 +2,6 @@ import {
   SiLucide,
   SiRadixui,
   SiReact,
-  SiShadcnui,
   SiTailwindcss,
   SiTypescript,
 } from '@icons-pack/react-simple-icons';
@@ -23,11 +22,6 @@ const icons = [
     icon: SiReact,
     name: 'React',
     color: '#087ea4',
-  },
-  {
-    icon: SiShadcnui,
-    name: 'shadcn/ui',
-    color: '#000000',
   },
   {
     icon: SiTypescript,
