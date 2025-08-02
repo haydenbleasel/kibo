@@ -75,6 +75,7 @@ export type GanttFeature = {
   endAt: Date;
   status: GanttStatus;
   lane?: string; // Optional: features with the same lane will share a row
+  dependencies?: string[]; // Optional: array of feature IDs this feature depends on
 };
 
 export type GanttMarkerProps = {
@@ -288,6 +289,118 @@ const calculateInnerOffset = (
   const dayOfMonth = date.getDate();
 
   return (dayOfMonth / totalRangeDays) * columnWidth;
+};
+
+// Dependency helper functions
+export const getDependentFeatures = (
+  feature: GanttFeature,
+  allFeatures: GanttFeature[]
+): GanttFeature[] => {
+  if (!feature.dependencies?.length) return [];
+  return allFeatures.filter(f => feature.dependencies!.includes(f.id));
+};
+
+export const getBlockingFeatures = (
+  feature: GanttFeature,
+  allFeatures: GanttFeature[]
+): GanttFeature[] => {
+  return allFeatures.filter(f => f.dependencies?.includes(feature.id));
+};
+
+export const validateDependencies = (
+  feature: GanttFeature,
+  allFeatures: GanttFeature[]
+): { isValid: boolean; conflicts: string[] } => {
+  const conflicts: string[] = [];
+  const dependentFeatures = getDependentFeatures(feature, allFeatures);
+  
+  for (const dependency of dependentFeatures) {
+    if (dependency.endAt > feature.startAt) {
+      conflicts.push(
+        `Feature "${feature.name}" starts before dependency "${dependency.name}" ends`
+      );
+    }
+  }
+  
+  return {
+    isValid: conflicts.length === 0,
+    conflicts
+  };
+};
+
+export const hasCyclicDependency = (
+  features: GanttFeature[]
+): { hasCycle: boolean; cycle?: string[] } => {
+  const visited = new Set<string>();
+  const recursionStack = new Set<string>();
+  
+  const dfs = (featureId: string, path: string[]): string[] | null => {
+    if (recursionStack.has(featureId)) {
+      const cycleStart = path.indexOf(featureId);
+      return path.slice(cycleStart).concat([featureId]);
+    }
+    
+    if (visited.has(featureId)) return null;
+    
+    visited.add(featureId);
+    recursionStack.add(featureId);
+    
+    const feature = features.find(f => f.id === featureId);
+    if (feature?.dependencies) {
+      for (const depId of feature.dependencies) {
+        const cycle = dfs(depId, [...path, featureId]);
+        if (cycle) return cycle;
+      }
+    }
+    
+    recursionStack.delete(featureId);
+    return null;
+  };
+  
+  for (const feature of features) {
+    if (!visited.has(feature.id)) {
+      const cycle = dfs(feature.id, []);
+      if (cycle) {
+        return { hasCycle: true, cycle };
+      }
+    }
+  }
+  
+  return { hasCycle: false };
+};
+
+export const getDependencySummary = (
+  features: GanttFeature[]
+): {
+  totalFeatures: number;
+  featuresWithDependencies: number;
+  totalDependencies: number;
+  conflicts: Array<{ feature: GanttFeature; conflicts: string[] }>;
+  cyclicDependency: { hasCycle: boolean; cycle?: string[] };
+} => {
+  const featuresWithDeps = features.filter(f => f.dependencies?.length);
+  const totalDeps = featuresWithDeps.reduce((sum, f) => sum + (f.dependencies?.length || 0), 0);
+  
+  const conflicts = features
+    .map(feature => ({
+      feature,
+      validation: validateDependencies(feature, features)
+    }))
+    .filter(({ validation }) => !validation.isValid)
+    .map(({ feature, validation }) => ({
+      feature,
+      conflicts: validation.conflicts
+    }));
+  
+  const cyclicDependency = hasCyclicDependency(features);
+  
+  return {
+    totalFeatures: features.length,
+    featuresWithDependencies: featuresWithDeps.length,
+    totalDependencies: totalDeps,
+    conflicts,
+    cyclicDependency
+  };
 };
 
 const GanttContext = createContext<GanttContextProps>({
@@ -831,6 +944,75 @@ export const GanttFeatureItemCard: FC<GanttFeatureItemCardProps> = ({
         {children}
       </div>
     </Card>
+  );
+};
+
+export type GanttDependencyLineProps = {
+  fromFeature: GanttFeature;
+  toFeature: GanttFeature;
+  fromRow: number;
+  toRow: number;
+  className?: string;
+};
+
+export const GanttDependencyLine: FC<GanttDependencyLineProps> = ({
+  fromFeature,
+  toFeature,
+  fromRow,
+  toRow,
+  className,
+}) => {
+  const gantt = useContext(GanttContext);
+  const timelineStartDate = useMemo(
+    () => new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1),
+    [gantt.timelineData]
+  );
+
+  const fromOffset = useMemo(
+    () => getOffset(fromFeature.endAt, timelineStartDate, gantt),
+    [fromFeature.endAt, timelineStartDate, gantt]
+  );
+  const toOffset = useMemo(
+    () => getOffset(toFeature.startAt, timelineStartDate, gantt),
+    [toFeature.startAt, timelineStartDate, gantt]
+  );
+
+  const fromY = fromRow * gantt.rowHeight + gantt.rowHeight / 2;
+  const toY = toRow * gantt.rowHeight + gantt.rowHeight / 2;
+
+  return (
+    <svg
+      className={cn(
+        'pointer-events-none absolute top-0 left-0 h-full w-full',
+        className
+      )}
+      style={{ zIndex: 1 }}
+    >
+      <defs>
+        <marker
+          id={`arrowhead-${fromFeature.id}-${toFeature.id}`}
+          markerWidth="10"
+          markerHeight="7"
+          refX="9"
+          refY="3.5"
+          orient="auto"
+          className="fill-muted-foreground"
+        >
+          <polygon points="0 0, 10 3.5, 0 7" />
+        </marker>
+      </defs>
+      <line
+        x1={fromOffset}
+        y1={fromY}
+        x2={toOffset}
+        y2={toY}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeDasharray="4,4"
+        markerEnd={`url(#arrowhead-${fromFeature.id}-${toFeature.id})`}
+        className="text-muted-foreground"
+      />
+    </svg>
   );
 };
 
