@@ -5,26 +5,14 @@ import { ArrowRightIcon, icons } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentType } from 'react';
 import { createElement } from 'react';
-import AIInputExample from '../../../../../examples/ai-chatbot';
 import CollaborativeCanvasExample from '../../../../../examples/collaborative-canvas';
 import FormExample from '../../../../../examples/form';
 import { source } from '../../../../../lib/source';
 
-const aiChatbot = source.getPage(['blocks', 'ai-chatbot']);
 const collaborativeCanvas = source.getPage(['blocks', 'collaborative-canvas']);
 const form = source.getPage(['blocks', 'form']);
 
 const examples = [
-  {
-    icon: aiChatbot?.data.icon,
-    name: aiChatbot?.data.title,
-    description: aiChatbot?.data.description,
-    component: () => (
-      <div className="aspect-square overflow-hidden">
-        <AIInputExample />
-      </div>
-    ),
-  },
   {
     icon: collaborativeCanvas?.data.icon,
     name: collaborativeCanvas?.data.title,

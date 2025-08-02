@@ -17,7 +17,6 @@
     "@next/third-parties": "^15.3.3",
     "@number-flow/react": "^0.5.10",
     "@octokit/rest": "^22.0.0",
-    "@repo/ai": "workspace:*",
     "@repo/announcement": "workspace:*",
     "@repo/avatar-stack": "workspace:*",
     "@repo/banner": "workspace:*",
