@@ -16,9 +16,14 @@ import {
 } from 'react';
 import { cn } from '@/lib/utils';
 
-export type DeckProps = HTMLAttributes<HTMLDivElement> & {
-  onSwipeLeft?: (index: number) => void;
-  onSwipeRight?: (index: number) => void;
+export type DeckProps = HTMLAttributes<HTMLDivElement>;
+
+export const Deck = ({ children, className, ...props }: DeckProps) => (
+  <div className={cn('relative isolate', className)} {...props} />
+);
+
+export type DeckCardsProps = HTMLAttributes<HTMLDivElement> & {
+  onSwipe?: (index: number, direction: 'left' | 'right') => void;
   onSwipeEnd?: (index: number, direction: 'left' | 'right') => void;
   threshold?: number;
   stackSize?: number;
@@ -26,18 +31,17 @@ export type DeckProps = HTMLAttributes<HTMLDivElement> & {
   scale?: number;
 };
 
-export const Deck = ({
+export const DeckCards = ({
   children,
   className,
-  onSwipeLeft,
-  onSwipeRight,
+  onSwipe,
   onSwipeEnd,
   threshold = 150,
   stackSize = 3,
   perspective = 1000,
   scale = 0.05,
   ...props
-}: DeckProps) => {
+}: DeckCardsProps) => {
   const childrenArray = Children.toArray(children) as ReactElement[];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(
@@ -53,9 +57,9 @@ export const Deck = ({
       setExitDirection(direction);
 
       if (direction === 'left') {
-        onSwipeLeft?.(currentIndex);
+        onSwipe?.(currentIndex, 'left');
       } else {
-        onSwipeRight?.(currentIndex);
+        onSwipe?.(currentIndex, 'right');
       }
 
       onSwipeEnd?.(currentIndex, direction);
@@ -66,7 +70,7 @@ export const Deck = ({
         setExitDirection(null);
       }, 300);
     },
-    [currentIndex, childrenArray.length, onSwipeLeft, onSwipeRight, onSwipeEnd]
+    [currentIndex, childrenArray.length, onSwipe, onSwipeEnd]
   );
 
   const visibleCards = childrenArray.slice(
@@ -75,22 +79,12 @@ export const Deck = ({
   );
 
   if (currentIndex >= childrenArray.length) {
-    return (
-      <div
-        className={cn(
-          'relative flex h-96 w-full items-center justify-center rounded-lg border-2 border-muted-foreground/25 border-dashed text-muted-foreground',
-          className
-        )}
-        {...props}
-      >
-        <p className="text-sm">No more cards</p>
-      </div>
-    );
+    return null;
   }
 
   return (
     <div
-      className={cn('relative h-96 w-full', className)}
+      className={cn('relative z-10 size-full', className)}
       style={{ perspective }}
       {...props}
     >
@@ -222,5 +216,21 @@ export const DeckItem = ({ children, className, ...props }: DeckItemProps) => (
     {...props}
   >
     {children}
+  </div>
+);
+
+export const DeckEmpty = ({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      'absolute inset-0 flex w-full items-center justify-center rounded-lg border-2 border-muted-foreground/25 border-dashed text-muted-foreground',
+      className
+    )}
+    {...props}
+  >
+    <p className="text-sm">No more cards</p>
   </div>
 );

@@ -1,6 +1,6 @@
 'use client';
 
-import { Deck, DeckItem } from '@repo/deck';
+import { Deck, DeckCards, DeckEmpty, DeckItem } from '@repo/deck';
 import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -60,24 +60,26 @@ const Example = () => {
       </div>
 
       <div className="mx-auto w-80">
-        <Deck
-          className="aspect-[4/5]"
-          onSwipeLeft={() => { }}
-          onSwipeRight={() => { }}
-          scale={scale[0] / 100}
-          stackSize={stackSize[0]}
-          threshold={threshold[0]}
-        >
-          {cards.map((card) => (
-            <DeckItem className={cn(card.color, 'text-white')} key={card.id}>
-              <div className="text-center">
-                <h3 className='font-bold text-2xl'>{card.text}</h3>
-                <p className="mt-2 text-sm opacity-80">
-                  Threshold: {threshold[0]}px
-                </p>
-              </div>
-            </DeckItem>
-          ))}
+        <Deck>
+          <DeckCards
+            className="aspect-[4/5]"
+            onSwipe={console.log}
+            scale={scale[0] / 100}
+            stackSize={stackSize[0]}
+            threshold={threshold[0]}
+          >
+            {cards.map((card) => (
+              <DeckItem className={cn(card.color, 'text-white')} key={card.id}>
+                <div className="text-center">
+                  <h3 className="font-bold text-2xl">{card.text}</h3>
+                  <p className="mt-2 text-sm opacity-80">
+                    Threshold: {threshold[0]}px
+                  </p>
+                </div>
+              </DeckItem>
+            ))}
+          </DeckCards>
+          <DeckEmpty />
         </Deck>
       </div>
     </div>

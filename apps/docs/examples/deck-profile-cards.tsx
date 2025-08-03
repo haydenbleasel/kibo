@@ -1,6 +1,6 @@
 'use client';
 
-import { Deck, DeckItem } from '@repo/deck';
+import { Deck, DeckCards, DeckEmpty, DeckItem } from '@repo/deck';
 import { HeartIcon, XIcon } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -42,36 +42,39 @@ const profiles = [
 
 const Example = () => (
   <div className="mx-auto w-80">
-    <Deck className="aspect-[2/3]" onSwipeLeft={() => { }} onSwipeRight={() => { }}>
-      {profiles.map((profile) => (
-        <DeckItem className="relative overflow-hidden p-0" key={profile.id}>
-          <Image
-            alt={profile.name}
-            className="h-full w-full object-cover"
-            draggable={false}
-            height={600}
-            src={profile.image}
-            unoptimized
-            width={400}
-          />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-            <h3 className='font-bold text-xl'>
-              {profile.name}, {profile.age}
-            </h3>
-            <p className="text-sm opacity-90">{profile.bio}</p>
-            <div className="mt-2 flex flex-wrap gap-1">
-              {profile.interests.map((interest) => (
-                <span
-                  className="rounded-full bg-white/20 px-2 py-1 text-xs backdrop-blur-sm"
-                  key={interest}
-                >
-                  {interest}
-                </span>
-              ))}
+    <Deck>
+      <DeckCards className="aspect-[2/3]" onSwipe={console.log}>
+        {profiles.map((profile) => (
+          <DeckItem className="relative overflow-hidden p-0" key={profile.id}>
+            <Image
+              alt={profile.name}
+              className="h-full w-full object-cover"
+              draggable={false}
+              height={600}
+              src={profile.image}
+              unoptimized
+              width={400}
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+              <h3 className="font-bold text-xl">
+                {profile.name}, {profile.age}
+              </h3>
+              <p className="text-sm opacity-90">{profile.bio}</p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                {profile.interests.map((interest) => (
+                  <span
+                    className="rounded-full bg-white/20 px-2 py-1 text-xs backdrop-blur-sm"
+                    key={interest}
+                  >
+                    {interest}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        </DeckItem>
-      ))}
+          </DeckItem>
+        ))}
+      </DeckCards>
+      <DeckEmpty />
     </Deck>
 
     <div className="mt-6 flex justify-center gap-4">

@@ -1,6 +1,6 @@
 'use client';
 
-import { Deck, DeckItem } from '@repo/deck';
+import { Deck, DeckCards, DeckEmpty, DeckItem } from '@repo/deck';
 import Image from 'next/image';
 
 const images = [
@@ -33,19 +33,22 @@ const images = [
 
 const Example = () => (
   <Deck className="size-full">
-    {images.map((image) => (
-      <DeckItem className="p-0" key={image.id}>
-        <Image
-          alt={image.title}
-          className="h-full w-full rounded-lg object-cover"
-          draggable={false}
-          height={600}
-          src={image.src}
-          unoptimized
-          width={400}
-        />
-      </DeckItem>
-    ))}
+    <DeckCards>
+      {images.map((image) => (
+        <DeckItem className="p-0" key={image.id}>
+          <Image
+            alt={image.title}
+            className="h-full w-full rounded-lg object-cover"
+            draggable={false}
+            height={600}
+            src={image.src}
+            unoptimized
+            width={400}
+          />
+        </DeckItem>
+      ))}
+    </DeckCards>
+    <DeckEmpty />
   </Deck>
 );
 
