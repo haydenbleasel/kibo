@@ -1,0 +1,127 @@
+---
+title: Deck
+description: A Tinder-like swipeable card stack component with smooth animations.
+icon: IdCardLanyard
+---
+
+<PoweredBy packages={[
+  { name: 'Motion', url: 'https://motion.dev/' },
+  { name: 'Lucide', url: 'https://lucide.dev/' },
+]} />
+
+<Preview path="deck" />
+
+## Installation
+
+<Installer packageName="deck" />
+
+## Features
+
+- Tinder-like swipe gestures (left/right)
+- Smooth animations using Motion
+- Composable API - children become swipeable cards
+- Customizable swipe threshold and stack appearance
+- Callbacks for swipe events
+- Stack visualization with perspective and scaling
+- Touch and mouse drag support
+- Automatic card progression
+
+## Examples
+
+### Profile Cards
+
+A dating app style interface with profile information overlays.
+
+<Preview path="deck-profile-cards" />
+
+### Product Cards
+
+Product showcase with ratings and categories.
+
+<Preview path="deck-product-cards" />
+
+### Custom Settings
+
+Adjustable threshold, stack size, and scale factor.
+
+<Preview path="deck-custom-threshold" />
+
+## API Reference
+
+### Deck
+
+The main container component that manages the swipeable card stack.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactElement[]` | - | Cards to display in the deck |
+| `onSwipeLeft` | `(index: number) => void` | - | Callback when a card is swiped left |
+| `onSwipeRight` | `(index: number) => void` | - | Callback when a card is swiped right |
+| `onSwipeEnd` | `(index: number, direction: 'left' \| 'right') => void` | - | Callback when any swipe completes |
+| `threshold` | `number` | `150` | Distance in pixels required to trigger a swipe |
+| `stackSize` | `number` | `3` | Number of cards visible in the stack |
+| `perspective` | `number` | `1000` | CSS perspective for 3D effect |
+| `scale` | `number` | `0.05` | Scale factor between stacked cards |
+
+### DeckItem
+
+A convenience wrapper component for individual cards with default styling.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Content of the card |
+| `className` | `string` | - | Additional CSS classes |
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import { Deck, DeckItem } from '@repo/deck';
+
+<Deck
+  onSwipeLeft={(index) => console.log('Swiped left')}
+  onSwipeRight={(index) => console.log('Swiped right')}
+>
+  {items.map((item) => (
+    <DeckItem key={item.id}>
+      <img src={item.image} alt={item.title} />
+    </DeckItem>
+  ))}
+</Deck>
+```
+
+### Custom Cards
+
+You don't need to use `DeckItem` - any React element can be a card:
+
+```tsx
+<Deck>
+  {items.map((item) => (
+    <div key={item.id} className="custom-card">
+      {/* Your custom card content */}
+    </div>
+  ))}
+</Deck>
+```
+
+### Programmatic Control
+
+The component automatically progresses through cards on swipe. Track progress using the callback indices:
+
+```tsx
+const [currentIndex, setCurrentIndex] = useState(0);
+
+<Deck
+  onSwipeEnd={(index) => setCurrentIndex(index + 1)}
+>
+  {/* cards */}
+</Deck>
+```
+
+## Accessibility
+
+- Cards are keyboard accessible via drag interactions
+- Support for screen readers through proper ARIA labels
+- Touch-friendly with appropriate hit targets
+- Respects reduced motion preferences

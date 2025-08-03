@@ -1,0 +1,91 @@
+'use client';
+
+import { Deck, DeckItem } from '@repo/deck';
+import { HeartIcon, XIcon } from 'lucide-react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+
+const profiles = [
+  {
+    id: 1,
+    name: 'Sarah Chen',
+    age: 28,
+    bio: 'Product designer who loves hiking and coffee',
+    image: 'https://placehold.co/400x600/ff6b6b/fff?text=Sarah',
+    interests: ['Design', 'Hiking', 'Coffee'],
+  },
+  {
+    id: 2,
+    name: 'Alex Rivera',
+    age: 32,
+    bio: 'Software engineer and amateur photographer',
+    image: 'https://placehold.co/400x600/4ecdc4/fff?text=Alex',
+    interests: ['Tech', 'Photography', 'Travel'],
+  },
+  {
+    id: 3,
+    name: 'Jamie Taylor',
+    age: 26,
+    bio: 'Artist and musician living in the city',
+    image: 'https://placehold.co/400x600/45b7d1/fff?text=Jamie',
+    interests: ['Art', 'Music', 'Concerts'],
+  },
+  {
+    id: 4,
+    name: 'Morgan Kim',
+    age: 30,
+    bio: 'Yoga instructor and wellness coach',
+    image: 'https://placehold.co/400x600/96ceb4/fff?text=Morgan',
+    interests: ['Yoga', 'Wellness', 'Nature'],
+  },
+];
+
+const Example = () => (
+  <div className="mx-auto w-80">
+    <Deck className="aspect-[2/3]" onSwipeLeft={() => { }} onSwipeRight={() => { }}>
+      {profiles.map((profile) => (
+        <DeckItem className="relative overflow-hidden p-0" key={profile.id}>
+          <Image
+            alt={profile.name}
+            className="h-full w-full object-cover"
+            draggable={false}
+            height={600}
+            src={profile.image}
+            unoptimized
+            width={400}
+          />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+            <h3 className='font-bold text-xl'>
+              {profile.name}, {profile.age}
+            </h3>
+            <p className="text-sm opacity-90">{profile.bio}</p>
+            <div className="mt-2 flex flex-wrap gap-1">
+              {profile.interests.map((interest) => (
+                <span
+                  className="rounded-full bg-white/20 px-2 py-1 text-xs backdrop-blur-sm"
+                  key={interest}
+                >
+                  {interest}
+                </span>
+              ))}
+            </div>
+          </div>
+        </DeckItem>
+      ))}
+    </Deck>
+
+    <div className="mt-6 flex justify-center gap-4">
+      <Button className="h-12 w-12 rounded-full" size="icon" variant="outline">
+        <XIcon className="h-5 w-5" />
+      </Button>
+      <Button
+        className="h-12 w-12 rounded-full bg-red-500 hover:bg-red-600"
+        size="icon"
+      >
+        <HeartIcon className="h-5 w-5" />
+      </Button>
+    </div>
+  </div>
+);
+
+export default Example;
