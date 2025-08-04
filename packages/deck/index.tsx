@@ -13,6 +13,8 @@ import {
   type HTMLAttributes,
   type ReactElement,
   useCallback,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
 import { cn } from '@/lib/utils';
@@ -33,6 +35,8 @@ export type DeckCardsProps = HTMLAttributes<HTMLDivElement> & {
   currentIndex?: number;
   defaultCurrentIndex?: number;
   onCurrentIndexChange?: (index: number) => void;
+  animateOnIndexChange?: boolean;
+  indexChangeDirection?: 'left' | 'right';
 };
 
 export const DeckCards = ({
@@ -47,6 +51,8 @@ export const DeckCards = ({
   currentIndex: currentIndexProp,
   defaultCurrentIndex = 0,
   onCurrentIndexChange,
+  animateOnIndexChange = true,
+  indexChangeDirection = 'left',
   ...props
 }: DeckCardsProps) => {
   const childrenArray = Children.toArray(children) as ReactElement[];
@@ -58,6 +64,32 @@ export const DeckCards = ({
   const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(
     null
   );
+  const isInternalChangeRef = useRef(false);
+  const prevIndexRef = useRef(currentIndex);
+
+  // Detect external currentIndex changes and trigger animation
+  useEffect(() => {
+    const prevIndex = prevIndexRef.current;
+
+    // Skip initial mount and internal changes
+    if (prevIndex === currentIndex || isInternalChangeRef.current) {
+      isInternalChangeRef.current = false;
+      prevIndexRef.current = currentIndex;
+      return;
+    }
+
+    // Only animate if the option is enabled and we have cards to show
+    if (animateOnIndexChange && prevIndex < childrenArray.length) {
+      setExitDirection(indexChangeDirection);
+
+      // Clear animation after duration
+      setTimeout(() => {
+        setExitDirection(null);
+      }, 300);
+    }
+
+    prevIndexRef.current = currentIndex;
+  }, [currentIndex, animateOnIndexChange, indexChangeDirection, childrenArray.length]);
 
   const handleSwipe = useCallback(
     (direction: 'left' | 'right') => {
@@ -77,6 +109,7 @@ export const DeckCards = ({
 
       // Move to next card after animation
       setTimeout(() => {
+        isInternalChangeRef.current = true;
         setCurrentIndex((prev) => prev + 1);
         setExitDirection(null);
       }, 300);
