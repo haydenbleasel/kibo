@@ -13,6 +13,7 @@
     "table",
     "---Code---",
     "code-block",
+    "sandbox",
     "snippet",
     "---Forms---",
     "choicebox",
@@ -26,6 +27,9 @@
     "---Finance---",
     "credit-card",
     "ticker",
+    "---Callouts---",
+    "announcement",
+    "banner",
     "---Other---",
     "..."
   ]
