@@ -89,11 +89,11 @@ export const DeckCards = ({
       {...props}
     >
       {visibleCards.map((child, index) => {
-        const isTopCard = index === 0;
+        const isTopCard = !index;
         const zIndex = stackSize - index;
         const scaleValue = 1 - index * scale;
         const yOffset = index * 4;
-        const cardKey = `${currentIndex}-${child.key || index}`;
+        const cardKey = `${currentIndex}-${child.key ?? index}`;
 
         if (isTopCard) {
           return (
@@ -171,8 +171,8 @@ const DeckCard = ({
     }
   };
 
-  // Handle programmatic exit animation
   let exitX = 0;
+
   if (exitDirection === 'left') {
     exitX = -500;
   } else if (exitDirection === 'right') {
