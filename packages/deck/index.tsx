@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils';
 
 export type DeckProps = HTMLAttributes<HTMLDivElement>;
 
-export const Deck = ({ children, className, ...props }: DeckProps) => (
+export const Deck = ({ className, ...props }: DeckProps) => (
   <div className={cn('relative isolate', className)} {...props} />
 );
 
@@ -195,10 +195,11 @@ const DeckCard = ({
       transition={{ duration: 0.3, ease: 'easeOut' }}
       whileDrag={{ scale: 1.05 }}
     >
-      {cloneElement(children as ReactElement<any>, {
+      {cloneElement(children as ReactElement<HTMLAttributes<HTMLDivElement>>, {
         className: cn(
           'h-full w-full select-none rounded-lg shadow-lg',
-          (children as any).props?.className
+          (children as ReactElement<HTMLAttributes<HTMLDivElement>>).props
+            ?.className
         ),
       })}
     </motion.div>
@@ -219,6 +220,8 @@ export const DeckItem = ({ children, className, ...props }: DeckItemProps) => (
   </div>
 );
 
+export type DeckEmptyProps = HTMLAttributes<HTMLDivElement>;
+
 export const DeckEmpty = ({
   children,
   className,
@@ -226,11 +229,11 @@ export const DeckEmpty = ({
 }: HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      'absolute inset-0 flex w-full items-center justify-center rounded-lg border-2 border-muted-foreground/25 border-dashed text-muted-foreground',
+      'absolute inset-0 flex w-full items-center justify-center rounded-lg border border-dashed text-muted-foreground',
       className
     )}
     {...props}
   >
-    <p className="text-sm">No more cards</p>
+    {children ?? <p className="text-sm">No more cards</p>}
   </div>
 );
