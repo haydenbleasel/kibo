@@ -64,6 +64,7 @@ export const DeckCards = ({
   const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(
     null
   );
+  const [displayIndex, setDisplayIndex] = useState(currentIndex);
   const isInternalChangeRef = useRef(false);
   const prevIndexRef = useRef(currentIndex);
 
@@ -75,6 +76,7 @@ export const DeckCards = ({
     if (prevIndex === currentIndex || isInternalChangeRef.current) {
       isInternalChangeRef.current = false;
       prevIndexRef.current = currentIndex;
+      setDisplayIndex(currentIndex);
       return;
     }
 
@@ -82,10 +84,14 @@ export const DeckCards = ({
     if (animateOnIndexChange && prevIndex < childrenArray.length) {
       setExitDirection(indexChangeDirection);
 
-      // Clear animation after duration
+      // Update display index after animation completes
       setTimeout(() => {
         setExitDirection(null);
+        setDisplayIndex(currentIndex);
       }, 300);
+    } else {
+      // No animation, update display index immediately
+      setDisplayIndex(currentIndex);
     }
 
     prevIndexRef.current = currentIndex;
@@ -93,36 +99,38 @@ export const DeckCards = ({
 
   const handleSwipe = useCallback(
     (direction: 'left' | 'right') => {
-      if (currentIndex >= childrenArray.length) {
+      if (displayIndex >= childrenArray.length) {
         return;
       }
 
       setExitDirection(direction);
 
       if (direction === 'left') {
-        onSwipe?.(currentIndex, 'left');
+        onSwipe?.(displayIndex, 'left');
       } else {
-        onSwipe?.(currentIndex, 'right');
+        onSwipe?.(displayIndex, 'right');
       }
 
-      onSwipeEnd?.(currentIndex, direction);
+      onSwipeEnd?.(displayIndex, direction);
 
       // Move to next card after animation
       setTimeout(() => {
         isInternalChangeRef.current = true;
-        setCurrentIndex((prev) => prev + 1);
+        const newIndex = displayIndex + 1;
+        setCurrentIndex(newIndex);
+        setDisplayIndex(newIndex);
         setExitDirection(null);
       }, 300);
     },
-    [currentIndex, childrenArray.length, onSwipe, onSwipeEnd, setCurrentIndex]
+    [displayIndex, childrenArray.length, onSwipe, onSwipeEnd, setCurrentIndex]
   );
 
   const visibleCards = childrenArray.slice(
-    currentIndex,
-    currentIndex + stackSize
+    displayIndex,
+    displayIndex + stackSize
   );
 
-  if (currentIndex >= childrenArray.length) {
+  if (displayIndex >= childrenArray.length) {
     return null;
   }
 
@@ -137,7 +145,7 @@ export const DeckCards = ({
         const zIndex = stackSize - index;
         const scaleValue = 1 - index * scale;
         const yOffset = index * 4;
-        const cardKey = `${currentIndex}-${child.key ?? index}`;
+        const cardKey = `${displayIndex}-${child.key ?? index}`;
 
         if (isTopCard) {
           return (
@@ -272,7 +280,7 @@ export const DeckEmpty = ({
 }: HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      'absolute inset-0 flex w-full items-center justify-center rounded-lg border border-dashed text-muted-foreground',
+      'absolute inset-0 flex items-center justify-center rounded-lg border border-dashed text-muted-foreground',
       className
     )}
     {...props}
