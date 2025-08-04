@@ -18,10 +18,15 @@ for (const packageName of packageNames) {
 
   console.log(`Adding ${packageName} component...`);
 
-  const url = new URL(
-    `registry/${packageName}.json`,
-    'https://www.kibo-ui.com'
-  );
+  const url = packageName === 'ai' ? 
+    new URL(
+      'elements.json',
+      'https://ai-sdk.dev'
+    ) :
+    new URL(
+      `registry/${packageName}.json`,
+      'https://www.kibo-ui.com'
+    );
 
-  execSync(`npx shadcn@latest add ${url.toString()}`);
+  execSync(`npx -y shadcn@latest add ${url.toString()}`);
 }
