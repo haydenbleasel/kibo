@@ -1,5 +1,6 @@
 'use client';
 
+import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import {
   motion,
   type PanInfo,
@@ -29,6 +30,9 @@ export type DeckCardsProps = HTMLAttributes<HTMLDivElement> & {
   stackSize?: number;
   perspective?: number;
   scale?: number;
+  currentIndex?: number;
+  defaultCurrentIndex?: number;
+  onCurrentIndexChange?: (index: number) => void;
 };
 
 export const DeckCards = ({
@@ -40,10 +44,17 @@ export const DeckCards = ({
   stackSize = 3,
   perspective = 1000,
   scale = 0.05,
+  currentIndex: currentIndexProp,
+  defaultCurrentIndex = 0,
+  onCurrentIndexChange,
   ...props
 }: DeckCardsProps) => {
   const childrenArray = Children.toArray(children) as ReactElement[];
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useControllableState({
+    prop: currentIndexProp,
+    defaultProp: defaultCurrentIndex,
+    onChange: onCurrentIndexChange,
+  });
   const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(
     null
   );
@@ -70,7 +81,7 @@ export const DeckCards = ({
         setExitDirection(null);
       }, 300);
     },
-    [currentIndex, childrenArray.length, onSwipe, onSwipeEnd]
+    [currentIndex, childrenArray.length, onSwipe, onSwipeEnd, setCurrentIndex]
   );
 
   const visibleCards = childrenArray.slice(
@@ -179,6 +190,8 @@ const DeckCard = ({
     exitX = 500;
   }
 
+  const castedChildren = children as ReactElement<HTMLAttributes<HTMLDivElement>>;
+
   return (
     <motion.div
       animate={exitDirection ? { x: exitX, opacity: 0 } : undefined}
@@ -195,11 +208,10 @@ const DeckCard = ({
       transition={{ duration: 0.3, ease: 'easeOut' }}
       whileDrag={{ scale: 1.05 }}
     >
-      {cloneElement(children as ReactElement<HTMLAttributes<HTMLDivElement>>, {
+      {cloneElement(castedChildren, {
         className: cn(
           'h-full w-full select-none rounded-lg shadow-lg',
-          (children as ReactElement<HTMLAttributes<HTMLDivElement>>).props
-            ?.className
+          castedChildren.props.className
         ),
       })}
     </motion.div>
@@ -208,16 +220,14 @@ const DeckCard = ({
 
 export type DeckItemProps = HTMLAttributes<HTMLDivElement>;
 
-export const DeckItem = ({ children, className, ...props }: DeckItemProps) => (
+export const DeckItem = ({ className, ...props }: DeckItemProps) => (
   <div
     className={cn(
       'flex h-full w-full items-center justify-center rounded-lg border bg-card text-card-foreground shadow-lg',
       className
     )}
     {...props}
-  >
-    {children}
-  </div>
+  />
 );
 
 export type DeckEmptyProps = HTMLAttributes<HTMLDivElement>;
