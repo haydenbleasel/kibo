@@ -5,7 +5,7 @@ export const Footer = () => (
       <a
         className="text-primary underline"
         href="https://x.com/haydenbleasel"
-        rel="noreferrer"
+        rel="noopener"
         target="_blank"
       >
         @haydenbleasel

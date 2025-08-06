@@ -28,7 +28,7 @@ export const PoweredBy = ({ packages }: PoweredByProps) => (
           )}
           href={url}
           key={name}
-          rel="noopener noreferrer"
+          rel="noopener"
           target="_blank"
         >
           <Image

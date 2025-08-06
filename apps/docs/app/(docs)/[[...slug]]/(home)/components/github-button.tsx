@@ -36,11 +36,11 @@ export const GitHubButton = async (): Promise<ReactElement> => {
   return (
     <Button
       asChild
-      className="border-none p-0 ring ring-1 ring-border"
+      className="border-none p-0 ring-1 ring-border"
       size="lg"
       variant="outline"
     >
-      <a href={url} rel="noreferrer" target="_blank">
+      <a href={url} rel="noopener" target="_blank">
         <div className="flex h-full items-center">
           <div className="flex items-center gap-2 px-4 py-2">
             <SiGithub size={16} />
