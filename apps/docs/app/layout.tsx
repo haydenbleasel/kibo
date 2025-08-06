@@ -29,8 +29,10 @@ const Layout = ({ children }: LayoutProps) => (
       <Banner variant="rainbow">
         <span>Looking for the AI components? They're now</span>
         <a
-          className='mx-1 font-semibold underline'
+          className="mx-1 font-semibold underline"
           href="https://ai-sdk.dev/elements?ref=kibo"
+          rel="noopener"
+          target="_blank"
         >
           AI Elements
         </a>
