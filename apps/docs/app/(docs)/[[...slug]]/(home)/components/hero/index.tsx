@@ -70,7 +70,7 @@ export const Hero = () => (
               width={56}
             />{' '}
             <span>shadcn/ui</span>
-          </div>
+          </div>{' '}
           components built with{' '}
           <div className="-space-x-2 -translate-y-1.5 md:-translate-y-2.5 inline-flex items-center justify-center">
             {icons.map((icon, index) => (

@@ -3,33 +3,22 @@
 import {
   Ticker,
   TickerIcon,
-  type TickerIconProps,
   TickerPrice,
   TickerPriceChange,
-  type TickerPriceChangeProps,
-  type TickerPriceProps,
-  type TickerProps,
   TickerSymbol,
-  type TickerSymbolProps,
 } from '@repo/ticker';
+import Image from 'next/image';
 
-const items: {
-  symbol: TickerSymbolProps['symbol'];
-  src: TickerIconProps['src'];
-  price: TickerPriceProps['price'];
-  change: TickerPriceChangeProps['change'];
-  currency?: TickerProps['currency'];
-  locale?: TickerProps['locale'];
-}[] = [
+const items = [
   {
     symbol: 'DUOL',
-    src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/DUOL.png',
+    src: `https://img.logo.dev/ticker/DUOL?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=26&retina=true`,
     price: 478.03,
     change: 5.2,
   },
   {
     symbol: 'DBD',
-    src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/DBD.png',
+    src: `https://img.logo.dev/ticker/DBD?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=26&retina=true`,
     price: 102.33,
     change: 1.05,
     currency: 'EUR',
@@ -37,7 +26,7 @@ const items: {
   },
   {
     symbol: '7203.T',
-    src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/TM.png',
+    src: `https://img.logo.dev/ticker/TM?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=26&retina=true`,
     price: 2460,
     change: -120,
     currency: 'JPY',
@@ -48,7 +37,14 @@ const items: {
 const Example = () =>
   items.map((i) => (
     <Ticker currency={i.currency} key={i.symbol} locale={i.locale}>
-      <TickerIcon src={i.src} symbol={i.symbol} />
+      <TickerIcon asChild>
+        <Image
+          alt={i.symbol}
+          height={26}
+          src={i.src}
+          width={26}
+        />
+      </TickerIcon>
       <TickerSymbol symbol={i.symbol} />
       <TickerPrice price={i.price} />
       <TickerPriceChange change={i.change} />

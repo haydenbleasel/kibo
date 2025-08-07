@@ -3,30 +3,22 @@
 import {
   Ticker,
   TickerIcon,
-  type TickerIconProps,
   TickerPrice,
   TickerPriceChange,
-  type TickerPriceChangeProps,
-  type TickerPriceProps,
   TickerSymbol,
-  type TickerSymbolProps,
 } from '@repo/ticker';
+import Image from 'next/image';
 
-const items: {
-  symbol: TickerSymbolProps['symbol'];
-  src: TickerIconProps['src'];
-  price: TickerPriceProps['price'];
-  change: TickerPriceChangeProps['change'];
-}[] = [
+const items = [
   {
     symbol: 'TSLA',
-    src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/TSLA.png',
+    src: `https://img.logo.dev/ticker/TSLA?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=26&retina=true`,
     price: 182.12,
     change: -3.12,
   },
   {
     symbol: 'MSFT',
-    src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/MSFT.png',
+    src: `https://img.logo.dev/ticker/MSFT?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=26&retina=true`,
     price: 409.33,
     change: 2.18,
   },
@@ -36,7 +28,14 @@ const Example = () => (
   <>
     {items.map((i) => (
       <Ticker key={i.symbol}>
-        <TickerIcon src={i.src} symbol={i.symbol} />
+        <TickerIcon asChild>
+          <Image
+            alt={i.symbol}
+            height={26}
+            src={i.src}
+            width={26}
+          />
+        </TickerIcon>
         <TickerSymbol symbol={i.symbol} />
         <TickerPrice price={i.price} />
         <TickerPriceChange change={i.change} isPercent />

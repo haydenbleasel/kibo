@@ -70,22 +70,28 @@ export const Ticker = memo(
 Ticker.displayName = 'Ticker';
 
 export type TickerIconProps = HTMLAttributes<HTMLImageElement> & {
-  src: string;
-  symbol: string;
+  src?: string;
+  symbol?: string;
+  asChild?: boolean;
 };
 
 export const TickerIcon = memo(
-  ({ src, symbol, className, ...props }: TickerIconProps) => {
-    if (!src) {
-      return null;
+  ({ src, symbol, className, asChild, children, ...props }: TickerIconProps) => {
+    if (asChild) {
+      return (
+        <div className={cn('overflow-hidden rounded-full border border-border bg-muted', className)}>
+          {children}
+        </div>
+      )
     }
+
     return (
       <Avatar
-        className={cn('size-7 border border-border bg-muted p-1', className)}
+        className={cn('size-7 border border-border bg-muted', className)}
       >
         <AvatarImage src={src} {...props} />
         <AvatarFallback className="font-semibold text-muted-foreground text-sm">
-          {symbol.slice(0, 2).toUpperCase()}
+          {symbol?.slice(0, 2).toUpperCase()}
         </AvatarFallback>
       </Avatar>
     );

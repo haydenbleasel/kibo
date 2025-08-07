@@ -35,8 +35,7 @@ export const PoweredBy = ({ packages }: PoweredByProps) => (
             alt={name}
             className="h-3.5 w-3.5 overflow-hidden rounded-sm object-cover"
             height={14}
-            src={`https://img.logo.dev/${getHostname(url)}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}`}
-            unoptimized
+            src={`https://img.logo.dev/${getHostname(url)}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=14&retina=true`}
             width={14}
           />
           <p className="text-muted-foreground text-sm">{name}</p>
