@@ -11,7 +11,7 @@
   "dependencies": {
     "@faker-js/faker": "^9.8.0",
     "@icons-pack/react-simple-icons": "^13.1.0",
-    "@logtail/next": "^0.2.0",
+    "@logtail/next": "^0.2.1",
     "@modelcontextprotocol/sdk": "^1.15.1",
     "@next/bundle-analyzer": "^15.3.3",
     "@next/third-parties": "^15.3.3",
