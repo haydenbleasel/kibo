@@ -487,22 +487,36 @@ const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
 
 const handleCommandNavigation = (event: KeyboardEvent) => {
   if (['ArrowUp', 'ArrowDown', 'Enter'].includes(event.key)) {
-    const slashCommand = document.querySelector('#slash-command');
+    const findAndDispatchEvent = (retryCount = 0) => {
+      const slashCommand = document.querySelector('#slash-command');
 
-    if (slashCommand) {
-      event.preventDefault();
+      if (slashCommand) {
+        event.preventDefault();
 
-      slashCommand.dispatchEvent(
-        new KeyboardEvent('keydown', {
-          key: event.key,
-          cancelable: true,
-          bubbles: true,
-        })
-      );
+        slashCommand.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: event.key,
+            cancelable: true,
+            bubbles: true,
+          })
+        );
 
-      return true;
-    }
+        return true;
+      }
+
+      // If element not found and we haven't exceeded retry limit, try again with a small delay
+      if (retryCount < 3) {
+        setTimeout(() => findAndDispatchEvent(retryCount + 1), 10);
+        return true;
+      }
+
+      return false;
+    };
+
+    return findAndDispatchEvent();
   }
+
+  return false;
 };
 
 export type EditorProviderProps = TiptapEditorProviderProps & {
