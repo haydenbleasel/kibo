@@ -482,7 +482,7 @@ export const ContributionGraphFooter = ({
           </span>
           {new Array(maxLevel + 1).fill(undefined).map((_, level) => (
             <svg height={blockSize} key={level} width={blockSize}>
-              <title>{level} contributions</title>
+              <title>{`${level} contributions`}</title>
               <rect
                 className={cn(
                   'stroke-[1px] stroke-border',
