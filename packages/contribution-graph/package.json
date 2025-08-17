@@ -4,16 +4,14 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@repo/shadcn-ui": "workspace:*",
-    "chroma-js": "^2.4.2",
+    "cheerio": "^1.0.0",
     "date-fns": "^3.6.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/chroma-js": "^2.4.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "typescript": "^5.8.3"

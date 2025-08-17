@@ -1,6 +1,5 @@
 'use client';
 
-import chroma from 'chroma-js';
 import type { Day as WeekDay } from 'date-fns';
 import {
   differenceInCalendarDays,
@@ -41,24 +40,6 @@ export interface Labels {
     more?: string;
   };
 }
-
-type Color = string;
-type ColorScale = Color[];
-
-export interface Theme {
-  light: ColorScale;
-  dark: ColorScale;
-}
-
-export type ThemeInput =
-  | {
-    light: ColorScale | [from: Color, to: Color];
-    dark?: ColorScale | [from: Color, to: Color];
-  }
-  | {
-    light?: ColorScale | [from: Color, to: Color];
-    dark: ColorScale | [from: Color, to: Color];
-  };
 
 interface BlockAttributes {
   x: number;
@@ -110,14 +91,11 @@ interface ContributionGraphContextType {
   blockMargin: number;
   blockRadius: number;
   blockSize: number;
-  colorScheme: 'light' | 'dark' | undefined;
-  colorScale: ColorScale;
   fontSize: number;
   labels: Labels;
   labelHeight: number;
   maxLevel: number;
   renderBlock?: (block: BlockElement, activity: Activity) => ReactElement;
-  theme: Theme;
   totalCount: number;
   weekStart: WeekDay;
   year: number;
@@ -185,9 +163,9 @@ function groupByWeeks(activities: Activity[], weekStart: WeekDay = 0): Week[] {
       : subWeeks(nextDay(firstDate, weekStart), 1);
 
   const paddedActivities = [
-    ...new Array(differenceInCalendarDays(firstDate, firstCalendarDate)).fill(
+    ...(new Array(differenceInCalendarDays(firstDate, firstCalendarDate)).fill(
       undefined
-    ) as Activity[],
+    ) as Activity[]),
     ...normalizedActivities,
   ];
 
@@ -248,90 +226,16 @@ function getMonthLabels(
     });
 }
 
-function createColorScale(
-  colors: [from: Color, to: Color],
-  size: number
-): ColorScale {
-  return chroma.scale(colors).mode('lch').colors(size);
-}
-
-function isColorScale(colors: unknown[], size: number): colors is ColorScale {
-  const invalidColor = colors.find((color) => !chroma.valid(color));
-
-  if (invalidColor) {
-    throw new Error(
-      `Invalid color "${String(
-        invalidColor
-      )}" passed. All CSS color formats are accepted.`
-    );
-  }
-
-  return colors.length === size;
-}
-
-function createTheme(input?: ThemeInput, size = 5): Theme {
-  const defaultTheme: Theme = {
-    light: createColorScale(['hsl(0, 0%, 92%)', 'hsl(0, 0%, 26%)'], size),
-    dark: createColorScale(['hsl(0, 0%, 20%)', 'hsl(0, 0%, 92%)'], size),
-  };
-
-  if (input) {
-    if (
-      typeof input !== 'object' ||
-      (input.light === undefined && input.dark === undefined)
-    ) {
-      throw new Error(
-        `The theme object must contain at least one of the fields "light" and "dark" with exactly 2 or ${size} colors respectively.`
-      );
-    }
-
-    if (input.light) {
-      const { length } = input.light;
-      if (length !== 2 && length !== size) {
-        throw new Error(
-          `theme.light must contain exactly 2 or ${size} colors, ${length} passed.`
-        );
-      }
-    }
-
-    if (input.dark) {
-      const { length } = input.dark;
-      if (length !== 2 && length !== size) {
-        throw new Error(
-          `theme.dark must contain exactly 2 or ${size} colors, ${length} passed.`
-        );
-      }
-    }
-
-    input.light = input.light ?? defaultTheme.light;
-    input.dark = input.dark ?? defaultTheme.dark;
-
-    return {
-      light: isColorScale(input.light, size)
-        ? input.light
-        : createColorScale(input.light, size),
-      dark: isColorScale(input.dark, size)
-        ? input.dark
-        : createColorScale(input.dark, size),
-    };
-  }
-
-  return defaultTheme;
-}
-
-
 export interface ContributionGraphProps {
   data: Activity[];
   blockMargin?: number;
   blockRadius?: number;
   blockSize?: number;
-  colorScheme?: 'light' | 'dark';
   fontSize?: number;
   labels?: Labels;
   maxLevel?: number;
   renderBlock?: (block: BlockElement, activity: Activity) => ReactElement;
   style?: CSSProperties;
-  theme?: ThemeInput;
   totalCount?: number;
   weekStart?: WeekDay;
   children: ReactNode;
@@ -343,25 +247,17 @@ export const ContributionGraph = ({
   blockMargin = 4,
   blockRadius = 2,
   blockSize = 12,
-  colorScheme,
   fontSize = 14,
   labels: labelsProp = undefined,
   maxLevel: maxLevelProp = 4,
   renderBlock,
   style = {},
-  theme: themeProp = undefined,
   totalCount: totalCountProp = undefined,
   weekStart = 0,
   children,
   className,
 }: ContributionGraphProps) => {
   const maxLevel = Math.max(1, maxLevelProp);
-  const theme = useMemo(
-    () => createTheme(themeProp, maxLevel + 1),
-    [themeProp, maxLevel]
-  );
-  const colorScale = theme[colorScheme ?? 'light'];
-
   const weeks = useMemo(() => groupByWeeks(data, weekStart), [data, weekStart]);
 
   const labels = { ...DEFAULT_LABELS, ...labelsProp };
@@ -392,14 +288,11 @@ export const ContributionGraph = ({
         blockMargin,
         blockRadius,
         blockSize,
-        colorScheme,
-        colorScale,
         fontSize,
         labels,
         labelHeight,
         maxLevel,
         renderBlock,
-        theme,
         totalCount,
         weekStart,
         year,
@@ -436,7 +329,6 @@ export const ContributionGraphBlock = ({
     blockSize,
     blockMargin,
     blockRadius,
-    colorScale,
     labelHeight,
     maxLevel,
     renderBlock,
@@ -451,12 +343,17 @@ export const ContributionGraphBlock = ({
   const block = (
     <rect
       className={cn(
-        'stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]',
+        'stroke-[1px] stroke-border',
+        'data-[level="0"]:fill-muted',
+        'data-[level="1"]:fill-primary/20',
+        'data-[level="2"]:fill-primary/40',
+        'data-[level="3"]:fill-primary/60',
+        'data-[level="4"]:fill-primary/80',
         className
       )}
+      data-count={activity.count}
       data-date={activity.date}
       data-level={activity.level}
-      fill={colorScale[activity.level]}
       height={blockSize}
       rx={blockRadius}
       ry={blockRadius}
@@ -546,19 +443,20 @@ export const ContributionGraphFooter = ({
   hideColorLegend = false,
   className,
 }: ContributionGraphFooterProps) => {
-  const {
-    totalCount,
-    year,
-    labels,
-    maxLevel,
-    colorScale,
-    blockSize,
-    blockRadius,
-  } = useContributionGraph();
+  const { totalCount, year, labels, maxLevel, blockSize, blockRadius } =
+    useContributionGraph();
 
   if (hideTotalCount && hideColorLegend) {
     return null;
   }
+
+  const levelClasses = [
+    'fill-muted',
+    'fill-muted-foreground/20',
+    'fill-muted-foreground/40',
+    'fill-muted-foreground/60',
+    'fill-muted-foreground/80',
+  ];
 
   return (
     <footer
@@ -571,8 +469,8 @@ export const ContributionGraphFooter = ({
         <div className="text-muted-foreground">
           {labels.totalCount
             ? labels.totalCount
-                .replace('{{count}}', String(totalCount))
-                .replace('{{year}}', String(year))
+              .replace('{{count}}', String(totalCount))
+              .replace('{{year}}', String(year))
             : `${totalCount} activities in ${year}`}
         </div>
       )}
@@ -582,21 +480,21 @@ export const ContributionGraphFooter = ({
           <span className="mr-1 text-muted-foreground">
             {labels.legend?.less || 'Less'}
           </span>
-          {new Array(maxLevel + 1)
-            .fill(undefined)
-            .map((_, level) => (
-              <svg height={blockSize} key={level} width={blockSize}>
-                <title>{level} contributions</title>
-                <rect
-                  className="stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]"
-                  fill={colorScale[level]}
-                  height={blockSize}
-                  rx={blockRadius}
-                  ry={blockRadius}
-                  width={blockSize}
-                />
-              </svg>
-            ))}
+          {new Array(maxLevel + 1).fill(undefined).map((_, level) => (
+            <svg height={blockSize} key={level} width={blockSize}>
+              <title>{level} contributions</title>
+              <rect
+                className={cn(
+                  'stroke-[1px] stroke-border',
+                  levelClasses[level] || levelClasses[levelClasses.length - 1]
+                )}
+                height={blockSize}
+                rx={blockRadius}
+                ry={blockRadius}
+                width={blockSize}
+              />
+            </svg>
+          ))}
           <span className="ml-1 text-muted-foreground">
             {labels.legend?.more || 'More'}
           </span>
@@ -605,4 +503,3 @@ export const ContributionGraphFooter = ({
     </footer>
   );
 };
-
