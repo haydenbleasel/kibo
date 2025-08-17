@@ -1,0 +1,153 @@
+---
+title: Contribution Graph
+description: A GitHub-style contribution graph component that displays activity levels over time.
+icon: CalendarDays
+---
+
+<Preview path="contribution-graph" />
+
+## Installation
+
+<Installer packageName="contribution-graph" />
+
+## Features
+
+- GitHub-style activity calendar visualization
+- Fully composable architecture
+- Customizable color themes for light and dark modes
+- Configurable block size, margin, and radius
+- Loading skeleton state
+- Tooltip support with render prop
+- Month and week labels
+- Activity count and legend
+- Responsive design with horizontal scrolling
+- TypeScript support
+
+## Examples
+
+### Custom theme
+
+Customize the color scheme with your own palette:
+
+<Preview path="contribution-graph-custom-theme" />
+
+### Minimal view
+
+Hide labels and footer for a compact display:
+
+<Preview path="contribution-graph-minimal" />
+
+### With tooltips
+
+Add interactive tooltips to show detailed information:
+
+<Preview path="contribution-graph-tooltip" />
+
+### Custom size
+
+Adjust block size and spacing:
+
+<Preview path="contribution-graph-size" />
+
+### Loading state
+
+Display a skeleton while data is loading:
+
+<Preview path="contribution-graph-loading" />
+
+## API Reference
+
+### ContributionGraph
+
+The root component that provides context for all child components.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `data` | `Activity[]` | Required | Array of activity objects with date, count, and level |
+| `blockMargin` | `number` | `4` | Margin between blocks in pixels |
+| `blockRadius` | `number` | `2` | Border radius of blocks in pixels |
+| `blockSize` | `number` | `12` | Block size in pixels |
+| `colorScheme` | `'light' \| 'dark'` | System | Color scheme to use |
+| `fontSize` | `number` | `14` | Font size for text in pixels |
+| `labels` | `Labels` | Default labels | Localization strings for all calendar labels |
+| `maxLevel` | `number` | `4` | Maximum activity level (zero indexed) |
+| `loading` | `boolean` | `false` | Toggle for loading state |
+| `renderBlock` | `(block, activity) => ReactElement` | - | Render prop for calendar blocks |
+| `style` | `CSSProperties` | `{}` | Style object to pass to container |
+| `theme` | `ThemeInput` | Default theme | Custom color scales for light and dark modes |
+| `totalCount` | `number` | Calculated | Overwrite the total activity count |
+| `weekStart` | `WeekDay` | `0` (Sunday) | Index of day to be used as start of week |
+| `className` | `string` | - | Additional CSS classes |
+
+### ContributionGraphCalendar
+
+Renders the calendar grid with activity blocks.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `hideMonthLabels` | `boolean` | `false` | Toggle to hide month labels above calendar |
+| `className` | `string` | - | Additional CSS classes |
+
+### ContributionGraphFooter
+
+Renders the footer with total count and color legend.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `hideTotalCount` | `boolean` | `false` | Toggle to hide the total count |
+| `hideColorLegend` | `boolean` | `false` | Toggle to hide color legend |
+| `className` | `string` | - | Additional CSS classes |
+
+### ContributionGraphSkeleton
+
+A convenience component that renders a loading skeleton.
+
+Accepts all `ContributionGraph` props except `data` and `children`.
+
+## Types
+
+### Activity
+
+```typescript
+interface Activity {
+  date: string; // ISO 8601 date string (yyyy-MM-dd)
+  count: number; // Amount of tracked data
+  level: number; // Activity intensity (0 to maxLevel)
+}
+```
+
+### Labels
+
+```typescript
+interface Labels {
+  months?: string[];
+  weekdays?: string[];
+  totalCount?: string; // Supports {{count}} and {{year}} placeholders
+  legend?: {
+    less?: string;
+    more?: string;
+  };
+}
+```
+
+### ThemeInput
+
+```typescript
+type ThemeInput =
+  | {
+      light: ColorScale | [from: Color, to: Color];
+      dark?: ColorScale | [from: Color, to: Color];
+    }
+  | {
+      light?: ColorScale | [from: Color, to: Color];
+      dark: ColorScale | [from: Color, to: Color];
+    };
+```
+
+## Usage Tips
+
+- For missing dates in the data array, no activity is assumed
+- The calendar will automatically fill gaps between dates with zero activity
+- You can control the calendar's date range by including empty entries as the first and last items
+- The component automatically handles dark mode when using the system color scheme
+- Use the `generateTestData()` helper function to quickly generate sample data for testing
