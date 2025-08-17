@@ -23,6 +23,7 @@
     "@repo/calendar": "workspace:*",
     "@repo/choicebox": "workspace:*",
     "@repo/code-block": "workspace:*",
+    "@repo/contribution-graph": "workspace:*",
     "@repo/color-picker": "workspace:*",
     "@repo/combobox": "workspace:*",
     "@repo/comparison": "workspace:*",

@@ -343,7 +343,6 @@ export const ContributionGraphBlock = ({
   const block = (
     <rect
       className={cn(
-        'stroke-[1px] stroke-border',
         'data-[level="0"]:fill-muted',
         'data-[level="1"]:fill-primary/20',
         'data-[level="2"]:fill-primary/40',
