@@ -489,7 +489,7 @@ export const ContributionGraphBlock = ({
 export interface ContributionGraphCalendarProps {
   hideMonthLabels?: boolean;
   className?: string;
-  children?: (props: {
+  children: (props: {
     activity: Activity;
     dayIndex: number;
     weekIndex: number;
@@ -547,15 +547,7 @@ export const ContributionGraphCalendar = ({
 
             return (
               <Fragment key={`${weekIndex}-${dayIndex}`}>
-                {children ? (
-                  children({ activity, dayIndex, weekIndex })
-                ) : (
-                  <ContributionGraphBlock
-                    activity={activity}
-                    dayIndex={dayIndex}
-                    weekIndex={weekIndex}
-                  />
-                )}
+                {children({ activity, dayIndex, weekIndex })}
               </Fragment>
             );
           })
@@ -642,7 +634,15 @@ export const ContributionGraphSkeleton = (
   props: Omit<ContributionGraphProps, 'data' | 'children'>
 ) => (
   <ContributionGraph data={[]} loading {...props}>
-    <ContributionGraphCalendar />
+    <ContributionGraphCalendar>
+      {({ activity, dayIndex, weekIndex }) => (
+        <ContributionGraphBlock
+          activity={activity}
+          dayIndex={dayIndex}
+          weekIndex={weekIndex}
+        />
+      )}
+    </ContributionGraphCalendar>
     <ContributionGraphFooter />
   </ContributionGraph>
 );

@@ -3,6 +3,7 @@
 import {
   ContributionGraph,
   ContributionGraphCalendar,
+  ContributionGraphBlock,
   ContributionGraphFooter,
   generateTestData,
 } from '@repo/contribution-graph';
@@ -17,7 +18,15 @@ const Example = () => (
       dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
     }}
   >
-    <ContributionGraphCalendar />
+    <ContributionGraphCalendar>
+      {({ activity, dayIndex, weekIndex }) => (
+        <ContributionGraphBlock
+          activity={activity}
+          dayIndex={dayIndex}
+          weekIndex={weekIndex}
+        />
+      )}
+    </ContributionGraphCalendar>
     <ContributionGraphFooter />
   </ContributionGraph>
 );
