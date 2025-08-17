@@ -3,10 +3,9 @@
 import {
   ContributionGraph,
   ContributionGraphCalendar,
+  ContributionGraphBlock,
   ContributionGraphFooter,
   generateTestData,
-  type Activity,
-  type BlockElement,
 } from '@repo/contribution-graph';
 import {
   Tooltip,
@@ -14,29 +13,35 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { cloneElement } from 'react';
 
 const data = generateTestData();
 
-const Example = () => {
-  const renderBlock = (block: BlockElement, activity: Activity) => (
-    <Tooltip>
-      <TooltipTrigger asChild>{cloneElement(block)}</TooltipTrigger>
-      <TooltipContent>
-        <p className="font-semibold">{activity.date}</p>
-        <p>{activity.count} contributions</p>
-      </TooltipContent>
-    </Tooltip>
-  );
-
-  return (
-    <TooltipProvider>
-      <ContributionGraph data={data} renderBlock={renderBlock}>
-        <ContributionGraphCalendar />
-        <ContributionGraphFooter />
-      </ContributionGraph>
-    </TooltipProvider>
-  );
-};
+const Example = () => (
+  <TooltipProvider>
+    <ContributionGraph data={data}>
+      <ContributionGraphCalendar>
+        {({ activity, dayIndex, weekIndex }) => (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <g>
+                <ContributionGraphBlock
+                  activity={activity}
+                  dayIndex={dayIndex}
+                  weekIndex={weekIndex}
+                  className="cursor-pointer"
+                />
+              </g>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="font-semibold">{activity.date}</p>
+              <p>{activity.count} contributions</p>
+            </TooltipContent>
+          </Tooltip>
+        )}
+      </ContributionGraphCalendar>
+      <ContributionGraphFooter />
+    </ContributionGraph>
+  </TooltipProvider>
+);
 
 export default Example;

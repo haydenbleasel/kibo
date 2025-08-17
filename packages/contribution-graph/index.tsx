@@ -433,14 +433,73 @@ export const ContributionGraph = ({
   );
 };
 
+export interface ContributionGraphBlockProps {
+  activity: Activity;
+  dayIndex: number;
+  weekIndex: number;
+  className?: string;
+  style?: CSSProperties;
+}
+
+export const ContributionGraphBlock = ({
+  activity,
+  dayIndex,
+  weekIndex,
+  className,
+  style,
+}: ContributionGraphBlockProps) => {
+  const {
+    blockSize,
+    blockMargin,
+    blockRadius,
+    colorScale,
+    labelHeight,
+    maxLevel,
+    renderBlock,
+  } = useContributionGraph();
+
+  if (activity.level < 0 || activity.level > maxLevel) {
+    throw new RangeError(
+      `Provided activity level ${activity.level} for ${activity.date} is out of range. It must be between 0 and ${maxLevel}.`
+    );
+  }
+
+  const block = (
+    <rect
+      className={cn(
+        'stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]',
+        className
+      )}
+      data-date={activity.date}
+      data-level={activity.level}
+      fill={colorScale[activity.level]}
+      height={blockSize}
+      rx={blockRadius}
+      ry={blockRadius}
+      width={blockSize}
+      x={(blockSize + blockMargin) * weekIndex}
+      y={labelHeight + (blockSize + blockMargin) * dayIndex}
+      style={style}
+    />
+  );
+
+  return renderBlock ? renderBlock(block, activity) : block;
+};
+
 export interface ContributionGraphCalendarProps {
   hideMonthLabels?: boolean;
   className?: string;
+  children?: (props: {
+    activity: Activity;
+    dayIndex: number;
+    weekIndex: number;
+  }) => ReactNode;
 }
 
 export const ContributionGraphCalendar = ({
   hideMonthLabels = false,
   className,
+  children,
 }: ContributionGraphCalendarProps) => {
   const {
     weeks,
@@ -448,13 +507,8 @@ export const ContributionGraphCalendar = ({
     height,
     blockSize,
     blockMargin,
-    blockRadius,
-    colorScale,
     labels,
-    labelHeight,
     loading,
-    maxLevel,
-    renderBlock,
   } = useContributionGraph();
 
   const monthLabels = useMemo(
@@ -485,45 +539,27 @@ export const ContributionGraphCalendar = ({
             ))}
           </g>
         )}
-        {weeks.map((week, weekIndex) => (
-          <g
-            key={weekIndex}
-            transform={`translate(${(blockSize + blockMargin) * weekIndex}, 0)`}
-          >
-            {week.map((activity, dayIndex) => {
-              if (!activity) {
-                return null;
-              }
+        {weeks.map((week, weekIndex) =>
+          week.map((activity, dayIndex) => {
+            if (!activity) {
+              return null;
+            }
 
-              if (activity.level < 0 || activity.level > maxLevel) {
-                throw new RangeError(
-                  `Provided activity level ${activity.level} for ${activity.date} is out of range. It must be between 0 and ${maxLevel}.`
-                );
-              }
-
-              const block = (
-                <rect
-                  className='stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]'
-                  data-date={activity.date}
-                  data-level={activity.level}
-                  fill={colorScale[activity.level]}
-                  height={blockSize}
-                  rx={blockRadius}
-                  ry={blockRadius}
-                  width={blockSize}
-                  x={0}
-                  y={labelHeight + (blockSize + blockMargin) * dayIndex}
-                />
-              );
-
-              return (
-                <Fragment key={activity.date}>
-                  {renderBlock ? renderBlock(block, activity) : block}
-                </Fragment>
-              );
-            })}
-          </g>
-        ))}
+            return (
+              <Fragment key={`${weekIndex}-${dayIndex}`}>
+                {children ? (
+                  children({ activity, dayIndex, weekIndex })
+                ) : (
+                  <ContributionGraphBlock
+                    activity={activity}
+                    dayIndex={dayIndex}
+                    weekIndex={weekIndex}
+                  />
+                )}
+              </Fragment>
+            );
+          })
+        )}
       </svg>
     </div>
   );
