@@ -2,21 +2,36 @@
 
 import {
   ContributionGraph,
-  ContributionGraphCalendar,
   ContributionGraphBlock,
+  ContributionGraphCalendar,
   ContributionGraphFooter,
-  generateTestData,
 } from '@repo/contribution-graph';
+import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from 'date-fns';
 
-const data = generateTestData();
+const maxCount = 20;
+const maxLevel = 4;
+const now = new Date();
+const days = eachDayOfInterval({
+  start: startOfYear(now),
+  end: endOfYear(now),
+});
+
+const data = days.map((date) => {
+  const c = Math.round(
+    Math.random() * maxCount - Math.random() * (0.8 * maxCount)
+  );
+  const count = Math.max(0, c);
+  const level = Math.ceil((count / maxCount) * maxLevel);
+
+  return {
+    date: formatISO(date, { representation: 'date' }),
+    count,
+    level,
+  };
+});
 
 const Example = () => (
-  <ContributionGraph
-    data={data}
-    blockSize={20}
-    blockMargin={2}
-    fontSize={16}
-  >
+  <ContributionGraph blockMargin={2} blockSize={20} data={data} fontSize={16}>
     <ContributionGraphCalendar>
       {({ activity, dayIndex, weekIndex }) => (
         <ContributionGraphBlock

@@ -5,14 +5,12 @@ import type { Day as WeekDay } from 'date-fns';
 import {
   differenceInCalendarDays,
   eachDayOfInterval,
-  endOfYear,
   formatISO,
   getDay,
   getMonth,
   getYear,
   nextDay,
   parseISO,
-  startOfYear,
   subWeeks,
 } from 'date-fns';
 import {
@@ -645,33 +643,3 @@ export const ContributionGraphSkeleton = (
     <ContributionGraphFooter />
   </ContributionGraph>
 );
-
-export function generateTestData(args?: {
-  interval?: { start: Date; end: Date };
-  maxLevel?: number;
-}): Activity[] {
-  const maxCount = 20;
-  const maxLevel = args?.maxLevel ? Math.max(1, args.maxLevel) : 4;
-  const now = new Date();
-
-  const days = eachDayOfInterval(
-    args?.interval ?? {
-      start: startOfYear(now),
-      end: endOfYear(now),
-    }
-  );
-
-  return days.map((date) => {
-    const c = Math.round(
-      Math.random() * maxCount - Math.random() * (0.8 * maxCount)
-    );
-    const count = Math.max(0, c);
-    const level = Math.ceil((count / maxCount) * maxLevel);
-
-    return {
-      date: formatISO(date, { representation: 'date' }),
-      count,
-      level,
-    };
-  });
-}
