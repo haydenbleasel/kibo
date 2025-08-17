@@ -411,31 +411,14 @@ export const ContributionGraphCalendar = ({
 };
 
 export interface ContributionGraphFooterProps {
-  hideTotalCount?: boolean;
-  hideColorLegend?: boolean;
   className?: string;
+  children?: ReactNode;
 }
 
 export const ContributionGraphFooter = ({
-  hideTotalCount = false,
-  hideColorLegend = false,
   className,
+  children,
 }: ContributionGraphFooterProps) => {
-  const { totalCount, year, labels, maxLevel, blockSize, blockRadius } =
-    useContributionGraph();
-
-  if (hideTotalCount && hideColorLegend) {
-    return null;
-  }
-
-  const levelClasses = [
-    'fill-muted',
-    'fill-muted-foreground/20',
-    'fill-muted-foreground/40',
-    'fill-muted-foreground/60',
-    'fill-muted-foreground/80',
-  ];
-
   return (
     <footer
       className={cn(
@@ -443,41 +426,80 @@ export const ContributionGraphFooter = ({
         className
       )}
     >
-      {!hideTotalCount && (
-        <div className="text-muted-foreground">
-          {labels.totalCount
-            ? labels.totalCount
-              .replace('{{count}}', String(totalCount))
-              .replace('{{year}}', String(year))
-            : `${totalCount} activities in ${year}`}
-        </div>
-      )}
-
-      {!hideColorLegend && (
-        <div className="ml-auto flex items-center gap-[3px]">
-          <span className="mr-1 text-muted-foreground">
-            {labels.legend?.less || 'Less'}
-          </span>
-          {new Array(maxLevel + 1).fill(undefined).map((_, level) => (
-            <svg height={blockSize} key={level} width={blockSize}>
-              <title>{`${level} contributions`}</title>
-              <rect
-                className={cn(
-                  'stroke-[1px] stroke-border',
-                  levelClasses[level] || levelClasses[levelClasses.length - 1]
-                )}
-                height={blockSize}
-                rx={blockRadius}
-                ry={blockRadius}
-                width={blockSize}
-              />
-            </svg>
-          ))}
-          <span className="ml-1 text-muted-foreground">
-            {labels.legend?.more || 'More'}
-          </span>
-        </div>
-      )}
+      {children}
     </footer>
+  );
+};
+
+export interface ContributionGraphTotalCountProps {
+  className?: string;
+  children?: (props: { totalCount: number; year: number }) => ReactNode;
+}
+
+export const ContributionGraphTotalCount = ({
+  className,
+  children,
+}: ContributionGraphTotalCountProps) => {
+  const { totalCount, year, labels } = useContributionGraph();
+
+  if (children) {
+    return <>{children({ totalCount, year })}</>;
+  }
+
+  return (
+    <div className={cn('text-muted-foreground', className)}>
+      {labels.totalCount
+        ? labels.totalCount
+            .replace('{{count}}', String(totalCount))
+            .replace('{{year}}', String(year))
+        : `${totalCount} activities in ${year}`}
+    </div>
+  );
+};
+
+export interface ContributionGraphLegendProps {
+  className?: string;
+  children?: (props: { level: number }) => ReactNode;
+}
+
+export const ContributionGraphLegend = ({
+  className,
+  children,
+}: ContributionGraphLegendProps) => {
+  const { labels, maxLevel, blockSize, blockRadius } = useContributionGraph();
+
+  return (
+    <div className={cn('ml-auto flex items-center gap-[3px]', className)}>
+      <span className="mr-1 text-muted-foreground">
+        {labels.legend?.less || 'Less'}
+      </span>
+      {new Array(maxLevel + 1).fill(undefined).map((_, level) =>
+        children ? (
+          <Fragment key={level}>{children({ level })}</Fragment>
+        ) : (
+          <svg height={blockSize} key={level} width={blockSize}>
+            <title>{`${level} contributions`}</title>
+            <rect
+              className={cn(
+                'stroke-[1px] stroke-border',
+                'data-[level="0"]:fill-muted',
+                'data-[level="1"]:fill-muted-foreground/20',
+                'data-[level="2"]:fill-muted-foreground/40',
+                'data-[level="3"]:fill-muted-foreground/60',
+                'data-[level="4"]:fill-muted-foreground/80'
+              )}
+              data-level={level}
+              height={blockSize}
+              rx={blockRadius}
+              ry={blockRadius}
+              width={blockSize}
+            />
+          </svg>
+        )
+      )}
+      <span className="ml-1 text-muted-foreground">
+        {labels.legend?.more || 'More'}
+      </span>
+    </div>
   );
 };

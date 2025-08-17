@@ -5,6 +5,8 @@ import {
   ContributionGraphBlock,
   ContributionGraphCalendar,
   ContributionGraphFooter,
+  ContributionGraphTotalCount,
+  ContributionGraphLegend,
 } from '@repo/contribution-graph';
 import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from 'date-fns';
 
@@ -41,7 +43,10 @@ const Example = () => (
         />
       )}
     </ContributionGraphCalendar>
-    <ContributionGraphFooter />
+    <ContributionGraphFooter>
+      <ContributionGraphTotalCount />
+      <ContributionGraphLegend />
+    </ContributionGraphFooter>
   </ContributionGraph>
 );
 
