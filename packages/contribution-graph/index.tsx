@@ -108,11 +108,17 @@ const fillHoles = (activities: Activity[]): Activity[] => {
     return [];
   }
 
+  // Sort activities by date to ensure correct date range
+  const sortedActivities = [...activities].sort((a, b) => 
+    a.date.localeCompare(b.date)
+  );
+
   const calendar = new Map<string, Activity>(
     activities.map((a) => [a.date, a])
   );
-  const firstActivity = activities[0] as Activity;
-  const lastActivity = activities.at(-1);
+  
+  const firstActivity = sortedActivities[0] as Activity;
+  const lastActivity = sortedActivities.at(-1);
 
   if (!lastActivity) {
     return [];

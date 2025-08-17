@@ -5,8 +5,8 @@ import {
   ContributionGraphBlock,
   ContributionGraphCalendar,
   ContributionGraphFooter,
-  ContributionGraphTotalCount,
   ContributionGraphLegend,
+  ContributionGraphTotalCount,
 } from '@repo/contribution-graph';
 import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from 'date-fns';
 

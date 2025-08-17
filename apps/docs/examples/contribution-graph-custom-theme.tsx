@@ -6,8 +6,8 @@ import {
   ContributionGraphCalendar,
   ContributionGraphFooter,
 } from '@repo/contribution-graph';
-import { cn } from '@/lib/utils';
 import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 const maxCount = 20;
 const maxLevel = 4;
@@ -37,8 +37,6 @@ const Example = () => (
       {({ activity, dayIndex, weekIndex }) => (
         <ContributionGraphBlock
           activity={activity}
-          dayIndex={dayIndex}
-          weekIndex={weekIndex}
           className={cn(
             'data-[level="0"]:fill-[#ebedf0] dark:data-[level="0"]:fill-[#161b22]',
             'data-[level="1"]:fill-[#9be9a8] dark:data-[level="1"]:fill-[#0e4429]',
@@ -46,6 +44,8 @@ const Example = () => (
             'data-[level="3"]:fill-[#30a14e] dark:data-[level="3"]:fill-[#26a641]',
             'data-[level="4"]:fill-[#216e39] dark:data-[level="4"]:fill-[#39d353]'
           )}
+          dayIndex={dayIndex}
+          weekIndex={weekIndex}
         />
       )}
     </ContributionGraphCalendar>

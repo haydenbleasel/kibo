@@ -5,11 +5,11 @@ import {
   ContributionGraphBlock,
   ContributionGraphCalendar,
   ContributionGraphFooter,
-  ContributionGraphTotalCount,
   ContributionGraphLegend,
+  ContributionGraphTotalCount,
 } from '@repo/contribution-graph';
-import { Badge } from '@/components/ui/badge';
 import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from 'date-fns';
+import { Badge } from '@/components/ui/badge';
 
 const maxCount = 20;
 const maxLevel = 4;
@@ -48,9 +48,7 @@ const Example = () => (
       <ContributionGraphTotalCount>
         {({ totalCount, year }) => (
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">
-              Year {year}:
-            </span>
+            <span className='text-muted-foreground text-sm'>Year {year}:</span>
             <Badge variant="secondary">
               {totalCount.toLocaleString()} contributions
             </Badge>
@@ -64,16 +62,9 @@ const Example = () => (
             data-level={level}
           >
             <div
-              className={`
-                h-full w-full rounded-sm border border-border
-                ${level === 0 ? 'bg-muted' : ''}
-                ${level === 1 ? 'bg-emerald-200 dark:bg-emerald-900' : ''}
-                ${level === 2 ? 'bg-emerald-400 dark:bg-emerald-700' : ''}
-                ${level === 3 ? 'bg-emerald-600 dark:bg-emerald-500' : ''}
-                ${level === 4 ? 'bg-emerald-800 dark:bg-emerald-300' : ''}
-              `}
+              className={`h-full w-full rounded-sm border border-border ${level === 0 ? 'bg-muted' : ''} ${level === 1 ? 'bg-emerald-200 dark:bg-emerald-900' : ''} ${level === 2 ? 'bg-emerald-400 dark:bg-emerald-700' : ''} ${level === 3 ? 'bg-emerald-600 dark:bg-emerald-500' : ''} ${level === 4 ? 'bg-emerald-800 dark:bg-emerald-300' : ''} `}
             />
-            <span className="absolute -top-8 hidden rounded bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md group-hover:block">
+            <span className='-top-8 absolute hidden rounded bg-popover px-2 py-1 text-popover-foreground text-xs shadow-md group-hover:block'>
               Level {level}
             </span>
           </div>
