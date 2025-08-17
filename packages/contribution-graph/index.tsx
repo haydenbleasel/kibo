@@ -1,6 +1,5 @@
 'use client';
 
-import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import chroma from 'chroma-js';
 import type { Day as WeekDay } from 'date-fns';
 import {
@@ -17,8 +16,8 @@ import {
   subWeeks,
 } from 'date-fns';
 import {
-  createContext,
   type CSSProperties,
+  createContext,
   Fragment,
   type ReactElement,
   type ReactNode,
@@ -36,8 +35,8 @@ export interface Activity {
 type Week = Array<Activity | undefined>;
 
 export interface Labels {
-  months?: Array<string>;
-  weekdays?: Array<string>;
+  months?: string[];
+  weekdays?: string[];
   totalCount?: string;
   legend?: {
     less?: string;
@@ -46,7 +45,7 @@ export interface Labels {
 }
 
 type Color = string;
-type ColorScale = Array<Color>;
+type ColorScale = Color[];
 
 export interface Theme {
   light: ColorScale;
@@ -55,13 +54,13 @@ export interface Theme {
 
 export type ThemeInput =
   | {
-      light: ColorScale | [from: Color, to: Color];
-      dark?: ColorScale | [from: Color, to: Color];
-    }
+    light: ColorScale | [from: Color, to: Color];
+    dark?: ColorScale | [from: Color, to: Color];
+  }
   | {
-      light?: ColorScale | [from: Color, to: Color];
-      dark: ColorScale | [from: Color, to: Color];
-    };
+    light?: ColorScale | [from: Color, to: Color];
+    dark: ColorScale | [from: Color, to: Color];
+  };
 
 interface BlockAttributes {
   x: number;
@@ -129,9 +128,8 @@ interface ContributionGraphContextType {
   height: number;
 }
 
-const ContributionGraphContext = createContext<ContributionGraphContextType | null>(
-  null
-);
+const ContributionGraphContext =
+  createContext<ContributionGraphContextType | null>(null);
 
 const useContributionGraph = () => {
   const context = useContext(ContributionGraphContext);
@@ -172,10 +170,7 @@ function fillHoles(activities: Activity[]): Activity[] {
   });
 }
 
-function groupByWeeks(
-  activities: Activity[],
-  weekStart: WeekDay = 0
-): Week[] {
+function groupByWeeks(activities: Activity[], weekStart: WeekDay = 0): Week[] {
   if (activities.length === 0) {
     return [];
   }
@@ -189,9 +184,9 @@ function groupByWeeks(
       : subWeeks(nextDay(firstDate, weekStart), 1);
 
   const paddedActivities = [
-    ...(Array(
-      differenceInCalendarDays(firstDate, firstCalendarDate)
-    ).fill(undefined) as Activity[]),
+    ...(Array(differenceInCalendarDays(firstDate, firstCalendarDate)).fill(
+      undefined
+    ) as Activity[]),
     ...normalizedActivities,
   ];
 
@@ -221,10 +216,9 @@ function getMonthLabels(
       const month = monthNames[getMonth(parseISO(firstActivity.date))];
 
       if (!month) {
-        const monthName = new Date(firstActivity.date).toLocaleString(
-          'en-US',
-          { month: 'short' }
-        );
+        const monthName = new Date(firstActivity.date).toLocaleString('en-US', {
+          month: 'short',
+        });
         throw new Error(
           `Unexpected error: undefined month label for ${monthName}.`
         );
@@ -274,7 +268,7 @@ function isColorScale(colors: unknown[], size: number): colors is ColorScale {
   return colors.length === size;
 }
 
-function createTheme(input?: ThemeInput, size: number = 5): Theme {
+function createTheme(input?: ThemeInput, size = 5): Theme {
   const defaultTheme: Theme = {
     light: createColorScale(['hsl(0, 0%, 92%)', 'hsl(0, 0%, 26%)'], size),
     dark: createColorScale(['hsl(0, 0%, 20%)', 'hsl(0, 0%, 92%)'], size),
@@ -362,12 +356,12 @@ export const ContributionGraph = ({
   blockMargin = 4,
   blockRadius = 2,
   blockSize = 12,
-  colorScheme = undefined,
+  colorScheme,
   fontSize = 14,
   labels: labelsProp = undefined,
   maxLevel: maxLevelProp = 4,
   loading = false,
-  renderBlock = undefined,
+  renderBlock,
   style = {},
   theme: themeProp = undefined,
   totalCount: totalCountProp = undefined,
@@ -388,7 +382,10 @@ export const ContributionGraph = ({
   const labels = { ...DEFAULT_LABELS, ...labelsProp };
   const labelHeight = fontSize + 8; // LABEL_MARGIN
 
-  const year = data.length > 0 ? getYear(parseISO(data[0].date)) : new Date().getFullYear();
+  const year =
+    data.length > 0
+      ? getYear(parseISO(data[0].date))
+      : new Date().getFullYear();
 
   const totalCount =
     typeof totalCountProp === 'number'
@@ -427,10 +424,7 @@ export const ContributionGraph = ({
       }}
     >
       <article
-        className={cn(
-          'flex w-max max-w-full flex-col gap-2',
-          className
-        )}
+        className={cn('flex w-max max-w-full flex-col gap-2', className)}
         style={{ fontSize, ...style }}
       >
         {children}
@@ -469,20 +463,22 @@ export const ContributionGraphCalendar = ({
   );
 
   return (
-    <div className={cn('max-w-full overflow-x-auto overflow-y-hidden', className)}>
+    <div
+      className={cn('max-w-full overflow-x-auto overflow-y-hidden', className)}
+    >
       <svg
-        width={width}
+        className="block overflow-visible"
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        className="block overflow-visible"
+        width={width}
       >
-        {!loading && !hideMonthLabels && (
+        {!(loading || hideMonthLabels) && (
           <g className="fill-current">
             {monthLabels.map(({ label, weekIndex }) => (
               <text
+                dominantBaseline="hanging"
                 key={weekIndex}
                 x={(blockSize + blockMargin) * weekIndex}
-                dominantBaseline="hanging"
               >
                 {label}
               </text>
@@ -507,16 +503,16 @@ export const ContributionGraphCalendar = ({
 
               const block = (
                 <rect
-                  x={0}
-                  y={labelHeight + (blockSize + blockMargin) * dayIndex}
-                  width={blockSize}
+                  className='stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]'
+                  data-date={activity.date}
+                  data-level={activity.level}
+                  fill={colorScale[activity.level]}
                   height={blockSize}
                   rx={blockRadius}
                   ry={blockRadius}
-                  fill={colorScale[activity.level]}
-                  data-date={activity.date}
-                  data-level={activity.level}
-                  className="stroke-black/[0.08] stroke-[1px] dark:stroke-white/[0.04]"
+                  width={blockSize}
+                  x={0}
+                  y={labelHeight + (blockSize + blockMargin) * dayIndex}
                 />
               );
 
@@ -561,21 +557,24 @@ export const ContributionGraphFooter = ({
 
   return (
     <footer
-      className={cn('flex flex-wrap gap-1 whitespace-nowrap sm:gap-x-4', className)}
+      className={cn(
+        'flex flex-wrap gap-1 whitespace-nowrap sm:gap-x-4',
+        className
+      )}
     >
       {loading && <div>&nbsp;</div>}
 
-      {!loading && !hideTotalCount && (
+      {!(loading || hideTotalCount) && (
         <div className="text-muted-foreground">
           {labels.totalCount
             ? labels.totalCount
-                .replace('{{count}}', String(totalCount))
-                .replace('{{year}}', String(year))
+              .replace('{{count}}', String(totalCount))
+              .replace('{{year}}', String(year))
             : `${totalCount} activities in ${year}`}
         </div>
       )}
 
-      {!loading && !hideColorLegend && (
+      {!(loading || hideColorLegend) && (
         <div className="ml-auto flex items-center gap-[3px]">
           <span className="mr-1 text-muted-foreground">
             {labels.legend?.less || 'Less'}
@@ -583,14 +582,14 @@ export const ContributionGraphFooter = ({
           {Array(maxLevel + 1)
             .fill(undefined)
             .map((_, level) => (
-              <svg width={blockSize} height={blockSize} key={level}>
+              <svg height={blockSize} key={level} width={blockSize}>
                 <rect
-                  width={blockSize}
-                  height={blockSize}
+                  className='stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]'
                   fill={colorScale[level]}
+                  height={blockSize}
                   rx={blockRadius}
                   ry={blockRadius}
-                  className="stroke-black/[0.08] stroke-[1px] dark:stroke-white/[0.04]"
+                  width={blockSize}
                 />
               </svg>
             ))}
@@ -628,10 +627,9 @@ export function generateTestData(args?: {
   );
 
   return days.map((date) => {
-    const c =
-      Math.round(
-        Math.random() * maxCount - Math.random() * (0.8 * maxCount)
-      );
+    const c = Math.round(
+      Math.random() * maxCount - Math.random() * (0.8 * maxCount)
+    );
     const count = Math.max(0, c);
     const level = Math.ceil((count / maxCount) * maxLevel);
 
