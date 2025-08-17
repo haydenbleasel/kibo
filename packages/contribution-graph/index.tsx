@@ -115,7 +115,6 @@ interface ContributionGraphContextType {
   fontSize: number;
   labels: Labels;
   labelHeight: number;
-  loading: boolean;
   maxLevel: number;
   renderBlock?: (block: BlockElement, activity: Activity) => ReactElement;
   theme: Theme;
@@ -320,19 +319,6 @@ function createTheme(input?: ThemeInput, size = 5): Theme {
   return defaultTheme;
 }
 
-function generateEmptyData(): Activity[] {
-  const year = new Date().getFullYear();
-  const days = eachDayOfInterval({
-    start: new Date(year, 0, 1),
-    end: new Date(year, 11, 31),
-  });
-
-  return days.map((date) => ({
-    date: formatISO(date, { representation: 'date' }),
-    count: 0,
-    level: 0,
-  }));
-}
 
 export interface ContributionGraphProps {
   data: Activity[];
@@ -343,7 +329,6 @@ export interface ContributionGraphProps {
   fontSize?: number;
   labels?: Labels;
   maxLevel?: number;
-  loading?: boolean;
   renderBlock?: (block: BlockElement, activity: Activity) => ReactElement;
   style?: CSSProperties;
   theme?: ThemeInput;
@@ -354,7 +339,7 @@ export interface ContributionGraphProps {
 }
 
 export const ContributionGraph = ({
-  data: dataProp,
+  data,
   blockMargin = 4,
   blockRadius = 2,
   blockSize = 12,
@@ -362,7 +347,6 @@ export const ContributionGraph = ({
   fontSize = 14,
   labels: labelsProp = undefined,
   maxLevel: maxLevelProp = 4,
-  loading = false,
   renderBlock,
   style = {},
   theme: themeProp = undefined,
@@ -378,7 +362,6 @@ export const ContributionGraph = ({
   );
   const colorScale = theme[colorScheme ?? 'light'];
 
-  const data = loading ? generateEmptyData() : dataProp;
   const weeks = useMemo(() => groupByWeeks(data, weekStart), [data, weekStart]);
 
   const labels = { ...DEFAULT_LABELS, ...labelsProp };
@@ -397,7 +380,7 @@ export const ContributionGraph = ({
   const width = weeks.length * (blockSize + blockMargin) - blockMargin;
   const height = labelHeight + (blockSize + blockMargin) * 7 - blockMargin;
 
-  if (data.length === 0 && !loading) {
+  if (data.length === 0) {
     return null;
   }
 
@@ -414,7 +397,6 @@ export const ContributionGraph = ({
         fontSize,
         labels,
         labelHeight,
-        loading,
         maxLevel,
         renderBlock,
         theme,
@@ -503,7 +485,7 @@ export const ContributionGraphCalendar = ({
   className,
   children,
 }: ContributionGraphCalendarProps) => {
-  const { weeks, width, height, blockSize, blockMargin, labels, loading } =
+  const { weeks, width, height, blockSize, blockMargin, labels } =
     useContributionGraph();
 
   const monthLabels = useMemo(
@@ -522,7 +504,7 @@ export const ContributionGraphCalendar = ({
         width={width}
       >
         <title>Contribution Graph</title>
-        {!(loading || hideMonthLabels) && (
+        {!hideMonthLabels && (
           <g className="fill-current">
             {monthLabels.map(({ label, weekIndex }) => (
               <text
@@ -565,7 +547,6 @@ export const ContributionGraphFooter = ({
   className,
 }: ContributionGraphFooterProps) => {
   const {
-    loading,
     totalCount,
     year,
     labels,
@@ -586,19 +567,17 @@ export const ContributionGraphFooter = ({
         className
       )}
     >
-      {loading && <div>&nbsp;</div>}
-
-      {!(loading || hideTotalCount) && (
+      {!hideTotalCount && (
         <div className="text-muted-foreground">
           {labels.totalCount
             ? labels.totalCount
-              .replace('{{count}}', String(totalCount))
-              .replace('{{year}}', String(year))
+                .replace('{{count}}', String(totalCount))
+                .replace('{{year}}', String(year))
             : `${totalCount} activities in ${year}`}
         </div>
       )}
 
-      {!(loading || hideColorLegend) && (
+      {!hideColorLegend && (
         <div className="ml-auto flex items-center gap-[3px]">
           <span className="mr-1 text-muted-foreground">
             {labels.legend?.less || 'Less'}
@@ -627,19 +606,3 @@ export const ContributionGraphFooter = ({
   );
 };
 
-export const ContributionGraphSkeleton = (
-  props: Omit<ContributionGraphProps, 'data' | 'children'>
-) => (
-  <ContributionGraph data={[]} loading {...props}>
-    <ContributionGraphCalendar>
-      {({ activity, dayIndex, weekIndex }) => (
-        <ContributionGraphBlock
-          activity={activity}
-          dayIndex={dayIndex}
-          weekIndex={weekIndex}
-        />
-      )}
-    </ContributionGraphCalendar>
-    <ContributionGraphFooter />
-  </ContributionGraph>
-);
