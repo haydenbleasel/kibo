@@ -150,7 +150,11 @@ function fillHoles(activities: Activity[]): Activity[] {
     activities.map((a) => [a.date, a])
   );
   const firstActivity = activities[0] as Activity;
-  const lastActivity = activities[activities.length - 1] as Activity;
+  const lastActivity = activities.at(-1);
+
+  if (!lastActivity) {
+    return [];
+  }
 
   return eachDayOfInterval({
     start: parseISO(firstActivity.date),
@@ -184,15 +188,15 @@ function groupByWeeks(activities: Activity[], weekStart: WeekDay = 0): Week[] {
       : subWeeks(nextDay(firstDate, weekStart), 1);
 
   const paddedActivities = [
-    ...(Array(differenceInCalendarDays(firstDate, firstCalendarDate)).fill(
+    ...new Array(differenceInCalendarDays(firstDate, firstCalendarDate)).fill(
       undefined
-    ) as Activity[]),
+    ) as Activity[],
     ...normalizedActivities,
   ];
 
   const numberOfWeeks = Math.ceil(paddedActivities.length / 7);
 
-  return Array(numberOfWeeks)
+  return new Array(numberOfWeeks)
     .fill(undefined)
     .map((_, weekIndex) =>
       paddedActivities.slice(weekIndex * 7, weekIndex * 7 + 7)
@@ -224,10 +228,10 @@ function getMonthLabels(
         );
       }
 
-      const prevLabel = labels[labels.length - 1];
+      const prevLabel = labels.at(-1);
 
       if (weekIndex === 0 || !prevLabel || prevLabel.label !== month) {
-        return [...labels, { weekIndex, label: month }];
+        return [...labels, { weekIndex, label: month }] as MonthLabel[];
       }
 
       return labels;
@@ -476,10 +480,10 @@ export const ContributionGraphBlock = ({
       height={blockSize}
       rx={blockRadius}
       ry={blockRadius}
+      style={style}
       width={blockSize}
       x={(blockSize + blockMargin) * weekIndex}
       y={labelHeight + (blockSize + blockMargin) * dayIndex}
-      style={style}
     />
   );
 
@@ -501,15 +505,8 @@ export const ContributionGraphCalendar = ({
   className,
   children,
 }: ContributionGraphCalendarProps) => {
-  const {
-    weeks,
-    width,
-    height,
-    blockSize,
-    blockMargin,
-    labels,
-    loading,
-  } = useContributionGraph();
+  const { weeks, width, height, blockSize, blockMargin, labels, loading } =
+    useContributionGraph();
 
   const monthLabels = useMemo(
     () => getMonthLabels(weeks, labels.months),
@@ -526,6 +523,7 @@ export const ContributionGraphCalendar = ({
         viewBox={`0 0 ${width} ${height}`}
         width={width}
       >
+        <title>Contribution Graph</title>
         {!(loading || hideMonthLabels) && (
           <g className="fill-current">
             {monthLabels.map(({ label, weekIndex }) => (
@@ -607,12 +605,13 @@ export const ContributionGraphFooter = ({
           <span className="mr-1 text-muted-foreground">
             {labels.legend?.less || 'Less'}
           </span>
-          {Array(maxLevel + 1)
+          {new Array(maxLevel + 1)
             .fill(undefined)
             .map((_, level) => (
               <svg height={blockSize} key={level} width={blockSize}>
+                <title>{level} contributions</title>
                 <rect
-                  className='stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]'
+                  className="stroke-[1px] stroke-black/[0.08] dark:stroke-white/[0.04]"
                   fill={colorScale[level]}
                   height={blockSize}
                   rx={blockRadius}
