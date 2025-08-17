@@ -16,7 +16,6 @@ import {
   type CSSProperties,
   createContext,
   Fragment,
-  type ReactElement,
   type ReactNode,
   useContext,
   useMemo,
@@ -41,19 +40,6 @@ export interface Labels {
   };
 }
 
-interface BlockAttributes {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  rx: number;
-  ry: number;
-  fill: string;
-  'data-date': string;
-  'data-level': number;
-}
-
-export type BlockElement = ReactElement<BlockAttributes>;
 
 interface MonthLabel {
   weekIndex: number;
@@ -95,7 +81,6 @@ interface ContributionGraphContextType {
   labels: Labels;
   labelHeight: number;
   maxLevel: number;
-  renderBlock?: (block: BlockElement, activity: Activity) => ReactElement;
   totalCount: number;
   weekStart: WeekDay;
   year: number;
@@ -234,7 +219,6 @@ export interface ContributionGraphProps {
   fontSize?: number;
   labels?: Labels;
   maxLevel?: number;
-  renderBlock?: (block: BlockElement, activity: Activity) => ReactElement;
   style?: CSSProperties;
   totalCount?: number;
   weekStart?: WeekDay;
@@ -250,7 +234,6 @@ export const ContributionGraph = ({
   fontSize = 14,
   labels: labelsProp = undefined,
   maxLevel: maxLevelProp = 4,
-  renderBlock,
   style = {},
   totalCount: totalCountProp = undefined,
   weekStart = 0,
@@ -292,7 +275,6 @@ export const ContributionGraph = ({
         labels,
         labelHeight,
         maxLevel,
-        renderBlock,
         totalCount,
         weekStart,
         year,
@@ -331,7 +313,6 @@ export const ContributionGraphBlock = ({
     blockRadius,
     labelHeight,
     maxLevel,
-    renderBlock,
   } = useContributionGraph();
 
   if (activity.level < 0 || activity.level > maxLevel) {
@@ -340,14 +321,14 @@ export const ContributionGraphBlock = ({
     );
   }
 
-  const block = (
+  return (
     <rect
       className={cn(
         'data-[level="0"]:fill-muted',
-        'data-[level="1"]:fill-primary/20',
-        'data-[level="2"]:fill-primary/40',
-        'data-[level="3"]:fill-primary/60',
-        'data-[level="4"]:fill-primary/80',
+        'data-[level="1"]:fill-muted-foreground/20',
+        'data-[level="2"]:fill-muted-foreground/40',
+        'data-[level="3"]:fill-muted-foreground/60',
+        'data-[level="4"]:fill-muted-foreground/80',
         className
       )}
       data-count={activity.count}
@@ -362,8 +343,6 @@ export const ContributionGraphBlock = ({
       y={labelHeight + (blockSize + blockMargin) * dayIndex}
     />
   );
-
-  return renderBlock ? renderBlock(block, activity) : block;
 };
 
 export interface ContributionGraphCalendarProps {
