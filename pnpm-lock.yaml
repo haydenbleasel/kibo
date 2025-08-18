@@ -432,9 +432,6 @@ importers:
 
   packages/code-block:
     dependencies:
-      '@icons-pack/react-simple-icons':
-        specifier: ^13.1.0
-        version: 13.1.0(react@19.1.0)
       '@radix-ui/react-use-controllable-state':
         specifier: ^1.2.2
         version: 1.2.2(@types/react@19.1.8)(react@19.1.0)
