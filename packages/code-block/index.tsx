@@ -1,7 +1,7 @@
 'use client';
 
+import type { IconType } from 'react-icons';
 import {
-  type IconType,
   SiAstro,
   SiBiome,
   SiBower,
@@ -10,7 +10,7 @@ import {
   SiCircleci,
   SiCoffeescript,
   SiCplusplus,
-  SiCss,
+  SiCss3,
   SiCssmodules,
   SiDart,
   SiDocker,
@@ -70,7 +70,7 @@ import {
   SiVite,
   SiVuedotjs,
   SiWebassembly,
-} from '@icons-pack/react-simple-icons';
+} from 'react-icons/si';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import {
   transformerNotationDiff,
@@ -121,7 +121,7 @@ const filenameIconMap = {
   '.circleci/config.yml': SiCircleci,
   '*.coffee': SiCoffeescript,
   '*.module.css': SiCssmodules,
-  '*.css': SiCss,
+  '*.css': SiCss3,
   '*.dart': SiDart,
   Dockerfile: SiDocker,
   'docusaurus.config.js': SiDocusaurus,
