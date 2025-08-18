@@ -20,19 +20,19 @@
   },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
-    "@biomejs/biome": "2.0.0",
-    "@types/node": "^24.0.1",
-    "turbo": "^2.5.4",
-    "typescript": "^5.8.3",
-    "ultracite": "^5.0.3"
+    "@biomejs/biome": "2.2.0",
+    "@types/node": "^24.3.0",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2",
+    "ultracite": "^5.2.4"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.14.0",
   "type": "module",
   "dependencies": {
     "tsup": "^8.5.0",
-    "zod": "^3.25.64"
+    "zod": "^4.0.17"
   }
 }
