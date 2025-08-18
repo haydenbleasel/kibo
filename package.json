@@ -33,6 +33,6 @@
   "type": "module",
   "dependencies": {
     "tsup": "^8.5.0",
-    "zod": "^4.0.17"
+    "zod": "^3.25.42"
   }
 }
