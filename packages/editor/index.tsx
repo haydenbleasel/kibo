@@ -100,6 +100,7 @@ import {
 } from 'lucide-react';
 import type { FormEventHandler, HTMLAttributes, ReactNode } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import tippy, { type Instance as TippyInstance } from 'tippy.js';
 
 interface SlashNodeAttrs {
 	id: string | null;
@@ -607,7 +608,7 @@ export const EditorProvider = ({
 					}
 
 					const slashFuse = new Fuse(items, {
-						keys: ["title", "description", "searchTerms"],
+            keys: ['title', 'description', 'searchTerms'],
 						threshold: 0.2,
 						minMatchCharLength: 1,
 					});
@@ -616,9 +617,10 @@ export const EditorProvider = ({
 
 					return results.map((result) => result.item);
 				},
-				char: "/",
+        char: '/',
 				render: () => {
 					let component: ReactRenderer<EditorSlashMenuProps>;
+          let popup: TippyInstance;
 
 					return {
 						onStart: (onStartProps) => {
@@ -626,15 +628,33 @@ export const EditorProvider = ({
 								props: onStartProps,
 								editor: onStartProps.editor,
 							});
+
+              popup = tippy(document.body, {
+                getReferenceClientRect: () =>
+                  onStartProps.clientRect?.() || new DOMRect(),
+                appendTo: () => document.body,
+                content: component.element,
+                showOnCreate: true,
+                interactive: true,
+                trigger: 'manual',
+                placement: 'bottom-start',
+              });
 						},
 
 						onUpdate(onUpdateProps) {
 							component.updateProps(onUpdateProps);
+
+              popup.setProps({
+                getReferenceClientRect: () =>
+                  onUpdateProps.clientRect?.() || new DOMRect(),
+              });
 						},
 
 						onKeyDown(onKeyDownProps) {
-							if (onKeyDownProps.event.key === "Escape") {
+              if (onKeyDownProps.event.key === 'Escape') {
+                popup.hide();
 								component.destroy();
+
 								return true;
 							}
 
@@ -642,12 +662,64 @@ export const EditorProvider = ({
 						},
 
 						onExit() {
+              popup.destroy();
 							component.destroy();
 						},
 					};
 				},
 			},
 		}),
+		// Slash.configure({
+		// 	suggestion: {
+		// 		items: async ({ editor, query }) => {
+		// 			const items = await defaultSlashSuggestions({ editor, query });
+
+		// 			if (!query) {
+		// 				return items;
+		// 			}
+
+		// 			const slashFuse = new Fuse(items, {
+		// 				keys: ["title", "description", "searchTerms"],
+		// 				threshold: 0.2,
+		// 				minMatchCharLength: 1,
+		// 			});
+
+		// 			const results = slashFuse.search(query);
+
+		// 			return results.map((result) => result.item);
+		// 		},
+		// 		char: "/",
+		// 		render: () => {
+		// 			let component: ReactRenderer<EditorSlashMenuProps>;
+
+		// 			return {
+		// 				onStart: (onStartProps) => {
+		// 					component = new ReactRenderer(EditorSlashMenu, {
+		// 						props: onStartProps,
+		// 						editor: onStartProps.editor,
+		// 					});
+		// 				},
+
+		// 				onUpdate(onUpdateProps) {
+		// 					component.updateProps(onUpdateProps);
+		// 				},
+
+		// 				onKeyDown(onKeyDownProps) {
+		// 					if (onKeyDownProps.event.key === "Escape") {
+		// 						component.destroy();
+		// 						return true;
+		// 					}
+
+		// 					return handleCommandNavigation(onKeyDownProps.event) ?? false;
+		// 				},
+
+		// 				onExit() {
+		// 					component.destroy();
+		// 				},
+		// 			};
+		// 		},
+		// 	},
+		// }),
 		Table.configure({
 			HTMLAttributes: {
 				class: cn(

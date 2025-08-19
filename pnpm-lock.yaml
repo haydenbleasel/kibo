@@ -808,6 +808,9 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
+      tippy.js:
+        specifier: ^6.3.7
+        version: 6.3.7
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -2798,6 +2801,9 @@ packages:
 
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
+
+  '@popperjs/core@2.11.8':
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
   '@prisma/instrumentation@6.13.0':
     resolution: {integrity: sha512-b97b0sBycGh89RQcqobSgjGl3jwPaC5cQIOFod6EX1v0zIxlXPmL3ckSXxoHpy+Js0QV/tgCzFvqicMJCtezBA==}
@@ -7858,6 +7864,9 @@ packages:
     resolution: {integrity: sha512-t2T/WLB2WRgZ9EpE4jgPJ9w+i66UZfDc8wHh0xrwiRNN+UwH98GIJkTeZqX9rg0i0ptwzqW+uYeIF0T4F8LR7A==}
     engines: {node: '>=14.0.0'}
 
+  tippy.js@6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -9675,6 +9684,8 @@ snapshots:
     optional: true
 
   '@polka/url@1.0.0-next.28': {}
+
+  '@popperjs/core@2.11.8': {}
 
   '@prisma/instrumentation@6.13.0(@opentelemetry/api@1.9.0)':
     dependencies:
@@ -15455,6 +15466,10 @@ snapshots:
   tinyrainbow@2.0.0: {}
 
   tinyspy@4.0.3: {}
+
+  tippy.js@6.3.7:
+    dependencies:
+      '@popperjs/core': 2.11.8
 
   to-regex-range@5.0.1:
     dependencies:
