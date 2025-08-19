@@ -669,57 +669,6 @@ export const EditorProvider = ({
 				},
 			},
 		}),
-		// Slash.configure({
-		// 	suggestion: {
-		// 		items: async ({ editor, query }) => {
-		// 			const items = await defaultSlashSuggestions({ editor, query });
-
-		// 			if (!query) {
-		// 				return items;
-		// 			}
-
-		// 			const slashFuse = new Fuse(items, {
-		// 				keys: ["title", "description", "searchTerms"],
-		// 				threshold: 0.2,
-		// 				minMatchCharLength: 1,
-		// 			});
-
-		// 			const results = slashFuse.search(query);
-
-		// 			return results.map((result) => result.item);
-		// 		},
-		// 		char: "/",
-		// 		render: () => {
-		// 			let component: ReactRenderer<EditorSlashMenuProps>;
-
-		// 			return {
-		// 				onStart: (onStartProps) => {
-		// 					component = new ReactRenderer(EditorSlashMenu, {
-		// 						props: onStartProps,
-		// 						editor: onStartProps.editor,
-		// 					});
-		// 				},
-
-		// 				onUpdate(onUpdateProps) {
-		// 					component.updateProps(onUpdateProps);
-		// 				},
-
-		// 				onKeyDown(onKeyDownProps) {
-		// 					if (onKeyDownProps.event.key === "Escape") {
-		// 						component.destroy();
-		// 						return true;
-		// 					}
-
-		// 					return handleCommandNavigation(onKeyDownProps.event) ?? false;
-		// 				},
-
-		// 				onExit() {
-		// 					component.destroy();
-		// 				},
-		// 			};
-		// 		},
-		// 	},
-		// }),
 		Table.configure({
 			HTMLAttributes: {
 				class: cn(
