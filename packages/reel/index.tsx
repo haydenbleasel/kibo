@@ -52,6 +52,8 @@ type ReelContextType = {
   currentItem: ReelItem;
   isNavigating: boolean;
   setIsNavigating: (navigating: boolean) => void;
+  isTransitioning: boolean;
+  setIsTransitioning: (transitioning: boolean) => void;
 };
 
 const ReelContext = createContext<ReelContextType | undefined>(undefined);
@@ -115,13 +117,15 @@ export const Reel = ({
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const setCurrentIndex = useCallback(
     (index: number) => {
+      setIsTransitioning(true);
+      setProgress(0); // Reset progress immediately to prevent showing 100% during transition
       setCurrentIndexState(index);
-      setProgress(0);
     },
-    [setCurrentIndexState]
+    [setCurrentIndexState, setProgress]
   );
 
   const currentItem = data[currentIndex];
@@ -143,6 +147,8 @@ export const Reel = ({
         currentItem,
         isNavigating,
         setIsNavigating,
+        isTransitioning,
+        setIsTransitioning,
       }}
     >
       <div
@@ -168,7 +174,7 @@ export const ReelContent = ({
   children,
   ...props
 }: ReelContentProps) => {
-  const { currentIndex, currentItem } = useReelContext();
+  const { currentIndex, currentItem, setIsTransitioning, setProgress } = useReelContext();
 
   const renderContent = () => {
     if (typeof children === 'function') {
@@ -192,6 +198,10 @@ export const ReelContent = ({
           initial={{ opacity: 0 }}
           key={currentIndex}
           transition={{ duration: 0.3 }}
+          onAnimationComplete={() => {
+            // Mark transition as complete when fade-in completes
+            setIsTransitioning(false);
+          }}
         >
           {renderContent()}
         </motion.div>
@@ -232,6 +242,7 @@ export const ReelVideo = ({
     data,
     progress,
     currentItem,
+    isTransitioning,
   } = useReelContext();
   const animationFrameRef = useRef<number | undefined>(undefined);
   const startTimeRef = useRef<number | undefined>(undefined);
@@ -241,9 +252,11 @@ export const ReelVideo = ({
   // Set duration when component mounts or currentIndex changes
   useEffect(() => {
     setDuration(duration);
-    setProgress(0);
-    pausedProgressRef.current = 0;
-  }, [currentIndex, duration, setDuration, setProgress]);
+    // Don't reset progress here anymore - it's handled in ReelContent after transition
+    if (!isTransitioning) {
+      pausedProgressRef.current = 0;
+    }
+  }, [currentIndex, duration, setDuration, isTransitioning]);
 
   // Handle muting
   useEffect(() => {
@@ -268,12 +281,12 @@ export const ReelVideo = ({
       return;
     }
 
-    if (isPlaying) {
+    if (isPlaying && !isTransitioning) {
       video.play().catch(() => {
         // Ignore autoplay errors
       });
 
-      // Start progress animation
+      // Start progress animation only when not transitioning
       const elapsedTime = (pausedProgressRef.current * duration) / PERCENTAGE;
       startTimeRef.current = performance.now() - elapsedTime * MS_TO_SECONDS;
 
@@ -295,7 +308,7 @@ export const ReelVideo = ({
       };
 
       animationFrameRef.current = requestAnimationFrame(updateProgress);
-    } else {
+    } else if (!isTransitioning) {
       video.pause();
     }
 
@@ -311,6 +324,7 @@ export const ReelVideo = ({
     setProgress,
     setCurrentIndex,
     data,
+    isTransitioning,
   ]);
 
   // Reset video when index changes
@@ -358,6 +372,7 @@ export const ReelImage = ({
     setCurrentIndex,
     data,
     progress,
+    isTransitioning,
   } = useReelContext();
   const animationFrameRef = useRef<number | undefined>(undefined);
   const startTimeRef = useRef<number | undefined>(undefined);
@@ -366,13 +381,15 @@ export const ReelImage = ({
   // Reset progress when index changes
   useEffect(() => {
     setDuration(duration);
-    setProgress(0);
-    pausedProgressRef.current = 0;
-  }, [currentIndex, duration, setDuration, setProgress]);
+    // Don't reset progress here anymore - it's handled in ReelContent after transition
+    if (!isTransitioning) {
+      pausedProgressRef.current = 0;
+    }
+  }, [currentIndex, duration, setDuration, isTransitioning]);
 
   // Handle play/pause
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && !isTransitioning) {
       const elapsedTime = (pausedProgressRef.current * duration) / PERCENTAGE;
       startTimeRef.current = performance.now() - elapsedTime * MS_TO_SECONDS;
 
@@ -396,7 +413,7 @@ export const ReelImage = ({
       };
 
       animationFrameRef.current = requestAnimationFrame(updateProgress);
-    } else {
+    } else if (!isTransitioning) {
       pausedProgressRef.current = progress;
     }
 
@@ -413,6 +430,7 @@ export const ReelImage = ({
     setCurrentIndex,
     data,
     progress,
+    isTransitioning,
   ]);
 
   return (
