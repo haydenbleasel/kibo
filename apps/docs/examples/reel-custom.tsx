@@ -38,7 +38,7 @@ const reels: CustomReelItem[] = [
     type: 'video',
     author: 'Sarah Chen',
     avatar:
-      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face',
+      'https://images.unsplash.com/photo-1659691349345-f9e2e17248cb?w=40&h=40&fit=crop&crop=face',
     description: 'Living my best life 🌟 #happy #vibes',
     likes: '8.3K',
     comments: '156',
