@@ -595,7 +595,7 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
     >
       <Button
         aria-label="Previous"
-        className='rounded-full text-white hover:bg-white/10 hover:text-white'
+        className="rounded-full text-white hover:bg-white/10 hover:text-white"
         disabled={currentIndex === 0}
         onClick={handlePrevious}
         size="icon"
@@ -608,7 +608,7 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
       <div className="flex gap-2">
         <Button
           aria-label={isPlaying ? 'Pause' : 'Play'}
-          className='rounded-full text-white hover:bg-white/10 hover:text-white'
+          className="rounded-full text-white hover:bg-white/10 hover:text-white"
           onClick={() => setIsPlaying(!isPlaying)}
           size="icon"
           variant="ghost"
@@ -622,7 +622,7 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
 
         <Button
           aria-label={isMuted ? 'Unmute' : 'Mute'}
-          className='rounded-full text-white hover:bg-white/10 hover:text-white'
+          className="rounded-full text-white hover:bg-white/10 hover:text-white"
           onClick={() => setIsMuted(!isMuted)}
           size="icon"
           variant="ghost"
@@ -637,7 +637,7 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
 
       <Button
         aria-label="Next"
-        className='rounded-full text-white hover:bg-white/10 hover:text-white'
+        className="rounded-full text-white hover:bg-white/10 hover:text-white"
         disabled={currentIndex === totalItems - 1}
         onClick={handleNext}
         size="icon"
