@@ -721,7 +721,6 @@ export const EditorProvider = ({
 						},
 					}}
 					immediatelyRender={false}
-					shouldRerenderOnTransaction
 					extensions={[
 						...defaultExtensions,
 						TextStyleKit,
