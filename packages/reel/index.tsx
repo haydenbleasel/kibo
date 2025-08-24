@@ -272,7 +272,7 @@ export const ReelVideo = ({
       video.play().catch(() => {
         // Ignore autoplay errors
       });
-      
+
       // Start progress animation
       const elapsedTime = (pausedProgressRef.current * duration) / PERCENTAGE;
       startTimeRef.current = performance.now() - elapsedTime * MS_TO_SECONDS;
@@ -666,7 +666,7 @@ export const ReelHeader = ({
 }: ReelHeaderProps) => (
   <div
     className={cn(
-      'absolute top-0 right-0 left-0 z-20 p-4',
+      'absolute top-0 right-0 left-0 z-20 p-4 pt-6',
       'bg-gradient-to-b from-black/60 to-transparent',
       className
     )}

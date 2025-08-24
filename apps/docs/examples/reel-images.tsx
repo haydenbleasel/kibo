@@ -49,7 +49,7 @@ const Example = () => (
       {(reel) => (
         <ReelItem>
           <ReelImage alt={reel.alt ?? ''} duration={reel.duration} src={reel.src} />
-          <ReelFooter>
+          <ReelFooter className='pb-16'>
             <div className="text-white">
               <h3 className='font-semibold text-lg'>{reel.title}</h3>
               <p className="text-sm opacity-90">{reel.description}</p>

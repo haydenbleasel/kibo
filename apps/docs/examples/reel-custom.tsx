@@ -31,7 +31,7 @@ const reels: CustomReelItem[] = [
     likes: '12.5K',
     comments: '234',
     duration: 6,
-    src: '/videos/grok-imagine-1.mp4',
+    src: 'https://wajxiz6qhqyqkm0o.public.blob.vercel-storage.com/grok-imagine-1.mp4',
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const reels: CustomReelItem[] = [
     likes: '8.3K',
     comments: '156',
     duration: 6,
-    src: '/videos/grok-imagine-2.mp4',
+    src: 'https://wajxiz6qhqyqkm0o.public.blob.vercel-storage.com/grok-imagine-2.mp4',
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ const reels: CustomReelItem[] = [
     likes: '15.2K',
     comments: '412',
     duration: 6,
-    src: '/videos/grok-imagine-3.mp4',
+    src: 'https://wajxiz6qhqyqkm0o.public.blob.vercel-storage.com/grok-imagine-3.mp4',
   },
 ];
 
@@ -71,11 +71,11 @@ const Example = () => (
             <div className="flex items-center gap-2">
               <Image
                 alt={(reel as CustomReelItem).author}
-                className="h-8 w-8 rounded-full border-2 border-white"
-                height={32}
+                className="h-6 w-6 rounded-full border-2 border-white"
+                height={24}
                 src={(reel as CustomReelItem).avatar}
                 unoptimized
-                width={32}
+                width={24}
               />
               <span className="font-medium text-sm text-white">
                 {(reel as CustomReelItem).author}
@@ -87,23 +87,25 @@ const Example = () => (
           </ReelHeader>
 
           <ReelFooter>
-            <div className="flex items-end justify-between">
-              <div className="flex-1 text-white">
-                <p className="mb-2 text-sm">{reel.description}</p>
-              </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-white">{reel.description}</p>
 
-              <div className="ml-4 flex flex-col gap-4">
-                <Button className="flex flex-col items-center gap-1 text-white">
+              <div className="flex gap-2">
+                <Button className="h-auto p-2 text-white hover:bg-white/10 hover:text-white" variant="ghost">
                   <Heart className="h-6 w-6" />
-                  <span className="text-xs">{(reel as CustomReelItem).likes}</span>
+                  <span className="text-xs">
+                    {(reel as CustomReelItem).likes}
+                  </span>
                 </Button>
-                <Button className="flex flex-col items-center gap-1 text-white">
+                <Button className="h-auto p-2 text-white hover:bg-white/10 hover:text-white" variant="ghost">
                   <MessageCircle className="h-6 w-6" />
-                  <span className="text-xs">{(reel as CustomReelItem).comments}</span>
+                  <span className="text-xs">
+                    {(reel as CustomReelItem).comments}
+                  </span>
                 </Button>
-                <Button className="flex flex-col items-center gap-1 text-white">
+                <Button className="h-auto p-2 text-white hover:bg-white/10 hover:text-white" variant="ghost">
                   <Share className="h-6 w-6" />
-                  <span className="text-xs">Share</span>
+                  <span className='sr-only text-xs'>Share</span>
                 </Button>
               </div>
             </div>
