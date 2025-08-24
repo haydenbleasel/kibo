@@ -1101,7 +1101,7 @@ export const EditorSelector = ({
 	}
 
 	return (
-		<Popover modal onOpenChange={onOpenChange} open={open}>
+		<Popover onOpenChange={onOpenChange} open={open}>
 			<PopoverTrigger asChild>
 				<Button
           className="gap-2 rounded-none border-none"
