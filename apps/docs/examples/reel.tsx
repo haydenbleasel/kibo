@@ -5,7 +5,11 @@ import {
   ReelContent,
   ReelControls,
   ReelItem,
+  ReelMuteButton,
   ReelNavigation,
+  ReelNextButton,
+  ReelPlayButton,
+  ReelPreviousButton,
   ReelProgress,
   ReelVideo,
 } from '@repo/reel';
@@ -48,7 +52,14 @@ const Example = () => (
       )}
     </ReelContent>
     <ReelNavigation />
-    <ReelControls />
+    <ReelControls>
+      <ReelPreviousButton />
+      <div className="flex gap-2">
+        <ReelPlayButton />
+        <ReelMuteButton />
+      </div>
+      <ReelNextButton />
+    </ReelControls>
   </Reel>
 );
 

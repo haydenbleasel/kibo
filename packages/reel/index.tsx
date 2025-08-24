@@ -85,7 +85,6 @@ export type ReelProps = HTMLAttributes<HTMLDivElement> & {
 
 export const Reel = ({
   className,
-  children,
   data,
   defaultIndex = 0,
   index: controlledIndex,
@@ -161,9 +160,7 @@ export const Reel = ({
           className
         )}
         {...props}
-      >
-        {children}
-      </div>
+      />
     </ReelContext.Provider>
   );
 };
@@ -218,14 +215,12 @@ export const ReelContent = ({
 
 export type ReelItemProps = HTMLAttributes<HTMLDivElement>;
 
-export const ReelItem = ({ className, children, ...props }: ReelItemProps) => (
+export const ReelItem = ({ className, ...props }: ReelItemProps) => (
   <div
     className={cn('relative size-full overflow-hidden', className)}
     data-reel-item
     {...props}
-  >
-    {children}
-  </div>
+  />
 );
 
 export type ReelVideoProps = VideoHTMLAttributes<HTMLVideoElement>;
@@ -464,8 +459,7 @@ export const ReelProgress = ({
   children,
   ...props
 }: ReelProgressProps) => {
-  const { progress, currentIndex, data, isPlaying, isNavigating } =
-    useReelContext();
+  const { progress, currentIndex, data } = useReelContext();
   const FULL_PROGRESS = 100;
 
   const calculateProgress = (index: number) => {
@@ -523,19 +517,21 @@ export const ReelProgress = ({
 
 export type ReelControlsProps = HTMLAttributes<HTMLDivElement>;
 
-export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
-  const {
-    isPlaying,
-    setIsPlaying,
-    isMuted,
-    setIsMuted,
-    currentIndex,
-    setCurrentIndex,
-    data,
-    setIsNavigating,
-  } = useReelContext();
-  const totalItems = data?.length || 0;
+export const ReelControls = ({ className, ...props }: ReelControlsProps) => (
+  <div
+    className={cn(
+      'absolute right-0 bottom-0 left-0 z-20 flex items-center justify-between p-4',
+      'bg-gradient-to-t from-black/60 to-transparent',
+      className
+    )}
+    {...props}
+  />
+);
 
+export type ReelPreviousButtonProps = ComponentProps<typeof Button>;
+
+export const ReelPreviousButton = ({ className, children, ...props }: ReelPreviousButtonProps) => {
+  const { currentIndex, setCurrentIndex, setIsNavigating } = useReelContext();
   const NAVIGATION_RESET_DELAY = 50;
 
   const handlePrevious = () => {
@@ -546,6 +542,29 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
     }
   };
 
+  return (
+    <Button
+      aria-label="Previous"
+      className={cn("rounded-full text-white hover:bg-white/10 hover:text-white", className)}
+      disabled={currentIndex === 0}
+      onClick={handlePrevious}
+      size="icon"
+      type="button"
+      variant="ghost"
+      {...props}
+    >
+      {children || <ChevronLeft className="size-4" />}
+    </Button>
+  );
+};
+
+export type ReelNextButtonProps = ComponentProps<typeof Button>;
+
+export const ReelNextButton = ({ className, children, ...props }: ReelNextButtonProps) => {
+  const { currentIndex, setCurrentIndex, data, setIsNavigating } = useReelContext();
+  const totalItems = data?.length || 0;
+  const NAVIGATION_RESET_DELAY = 50;
+
   const handleNext = () => {
     if (currentIndex < totalItems - 1) {
       setIsNavigating(true);
@@ -555,67 +574,56 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
   };
 
   return (
-    <div
-      className={cn(
-        'absolute right-0 bottom-0 left-0 z-20 flex items-center justify-between p-4',
-        'bg-gradient-to-t from-black/60 to-transparent',
-        className
-      )}
+    <Button
+      aria-label="Next"
+      className={cn("rounded-full text-white hover:bg-white/10 hover:text-white", className)}
+      disabled={currentIndex === totalItems - 1}
+      onClick={handleNext}
+      size="icon"
+      type="button"
+      variant="ghost"
       {...props}
     >
-      <Button
-        aria-label="Previous"
-        className="rounded-full text-white hover:bg-white/10 hover:text-white"
-        disabled={currentIndex === 0}
-        onClick={handlePrevious}
-        size="icon"
-        type="button"
-        variant="ghost"
-      >
-        <ChevronLeft className="size-4" />
-      </Button>
+      {children || <ChevronRight className="size-4" />}
+    </Button>
+  );
+};
 
-      <div className="flex gap-2">
-        <Button
-          aria-label={isPlaying ? 'Pause' : 'Play'}
-          className="rounded-full text-white hover:bg-white/10 hover:text-white"
-          onClick={() => setIsPlaying(!isPlaying)}
-          size="icon"
-          variant="ghost"
-        >
-          {isPlaying ? (
-            <Pause className="size-4" />
-          ) : (
-            <Play className="size-4" />
-          )}
-        </Button>
+export type ReelPlayButtonProps = ComponentProps<typeof Button>;
 
-        <Button
-          aria-label={isMuted ? 'Unmute' : 'Mute'}
-          className="rounded-full text-white hover:bg-white/10 hover:text-white"
-          onClick={() => setIsMuted(!isMuted)}
-          size="icon"
-          variant="ghost"
-        >
-          {isMuted ? (
-            <VolumeX className="size-4" />
-          ) : (
-            <Volume2 className="size-4" />
-          )}
-        </Button>
-      </div>
+export const ReelPlayButton = ({ className, children, ...props }: ReelPlayButtonProps) => {
+  const { isPlaying, setIsPlaying } = useReelContext();
 
-      <Button
-        aria-label="Next"
-        className="rounded-full text-white hover:bg-white/10 hover:text-white"
-        disabled={currentIndex === totalItems - 1}
-        onClick={handleNext}
-        size="icon"
-        variant="ghost"
-      >
-        <ChevronRight className="size-4" />
-      </Button>
-    </div>
+  return (
+    <Button
+      aria-label={isPlaying ? 'Pause' : 'Play'}
+      className={cn("rounded-full text-white hover:bg-white/10 hover:text-white", className)}
+      onClick={() => setIsPlaying(!isPlaying)}
+      size="icon"
+      variant="ghost"
+      {...props}
+    >
+      {children || (isPlaying ? <Pause className="size-4" /> : <Play className="size-4" />)}
+    </Button>
+  );
+};
+
+export type ReelMuteButtonProps = ComponentProps<typeof Button>;
+
+export const ReelMuteButton = ({ className, children, ...props }: ReelMuteButtonProps) => {
+  const { isMuted, setIsMuted } = useReelContext();
+
+  return (
+    <Button
+      aria-label={isMuted ? 'Unmute' : 'Mute'}
+      className={cn("rounded-full text-white hover:bg-white/10 hover:text-white", className)}
+      onClick={() => setIsMuted(!isMuted)}
+      size="icon"
+      variant="ghost"
+      {...props}
+    >
+      {children || (isMuted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />)}
+    </Button>
   );
 };
 
@@ -666,22 +674,18 @@ export type ReelOverlayProps = HTMLAttributes<HTMLDivElement>;
 
 export const ReelOverlay = ({
   className,
-  children,
   ...props
 }: ReelOverlayProps) => (
   <div
     className={cn('pointer-events-none absolute inset-0 z-30', className)}
     {...props}
-  >
-    {children}
-  </div>
+  />
 );
 
 export type ReelHeaderProps = HTMLAttributes<HTMLDivElement>;
 
 export const ReelHeader = ({
   className,
-  children,
   ...props
 }: ReelHeaderProps) => (
   <div
@@ -691,16 +695,13 @@ export const ReelHeader = ({
       className
     )}
     {...props}
-  >
-    {children}
-  </div>
+  />
 );
 
 export type ReelFooterProps = HTMLAttributes<HTMLDivElement>;
 
 export const ReelFooter = ({
   className,
-  children,
   ...props
 }: ReelFooterProps) => (
   <div
@@ -710,7 +711,5 @@ export const ReelFooter = ({
       className
     )}
     {...props}
-  >
-    {children}
-  </div>
+  />
 );
