@@ -26,6 +26,7 @@ import {
   useState,
 } from 'react';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 
 // Explicit type for reel items
@@ -478,30 +479,6 @@ export const ReelProgress = ({
     return 0;
   };
 
-  const calculateWidth = (index: number) => {
-    if (index < currentIndex) {
-      return '100%';
-    }
-
-    if (index === currentIndex) {
-      return `${progress}%`;
-    }
-
-    return '0%';
-  };
-
-  const calculateTransition = (index: number) => {
-    if (isNavigating) {
-      return 'none';
-    }
-
-    if (index === currentIndex && isPlaying) {
-      return 'none';
-    }
-
-    return 'width 0.3s ease-out';
-  };
-
   if (typeof children === 'function') {
     return (
       <div
@@ -534,18 +511,11 @@ export const ReelProgress = ({
       {...props}
     >
       {data.map((item, index) => (
-        <div
-          className="relative h-0.5 flex-1 overflow-hidden rounded-full bg-white/30"
+        <Progress
+          className="h-0.5 flex-1 bg-white/30 [&>div]:bg-white [&>div]:transition-none"
           key={`${item.id}-progress`}
-        >
-          <div
-            className="absolute top-0 left-0 h-full bg-white"
-            style={{
-              width: calculateWidth(index),
-              transition: calculateTransition(index),
-            }}
-          />
-        </div>
+          value={calculateProgress(index)}
+        />
       ))}
     </div>
   );
