@@ -14,7 +14,7 @@
     "@logtail/next": "^0.2.1",
     "@modelcontextprotocol/sdk": "^1.17.3",
     "@next/bundle-analyzer": "^15.4.6",
-    "@next/third-parties": "^15.4.6",
+    "@next/third-parties": "^15.4.7",
     "@number-flow/react": "^0.5.10",
     "@octokit/rest": "^22.0.0",
     "@repo/announcement": "workspace:*",
