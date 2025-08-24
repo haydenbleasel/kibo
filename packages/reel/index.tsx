@@ -14,6 +14,7 @@ import type {
   ComponentProps,
   HTMLAttributes,
   MouseEventHandler,
+  ReactNode,
   VideoHTMLAttributes,
 } from 'react';
 import {
@@ -125,7 +126,7 @@ export const Reel = ({
       setProgress(0); // Reset progress immediately to prevent showing 100% during transition
       setCurrentIndexState(index);
     },
-    [setCurrentIndexState, setProgress]
+    [setCurrentIndexState]
   );
 
   const currentItem = data[currentIndex];
@@ -153,7 +154,7 @@ export const Reel = ({
     >
       <div
         className={cn(
-          'relative isolate h-full w-auto overflow-hidden rounded-xl bg-black',
+          'relative isolate h-full w-auto overflow-hidden bg-black',
           'aspect-[9/16]',
           className
         )}
@@ -165,8 +166,11 @@ export const Reel = ({
   );
 };
 
-export type ReelContentProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
-  children: ((item: ReelItem, index: number) => React.ReactNode);
+export type ReelContentProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children'
+> & {
+  children: (item: ReelItem, index: number) => ReactNode;
 };
 
 export const ReelContent = ({
@@ -174,7 +178,8 @@ export const ReelContent = ({
   children,
   ...props
 }: ReelContentProps) => {
-  const { currentIndex, currentItem, setIsTransitioning, setProgress } = useReelContext();
+  const { currentIndex, currentItem, setIsTransitioning } =
+    useReelContext();
 
   const renderContent = () => {
     if (typeof children === 'function') {
@@ -186,7 +191,7 @@ export const ReelContent = ({
 
   return (
     <div
-      className={cn('relative h-full w-full', className)}
+      className={cn('relative size-full', className)}
       data-reel-content
       {...props}
     >
@@ -197,11 +202,11 @@ export const ReelContent = ({
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           key={currentIndex}
-          transition={{ duration: 0.3 }}
           onAnimationComplete={() => {
             // Mark transition as complete when fade-in completes
             setIsTransitioning(false);
           }}
+          transition={{ duration: 0.3 }}
         >
           {renderContent()}
         </motion.div>
@@ -214,7 +219,7 @@ export type ReelItemProps = HTMLAttributes<HTMLDivElement>;
 
 export const ReelItem = ({ className, children, ...props }: ReelItemProps) => (
   <div
-    className={cn('relative h-full w-full overflow-hidden', className)}
+    className={cn('relative size-full overflow-hidden', className)}
     data-reel-item
     {...props}
   >
@@ -227,10 +232,7 @@ export type ReelVideoProps = VideoHTMLAttributes<HTMLVideoElement>;
 const MS_TO_SECONDS = 1000;
 const PERCENTAGE = 100;
 
-export const ReelVideo = ({
-  className,
-  ...props
-}: ReelVideoProps) => {
+export const ReelVideo = ({ className, ...props }: ReelVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const {
     isPlaying,
@@ -256,7 +258,7 @@ export const ReelVideo = ({
     if (!isTransitioning) {
       pausedProgressRef.current = 0;
     }
-  }, [currentIndex, duration, setDuration, isTransitioning]);
+  }, [duration, setDuration, isTransitioning]);
 
   // Handle muting
   useEffect(() => {
@@ -291,7 +293,8 @@ export const ReelVideo = ({
       startTimeRef.current = performance.now() - elapsedTime * MS_TO_SECONDS;
 
       const updateProgress = (currentTime: number) => {
-        const elapsed = (currentTime - (startTimeRef.current || 0)) / MS_TO_SECONDS;
+        const elapsed =
+          (currentTime - (startTimeRef.current || 0)) / MS_TO_SECONDS;
         const newProgress = (elapsed / duration) * PERCENTAGE;
 
         if (newProgress >= PERCENTAGE) {
@@ -327,7 +330,7 @@ export const ReelVideo = ({
     isTransitioning,
   ]);
 
-  // Reset video when index changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Reset video when index changes
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
@@ -337,7 +340,7 @@ export const ReelVideo = ({
 
   return (
     <video
-      className={cn('absolute inset-0 h-full w-full object-cover', className)}
+      className={cn('absolute inset-0 size-full object-cover', className)}
       loop
       muted={isMuted}
       playsInline
@@ -378,7 +381,7 @@ export const ReelImage = ({
   const startTimeRef = useRef<number | undefined>(undefined);
   const pausedProgressRef = useRef<number>(0);
 
-  // Reset progress when index changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Reset progress when index changes
   useEffect(() => {
     setDuration(duration);
     // Don't reset progress here anymore - it's handled in ReelContent after transition
@@ -394,7 +397,8 @@ export const ReelImage = ({
       startTimeRef.current = performance.now() - elapsedTime * MS_TO_SECONDS;
 
       const updateProgress = (currentTime: number) => {
-        const elapsed = (currentTime - (startTimeRef.current || 0)) / MS_TO_SECONDS;
+        const elapsed =
+          (currentTime - (startTimeRef.current || 0)) / MS_TO_SECONDS;
         const newProgress = (elapsed / duration) * PERCENTAGE;
 
         if (newProgress >= PERCENTAGE) {
@@ -434,12 +438,10 @@ export const ReelImage = ({
   ]);
 
   return (
-    // biome-ignore lint/a11y/useAltText: Alt prop is passed as required prop
-    // biome-ignore lint/a11y/noImgElement: Image element is appropriate for static content
-    // eslint-disable-next-line @next/next/no-img-element
+    // biome-ignore lint/performance/noImgElement: "Reel is framework-agnostic"
     <img
       alt={alt}
-      className={cn('absolute inset-0 h-full w-full object-cover', className)}
+      className={cn('absolute inset-0 size-full object-cover', className)}
       height={height}
       width={width}
       {...props}
@@ -453,7 +455,7 @@ export type ReelProgressProps = HTMLAttributes<HTMLDivElement> & {
     index: number,
     isActive: boolean,
     progress: number
-  ) => React.ReactNode;
+  ) => ReactNode;
 };
 
 export const ReelProgress = ({
@@ -463,23 +465,59 @@ export const ReelProgress = ({
 }: ReelProgressProps) => {
   const { progress, currentIndex, data, isPlaying, isNavigating } =
     useReelContext();
+  const FULL_PROGRESS = 100;
+
+  const calculateProgress = (index: number) => {
+    if (index < currentIndex) {
+      return FULL_PROGRESS;
+    }
+    if (index === currentIndex) {
+      return progress;
+    }
+
+    return 0;
+  };
+
+  const calculateWidth = (index: number) => {
+    if (index < currentIndex) {
+      return '100%';
+    }
+
+    if (index === currentIndex) {
+      return `${progress}%`;
+    }
+
+    return '0%';
+  };
+
+  const calculateTransition = (index: number) => {
+    if (isNavigating) {
+      return 'none';
+    }
+
+    if (index === currentIndex && isPlaying) {
+      return 'none';
+    }
+
+    return 'width 0.3s ease-out';
+  };
 
   if (typeof children === 'function') {
     return (
       <div
         className={cn(
-          'absolute top-0 right-0 left-0 z-20 flex gap-1 p-2',
+          'absolute top-0 right-0 left-0 z-40 flex gap-1 p-2',
           className
         )}
         {...props}
       >
         {data.map((item, index) => (
-          <div className="relative flex-1" key={index}>
+          <div className="relative flex-1" key={`${item.id}-progress`}>
             {children(
               item,
               index,
               index === currentIndex,
-              index < currentIndex ? 100 : index === currentIndex ? progress : 0
+              calculateProgress(index)
             )}
           </div>
         ))}
@@ -490,30 +528,21 @@ export const ReelProgress = ({
   return (
     <div
       className={cn(
-        'absolute top-0 right-0 left-0 z-20 flex gap-1 p-2',
+        'absolute top-0 right-0 left-0 z-40 flex gap-1 p-2',
         className
       )}
       {...props}
     >
-      {data.map((_, index) => (
+      {data.map((item, index) => (
         <div
           className="relative h-0.5 flex-1 overflow-hidden rounded-full bg-white/30"
-          key={index}
+          key={`${item.id}-progress`}
         >
           <div
             className="absolute top-0 left-0 h-full bg-white"
             style={{
-              width:
-                index < currentIndex
-                  ? '100%'
-                  : index === currentIndex
-                    ? `${progress}%`
-                    : '0%',
-              transition: isNavigating
-                ? 'none'
-                : index === currentIndex && isPlaying
-                  ? 'none'
-                  : 'width 0.3s ease-out',
+              width: calculateWidth(index),
+              transition: calculateTransition(index),
             }}
           />
         </div>
@@ -615,7 +644,7 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
   );
 };
 
-export type ReelNavigationProps = HTMLAttributes<HTMLDivElement>;
+export type ReelNavigationProps = HTMLAttributes<HTMLButtonElement>;
 
 export const ReelNavigation = ({
   className,
@@ -627,7 +656,7 @@ export const ReelNavigation = ({
   const NAVIGATION_RESET_DELAY = 50;
   const HALF_WIDTH_DIVISOR = 2;
 
-  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const width = rect.width;
@@ -646,17 +675,15 @@ export const ReelNavigation = ({
   };
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: Navigation is handled via click zones
-    <div
+    <button
       className={cn('absolute inset-0 z-10 flex', className)}
       onClick={handleClick}
-      role="button"
-      tabIndex={0}
+      type="button"
       {...props}
     >
       <div className="flex-1 cursor-pointer" />
       <div className="flex-1 cursor-pointer" />
-    </div>
+    </button>
   );
 };
 
