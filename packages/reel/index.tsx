@@ -25,6 +25,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 // Explicit type for reel items
@@ -178,8 +179,7 @@ export const ReelContent = ({
   children,
   ...props
 }: ReelContentProps) => {
-  const { currentIndex, currentItem, setIsTransitioning } =
-    useReelContext();
+  const { currentIndex, currentItem, setIsTransitioning } = useReelContext();
 
   const renderContent = () => {
     if (typeof children === 'function') {
@@ -593,53 +593,58 @@ export const ReelControls = ({ className, ...props }: ReelControlsProps) => {
       )}
       {...props}
     >
-      <button
+      <Button
         aria-label="Previous"
-        className="rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
+        className='rounded-full text-white hover:bg-white/10 hover:text-white'
         disabled={currentIndex === 0}
         onClick={handlePrevious}
+        size="icon"
         type="button"
+        variant="ghost"
       >
-        <ChevronLeft className="h-5 w-5 text-white" />
-      </button>
+        <ChevronLeft className="size-4" />
+      </Button>
 
       <div className="flex gap-2">
-        <button
+        <Button
           aria-label={isPlaying ? 'Pause' : 'Play'}
-          className="rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+          className='rounded-full text-white hover:bg-white/10 hover:text-white'
           onClick={() => setIsPlaying(!isPlaying)}
-          type="button"
+          size="icon"
+          variant="ghost"
         >
           {isPlaying ? (
-            <Pause className="h-5 w-5 text-white" />
+            <Pause className="size-4" />
           ) : (
-            <Play className="h-5 w-5 text-white" />
+            <Play className="size-4" />
           )}
-        </button>
+        </Button>
 
-        <button
+        <Button
           aria-label={isMuted ? 'Unmute' : 'Mute'}
-          className="rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+          className='rounded-full text-white hover:bg-white/10 hover:text-white'
           onClick={() => setIsMuted(!isMuted)}
-          type="button"
+          size="icon"
+          variant="ghost"
         >
           {isMuted ? (
-            <VolumeX className="h-5 w-5 text-white" />
+            <VolumeX className="size-4" />
           ) : (
-            <Volume2 className="h-5 w-5 text-white" />
+            <Volume2 className="size-4" />
           )}
-        </button>
+        </Button>
       </div>
 
-      <button
+      <Button
         aria-label="Next"
-        className="rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
+        className='rounded-full text-white hover:bg-white/10 hover:text-white'
         disabled={currentIndex === totalItems - 1}
         onClick={handleNext}
-        type="button"
+        size="icon"
+        variant="ghost"
       >
-        <ChevronRight className="h-5 w-5 text-white" />
-      </button>
+        <ChevronRight className="size-4" />
+      </Button>
     </div>
   );
 };
