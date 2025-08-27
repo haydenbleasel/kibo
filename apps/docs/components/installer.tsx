@@ -33,7 +33,7 @@ export const Installer = ({ packageName }: InstallerProps) => {
     namespace: {
       label: 'Namespace',
       image: kibo,
-      code: `npx shadcn@beta add @kibo-ui/${packageName}.json`,
+      code: `npx shadcn@beta add @kibo-ui/${packageName}`,
     },
     shadcn: {
       label: 'shadcn CLI',
