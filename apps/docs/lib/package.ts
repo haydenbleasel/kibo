@@ -2,6 +2,62 @@ import { promises as fs, readdirSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
+type RegistryItemSchema = {
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  name: string
+  type:
+    | "registry:lib"
+    | "registry:block"
+    | "registry:component"
+    | "registry:ui"
+    | "registry:hook"
+    | "registry:theme"
+    | "registry:page"
+    | "registry:file"
+    | "registry:style"
+    | "registry:item";
+  description: string
+  title: string
+  author: string
+  dependencies?: string[]
+  devDependencies?: string[]
+  registryDependencies?: string[]
+  files: {
+    path?: string
+    content?: string
+    type?:
+      | "registry:lib"
+      | "registry:block"
+      | "registry:component"
+      | "registry:ui"
+      | "registry:hook"
+      | "registry:theme"
+      | "registry:page"
+      | "registry:file"
+      | "registry:style"
+      | "registry:item";
+    target?: string
+  }[]
+  tailwind?: {
+    config?: {
+      content?: string[]
+      theme?: Record<string, string>
+      plugins?: string[]
+    }
+  }
+  cssVars?: {
+    theme?: Record<string, string>
+    light?: Record<string, string>
+    dark?: Record<string, string>
+  }
+  css?: Record<string, object>
+  envVars?: Record<string, string>
+  meta?: Record<string, unknown>
+  docs?: string
+  categories?: string[]
+  extends?: string
+}
+
 export const getPackage = async (packageName: string) => {
   const packageDir = join(process.cwd(), '..', '..', 'packages', packageName);
   const packagePath = join(packageDir, 'package.json');
@@ -33,24 +89,21 @@ export const getPackage = async (packageName: string) => {
     (file) => file.isFile() && file.name.endsWith('.tsx')
   );
 
-  const files: {
-    type: string;
-    path: string;
-    content: string;
-    target: string;
-  }[] = [];
+  const files: RegistryItemSchema['files'] = [];
 
   const fileContents = await Promise.all(
     tsxFiles.map(async (file) => {
       const filePath = join(packageDir, file.name);
       const content = await fs.readFile(filePath, 'utf-8');
 
-      return {
+      const registryFile: RegistryItemSchema['files'][number] = {
         type: 'registry:ui',
         path: file.name,
         content,
         target: `components/ui/kibo-ui/${packageName}/${file.name}`,
       };
+
+      return registryFile;
     })
   );
 
@@ -65,18 +118,19 @@ export const getPackage = async (packageName: string) => {
       .filter((name): name is string => !!name) || [];
 
   for (const dep of kiboDependencies) {
-    const packageName = dep.replace('@repo/', '');
+    const pkg = dep.replace('@repo/', '');
 
     registryDependencies.push(
-      `https://www.kibo-ui.com/registry/${packageName}.json`
+      `https://www.kibo-ui.com/registry/${pkg}.json`
     );
   }
 
-  const response = {
-    $schema: 'https://ui.shadcn.com/schema/registry.json',
-    homepage: `https://www.kibo-ui.com/components/${packageName}`,
+  const response: RegistryItemSchema = {
+    "$schema": "https://ui.shadcn.com/schema/registry-item.json",
     name: packageName,
     type: 'registry:ui',
+    title: packageName,
+    description: packageJson.description,
     author: 'Hayden Bleasel <hello@haydenbleasel.com>',
     dependencies,
     devDependencies,
