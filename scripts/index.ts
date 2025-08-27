@@ -20,11 +20,11 @@ for (const packageName of packageNames) {
 
   const url = packageName === 'ai' ? 
     new URL(
-      'elements.json',
-      'https://ai-sdk.dev'
+      'all.json',
+      'https://registry.ai-sdk.dev/'
     ) :
     new URL(
-      `registry/${packageName}.json`,
+      `r/${packageName}.json`,
       'https://www.kibo-ui.com'
     );
 

@@ -2,7 +2,7 @@ import { promises as fs, readdirSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-type RegistryItemSchema = {
+export type RegistryItemSchema = {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   name: string
   type:
