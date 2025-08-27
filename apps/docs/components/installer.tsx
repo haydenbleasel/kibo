@@ -31,7 +31,7 @@ export const Installer = ({ packageName }: InstallerProps) => {
       code: `npx kibo-ui@latest add ${packageName}`,
     },
     namespace: {
-      label: 'Namespaced Registry',
+      label: 'Namespace',
       image: kibo,
       code: `npx shadcn@beta add @kibo-ui/${packageName}.json`,
     },
