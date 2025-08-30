@@ -6,6 +6,7 @@ import {
   CodeBlock,
   CodeBlockBody,
   CodeBlockContent,
+  CodeBlockCopyButton,
   CodeBlockItem,
 } from '@repo/code-block';
 import {
@@ -34,9 +35,9 @@ export const PreviewSource = ({ source }: PreviewSourceProps) => (
             <span>{name}</span>
           </div>
         </AccordionTrigger>
-        <AccordionContent>
+        <AccordionContent className='overflow-visible' style={{ overflow: 'visible' }}>
           <CodeBlock
-            className="overflow-auto rounded-none border-none"
+            className="overflow-visible rounded-none border-none"
             data={[
               {
                 language: 'tsx',
@@ -45,7 +46,10 @@ export const PreviewSource = ({ source }: PreviewSourceProps) => (
               },
             ]}
             defaultValue="tsx"
-          >
+            >
+            <div className="sticky top-0 z-1">
+              <CodeBlockCopyButton className="absolute top-1 right-1.5" />
+            </div>
             <CodeBlockBody>
               {(item) => (
                 <CodeBlockItem key={item.language} value={item.language}>

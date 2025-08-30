@@ -5,6 +5,7 @@ import {
   CodeBlock,
   CodeBlockBody,
   CodeBlockContent,
+  CodeBlockCopyButton,
   CodeBlockItem,
   type CodeBlockProps,
 } from '@repo/code-block';
@@ -30,6 +31,9 @@ export const PreviewCode = ({ code, language, filename }: PreviewCodeProps) => {
       data={data}
       defaultValue={data[0].language}
     >
+      <div className="sticky top-0 z-1">
+        <CodeBlockCopyButton className="absolute top-1 right-1.5" />
+      </div>
       <CodeBlockBody>
         {(item) => (
           <CodeBlockItem key={item.language} value={item.language}>
