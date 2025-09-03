@@ -11,8 +11,8 @@ import {
   CreditCardName,
   CreditCardNumber,
   CreditCardServiceProvider,
-} from '@repo/credit-card';
-import type { HTMLAttributes } from 'react';
+} from "@repo/credit-card";
+import type { HTMLAttributes } from "react";
 
 const ChaseLogo = (props: HTMLAttributes<SVGElement>) => (
   <svg
@@ -34,8 +34,8 @@ const ChaseLogo = (props: HTMLAttributes<SVGElement>) => (
 
 const ChaseMark = (props: HTMLAttributes<SVGElement>) => (
   <svg
-    viewBox="0 0 465 465"
     fill="none"
+    viewBox="0 0 465 465"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
@@ -56,7 +56,11 @@ const Example = () => (
           <ChaseMark className="text-[#0e72d1]" />
         </CreditCardLogo>
         <CreditCardChip />
-        <CreditCardServiceProvider type="Visa" format="logo" className="brightness-0 invert" />
+        <CreditCardServiceProvider
+          className="brightness-0 invert"
+          format="logo"
+          type="Visa"
+        />
         <CreditCardName className="absolute bottom-0 left-0">
           John R. Doe
         </CreditCardName>

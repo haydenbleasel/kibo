@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { Editor, JSONContent } from '@repo/editor';
+import type { Editor, JSONContent } from "@repo/editor";
 import {
   EditorBubbleMenu,
   EditorCharacterCount,
@@ -42,91 +42,91 @@ import {
   EditorTableRowDelete,
   EditorTableRowMenu,
   EditorTableSplitCell,
-} from '@repo/editor';
-import { useState } from 'react';
+} from "@repo/editor";
+import { useState } from "react";
 
 const Example = () => {
   const [content, setContent] = useState<JSONContent>({
-    type: 'doc',
+    type: "doc",
     content: [
       {
-        type: 'heading',
+        type: "heading",
         attrs: { level: 1 },
-        content: [{ type: 'text', text: 'Heading 1' }],
+        content: [{ type: "text", text: "Heading 1" }],
       },
       {
-        type: 'heading',
+        type: "heading",
         attrs: { level: 2 },
-        content: [{ type: 'text', text: 'Heading 2' }],
+        content: [{ type: "text", text: "Heading 2" }],
       },
       {
-        type: 'heading',
+        type: "heading",
         attrs: { level: 3 },
-        content: [{ type: 'text', text: 'Heading 3' }],
+        content: [{ type: "text", text: "Heading 3" }],
       },
       {
-        type: 'heading',
+        type: "heading",
         attrs: { level: 4 },
-        content: [{ type: 'text', text: 'Heading 4' }],
+        content: [{ type: "text", text: "Heading 4" }],
       },
       {
-        type: 'heading',
+        type: "heading",
         attrs: { level: 5 },
-        content: [{ type: 'text', text: 'Heading 5' }],
+        content: [{ type: "text", text: "Heading 5" }],
       },
       {
-        type: 'heading',
+        type: "heading",
         attrs: { level: 6 },
-        content: [{ type: 'text', text: 'Heading 6' }],
+        content: [{ type: "text", text: "Heading 6" }],
       },
-      { type: 'paragraph' },
-      { type: 'paragraph', content: [{ type: 'text', text: 'Hello, world.' }] },
-      { type: 'paragraph' },
+      { type: "paragraph" },
+      { type: "paragraph", content: [{ type: "text", text: "Hello, world." }] },
+      { type: "paragraph" },
       {
-        type: 'taskList',
+        type: "taskList",
         content: [
           {
-            type: 'taskItem',
+            type: "taskItem",
             attrs: { checked: false },
             content: [
               {
-                type: 'paragraph',
-                content: [{ type: 'text', text: 'This is a todo list' }],
+                type: "paragraph",
+                content: [{ type: "text", text: "This is a todo list" }],
               },
             ],
           },
           {
-            type: 'taskItem',
+            type: "taskItem",
             attrs: { checked: false },
             content: [
               {
-                type: 'paragraph',
-                content: [{ type: 'text', text: 'With two items' }],
+                type: "paragraph",
+                content: [{ type: "text", text: "With two items" }],
               },
             ],
           },
         ],
       },
-      { type: 'paragraph' },
+      { type: "paragraph" },
       {
-        type: 'bulletList',
+        type: "bulletList",
         content: [
           {
-            type: 'listItem',
+            type: "listItem",
             content: [
               {
-                type: 'paragraph',
-                content: [{ type: 'text', text: 'This is an unordered list' }],
+                type: "paragraph",
+                content: [{ type: "text", text: "This is an unordered list" }],
               },
               {
-                type: 'bulletList',
+                type: "bulletList",
                 content: [
                   {
-                    type: 'listItem',
+                    type: "listItem",
                     content: [
                       {
-                        type: 'paragraph',
-                        content: [{ type: 'text', text: 'With a nested item' }],
+                        type: "paragraph",
+                        content: [{ type: "text", text: "With a nested item" }],
                       },
                     ],
                   },
@@ -136,179 +136,179 @@ const Example = () => {
           },
         ],
       },
-      { type: 'paragraph' },
+      { type: "paragraph" },
       {
-        type: 'orderedList',
+        type: "orderedList",
         attrs: { start: 1 },
         content: [
           {
-            type: 'listItem',
+            type: "listItem",
             content: [
               {
-                type: 'paragraph',
-                content: [{ type: 'text', text: 'This is an ordered list' }],
+                type: "paragraph",
+                content: [{ type: "text", text: "This is an ordered list" }],
               },
             ],
           },
           {
-            type: 'listItem',
+            type: "listItem",
             content: [
               {
-                type: 'paragraph',
-                content: [{ type: 'text', text: 'With two items' }],
+                type: "paragraph",
+                content: [{ type: "text", text: "With two items" }],
               },
             ],
           },
         ],
       },
-      { type: 'paragraph' },
+      { type: "paragraph" },
       {
-        type: 'blockquote',
+        type: "blockquote",
         content: [
           {
-            type: 'paragraph',
+            type: "paragraph",
             content: [
               {
-                type: 'text',
-                text: 'This is a quote, probably by someone famous.',
+                type: "text",
+                text: "This is a quote, probably by someone famous.",
               },
             ],
           },
         ],
       },
-      { type: 'paragraph' },
+      { type: "paragraph" },
       {
-        type: 'paragraph',
+        type: "paragraph",
         content: [
-          { type: 'text', text: 'This is some ' },
-          { type: 'text', marks: [{ type: 'code' }], text: 'inline code' },
-          { type: 'text', text: ', while this is a code block:' },
+          { type: "text", text: "This is some " },
+          { type: "text", marks: [{ type: "code" }], text: "inline code" },
+          { type: "text", text: ", while this is a code block:" },
         ],
       },
-      { type: 'paragraph' },
+      { type: "paragraph" },
       {
-        type: 'codeBlock',
+        type: "codeBlock",
         attrs: { language: null },
         content: [
           {
-            type: 'text',
+            type: "text",
             text: "function x () {\\n  console.log('hello, world.');\\n}",
           },
         ],
       },
-      { type: 'paragraph' },
+      { type: "paragraph" },
       {
-        type: 'paragraph',
+        type: "paragraph",
         content: [
           {
-            type: 'text',
-            text: 'You can also create complex tables, like so:',
+            type: "text",
+            text: "You can also create complex tables, like so:",
           },
         ],
       },
       {
-        type: 'table',
+        type: "table",
         content: [
           {
-            type: 'tableRow',
+            type: "tableRow",
             content: [
               {
-                type: 'tableHeader',
+                type: "tableHeader",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Here’s a column' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Here’s a column" }],
                   },
                 ],
               },
               {
-                type: 'tableHeader',
+                type: "tableHeader",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Another column' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Another column" }],
                   },
                 ],
               },
               {
-                type: 'tableHeader',
+                type: "tableHeader",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Yet another' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Yet another" }],
                   },
                 ],
               },
             ],
           },
           {
-            type: 'tableRow',
+            type: "tableRow",
             content: [
               {
-                type: 'tableCell',
+                type: "tableCell",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Cell 1A' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Cell 1A" }],
                   },
                 ],
               },
               {
-                type: 'tableCell',
+                type: "tableCell",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Cell 2A' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Cell 2A" }],
                   },
                 ],
               },
               {
-                type: 'tableCell',
+                type: "tableCell",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Cell 3A' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Cell 3A" }],
                   },
                 ],
               },
             ],
           },
           {
-            type: 'tableRow',
+            type: "tableRow",
             content: [
               {
-                type: 'tableCell',
+                type: "tableCell",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Cell 1B' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Cell 1B" }],
                   },
                 ],
               },
               {
-                type: 'tableCell',
+                type: "tableCell",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Cell 2B' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Cell 2B" }],
                   },
                 ],
               },
               {
-                type: 'tableCell',
+                type: "tableCell",
                 attrs: { colspan: 1, rowspan: 1, colwidth: null },
                 content: [
                   {
-                    type: 'paragraph',
-                    content: [{ type: 'text', text: 'Cell 3B' }],
+                    type: "paragraph",
+                    content: [{ type: "text", text: "Cell 3B" }],
                   },
                 ],
               },

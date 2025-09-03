@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import type { HTMLAttributes, ReactNode } from 'react';
-import { createContext, memo, useContext, useMemo } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils';
+import type { HTMLAttributes, ReactNode } from "react";
+import { createContext, memo, useContext, useMemo } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
 type TickerContextValue = {
   formatter: Intl.NumberFormat;
 };
 
-const DEFAULT_CURRENCY = 'USD';
-const DEFAULT_LOCALE = 'en-US';
+const DEFAULT_CURRENCY = "USD";
+const DEFAULT_LOCALE = "en-US";
 
 const defaultFormatter = new Intl.NumberFormat(DEFAULT_LOCALE, {
-  style: 'currency',
+  style: "currency",
   currency: DEFAULT_CURRENCY,
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
@@ -41,7 +41,7 @@ export const Ticker = memo(
     const formatter = useMemo(() => {
       try {
         return new Intl.NumberFormat(locale, {
-          style: 'currency',
+          style: "currency",
           currency: currency.toUpperCase(),
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
@@ -55,7 +55,7 @@ export const Ticker = memo(
       <TickerContext.Provider value={{ formatter }}>
         <button
           className={cn(
-            'inline-flex items-center gap-1.5 whitespace-nowrap align-middle',
+            "inline-flex items-center gap-1.5 whitespace-nowrap align-middle",
             className
           )}
           type="button"
@@ -67,7 +67,7 @@ export const Ticker = memo(
     );
   }
 );
-Ticker.displayName = 'Ticker';
+Ticker.displayName = "Ticker";
 
 export type TickerIconProps = HTMLAttributes<HTMLImageElement> & {
   src?: string;
@@ -76,19 +76,29 @@ export type TickerIconProps = HTMLAttributes<HTMLImageElement> & {
 };
 
 export const TickerIcon = memo(
-  ({ src, symbol, className, asChild, children, ...props }: TickerIconProps) => {
+  ({
+    src,
+    symbol,
+    className,
+    asChild,
+    children,
+    ...props
+  }: TickerIconProps) => {
     if (asChild) {
       return (
-        <div className={cn('overflow-hidden rounded-full border border-border bg-muted', className)}>
+        <div
+          className={cn(
+            "overflow-hidden rounded-full border border-border bg-muted",
+            className
+          )}
+        >
           {children}
         </div>
-      )
+      );
     }
 
     return (
-      <Avatar
-        className={cn('size-7 border border-border bg-muted', className)}
-      >
+      <Avatar className={cn("size-7 border border-border bg-muted", className)}>
         <AvatarImage src={src} {...props} />
         <AvatarFallback className="font-semibold text-muted-foreground text-sm">
           {symbol?.slice(0, 2).toUpperCase()}
@@ -97,7 +107,7 @@ export const TickerIcon = memo(
     );
   }
 );
-TickerIcon.displayName = 'TickerIcon';
+TickerIcon.displayName = "TickerIcon";
 
 export type TickerSymbolProps = HTMLAttributes<HTMLSpanElement> & {
   symbol: string;
@@ -105,12 +115,12 @@ export type TickerSymbolProps = HTMLAttributes<HTMLSpanElement> & {
 
 export const TickerSymbol = memo(
   ({ symbol, className, ...props }: TickerSymbolProps) => (
-    <span className={cn('font-medium', className)} {...props}>
+    <span className={cn("font-medium", className)} {...props}>
       {symbol.toUpperCase()}
     </span>
   )
 );
-TickerSymbol.displayName = 'TickerSymbol';
+TickerSymbol.displayName = "TickerSymbol";
 
 export type TickerPriceProps = HTMLAttributes<HTMLSpanElement> & {
   price: number;
@@ -126,13 +136,13 @@ export const TickerPrice = memo(
     );
 
     return (
-      <span className={cn('text-muted-foreground', className)} {...props}>
+      <span className={cn("text-muted-foreground", className)} {...props}>
         {formattedPrice}
       </span>
     );
   }
 );
-TickerPrice.displayName = 'TickerPrice';
+TickerPrice.displayName = "TickerPrice";
 
 export type TickerPriceChangeProps = HTMLAttributes<HTMLSpanElement> & {
   change: number;
@@ -154,17 +164,17 @@ export const TickerPriceChange = memo(
     return (
       <span
         className={cn(
-          'flex items-center gap-0.5',
+          "flex items-center gap-0.5",
           isPositiveChange
-            ? 'text-green-600 dark:text-green-500'
-            : 'text-red-600 dark:text-red-500',
+            ? "text-green-600 dark:text-green-500"
+            : "text-red-600 dark:text-red-500",
           className
         )}
         {...props}
       >
         <svg
           aria-labelledby="ticker-change-icon-title"
-          className={isPositiveChange ? '' : 'rotate-180'}
+          className={isPositiveChange ? "" : "rotate-180"}
           fill="currentColor"
           height="12"
           role="img"
@@ -173,7 +183,7 @@ export const TickerPriceChange = memo(
           xmlns="http://www.w3.org/2000/svg"
         >
           <title id="ticker-change-icon-title">
-            {isPositiveChange ? 'Up icon' : 'Down icon'}
+            {isPositiveChange ? "Up icon" : "Down icon"}
           </title>
           <path d="M24 22h-24l12-20z" />
         </svg>
@@ -182,4 +192,4 @@ export const TickerPriceChange = memo(
     );
   }
 );
-TickerPriceChange.displayName = 'TickerPriceChange';
+TickerPriceChange.displayName = "TickerPriceChange";

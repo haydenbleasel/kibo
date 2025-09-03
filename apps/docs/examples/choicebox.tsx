@@ -7,20 +7,20 @@ import {
   ChoiceboxItemIndicator,
   ChoiceboxItemSubtitle,
   ChoiceboxItemTitle,
-} from '@repo/choicebox';
+} from "@repo/choicebox";
 
 const options = [
   {
-    id: '1',
-    label: 'Option 1',
-    subtitle: '(the first option)',
-    description: 'This is the first option',
+    id: "1",
+    label: "Option 1",
+    subtitle: "(the first option)",
+    description: "This is the first option",
   },
   {
-    id: '2',
-    label: 'Option 2',
-    subtitle: '(the second option)',
-    description: 'This is the second option',
+    id: "2",
+    label: "Option 2",
+    subtitle: "(the second option)",
+    description: "This is the second option",
   },
 ];
 

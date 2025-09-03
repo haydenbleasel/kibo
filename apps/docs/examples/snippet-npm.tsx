@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Snippet,
@@ -7,25 +7,25 @@ import {
   SnippetTabsContent,
   SnippetTabsList,
   SnippetTabsTrigger,
-} from '@repo/snippet';
-import { useState } from 'react';
+} from "@repo/snippet";
+import { useState } from "react";
 
 const commands = [
   {
-    label: 'npm',
-    code: 'npx next-forge@latest init',
+    label: "npm",
+    code: "npx next-forge@latest init",
   },
   {
-    label: 'yarn',
-    code: 'yarn dlx next-forge@latest init',
+    label: "yarn",
+    code: "yarn dlx next-forge@latest init",
   },
   {
-    label: 'pnpm',
-    code: 'pnpx next-forge@latest init',
+    label: "pnpm",
+    code: "pnpx next-forge@latest init",
   },
   {
-    label: 'bun',
-    code: 'bunx next-forge@latest init',
+    label: "bun",
+    code: "bunx next-forge@latest init",
   },
 ];
 

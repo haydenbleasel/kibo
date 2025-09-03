@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ContributionGraph,
@@ -7,9 +7,9 @@ import {
   ContributionGraphFooter,
   ContributionGraphLegend,
   ContributionGraphTotalCount,
-} from '@repo/contribution-graph';
-import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from 'date-fns';
-import { Badge } from '@/components/ui/badge';
+} from "@repo/contribution-graph";
+import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from "date-fns";
+import { Badge } from "@/components/ui/badge";
 
 const maxCount = 20;
 const maxLevel = 4;
@@ -27,7 +27,7 @@ const data = days.map((date) => {
   const level = Math.ceil((count / maxCount) * maxLevel);
 
   return {
-    date: formatISO(date, { representation: 'date' }),
+    date: formatISO(date, { representation: "date" }),
     count,
     level,
   };
@@ -48,7 +48,7 @@ const Example = () => (
       <ContributionGraphTotalCount>
         {({ totalCount, year }) => (
           <div className="flex items-center gap-2">
-            <span className='text-muted-foreground text-sm'>Year {year}:</span>
+            <span className="text-muted-foreground text-sm">Year {year}:</span>
             <Badge variant="secondary">
               {totalCount.toLocaleString()} contributions
             </Badge>
@@ -62,9 +62,9 @@ const Example = () => (
             data-level={level}
           >
             <div
-              className={`h-full w-full rounded-sm border border-border ${level === 0 ? 'bg-muted' : ''} ${level === 1 ? 'bg-emerald-200 dark:bg-emerald-900' : ''} ${level === 2 ? 'bg-emerald-400 dark:bg-emerald-700' : ''} ${level === 3 ? 'bg-emerald-600 dark:bg-emerald-500' : ''} ${level === 4 ? 'bg-emerald-800 dark:bg-emerald-300' : ''} `}
+              className={`h-full w-full rounded-sm border border-border ${level === 0 ? "bg-muted" : ""} ${level === 1 ? "bg-emerald-200 dark:bg-emerald-900" : ""} ${level === 2 ? "bg-emerald-400 dark:bg-emerald-700" : ""} ${level === 3 ? "bg-emerald-600 dark:bg-emerald-500" : ""} ${level === 4 ? "bg-emerald-800 dark:bg-emerald-300" : ""} `}
             />
-            <span className='-top-8 absolute hidden rounded bg-popover px-2 py-1 text-popover-foreground text-xs shadow-md group-hover:block'>
+            <span className="-top-8 absolute hidden rounded bg-popover px-2 py-1 text-popover-foreground text-xs shadow-md group-hover:block">
               Level {level}
             </span>
           </div>

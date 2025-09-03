@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import { captureException } from '@sentry/nextjs';
-import type NextError from 'next/error';
-import { useEffect } from 'react';
-import { mono, sans } from '../lib/fonts';
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import { captureException } from "@sentry/nextjs";
+import type NextError from "next/error";
+import { useEffect } from "react";
+import { mono, sans } from "../lib/fonts";
 
 type GlobalErrorProperties = {
   readonly error: NextError & { digest?: string };
@@ -20,7 +20,7 @@ const GlobalError = ({ error, reset }: GlobalErrorProperties) => {
   return (
     <html
       className={cn(
-        'touch-manipulation font-sans antialiased',
+        "touch-manipulation font-sans antialiased",
         sans.variable,
         mono.variable
       )}

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   TreeExpander,
@@ -9,20 +9,25 @@ import {
   TreeNodeTrigger,
   TreeProvider,
   TreeView,
-} from '@repo/tree';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+} from "@repo/tree";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function TreeControlledExample() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [expandedIds] = useState<string[]>(['team', 'engineering', 'design', 'product']);
+  const [expandedIds] = useState<string[]>([
+    "team",
+    "engineering",
+    "design",
+    "product",
+  ]);
 
   const handleClearSelection = () => {
     setSelectedIds([]);
   };
 
   const handleSelectAll = () => {
-    const allIds = ['alice', 'bob', 'carol', 'david', 'eve', 'frank'];
+    const allIds = ["alice", "bob", "carol", "david", "eve", "frank"];
     setSelectedIds(allIds);
   };
 
@@ -36,36 +41,36 @@ export default function TreeControlledExample() {
           Clear Selection
         </Button>
       </div>
-      
+
       <TreeProvider
         defaultExpandedIds={expandedIds}
-        selectedIds={selectedIds}
-        onSelectionChange={setSelectedIds}
         multiSelect
+        onSelectionChange={setSelectedIds}
+        selectedIds={selectedIds}
       >
         <TreeView>
-          <TreeNode nodeId="team" isLast>
+          <TreeNode isLast nodeId="team">
             <TreeNodeTrigger>
               <TreeExpander hasChildren />
               <TreeIcon hasChildren />
               <TreeLabel>Team</TreeLabel>
             </TreeNodeTrigger>
             <TreeNodeContent hasChildren>
-              <TreeNode nodeId="engineering" level={1}>
+              <TreeNode level={1} nodeId="engineering">
                 <TreeNodeTrigger>
                   <TreeExpander hasChildren />
                   <TreeIcon hasChildren />
                   <TreeLabel>Engineering</TreeLabel>
                 </TreeNodeTrigger>
                 <TreeNodeContent hasChildren>
-                  <TreeNode nodeId="alice" level={2}>
+                  <TreeNode level={2} nodeId="alice">
                     <TreeNodeTrigger>
                       <TreeExpander />
                       <TreeIcon />
                       <TreeLabel>Alice Johnson</TreeLabel>
                     </TreeNodeTrigger>
                   </TreeNode>
-                  <TreeNode nodeId="bob" level={2} isLast>
+                  <TreeNode isLast level={2} nodeId="bob">
                     <TreeNodeTrigger>
                       <TreeExpander />
                       <TreeIcon />
@@ -74,21 +79,21 @@ export default function TreeControlledExample() {
                   </TreeNode>
                 </TreeNodeContent>
               </TreeNode>
-              <TreeNode nodeId="design" level={1}>
+              <TreeNode level={1} nodeId="design">
                 <TreeNodeTrigger>
                   <TreeExpander hasChildren />
                   <TreeIcon hasChildren />
                   <TreeLabel>Design</TreeLabel>
                 </TreeNodeTrigger>
                 <TreeNodeContent hasChildren>
-                  <TreeNode nodeId="carol" level={2}>
+                  <TreeNode level={2} nodeId="carol">
                     <TreeNodeTrigger>
                       <TreeExpander />
                       <TreeIcon />
                       <TreeLabel>Carol Williams</TreeLabel>
                     </TreeNodeTrigger>
                   </TreeNode>
-                  <TreeNode nodeId="david" level={2} isLast>
+                  <TreeNode isLast level={2} nodeId="david">
                     <TreeNodeTrigger>
                       <TreeExpander />
                       <TreeIcon />
@@ -97,21 +102,21 @@ export default function TreeControlledExample() {
                   </TreeNode>
                 </TreeNodeContent>
               </TreeNode>
-              <TreeNode nodeId="product" level={1} isLast>
+              <TreeNode isLast level={1} nodeId="product">
                 <TreeNodeTrigger>
                   <TreeExpander hasChildren />
                   <TreeIcon hasChildren />
                   <TreeLabel>Product</TreeLabel>
                 </TreeNodeTrigger>
                 <TreeNodeContent hasChildren>
-                  <TreeNode nodeId="eve" level={2}>
+                  <TreeNode level={2} nodeId="eve">
                     <TreeNodeTrigger>
                       <TreeExpander />
                       <TreeIcon />
                       <TreeLabel>Eve Davis</TreeLabel>
                     </TreeNodeTrigger>
                   </TreeNode>
-                  <TreeNode nodeId="frank" level={2} isLast>
+                  <TreeNode isLast level={2} nodeId="frank">
                     <TreeNodeTrigger>
                       <TreeExpander />
                       <TreeIcon />
@@ -124,10 +129,10 @@ export default function TreeControlledExample() {
           </TreeNode>
         </TreeView>
       </TreeProvider>
-      
+
       {selectedIds.length > 0 && (
-        <div className="text-sm text-muted-foreground">
-          Selected: {selectedIds.join(', ')}
+        <div className="text-muted-foreground text-sm">
+          Selected: {selectedIds.join(", ")}
         </div>
       )}
     </div>

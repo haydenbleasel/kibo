@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Skeleton } from '@repo/shadcn-ui/components/ui/skeleton';
-import dynamic from 'next/dynamic';
+import { Skeleton } from "@repo/shadcn-ui/components/ui/skeleton";
+import dynamic from "next/dynamic";
 
-const ReactPlayer = dynamic(() => import('react-player/youtube'), {
+const ReactPlayer = dynamic(() => import("react-player/youtube"), {
   ssr: false,
   loading: () => (
     <Skeleton className="relative aspect-video w-full overflow-hidden bg-background" />
@@ -30,7 +30,7 @@ export const DemoVideo = ({ url }: DemoVideoProps) => (
       playing
       playsinline
       style={{
-        position: 'absolute',
+        position: "absolute",
         inset: 0,
       }}
       url={url}

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Ticker,
@@ -6,14 +6,14 @@ import {
   TickerPrice,
   TickerPriceChange,
   TickerSymbol,
-} from '@repo/ticker';
-import Image from 'next/image';
+} from "@repo/ticker";
+import Image from "next/image";
 
-const ticker = 'GOOG';
+const ticker = "GOOG";
 
 const Example = () => (
   <p>
-    In other autonomous vehicle news, Alphabet-owned{' '}
+    In other autonomous vehicle news, Alphabet-owned{" "}
     <Ticker className="rounded-full bg-muted p-1 pr-2 text-xs">
       <TickerIcon asChild>
         <Image
@@ -26,7 +26,7 @@ const Example = () => (
       <TickerSymbol symbol={ticker} />
       <TickerPrice price={175.41} />
       <TickerPriceChange change={2.13} />
-    </Ticker>{' '}
+    </Ticker>{" "}
     Waymo is looking to bring its robotaxi service to New York.
   </p>
 );

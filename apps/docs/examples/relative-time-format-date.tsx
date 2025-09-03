@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   RelativeTime,
@@ -6,17 +6,17 @@ import {
   RelativeTimeZoneDate,
   RelativeTimeZoneDisplay,
   RelativeTimeZoneLabel,
-} from '@repo/relative-time';
+} from "@repo/relative-time";
 
 const timezones = [
-  { label: 'EST', zone: 'America/New_York' },
-  { label: 'GMT', zone: 'Europe/London' },
-  { label: 'JST', zone: 'Asia/Tokyo' },
+  { label: "EST", zone: "America/New_York" },
+  { label: "GMT", zone: "Europe/London" },
+  { label: "JST", zone: "Asia/Tokyo" },
 ];
 
 const Example = () => (
   <div className="rounded-md border bg-background p-4">
-    <RelativeTime dateFormatOptions={{ dateStyle: 'full' }}>
+    <RelativeTime dateFormatOptions={{ dateStyle: "full" }}>
       {timezones.map(({ zone, label }) => (
         <RelativeTimeZone key={zone} zone={zone}>
           <RelativeTimeZoneLabel>{label}</RelativeTimeZoneLabel>

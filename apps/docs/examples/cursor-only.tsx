@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Cursor, CursorPointer } from '@repo/cursor';
+import { Cursor, CursorPointer } from "@repo/cursor";
 
 const Example = () => (
   <Cursor>

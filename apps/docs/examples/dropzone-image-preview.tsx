@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@repo/dropzone';
-import { useState } from 'react';
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@repo/dropzone";
+import { useState } from "react";
 
 const Example = () => {
   const [files, setFiles] = useState<File[] | undefined>();
@@ -14,7 +14,7 @@ const Example = () => {
     if (files.length > 0) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        if (typeof e.target?.result === 'string') {
+        if (typeof e.target?.result === "string") {
           setFilePreview(e.target?.result);
         }
       };
@@ -24,7 +24,7 @@ const Example = () => {
 
   return (
     <Dropzone
-      accept={{ 'image/*': ['.png', '.jpg', '.jpeg'] }}
+      accept={{ "image/*": [".png", ".jpg", ".jpeg"] }}
       onDrop={handleDrop}
       onError={console.error}
       src={files}

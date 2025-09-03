@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { ImageZoom } from '@repo/image-zoom';
-import Image from 'next/image';
+import { ImageZoom } from "@repo/image-zoom";
+import Image from "next/image";
 
 const Example = () => (
   <ImageZoom zoomMargin={100}>

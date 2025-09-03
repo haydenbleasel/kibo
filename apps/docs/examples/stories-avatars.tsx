@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Stories,
@@ -6,32 +6,32 @@ import {
   Story,
   StoryAuthor,
   StoryAuthorImage,
-} from '@repo/stories';
+} from "@repo/stories";
 
 const stories = [
   {
     id: 1,
-    author: 'Hayden Bleasel',
-    avatar: 'https://github.com/haydenbleasel.png',
-    fallback: 'HB',
+    author: "Hayden Bleasel",
+    avatar: "https://github.com/haydenbleasel.png",
+    fallback: "HB",
   },
   {
     id: 2,
-    author: 'shadcn',
-    avatar: 'https://github.com/shadcn.png',
-    fallback: 'CN',
+    author: "shadcn",
+    avatar: "https://github.com/shadcn.png",
+    fallback: "CN",
   },
   {
     id: 3,
-    author: 'Lee Robinson',
-    avatar: 'https://github.com/leerob.png',
-    fallback: 'LR',
+    author: "Lee Robinson",
+    avatar: "https://github.com/leerob.png",
+    fallback: "LR",
   },
   {
     id: 4,
-    author: 'Serafim',
-    avatar: 'https://github.com/serafimcloud.png',
-    fallback: 'SC',
+    author: "Serafim",
+    avatar: "https://github.com/serafimcloud.png",
+    fallback: "SC",
   },
 ];
 
@@ -44,7 +44,7 @@ const Example = () => (
             <StoryAuthor className="p-0">
               <span
                 aria-hidden="true"
-                className='inline-flex size-full rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-0.5'
+                className="inline-flex size-full rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-0.5"
               >
                 <span className="inline-flex size-full rounded-full bg-white p-0.5">
                   <StoryAuthorImage

@@ -1,19 +1,19 @@
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import Image from 'next/image';
-import { env } from '@/env';
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import Image from "next/image";
+import { env } from "@/env";
 
 type PoweredByProps = {
   packages: { name: string; url: string }[];
 };
 
 const getHostname = (url: string) => {
-  if (url.startsWith('/')) {
-    return new URL(url, 'https://www.kibo-ui.com').hostname.replace('www.', '');
+  if (url.startsWith("/")) {
+    return new URL(url, "https://www.kibo-ui.com").hostname.replace("www.", "");
   }
 
   const parsedUrl = new URL(url);
 
-  return parsedUrl.hostname.replace('www.', '');
+  return parsedUrl.hostname.replace("www.", "");
 };
 
 export const PoweredBy = ({ packages }: PoweredByProps) => (
@@ -23,8 +23,8 @@ export const PoweredBy = ({ packages }: PoweredByProps) => (
       {packages.map(({ name, url }) => (
         <a
           className={cn(
-            'flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 transition-all',
-            'hover:bg-secondary/80'
+            "flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 transition-all",
+            "hover:bg-secondary/80"
           )}
           href={url}
           key={name}

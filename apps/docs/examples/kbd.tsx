@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Kbd, KbdKey } from '@repo/kbd';
+import { Kbd, KbdKey } from "@repo/kbd";
 
 const Example = () => (
   <Kbd>

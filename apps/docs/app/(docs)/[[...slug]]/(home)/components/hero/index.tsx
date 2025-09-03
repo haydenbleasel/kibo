@@ -4,52 +4,56 @@ import {
   SiReact,
   SiTailwindcss,
   SiTypescript,
-} from '@icons-pack/react-simple-icons';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
+} from "@icons-pack/react-simple-icons";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@repo/shadcn-ui/components/ui/tooltip';
-import Image from 'next/image';
-import Link from 'next/link';
-import { DemoVideo } from '../demo-video';
-import { GitHubButton } from '../github-button';
-import shadcn from './shadcn.jpg';
+} from "@repo/shadcn-ui/components/ui/tooltip";
+import Image from "next/image";
+import Link from "next/link";
+import { DemoVideo } from "../demo-video";
+import { GitHubButton } from "../github-button";
+import shadcn from "./shadcn.jpg";
 
 const icons = [
   {
     icon: SiReact,
-    name: 'React',
-    color: '#087ea4',
+    name: "React",
+    color: "#087ea4",
   },
   {
     icon: SiTypescript,
-    name: 'TypeScript',
-    color: '#3178c6',
+    name: "TypeScript",
+    color: "#3178c6",
   },
   {
     icon: SiTailwindcss,
-    name: 'Tailwind CSS',
-    color: '#00bcff',
+    name: "Tailwind CSS",
+    color: "#00bcff",
   },
   {
     icon: SiLucide,
-    name: 'Lucide',
-    color: '#f67373',
+    name: "Lucide",
+    color: "#f67373",
   },
   {
     icon: SiRadixui,
-    name: 'Radix UI',
-    color: '#000000',
+    name: "Radix UI",
+    color: "#000000",
   },
 ];
 
 export const Hero = () => (
-  <section className='relative isolate overflow-hidden rounded-4xl bg-background pt-8 sm:pt-12 md:pt-16 lg:pt-24' style={{
-    backgroundColor: 'var(--background)',
-    backgroundImage: 'radial-gradient(at 81% 100%, var(--color-pink-300) 0px, transparent 50%), radial-gradient(at 19% 100%, var(--color-purple-300) 0px, transparent 50%)',
-  }}>
+  <section
+    className="relative isolate overflow-hidden rounded-4xl bg-background pt-8 sm:pt-12 md:pt-16 lg:pt-24"
+    style={{
+      backgroundColor: "var(--background)",
+      backgroundImage:
+        "radial-gradient(at 81% 100%, var(--color-pink-300) 0px, transparent 50%), radial-gradient(at 19% 100%, var(--color-purple-300) 0px, transparent 50%)",
+    }}
+  >
     <div className="pointer-events-none absolute right-0 bottom-0 left-0 select-none border-background/15 border-t">
       <div className="grid grid-cols-24 divide-x divide-y divide-background/15">
         {new Array(24 * 12).fill(0).map((_, index) => (
@@ -60,7 +64,7 @@ export const Hero = () => (
     <div className="container relative z-10 grid gap-8 sm:gap-12 md:gap-16">
       <div className="mx-auto flex flex-col justify-center gap-6 text-balance">
         <h1 className="mb-0 text-balance text-center font-semibold text-4xl tracking-[-0.06em]! sm:text-5xl md:text-6xl xl:text-7xl">
-          High quality{' '}
+          High quality{" "}
           <div className="ml-2 inline-flex items-center justify-center gap-2 align-bottom">
             <Image
               alt="shadcn/ui"
@@ -68,10 +72,10 @@ export const Hero = () => (
               height={56}
               src={shadcn}
               width={56}
-            />{' '}
+            />{" "}
             <span>shadcn/ui</span>
-          </div>{' '}
-          components built with{' '}
+          </div>{" "}
+          components built with{" "}
           <div className="-space-x-2 -translate-y-1.5 md:-translate-y-2.5 inline-flex items-center justify-center">
             {icons.map((icon, index) => (
               <Tooltip key={icon.name}>
@@ -81,8 +85,8 @@ export const Hero = () => (
                     style={{
                       backgroundColor: icon.color,
                       maskImage: index
-                        ? 'radial-gradient(circle 28px at -17px 50%, transparent 99%, white 100%)'
-                        : 'none',
+                        ? "radial-gradient(circle 28px at -17px 50%, transparent 99%, white 100%)"
+                        : "none",
                     }}
                   >
                     <icon.icon className="size-3 sm:size-4 md:size-5 lg:size-6" />

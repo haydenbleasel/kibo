@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import {
   MiniCalendar,
   MiniCalendarDay,
   MiniCalendarDays,
   MiniCalendarNavigation,
-} from '@repo/mini-calendar';
+} from "@repo/mini-calendar";
 
 const Example = () => (
   <MiniCalendar>

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@repo/dropzone';
-import { UploadIcon } from 'lucide-react';
-import { useState } from 'react';
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@repo/dropzone";
+import { UploadIcon } from "lucide-react";
+import { useState } from "react";
 
 const Example = () => {
   const [files, setFiles] = useState<File[] | undefined>();

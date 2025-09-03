@@ -1,18 +1,18 @@
-import { type ComponentProps, Fragment, type ReactNode } from 'react';
-import type { Key } from 'ts-key-enum';
-import { cn } from '@/lib/utils';
+import { type ComponentProps, Fragment, type ReactNode } from "react";
+import type { Key } from "ts-key-enum";
+import { cn } from "@/lib/utils";
 
 const DefaultKbdSeparator = ({
   className,
-  children = '+',
+  children = "+",
   ...props
-}: ComponentProps<'span'>) => (
-  <span className={cn('text-muted-foreground/50', className)} {...props}>
+}: ComponentProps<"span">) => (
+  <span className={cn("text-muted-foreground/50", className)} {...props}>
     {children}
   </span>
 );
 
-export type KbdProps = ComponentProps<'span'> & {
+export type KbdProps = ComponentProps<"span"> & {
   separator?: ReactNode;
 };
 
@@ -24,7 +24,7 @@ export const Kbd = ({
 }: KbdProps) => (
   <span
     className={cn(
-      'inline-flex select-none items-center gap-1 rounded border bg-muted px-1.5 align-middle font-medium font-mono text-[10px] text-muted-foreground leading-loose',
+      "inline-flex select-none items-center gap-1 rounded border bg-muted px-1.5 align-middle font-medium font-mono text-[10px] text-muted-foreground leading-loose",
       className
     )}
     {...props}
@@ -40,8 +40,8 @@ export const Kbd = ({
   </span>
 );
 
-export type KbdKeyProps = Omit<ComponentProps<'kbd'>, 'aria-label'> & {
-  'aria-label'?: keyof typeof Key | (string & {});
+export type KbdKeyProps = Omit<ComponentProps<"kbd">, "aria-label"> & {
+  "aria-label"?: keyof typeof Key | (string & {});
 };
 
 export const KbdKey = ({ className, ...props }: KbdKeyProps) => (

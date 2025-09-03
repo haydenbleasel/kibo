@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import {
   GanttCreateMarkerTrigger,
   GanttFeatureItem,
@@ -14,24 +14,24 @@ import {
   GanttSidebarItem,
   GanttTimeline,
   GanttToday,
-} from '@repo/gantt';
-import groupBy from 'lodash.groupby';
-import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
-import { useState } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+} from "@repo/gantt";
+import groupBy from "lodash.groupby";
+import { EyeIcon, LinkIcon, TrashIcon } from "lucide-react";
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@/components/ui/context-menu';
+} from "@/components/ui/context-menu";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const statuses = [
-  { id: faker.string.uuid(), name: 'Planned', color: '#6B7280' },
-  { id: faker.string.uuid(), name: 'In Progress', color: '#F59E0B' },
-  { id: faker.string.uuid(), name: 'Done', color: '#10B981' },
+  { id: faker.string.uuid(), name: "Planned", color: "#6B7280" },
+  { id: faker.string.uuid(), name: "In Progress", color: "#F59E0B" },
+  { id: faker.string.uuid(), name: "Done", color: "#10B981" },
 ];
 
 const users = Array.from({ length: 4 })
@@ -92,18 +92,18 @@ const exampleMarkers = Array.from({ length: 6 })
     date: faker.date.past({ years: 0.5, refDate: new Date() }),
     label: capitalize(faker.company.buzzPhrase()),
     className: faker.helpers.arrayElement([
-      'bg-blue-100 text-blue-900',
-      'bg-green-100 text-green-900',
-      'bg-purple-100 text-purple-900',
-      'bg-red-100 text-red-900',
-      'bg-orange-100 text-orange-900',
-      'bg-teal-100 text-teal-900',
+      "bg-blue-100 text-blue-900",
+      "bg-green-100 text-green-900",
+      "bg-purple-100 text-purple-900",
+      "bg-red-100 text-red-900",
+      "bg-orange-100 text-orange-900",
+      "bg-teal-100 text-teal-900",
     ]),
   }));
 
 const Example = () => {
   const [features, setFeatures] = useState(exampleFeatures);
-  const groupedFeatures = groupBy(features, 'group.name');
+  const groupedFeatures = groupBy(features, "group.name");
   const sortedGroupedFeatures = Object.fromEntries(
     Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
       nameA.localeCompare(nameB)

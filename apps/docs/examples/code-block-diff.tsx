@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { BundledLanguage } from '@repo/code-block';
+import type { BundledLanguage } from "@repo/code-block";
 import {
   CodeBlock,
   CodeBlockBody,
@@ -15,12 +15,12 @@ import {
   CodeBlockSelectItem,
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
-} from '@repo/code-block';
+} from "@repo/code-block";
 
 const code = [
   {
-    language: 'js',
-    filename: 'utils.js',
+    language: "js",
+    filename: "utils.js",
     code: `function calculateTotal(items) {
   let total = 0;
   for (let i = 0; i < items.length; i++) {
@@ -32,8 +32,8 @@ const code = [
 }`,
   },
   {
-    language: 'ts',
-    filename: 'utils.ts',
+    language: "ts",
+    filename: "utils.ts",
     code: `interface Item {
   price: number;
   quantity: number;
@@ -74,8 +74,8 @@ const Example = () => (
         </CodeBlockSelectContent>
       </CodeBlockSelect>
       <CodeBlockCopyButton
-        onCopy={() => console.log('Copied code to clipboard')}
-        onError={() => console.error('Failed to copy code to clipboard')}
+        onCopy={() => console.log("Copied code to clipboard")}
+        onError={() => console.error("Failed to copy code to clipboard")}
       />
     </CodeBlockHeader>
     <CodeBlockBody>

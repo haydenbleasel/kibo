@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import type { ComponentProps } from 'react';
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import type { ComponentProps } from "react";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/components/ui/hover-card';
+} from "@/components/ui/hover-card";
 
 export type GlimpseProps = ComponentProps<typeof HoverCard>;
 
@@ -26,15 +26,15 @@ export const GlimpseTrigger = (props: GlimpseTriggerProps) => (
   <HoverCardTrigger {...props} />
 );
 
-export type GlimpseTitleProps = ComponentProps<'p'>;
+export type GlimpseTitleProps = ComponentProps<"p">;
 
 export const GlimpseTitle = ({ className, ...props }: GlimpseTitleProps) => {
   return (
-    <p className={cn('truncate font-semibold text-sm', className)} {...props} />
+    <p className={cn("truncate font-semibold text-sm", className)} {...props} />
   );
 };
 
-export type GlimpseDescriptionProps = ComponentProps<'p'>;
+export type GlimpseDescriptionProps = ComponentProps<"p">;
 
 export const GlimpseDescription = ({
   className,
@@ -42,13 +42,13 @@ export const GlimpseDescription = ({
 }: GlimpseDescriptionProps) => {
   return (
     <p
-      className={cn('line-clamp-2 text-muted-foreground text-sm', className)}
+      className={cn("line-clamp-2 text-muted-foreground text-sm", className)}
       {...props}
     />
   );
 };
 
-export type GlimpseImageProps = ComponentProps<'img'>;
+export type GlimpseImageProps = ComponentProps<"img">;
 
 export const GlimpseImage = ({
   className,
@@ -57,9 +57,9 @@ export const GlimpseImage = ({
 }: GlimpseImageProps) => (
   // biome-ignore lint/performance/noImgElement: "Kibo UI is framework agnostic"
   <img
-    alt={alt ?? ''}
+    alt={alt ?? ""}
     className={cn(
-      'mb-4 aspect-[120/63] w-full rounded-md border object-cover',
+      "mb-4 aspect-[120/63] w-full rounded-md border object-cover",
       className
     )}
     {...props}

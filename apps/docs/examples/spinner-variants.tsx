@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Spinner, type SpinnerProps } from '@repo/spinner';
+import { Spinner, type SpinnerProps } from "@repo/spinner";
 
-const variants: SpinnerProps['variant'][] = [
-  'default',
-  'circle',
-  'pinwheel',
-  'circle-filled',
-  'ellipsis',
-  'ring',
-  'bars',
-  'infinite',
+const variants: SpinnerProps["variant"][] = [
+  "default",
+  "circle",
+  "pinwheel",
+  "circle-filled",
+  "ellipsis",
+  "ring",
+  "bars",
+  "infinite",
 ];
 
 const Example = () => (

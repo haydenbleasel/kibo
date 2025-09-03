@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   SandboxCodeEditor,
@@ -10,8 +10,8 @@ import {
   SandboxTabsContent,
   SandboxTabsList,
   SandboxTabsTrigger,
-} from '@repo/sandbox';
-import { AppWindowIcon, CodeIcon, TerminalIcon } from 'lucide-react';
+} from "@repo/sandbox";
+import { AppWindowIcon, CodeIcon, TerminalIcon } from "lucide-react";
 
 const Example = () => (
   <SandboxProvider>

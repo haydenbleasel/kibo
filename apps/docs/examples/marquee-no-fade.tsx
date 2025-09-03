@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Marquee, MarqueeContent, MarqueeItem } from '@repo/marquee';
+import { Marquee, MarqueeContent, MarqueeItem } from "@repo/marquee";
 
 const Example = () => (
   <Marquee>

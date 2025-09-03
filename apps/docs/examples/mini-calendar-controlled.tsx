@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 import {
   MiniCalendar,
   MiniCalendarDay,
   MiniCalendarDays,
   MiniCalendarNavigation,
-} from '@repo/mini-calendar';
-import { useState } from 'react';
+} from "@repo/mini-calendar";
+import { useState } from "react";
 
 const Example = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -23,12 +23,12 @@ const Example = () => {
 
       {selectedDate && (
         <p className="text-muted-foreground text-sm">
-          Selected:{' '}
-          {selectedDate.toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
+          Selected:{" "}
+          {selectedDate.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
           })}
         </p>
       )}

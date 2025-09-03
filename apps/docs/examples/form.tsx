@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Choicebox,
@@ -8,7 +8,7 @@ import {
   ChoiceboxItemHeader,
   ChoiceboxItemIndicator,
   ChoiceboxItemTitle,
-} from '@repo/choicebox';
+} from "@repo/choicebox";
 import {
   Combobox,
   ComboboxContent,
@@ -18,18 +18,18 @@ import {
   ComboboxItem,
   ComboboxList,
   ComboboxTrigger,
-} from '@repo/combobox';
-import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@repo/dropzone';
+} from "@repo/combobox";
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@repo/dropzone";
 import {
   MiniCalendar,
   MiniCalendarDay,
   MiniCalendarDays,
   MiniCalendarNavigation,
-} from '@repo/mini-calendar';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { Input } from '@repo/shadcn-ui/components/ui/input';
-import { Label } from '@repo/shadcn-ui/components/ui/label';
-import { Textarea } from '@repo/shadcn-ui/components/ui/textarea';
+} from "@repo/mini-calendar";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { Input } from "@repo/shadcn-ui/components/ui/input";
+import { Label } from "@repo/shadcn-ui/components/ui/label";
+import { Textarea } from "@repo/shadcn-ui/components/ui/textarea";
 import {
   Tags,
   TagsContent,
@@ -40,7 +40,7 @@ import {
   TagsList,
   TagsTrigger,
   TagsValue,
-} from '@repo/tags';
+} from "@repo/tags";
 import {
   CalendarIcon,
   ImageIcon,
@@ -48,59 +48,59 @@ import {
   MapPinIcon,
   TagIcon,
   UsersIcon,
-} from 'lucide-react';
-import { type FormEventHandler, useState } from 'react';
-import { toast } from 'sonner';
+} from "lucide-react";
+import { type FormEventHandler, useState } from "react";
+import { toast } from "sonner";
 
 const eventTypes = [
   {
-    value: 'conference',
-    label: 'Conference',
-    description: 'Professional gathering with speakers and networking',
+    value: "conference",
+    label: "Conference",
+    description: "Professional gathering with speakers and networking",
   },
   {
-    value: 'workshop',
-    label: 'Workshop',
-    description: 'Hands-on learning experience with practical activities',
+    value: "workshop",
+    label: "Workshop",
+    description: "Hands-on learning experience with practical activities",
   },
   {
-    value: 'meetup',
-    label: 'Meetup',
-    description: 'Casual gathering for like-minded individuals',
+    value: "meetup",
+    label: "Meetup",
+    description: "Casual gathering for like-minded individuals",
   },
   {
-    value: 'webinar',
-    label: 'Webinar',
-    description: 'Online presentation or seminar via video conference',
+    value: "webinar",
+    label: "Webinar",
+    description: "Online presentation or seminar via video conference",
   },
 ];
 
 const venues = [
-  { value: 'convention-center', label: 'Downtown Convention Center' },
-  { value: 'hotel-ballroom', label: 'Grand Hotel Ballroom' },
-  { value: 'university-hall', label: 'University Main Hall' },
-  { value: 'co-working-space', label: 'Tech Hub Co-working Space' },
-  { value: 'online', label: 'Online/Virtual' },
+  { value: "convention-center", label: "Downtown Convention Center" },
+  { value: "hotel-ballroom", label: "Grand Hotel Ballroom" },
+  { value: "university-hall", label: "University Main Hall" },
+  { value: "co-working-space", label: "Tech Hub Co-working Space" },
+  { value: "online", label: "Online/Virtual" },
 ];
 
 const availableTags = [
-  'Technology',
-  'Business',
-  'Marketing',
-  'Design',
-  'Development',
-  'AI/ML',
-  'Startup',
-  'Networking',
-  'Education',
-  'Innovation',
-  'Remote Work',
-  'Leadership',
+  "Technology",
+  "Business",
+  "Marketing",
+  "Design",
+  "Development",
+  "AI/ML",
+  "Startup",
+  "Networking",
+  "Education",
+  "Innovation",
+  "Remote Work",
+  "Leadership",
 ];
 
 const Example = () => {
-  const [eventType, setEventType] = useState('');
-  const [venue, setVenue] = useState('');
+  const [eventType, setEventType] = useState("");
+  const [venue, setVenue] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [files, setFiles] = useState<File[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -118,7 +118,7 @@ const Example = () => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    toast.success('Event created successfully', {
+    toast.success("Event created successfully", {
       description: `${eventType} event created for ${selectedDate?.toLocaleDateString()} at ${venue}`,
     });
   };
@@ -283,7 +283,7 @@ const Example = () => {
           </h2>
           <Dropzone
             accept={{
-              'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.webp'],
+              "image/*": [".png", ".jpg", ".jpeg", ".gif", ".webp"],
             }}
             maxFiles={5}
             maxSize={5 * 1024 * 1024} // 5MB
@@ -294,7 +294,7 @@ const Example = () => {
           </Dropzone>
           {files.length > 0 && (
             <div className="text-muted-foreground text-sm">
-              {files.length} file{files.length > 1 ? 's' : ''} selected
+              {files.length} file{files.length > 1 ? "s" : ""} selected
             </div>
           )}
         </div>

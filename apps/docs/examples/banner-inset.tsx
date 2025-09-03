@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Banner,
@@ -6,8 +6,8 @@ import {
   BannerClose,
   BannerIcon,
   BannerTitle,
-} from '@repo/banner';
-import { CircleAlert } from 'lucide-react';
+} from "@repo/banner";
+import { CircleAlert } from "lucide-react";
 
 const Example = () => (
   <Banner inset>

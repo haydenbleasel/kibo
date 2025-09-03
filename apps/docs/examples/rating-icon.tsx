@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Rating, RatingButton } from '@repo/rating';
-import { HeartIcon } from 'lucide-react';
+import { Rating, RatingButton } from "@repo/rating";
+import { HeartIcon } from "lucide-react";
 
 const Example = () => (
   <Rating defaultValue={3}>

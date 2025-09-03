@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import {
   CalendarBody,
   CalendarDate,
@@ -11,14 +11,14 @@ import {
   CalendarMonthPicker,
   CalendarProvider,
   CalendarYearPicker,
-} from '@repo/calendar';
+} from "@repo/calendar";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const statuses = [
-  { id: faker.string.uuid(), name: 'Planned', color: '#6B7280' },
-  { id: faker.string.uuid(), name: 'In Progress', color: '#F59E0B' },
-  { id: faker.string.uuid(), name: 'Done', color: '#10B981' },
+  { id: faker.string.uuid(), name: "Planned", color: "#6B7280" },
+  { id: faker.string.uuid(), name: "In Progress", color: "#F59E0B" },
+  { id: faker.string.uuid(), name: "Done", color: "#10B981" },
 ];
 
 const exampleFeatures = Array.from({ length: 20 })

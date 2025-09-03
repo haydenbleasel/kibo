@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Cursor,
@@ -6,7 +6,7 @@ import {
   CursorMessage,
   CursorName,
   CursorPointer,
-} from '@repo/cursor';
+} from "@repo/cursor";
 
 const Example = () => (
   <>

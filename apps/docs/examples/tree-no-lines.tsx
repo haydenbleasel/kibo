@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   TreeExpander,
@@ -9,11 +9,14 @@ import {
   TreeNodeTrigger,
   TreeProvider,
   TreeView,
-} from '@repo/tree';
+} from "@repo/tree";
 
 export default function TreeNoLinesExample() {
   return (
-    <TreeProvider showLines={false} defaultExpandedIds={['projects', 'website-redesign']}>
+    <TreeProvider
+      defaultExpandedIds={["projects", "website-redesign"]}
+      showLines={false}
+    >
       <TreeView>
         <TreeNode nodeId="projects">
           <TreeNodeTrigger>
@@ -22,28 +25,28 @@ export default function TreeNoLinesExample() {
             <TreeLabel>Projects</TreeLabel>
           </TreeNodeTrigger>
           <TreeNodeContent hasChildren>
-            <TreeNode nodeId="website-redesign" level={1}>
+            <TreeNode level={1} nodeId="website-redesign">
               <TreeNodeTrigger>
                 <TreeExpander hasChildren />
                 <TreeIcon hasChildren />
                 <TreeLabel>Website Redesign</TreeLabel>
               </TreeNodeTrigger>
               <TreeNodeContent hasChildren>
-                <TreeNode nodeId="homepage" level={2}>
+                <TreeNode level={2} nodeId="homepage">
                   <TreeNodeTrigger>
                     <TreeExpander />
                     <TreeIcon />
                     <TreeLabel>Homepage</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
-                <TreeNode nodeId="about-page" level={2}>
+                <TreeNode level={2} nodeId="about-page">
                   <TreeNodeTrigger>
                     <TreeExpander />
                     <TreeIcon />
                     <TreeLabel>About Page</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
-                <TreeNode nodeId="contact-form" level={2} isLast>
+                <TreeNode isLast level={2} nodeId="contact-form">
                   <TreeNodeTrigger>
                     <TreeExpander />
                     <TreeIcon />
@@ -52,21 +55,21 @@ export default function TreeNoLinesExample() {
                 </TreeNode>
               </TreeNodeContent>
             </TreeNode>
-            <TreeNode nodeId="mobile-app" level={1} isLast>
+            <TreeNode isLast level={1} nodeId="mobile-app">
               <TreeNodeTrigger>
                 <TreeExpander hasChildren />
                 <TreeIcon hasChildren />
                 <TreeLabel>Mobile App</TreeLabel>
               </TreeNodeTrigger>
               <TreeNodeContent hasChildren>
-                <TreeNode nodeId="ios-version" level={2}>
+                <TreeNode level={2} nodeId="ios-version">
                   <TreeNodeTrigger>
                     <TreeExpander />
                     <TreeIcon />
                     <TreeLabel>iOS Version</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
-                <TreeNode nodeId="android-version" level={2} isLast>
+                <TreeNode isLast level={2} nodeId="android-version">
                   <TreeNodeTrigger>
                     <TreeExpander />
                     <TreeIcon />
@@ -77,28 +80,28 @@ export default function TreeNoLinesExample() {
             </TreeNode>
           </TreeNodeContent>
         </TreeNode>
-        <TreeNode nodeId="resources" isLast>
+        <TreeNode isLast nodeId="resources">
           <TreeNodeTrigger>
             <TreeExpander hasChildren />
             <TreeIcon hasChildren />
             <TreeLabel>Resources</TreeLabel>
           </TreeNodeTrigger>
           <TreeNodeContent hasChildren>
-            <TreeNode nodeId="documentation" level={1}>
+            <TreeNode level={1} nodeId="documentation">
               <TreeNodeTrigger>
                 <TreeExpander />
                 <TreeIcon />
                 <TreeLabel>Documentation</TreeLabel>
               </TreeNodeTrigger>
             </TreeNode>
-            <TreeNode nodeId="api-reference" level={1}>
+            <TreeNode level={1} nodeId="api-reference">
               <TreeNodeTrigger>
                 <TreeExpander />
                 <TreeIcon />
                 <TreeLabel>API Reference</TreeLabel>
               </TreeNodeTrigger>
             </TreeNode>
-            <TreeNode nodeId="examples" level={1} isLast>
+            <TreeNode isLast level={1} nodeId="examples">
               <TreeNodeTrigger>
                 <TreeExpander />
                 <TreeIcon />

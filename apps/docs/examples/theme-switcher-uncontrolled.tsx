@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { ThemeSwitcher } from '@repo/theme-switcher';
+import { ThemeSwitcher } from "@repo/theme-switcher";
 
 const Example = () => (
   <ThemeSwitcher defaultValue="system" onChange={console.log} />

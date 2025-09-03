@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { faker } from '@faker-js/faker';
-import type { DragEndEvent } from '@repo/list';
+import { faker } from "@faker-js/faker";
+import type { DragEndEvent } from "@repo/list";
 import {
   ListGroup,
   ListHeader,
   ListItem,
   ListItems,
   ListProvider,
-} from '@repo/list';
-import { useState } from 'react';
+} from "@repo/list";
+import { useState } from "react";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const statuses = [
-  { id: faker.string.uuid(), name: 'Planned', color: '#6B7280' },
-  { id: faker.string.uuid(), name: 'In Progress', color: '#F59E0B' },
-  { id: faker.string.uuid(), name: 'Done', color: '#10B981' },
+  { id: faker.string.uuid(), name: "Planned", color: "#6B7280" },
+  { id: faker.string.uuid(), name: "In Progress", color: "#F59E0B" },
+  { id: faker.string.uuid(), name: "Done", color: "#10B981" },
 ];
 
 const users = Array.from({ length: 4 })

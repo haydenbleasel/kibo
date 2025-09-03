@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   TreeExpander,
@@ -9,14 +9,14 @@ import {
   TreeNodeTrigger,
   TreeProvider,
   TreeView,
-} from '@repo/tree';
-import { FileCode, FileJson, FileText, FileType } from 'lucide-react';
+} from "@repo/tree";
+import { FileCode, FileJson, FileText, FileType } from "lucide-react";
 
 export default function TreeExample() {
   return (
     <TreeProvider
-      defaultExpandedIds={['src', 'components', 'ui']}
-      onSelectionChange={(ids) => console.log('Selected:', ids)}
+      defaultExpandedIds={["src", "components", "ui"]}
+      onSelectionChange={(ids) => console.log("Selected:", ids)}
     >
       <TreeView>
         <TreeNode nodeId="src">

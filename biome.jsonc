@@ -1,12 +1,12 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
   "extends": ["ultracite"],
   "files": {
     "includes": [
       "**/*",
-      "!packages/shadcn-ui/components/ui/**",
-      "!packages/shadcn-ui/lib/**",
-      "!packages/shadcn-ui/hooks/**"
+      "!packages/shadcn-ui/components/ui",
+      "!packages/shadcn-ui/lib",
+      "!packages/shadcn-ui/hooks"
     ]
   }
 }

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Rating, RatingButton } from '@repo/rating';
-import { Input } from '@repo/shadcn-ui/components/ui/input';
-import { useState } from 'react';
+import { Rating, RatingButton } from "@repo/rating";
+import { Input } from "@repo/shadcn-ui/components/ui/input";
+import { useState } from "react";
 
 const Example = () => {
   const [value, setValue] = useState(3);

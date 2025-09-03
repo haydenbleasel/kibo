@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Pill, PillButton } from '@repo/pill';
-import { XIcon } from 'lucide-react';
+import { Pill, PillButton } from "@repo/pill";
+import { XIcon } from "lucide-react";
 
 const Example = () => (
   <Pill>

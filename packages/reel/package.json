@@ -1,0 +1,20 @@
+{
+  "name": "@repo/reel",
+  "description": "A composable Reel component that looks like Instagram Stories - a full-height, 9:16 aspect ratio container with video playback and progress indicators.",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@radix-ui/react-use-controllable-state": "^1.2.2",
+    "@repo/shadcn-ui": "workspace:*",
+    "lucide-react": "^0.473.0",
+    "motion": "^12.23.12",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.9",
+    "typescript": "^5.9.2"
+  }
+}

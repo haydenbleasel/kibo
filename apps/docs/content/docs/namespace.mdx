@@ -1,0 +1,108 @@
+---
+title: Namespaces
+description: How to set up and use the Kibo UI namespaced registry with shadcn/ui
+---
+
+Kibo UI now supports the new shadcn/ui namespaced registry system, allowing you to install components using a cleaner namespace syntax. This guide will show you how to configure and use the `@kibo-ui` namespace in your project.
+
+## What is the Namespaced Registry?
+
+The namespaced registry is a new feature in shadcn/ui that allows you to organize and reference components from different sources using a namespace prefix. Instead of using long URLs, you can now use clean, memorable names like `@kibo-ui/gantt` or `@kibo-ui/dropzone`.
+
+## Benefits
+
+- **Cleaner syntax**: Use `@kibo-ui/component` instead of long URLs
+- **Better organization**: Clear separation between different component libraries
+- **Easier discovery**: More intuitive component names
+- **Consistent experience**: Works seamlessly with the shadcn/ui CLI
+- **Future-proof**: Ready for the evolving shadcn/ui ecosystem
+
+## Quick Start
+
+Add the Kibo UI registry to your `components.json` file:
+
+```json title="components.json"
+{
+  "registries": {
+    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json"
+  }
+}
+```
+
+Now you can install Kibo UI components using the namespace syntax:
+
+```bash
+npx shadcn@beta add @kibo-ui/gantt
+```
+
+## Detailed Configuration
+
+### Basic Registry Configuration
+
+The minimal configuration requires adding the `registries` field to your `components.json`:
+
+```json
+{
+  "registries": {
+    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json"
+  }
+}
+```
+
+The `{name}` placeholder is automatically replaced with the component name when you install a component. For example, when you run `npx shadcn@beta add @kibo-ui/gantt`, it will fetch from `https://www.kibo-ui.com/r/gantt.json`.
+
+### Multiple Registries
+
+You can configure multiple registries alongside Kibo UI:
+
+```json
+{
+  "registries": {
+    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json",
+    "@ai-elements": "https://registry.ai-sdk.dev/{name}.json",
+    "@custom": "https://your-registry.com/components/{name}.json"
+  }
+}
+```
+
+### Style Support
+
+The registry automatically supports different shadcn/ui styles. If you're using the `default` or `new-york` style, the components will be installed with the appropriate styling.
+
+## Installing Multiple Components
+
+You can install multiple components in a single command:
+
+```bash
+npx shadcn@beta add @kibo-ui/gantt @kibo-ui/dropzone @kibo-ui/calendar
+```
+
+## CLI Commands
+
+### View Component Details
+
+Before installing, you can view component details:
+
+```bash
+npx shadcn@beta view @kibo-ui/gantt
+```
+
+This will show you:
+- Component metadata and description
+- Required dependencies
+- File structure that will be created
+- CSS variables and Tailwind configuration
+
+### Search Components
+
+Search for available components in the Kibo UI registry:
+
+```bash
+npx shadcn@beta search @kibo-ui
+```
+
+You can also search with specific terms:
+
+```bash
+npx shadcn@beta search @kibo-ui --query "chart"
+```

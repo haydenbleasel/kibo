@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@repo/shadcn-ui/components/ui/avatar';
-import type { ColumnDef } from '@repo/table';
+} from "@repo/shadcn-ui/components/ui/avatar";
+import type { ColumnDef } from "@repo/table";
 import {
   TableBody,
   TableCell,
@@ -16,15 +16,15 @@ import {
   TableHeaderGroup,
   TableProvider,
   TableRow,
-} from '@repo/table';
-import { ChevronRightIcon } from 'lucide-react';
+} from "@repo/table";
+import { ChevronRightIcon } from "lucide-react";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const statuses = [
-  { id: faker.string.uuid(), name: 'Planned', color: '#6B7280' },
-  { id: faker.string.uuid(), name: 'In Progress', color: '#F59E0B' },
-  { id: faker.string.uuid(), name: 'Done', color: '#10B981' },
+  { id: faker.string.uuid(), name: "Planned", color: "#6B7280" },
+  { id: faker.string.uuid(), name: "In Progress", color: "#F59E0B" },
+  { id: faker.string.uuid(), name: "Done", color: "#10B981" },
 ];
 
 const users = Array.from({ length: 4 })
@@ -81,7 +81,7 @@ const exampleFeatures = Array.from({ length: 20 })
 const Example = () => {
   const columns: ColumnDef<(typeof exampleFeatures)[number]>[] = [
     {
-      accessorKey: 'name',
+      accessorKey: "name",
       header: ({ column }) => (
         <TableColumnHeader column={column} title="Name" />
       ),
@@ -113,27 +113,27 @@ const Example = () => {
       ),
     },
     {
-      accessorKey: 'startAt',
+      accessorKey: "startAt",
       header: ({ column }) => (
         <TableColumnHeader column={column} title="Start At" />
       ),
       cell: ({ row }) =>
-        new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'medium',
+        new Intl.DateTimeFormat("en-US", {
+          dateStyle: "medium",
         }).format(row.original.startAt),
     },
     {
-      accessorKey: 'endAt',
+      accessorKey: "endAt",
       header: ({ column }) => (
         <TableColumnHeader column={column} title="End At" />
       ),
       cell: ({ row }) =>
-        new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'medium',
+        new Intl.DateTimeFormat("en-US", {
+          dateStyle: "medium",
         }).format(row.original.endAt),
     },
     {
-      id: 'release',
+      id: "release",
       accessorFn: (row) => row.release.id,
       header: ({ column }) => (
         <TableColumnHeader column={column} title="Release" />

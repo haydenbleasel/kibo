@@ -1,19 +1,20 @@
-'use client';
+"use client";
 
-import { SiReact } from '@icons-pack/react-simple-icons';
+import { SiReact } from "@icons-pack/react-simple-icons";
 import {
   type BundledLanguage,
   CodeBlock,
   CodeBlockBody,
   CodeBlockContent,
+  CodeBlockCopyButton,
   CodeBlockItem,
-} from '@repo/code-block';
+} from "@repo/code-block";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
+} from "@/components/ui/accordion";
 
 type PreviewSourceProps = {
   source: { name: string; source: string }[];
@@ -21,8 +22,8 @@ type PreviewSourceProps = {
 
 const parseCode = (code: string) =>
   code
-    .replace(/@repo\/shadcn-ui\//g, '@/')
-    .replace(/@repo\//g, '@/components/ui/kibo-ui/');
+    .replace(/@repo\/shadcn-ui\//g, "@/")
+    .replace(/@repo\//g, "@/components/ui/kibo-ui/");
 
 export const PreviewSource = ({ source }: PreviewSourceProps) => (
   <Accordion collapsible defaultValue={source.at(0)?.name} type="single">
@@ -34,18 +35,21 @@ export const PreviewSource = ({ source }: PreviewSourceProps) => (
             <span>{name}</span>
           </div>
         </AccordionTrigger>
-        <AccordionContent>
+        <AccordionContent className='overflow-visible' style={{ overflow: 'visible' }}>
           <CodeBlock
-            className="overflow-auto rounded-none border-none"
+            className="overflow-visible rounded-none border-none"
             data={[
               {
-                language: 'tsx',
+                language: "tsx",
                 filename: name,
                 code: parseCode(source),
               },
             ]}
             defaultValue="tsx"
-          >
+            >
+            <div className="sticky top-0 z-1">
+              <CodeBlockCopyButton className="absolute top-1 right-1.5" />
+            </div>
             <CodeBlockBody>
               {(item) => (
                 <CodeBlockItem key={item.language} value={item.language}>

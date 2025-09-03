@@ -1,49 +1,49 @@
-'use client';
+"use client";
 
-import { AvatarStack } from '@repo/avatar-stack';
+import { AvatarStack } from "@repo/avatar-stack";
 import {
   Cursor,
   CursorBody,
   CursorMessage,
   CursorName,
   CursorPointer,
-} from '@repo/cursor';
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+} from "@repo/cursor";
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const users = [
   {
     id: 1,
-    name: 'Hayden Bleasel',
-    avatar: 'https://github.com/haydenbleasel.png',
+    name: "Hayden Bleasel",
+    avatar: "https://github.com/haydenbleasel.png",
   },
   {
     id: 2,
-    name: 'shadcn',
-    avatar: 'https://github.com/shadcn.png',
-    message: 'Can we adjust the color?',
+    name: "shadcn",
+    avatar: "https://github.com/shadcn.png",
+    message: "Can we adjust the color?",
   },
   {
     id: 3,
-    name: 'Lee Robinson',
-    avatar: 'https://github.com/leerob.png',
+    name: "Lee Robinson",
+    avatar: "https://github.com/leerob.png",
   },
 ];
 
 const colors = [
   {
-    foreground: 'text-emerald-800',
-    background: 'bg-emerald-50',
+    foreground: "text-emerald-800",
+    background: "bg-emerald-50",
   },
   {
-    foreground: 'text-rose-800',
-    background: 'bg-rose-50',
+    foreground: "text-rose-800",
+    background: "bg-rose-50",
   },
   {
-    foreground: 'text-sky-800',
-    background: 'bg-sky-50',
+    foreground: "text-sky-800",
+    background: "bg-sky-50",
   },
 ];
 
@@ -138,7 +138,7 @@ const Example = () => {
             className={cn(
               colors[index % colors.length].background,
               colors[index % colors.length].foreground,
-              'gap-1 px-3 py-2'
+              "gap-1 px-3 py-2"
             )}
           >
             <div className="flex items-center gap-2 opacity-100!">

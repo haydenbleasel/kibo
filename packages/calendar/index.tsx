@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { getDay, getDaysInMonth, isSameDay } from 'date-fns';
-import { atom, useAtom } from 'jotai';
+import { getDay, getDaysInMonth, isSameDay } from "date-fns";
+import { atom, useAtom } from "jotai";
 import {
   Check,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronsUpDown,
-} from 'lucide-react';
+} from "lucide-react";
 import {
   createContext,
   memo,
@@ -16,8 +16,8 @@ import {
   useContext,
   useMemo,
   useState,
-} from 'react';
-import { Button } from '@/components/ui/button';
+} from "react";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -25,23 +25,23 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 export type CalendarState = {
   month: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
   year: number;
 };
 
-const monthAtom = atom<CalendarState['month']>(
-  new Date().getMonth() as CalendarState['month']
+const monthAtom = atom<CalendarState["month"]>(
+  new Date().getMonth() as CalendarState["month"]
 );
-const yearAtom = atom<CalendarState['year']>(new Date().getFullYear());
+const yearAtom = atom<CalendarState["year"]>(new Date().getFullYear());
 
 export const useCalendarMonth = () => useAtom(monthAtom);
 export const useCalendarYear = () => useAtom(yearAtom);
@@ -52,7 +52,7 @@ type CalendarContextProps = {
 };
 
 const CalendarContext = createContext<CalendarContextProps>({
-  locale: 'en-US',
+  locale: "en-US",
   startDay: 0,
 });
 
@@ -87,7 +87,7 @@ type ComboboxProps = {
 
 export const monthsForLocale = (
   localeName: Intl.LocalesArgument,
-  monthFormat: Intl.DateTimeFormatOptions['month'] = 'long'
+  monthFormat: Intl.DateTimeFormatOptions["month"] = "long"
 ) => {
   const format = new Intl.DateTimeFormat(localeName, { month: monthFormat })
     .format;
@@ -106,7 +106,7 @@ export const daysForLocale = (
 
   for (let i = 0; i < 7; i++) {
     weekdays.push(
-      new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(baseDate)
+      new Intl.DateTimeFormat(locale, { weekday: "short" }).format(baseDate)
     );
     baseDate.setDate(baseDate.getDate() + 1);
   }
@@ -128,7 +128,7 @@ const Combobox = ({
       <PopoverTrigger asChild>
         <Button
           aria-expanded={open}
-          className={cn('w-40 justify-between capitalize', className)}
+          className={cn("w-40 justify-between capitalize", className)}
           variant="outline"
         >
           {value
@@ -154,15 +154,15 @@ const Combobox = ({
                   className="capitalize"
                   key={item.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? '' : currentValue);
+                    setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
                   value={item.value}
                 >
                   <Check
                     className={cn(
-                      'mr-2 h-4 w-4',
-                      value === item.value ? 'opacity-100' : 'opacity-0'
+                      "mr-2 h-4 w-4",
+                      value === item.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {item.label}
@@ -295,8 +295,8 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
       {days.map((day, index) => (
         <div
           className={cn(
-            'relative aspect-square overflow-hidden border-t border-r',
-            index % 7 === 6 && 'border-r-0'
+            "relative aspect-square overflow-hidden border-t border-r",
+            index % 7 === 6 && "border-r-0"
           )}
           key={index}
         >
@@ -316,7 +316,7 @@ export const CalendarDatePicker = ({
   className,
   children,
 }: CalendarDatePickerProps) => (
-  <div className={cn('flex items-center gap-1', className)}>{children}</div>
+  <div className={cn("flex items-center gap-1", className)}>{children}</div>
 );
 
 export type CalendarMonthPickerProps = {
@@ -342,12 +342,12 @@ export const CalendarMonthPicker = ({
       className={className}
       data={monthData}
       labels={{
-        button: 'Select month',
-        empty: 'No month found',
-        search: 'Search month',
+        button: "Select month",
+        empty: "No month found",
+        search: "Search month",
       }}
       setValue={(value) =>
-        setMonth(Number.parseInt(value) as CalendarState['month'])
+        setMonth(Number.parseInt(value) as CalendarState["month"])
       }
       value={month.toString()}
     />
@@ -375,9 +375,9 @@ export const CalendarYearPicker = ({
         label: (start + i).toString(),
       }))}
       labels={{
-        button: 'Select year',
-        empty: 'No year found',
-        search: 'Search year',
+        button: "Select year",
+        empty: "No year found",
+        search: "Search year",
       }}
       setValue={(value) => setYear(Number.parseInt(value))}
       value={year.toString()}
@@ -400,7 +400,7 @@ export const CalendarDatePagination = ({
       setMonth(11);
       setYear(year - 1);
     } else {
-      setMonth((month - 1) as CalendarState['month']);
+      setMonth((month - 1) as CalendarState["month"]);
     }
   }, [month, year, setMonth, setYear]);
 
@@ -409,12 +409,12 @@ export const CalendarDatePagination = ({
       setMonth(0);
       setYear(year + 1);
     } else {
-      setMonth((month + 1) as CalendarState['month']);
+      setMonth((month + 1) as CalendarState["month"]);
     }
   }, [month, year, setMonth, setYear]);
 
   return (
-    <div className={cn('flex items-center gap-2', className)}>
+    <div className={cn("flex items-center gap-2", className)}>
       <Button onClick={handlePreviousMonth} size="icon" variant="ghost">
         <ChevronLeftIcon size={16} />
       </Button>
@@ -446,7 +446,7 @@ export const CalendarHeader = ({ className }: CalendarHeaderProps) => {
   }, [locale, startDay]);
 
   return (
-    <div className={cn('grid flex-grow grid-cols-7', className)}>
+    <div className={cn("grid flex-grow grid-cols-7", className)}>
       {daysData.map((day) => (
         <div className="p-3 text-right text-muted-foreground text-xs" key={day}>
           {day}
@@ -463,7 +463,7 @@ export type CalendarItemProps = {
 
 export const CalendarItem = memo(
   ({ feature, className }: CalendarItemProps) => (
-    <div className={cn('flex items-center gap-2', className)}>
+    <div className={cn("flex items-center gap-2", className)}>
       <div
         className="h-2 w-2 shrink-0 rounded-full"
         style={{
@@ -475,7 +475,7 @@ export const CalendarItem = memo(
   )
 );
 
-CalendarItem.displayName = 'CalendarItem';
+CalendarItem.displayName = "CalendarItem";
 
 export type CalendarProviderProps = {
   locale?: Intl.LocalesArgument;
@@ -485,12 +485,12 @@ export type CalendarProviderProps = {
 };
 
 export const CalendarProvider = ({
-  locale = 'en-US',
+  locale = "en-US",
   startDay = 0,
   children,
   className,
 }: CalendarProviderProps) => (
   <CalendarContext.Provider value={{ locale, startDay }}>
-    <div className={cn('relative flex flex-col', className)}>{children}</div>
+    <div className={cn("relative flex flex-col", className)}>{children}</div>
   </CalendarContext.Provider>
 );

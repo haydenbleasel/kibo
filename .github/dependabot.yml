@@ -7,6 +7,7 @@ updates:
     open-pull-requests-limit: 10
     schedule:
       interval: "monthly"
+    labels: ["dependencies"]
 
   # Maintain dependencies for npm
   - package-ecosystem: "npm"
@@ -14,3 +15,4 @@ updates:
     open-pull-requests-limit: 10
     schedule:
       interval: "monthly"
+    labels: ["dependencies"]

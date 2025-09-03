@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Comparison, ComparisonHandle, ComparisonItem } from '@repo/comparison';
-import Image from 'next/image';
+import { Comparison, ComparisonHandle, ComparisonItem } from "@repo/comparison";
+import Image from "next/image";
 
 const Example = () => (
   <Comparison className="aspect-video" mode="hover">

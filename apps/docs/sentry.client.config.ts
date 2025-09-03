@@ -4,8 +4,8 @@
  * https://docs.sentry.io/platforms/javascript/guides/nextjs/
  */
 
-import { init, replayIntegration } from '@sentry/nextjs';
-import { env } from './env';
+import { init, replayIntegration } from "@sentry/nextjs";
+import { env } from "./env";
 
 export const initializeSentry = (): ReturnType<typeof init> =>
   init({

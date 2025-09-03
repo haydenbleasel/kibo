@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Status, StatusIndicator, StatusLabel } from '@repo/status';
+import { Status, StatusIndicator, StatusLabel } from "@repo/status";
 
 const Example = () => (
   <div className="flex gap-2">

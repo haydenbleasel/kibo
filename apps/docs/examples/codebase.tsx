@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { BundledLanguage } from '@repo/code-block';
+import type { BundledLanguage } from "@repo/code-block";
 import {
   CodeBlock,
   CodeBlockBody,
@@ -11,7 +11,7 @@ import {
   CodeBlockHeader,
   CodeBlockItem,
   type CodeBlockProps,
-} from '@repo/code-block';
+} from "@repo/code-block";
 import {
   TreeExpander,
   TreeIcon,
@@ -21,9 +21,9 @@ import {
   TreeNodeTrigger,
   TreeProvider,
   TreeView,
-} from '@repo/tree';
-import { FileCode, FileJson, FileText, FileType } from 'lucide-react';
-import { useState } from 'react';
+} from "@repo/tree";
+import { FileCode, FileJson, FileText, FileType } from "lucide-react";
+import { useState } from "react";
 
 type FileContent = {
   name: string;
@@ -32,9 +32,9 @@ type FileContent = {
 };
 
 const fileContents: Record<string, FileContent> = {
-  'button.tsx': {
-    name: 'button.tsx',
-    language: 'tsx',
+  "button.tsx": {
+    name: "button.tsx",
+    language: "tsx",
     code: `import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -89,9 +89,9 @@ Button.displayName = 'Button';
 
 export { Button, buttonVariants };`,
   },
-  'utils.ts': {
-    name: 'utils.ts',
-    language: 'typescript',
+  "utils.ts": {
+    name: "utils.ts",
+    language: "typescript",
     code: `import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -111,9 +111,9 @@ export function absoluteUrl(path: string) {
   return \`\${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}\${path}\`;
 }`,
   },
-  'package.json': {
-    name: 'package.json',
-    language: 'json',
+  "package.json": {
+    name: "package.json",
+    language: "json",
     code: `{
   "name": "my-app",
   "version": "0.1.0",
@@ -148,9 +148,9 @@ export function absoluteUrl(path: string) {
   }
 }`,
   },
-  'page.tsx': {
-    name: 'page.tsx',
-    language: 'tsx',
+  "page.tsx": {
+    name: "page.tsx",
+    language: "tsx",
     code: `import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -178,9 +178,9 @@ export default function HomePage() {
   );
 }`,
   },
-  'globals.css': {
-    name: 'globals.css',
-    language: 'css',
+  "globals.css": {
+    name: "globals.css",
+    language: "css",
     code: `@tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -210,9 +210,9 @@ export default function HomePage() {
   }
 }`,
   },
-  'README.md': {
-    name: 'README.md',
-    language: 'markdown',
+  "README.md": {
+    name: "README.md",
+    language: "markdown",
     code: `# My App
 
 A modern web application built with Next.js and React.
@@ -271,10 +271,10 @@ To learn more about the technologies used:
 };
 
 export default function CodebaseExample() {
-  const [selectedFile, setSelectedFile] = useState<string>('button.tsx');
+  const [selectedFile, setSelectedFile] = useState<string>("button.tsx");
 
   // Convert fileContents to the format expected by CodeBlock
-  const codeData: CodeBlockProps['data'] = Object.entries(fileContents).map(
+  const codeData: CodeBlockProps["data"] = Object.entries(fileContents).map(
     ([id, content]) => ({
       ...content,
       id,
@@ -293,7 +293,7 @@ export default function CodebaseExample() {
       {/* File Explorer */}
       <div className="size-full overflow-y-auto">
         <TreeProvider
-          defaultExpandedIds={['src', 'components', 'ui', 'app']}
+          defaultExpandedIds={["src", "components", "ui", "app"]}
           onSelectionChange={(ids) => {
             if (ids.length > 0) {
               handleFileSelect(ids[0]);

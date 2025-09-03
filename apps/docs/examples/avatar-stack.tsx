@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { AvatarStack } from '@repo/avatar-stack';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { AvatarStack } from "@repo/avatar-stack";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Example = () => (
   <AvatarStack>

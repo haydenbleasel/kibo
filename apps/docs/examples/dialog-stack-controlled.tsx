@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   DialogStack,
@@ -11,9 +11,9 @@ import {
   DialogStackOverlay,
   DialogStackPrevious,
   DialogStackTitle,
-} from '@repo/dialog-stack';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { useState } from 'react';
+} from "@repo/dialog-stack";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { useState } from "react";
 
 const Example = () => {
   const [open, setOpen] = useState(false);

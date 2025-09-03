@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { Deck, DeckCards, DeckEmpty, DeckItem } from '@repo/deck';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Deck, DeckCards, DeckEmpty, DeckItem } from "@repo/deck";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const cards = [
-  { id: 1, title: 'Card 1', color: 'bg-red-500' },
-  { id: 2, title: 'Card 2', color: 'bg-blue-500' },
-  { id: 3, title: 'Card 3', color: 'bg-green-500' },
-  { id: 4, title: 'Card 4', color: 'bg-yellow-500' },
-  { id: 5, title: 'Card 5', color: 'bg-purple-500' },
+  { id: 1, title: "Card 1", color: "bg-red-500" },
+  { id: 2, title: "Card 2", color: "bg-blue-500" },
+  { id: 3, title: "Card 3", color: "bg-green-500" },
+  { id: 4, title: "Card 4", color: "bg-yellow-500" },
+  { id: 5, title: "Card 5", color: "bg-purple-500" },
 ];
 
 const Example = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animationDirection, setAnimationDirection] = useState<
-    'left' | 'right'
-  >('left');
+    "left" | "right"
+  >("left");
 
   const nextCardLeft = () => {
     if (currentIndex < cards.length) {
-      setAnimationDirection('left');
+      setAnimationDirection("left");
       // Small delay to ensure direction is set before index changes
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
@@ -30,7 +30,7 @@ const Example = () => {
 
   const nextCardRight = () => {
     if (currentIndex < cards.length) {
-      setAnimationDirection('right');
+      setAnimationDirection("right");
       // Small delay to ensure direction is set before index changes
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
@@ -64,7 +64,7 @@ const Example = () => {
         </div>
       </div>
 
-      <Deck className='mx-auto aspect-square w-40'>
+      <Deck className="mx-auto aspect-square w-40">
         <DeckCards
           animateOnIndexChange={true}
           className="aspect-[2/3]"

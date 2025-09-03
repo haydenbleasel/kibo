@@ -1,32 +1,32 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@repo/shadcn-ui/components/ui/tabs';
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import { BoxIcon, CodeIcon, EyeIcon } from 'lucide-react';
-import { PreviewCode } from './code';
-import { PreviewContent } from './content';
-import { PreviewRender } from './render';
-import { PreviewSource } from './source';
+} from "@repo/shadcn-ui/components/ui/tabs";
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import { BoxIcon, CodeIcon, EyeIcon } from "lucide-react";
+import { PreviewCode } from "./code";
+import { PreviewContent } from "./content";
+import { PreviewRender } from "./render";
+import { PreviewSource } from "./source";
 
 type PreviewProps = {
   path: string;
   className?: string;
-  type?: 'component' | 'block';
+  type?: "component" | "block";
 };
 
 export const Preview = async ({
   path,
   className,
-  type = 'component',
+  type = "component",
 }: PreviewProps) => {
   const code = await readFile(
-    join(process.cwd(), 'examples', `${path}.tsx`),
-    'utf-8'
+    join(process.cwd(), "examples", `${path}.tsx`),
+    "utf-8"
   );
 
   const Component = await import(`../../examples/${path}.tsx`).then(
@@ -34,24 +34,24 @@ export const Preview = async ({
   );
 
   const parsedCode = code
-    .replace(/@repo\/shadcn-ui\//g, '@/')
-    .replace(/@repo\//g, '@/components/ui/kibo-ui/');
+    .replace(/@repo\/shadcn-ui\//g, "@/")
+    .replace(/@repo\//g, "@/components/ui/kibo-ui/");
 
   const sourceComponentNames =
     parsedCode
       .match(/@\/components\/ui\/kibo-ui\/([^'"`]+)/g)
-      ?.map((match) => match.replace('@/components/ui/kibo-ui/', '')) || [];
+      ?.map((match) => match.replace("@/components/ui/kibo-ui/", "")) || [];
 
   const sourceComponents: { name: string; source: string }[] = [];
 
   for (const component of sourceComponentNames) {
-    const fileName = component.includes('/')
+    const fileName = component.includes("/")
       ? `${component}.tsx`
       : `${component}/index.tsx`;
 
     const source = await readFile(
-      join(process.cwd(), '..', '..', 'packages', fileName),
-      'utf-8'
+      join(process.cwd(), "..", "..", "packages", fileName),
+      "utf-8"
     );
 
     if (sourceComponents.some((s) => s.name === component)) {
@@ -64,9 +64,9 @@ export const Preview = async ({
   return (
     <div
       className={cn(
-        'size-full overflow-hidden rounded-lg border bg-background',
-        type === 'block' && 'h-[48rem] prose-code:border-none prose-code:p-0',
-        type === 'component' && 'not-prose h-[32rem]',
+        "size-full overflow-hidden rounded-lg border bg-background",
+        type === "block" && "h-[48rem] prose-code:border-none prose-code:p-0",
+        type === "component" && "not-prose h-[32rem]",
         className
       )}
     >
@@ -99,13 +99,13 @@ export const Preview = async ({
         </TabsContent>
         <TabsContent
           className={cn(
-            'not-fumadocs-codeblock size-full',
-            type === 'component' ? 'overflow-hidden' : 'overflow-auto'
+            "not-fumadocs-codeblock size-full",
+            type === "component" ? "overflow-hidden" : "overflow-auto"
           )}
           value="preview"
         >
           <PreviewContent type={type}>
-            {type === 'block' ? (
+            {type === "block" ? (
               <Component />
             ) : (
               <PreviewRender>

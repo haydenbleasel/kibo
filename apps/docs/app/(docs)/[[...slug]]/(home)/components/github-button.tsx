@@ -1,15 +1,15 @@
-import { SiGithub } from '@icons-pack/react-simple-icons';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { unstable_cache } from 'next/cache';
-import type { ReactElement } from 'react';
-import { octokit } from '../../../../../lib/octokit';
+import { SiGithub } from "@icons-pack/react-simple-icons";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { unstable_cache } from "next/cache";
+import type { ReactElement } from "react";
+import { octokit } from "../../../../../lib/octokit";
 
 const getGitHubData = unstable_cache(
   async () => {
     try {
       const { data } = await octokit.rest.repos.get({
-        owner: 'haydenbleasel',
-        repo: 'kibo',
+        owner: "haydenbleasel",
+        repo: "kibo",
       });
       return {
         stars: data.stargazers_count,
@@ -20,11 +20,11 @@ const getGitHubData = unstable_cache(
       console.error(error);
       return {
         stars: 0,
-        url: '',
+        url: "",
       };
     }
   },
-  ['github-stats'],
+  ["github-stats"],
   {
     revalidate: 3600, // Cache for 1 hour
   }

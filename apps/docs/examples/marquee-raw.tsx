@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import {
   Marquee,
   MarqueeContent,
   MarqueeFade,
   MarqueeItem,
-} from '@repo/marquee';
+} from "@repo/marquee";
 
 const Example = () => (
   <div className="flex size-full items-center justify-center bg-background">

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ImageZoom } from '@repo/image-zoom';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
+import { ImageZoom } from "@repo/image-zoom";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const Example = () => (
   <ImageZoom

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Pill, PillAvatar, PillAvatarGroup } from '@repo/pill';
+import { Pill, PillAvatar, PillAvatarGroup } from "@repo/pill";
 
 const Example = () => (
   <Pill>

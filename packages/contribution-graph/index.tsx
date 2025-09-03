@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { Day as WeekDay } from 'date-fns';
+import type { Day as WeekDay } from "date-fns";
 import {
   differenceInCalendarDays,
   eachDayOfInterval,
@@ -11,7 +11,7 @@ import {
   nextDay,
   parseISO,
   subWeeks,
-} from 'date-fns';
+} from "date-fns";
 import {
   type CSSProperties,
   createContext,
@@ -20,8 +20,8 @@ import {
   type ReactNode,
   useContext,
   useMemo,
-} from 'react';
-import { cn } from '@/lib/utils';
+} from "react";
+import { cn } from "@/lib/utils";
 
 export type Activity = {
   date: string;
@@ -47,27 +47,27 @@ type MonthLabel = {
 };
 
 const DEFAULT_MONTH_LABELS = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
 
 const DEFAULT_LABELS: Labels = {
   months: DEFAULT_MONTH_LABELS,
-  weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  totalCount: '{{count}} activities in {{year}}',
+  weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  totalCount: "{{count}} activities in {{year}}",
   legend: {
-    less: 'Less',
-    more: 'More',
+    less: "Less",
+    more: "More",
   },
 };
 
@@ -96,7 +96,7 @@ const useContributionGraph = () => {
 
   if (!context) {
     throw new Error(
-      'ContributionGraph components must be used within a ContributionGraph'
+      "ContributionGraph components must be used within a ContributionGraph"
     );
   }
 
@@ -109,14 +109,14 @@ const fillHoles = (activities: Activity[]): Activity[] => {
   }
 
   // Sort activities by date to ensure correct date range
-  const sortedActivities = [...activities].sort((a, b) => 
+  const sortedActivities = [...activities].sort((a, b) =>
     a.date.localeCompare(b.date)
   );
 
   const calendar = new Map<string, Activity>(
     activities.map((a) => [a.date, a])
   );
-  
+
   const firstActivity = sortedActivities[0] as Activity;
   const lastActivity = sortedActivities.at(-1);
 
@@ -128,7 +128,7 @@ const fillHoles = (activities: Activity[]): Activity[] => {
     start: parseISO(firstActivity.date),
     end: parseISO(lastActivity.date),
   }).map((day) => {
-    const date = formatISO(day, { representation: 'date' });
+    const date = formatISO(day, { representation: "date" });
 
     if (calendar.has(date)) {
       return calendar.get(date) as Activity;
@@ -191,8 +191,8 @@ const getMonthLabels = (
       const month = monthNames[getMonth(parseISO(firstActivity.date))];
 
       if (!month) {
-        const monthName = new Date(firstActivity.date).toLocaleString('en-US', {
-          month: 'short',
+        const monthName = new Date(firstActivity.date).toLocaleString("en-US", {
+          month: "short",
         });
         throw new Error(
           `Unexpected error: undefined month label for ${monthName}.`
@@ -264,7 +264,7 @@ export const ContributionGraph = ({
       : new Date().getFullYear();
 
   const totalCount =
-    typeof totalCountProp === 'number'
+    typeof totalCountProp === "number"
       ? totalCountProp
       : data.reduce((sum, activity) => sum + activity.count, 0);
 
@@ -295,7 +295,7 @@ export const ContributionGraph = ({
       }}
     >
       <div
-        className={cn('flex w-max max-w-full flex-col gap-2', className)}
+        className={cn("flex w-max max-w-full flex-col gap-2", className)}
         style={{ fontSize, ...style }}
         {...props}
       />
@@ -349,10 +349,17 @@ export const ContributionGraphBlock = ({
   );
 };
 
-export type ContributionGraphCalendarProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
+export type ContributionGraphCalendarProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "children"
+> & {
   hideMonthLabels?: boolean;
   className?: string;
-  children: (props: { activity: Activity; dayIndex: number; weekIndex: number }) => ReactNode;
+  children: (props: {
+    activity: Activity;
+    dayIndex: number;
+    weekIndex: number;
+  }) => ReactNode;
 };
 
 export const ContributionGraphCalendar = ({
@@ -371,7 +378,7 @@ export const ContributionGraphCalendar = ({
 
   return (
     <div
-      className={cn('max-w-full overflow-x-auto overflow-y-hidden', className)}
+      className={cn("max-w-full overflow-x-auto overflow-y-hidden", className)}
       {...props}
     >
       <svg
@@ -420,14 +427,17 @@ export const ContributionGraphFooter = ({
 }: ContributionGraphFooterProps) => (
   <div
     className={cn(
-      'flex flex-wrap gap-1 whitespace-nowrap sm:gap-x-4',
+      "flex flex-wrap gap-1 whitespace-nowrap sm:gap-x-4",
       className
     )}
     {...props}
   />
 );
 
-export type ContributionGraphTotalCountProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
+export type ContributionGraphTotalCountProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "children"
+> & {
   children?: (props: { totalCount: number; year: number }) => ReactNode;
 };
 
@@ -443,17 +453,20 @@ export const ContributionGraphTotalCount = ({
   }
 
   return (
-    <div className={cn('text-muted-foreground', className)} {...props}>
+    <div className={cn("text-muted-foreground", className)} {...props}>
       {labels.totalCount
         ? labels.totalCount
-          .replace('{{count}}', String(totalCount))
-          .replace('{{year}}', String(year))
+            .replace("{{count}}", String(totalCount))
+            .replace("{{year}}", String(year))
         : `${totalCount} activities in ${year}`}
     </div>
   );
 };
 
-export type ContributionGraphLegendProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
+export type ContributionGraphLegendProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "children"
+> & {
   children?: (props: { level: number }) => ReactNode;
 };
 
@@ -465,9 +478,12 @@ export const ContributionGraphLegend = ({
   const { labels, maxLevel, blockSize, blockRadius } = useContributionGraph();
 
   return (
-    <div className={cn('ml-auto flex items-center gap-[3px]', className)} {...props}>
+    <div
+      className={cn("ml-auto flex items-center gap-[3px]", className)}
+      {...props}
+    >
       <span className="mr-1 text-muted-foreground">
-        {labels.legend?.less || 'Less'}
+        {labels.legend?.less || "Less"}
       </span>
       {new Array(maxLevel + 1).fill(undefined).map((_, level) =>
         children ? (
@@ -477,7 +493,7 @@ export const ContributionGraphLegend = ({
             <title>{`${level} contributions`}</title>
             <rect
               className={cn(
-                'stroke-[1px] stroke-border',
+                "stroke-[1px] stroke-border",
                 'data-[level="0"]:fill-muted',
                 'data-[level="1"]:fill-muted-foreground/20',
                 'data-[level="2"]:fill-muted-foreground/40',
@@ -494,7 +510,7 @@ export const ContributionGraphLegend = ({
         )
       )}
       <span className="ml-1 text-muted-foreground">
-        {labels.legend?.more || 'More'}
+        {labels.legend?.more || "More"}
       </span>
     </div>
   );

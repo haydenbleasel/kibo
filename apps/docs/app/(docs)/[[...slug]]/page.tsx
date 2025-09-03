@@ -1,17 +1,17 @@
-import defaultMdxComponents from 'fumadocs-ui/mdx';
+import defaultMdxComponents from "fumadocs-ui/mdx";
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle,
-} from 'fumadocs-ui/page';
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { Installer } from '../../../components/installer';
-import { PoweredBy } from '../../../components/powered-by';
-import { Preview } from '../../../components/preview';
-import { source } from '../../../lib/source';
-import Home from './(home)';
+} from "fumadocs-ui/page";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Installer } from "../../../components/installer";
+import { PoweredBy } from "../../../components/powered-by";
+import { Preview } from "../../../components/preview";
+import { source } from "../../../lib/source";
+import Home from "./(home)";
 
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
@@ -34,7 +34,7 @@ const Page = async (props: PageProps) => {
   return (
     <DocsPage
       full={page.data.full}
-      tableOfContent={{ style: 'clerk' }}
+      tableOfContent={{ style: "clerk" }}
       toc={page.data.toc}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
@@ -63,9 +63,9 @@ export async function generateMetadata(props: {
 
   if (!params.slug) {
     return {
-      title: 'Kibo UI',
+      title: "Kibo UI",
       description:
-        'Kibo UI is a custom registry of composable, accessible and open source components designed for use with shadcn/ui.',
+        "Kibo UI is a custom registry of composable, accessible and open source components designed for use with shadcn/ui.",
     };
   }
 
@@ -79,10 +79,10 @@ export async function generateMetadata(props: {
     openGraph: {
       title: page.data.title,
       description: page.data.description,
-      type: 'website',
+      type: "website",
       images: [
         {
-          url: `/og?slug=${params.slug?.join('/') ?? ''}`,
+          url: `/og?slug=${params.slug?.join("/") ?? ""}`,
           width: 1200,
           height: 630,
         },

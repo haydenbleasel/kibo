@@ -6,31 +6,31 @@ import {
   ColorPickerHue,
   ColorPickerOutput,
   ColorPickerSelection,
-} from '@repo/color-picker';
-import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@repo/dropzone';
-import { ImageZoom } from '@repo/image-zoom';
+} from "@repo/color-picker";
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@repo/dropzone";
+import { ImageZoom } from "@repo/image-zoom";
 import {
   Marquee,
   MarqueeContent,
   MarqueeFade,
   MarqueeItem,
-} from '@repo/marquee';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import { ArrowRightIcon, icons, type LucideProps } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { type ComponentType, createElement } from 'react';
-import QrCodeExample from '../../../../../examples/qr-code';
-import { source } from '../../../../../lib/source';
-import { CodeBlockExample } from './code-block-example';
+} from "@repo/marquee";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import { ArrowRightIcon, icons, type LucideProps } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { type ComponentType, createElement } from "react";
+import QrCodeExample from "../../../../../examples/qr-code";
+import { source } from "../../../../../lib/source";
+import { CodeBlockExample } from "./code-block-example";
 
-const colorPicker = source.getPage(['components', 'color-picker']);
-const imageZoom = source.getPage(['components', 'image-zoom']);
-const qrCode = source.getPage(['components', 'qr-code']);
-const codeBlock = source.getPage(['components', 'code-block']);
-const dropzone = source.getPage(['components', 'dropzone']);
-const marquee = source.getPage(['components', 'marquee']);
+const colorPicker = source.getPage(["components", "color-picker"]);
+const imageZoom = source.getPage(["components", "image-zoom"]);
+const qrCode = source.getPage(["components", "qr-code"]);
+const codeBlock = source.getPage(["components", "code-block"]);
+const dropzone = source.getPage(["components", "dropzone"]);
+const marquee = source.getPage(["components", "marquee"]);
 
 const examples = [
   {
@@ -93,7 +93,7 @@ const examples = [
     description: dropzone?.data.description,
     component: () => (
       <Dropzone
-        accept={{ 'image/*': [] }}
+        accept={{ "image/*": [] }}
         className="aspect-square shadow-none"
         maxFiles={10}
         maxSize={1024 * 1024 * 10}
@@ -149,15 +149,15 @@ const ExampleCard = ({
   const Icon =
     icon && icon in icons
       ? (props: LucideProps) =>
-        createElement(icons[icon as keyof typeof icons], {
-          ...props,
-        })
+          createElement(icons[icon as keyof typeof icons], {
+            ...props,
+          })
       : null;
 
   return (
     <div
       className={cn(
-        'flex h-full flex-col gap-8 rounded-lg bg-secondary p-4 sm:p-8',
+        "flex h-full flex-col gap-8 rounded-lg bg-secondary p-4 sm:p-8",
         className
       )}
       key={name}

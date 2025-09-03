@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Tags,
@@ -10,29 +10,29 @@ import {
   TagsList,
   TagsTrigger,
   TagsValue,
-} from '@repo/tags';
-import { useState } from 'react';
+} from "@repo/tags";
+import { useState } from "react";
 
 const defaultTags = [
-  { id: 'react', label: 'React' },
-  { id: 'typescript', label: 'TypeScript' },
-  { id: 'javascript', label: 'JavaScript' },
-  { id: 'nextjs', label: 'Next.js' },
-  { id: 'vuejs', label: 'Vue.js' },
-  { id: 'angular', label: 'Angular' },
-  { id: 'svelte', label: 'Svelte' },
-  { id: 'nodejs', label: 'Node.js' },
-  { id: 'python', label: 'Python' },
-  { id: 'ruby', label: 'Ruby' },
-  { id: 'java', label: 'Java' },
-  { id: 'csharp', label: 'C#' },
-  { id: 'php', label: 'PHP' },
-  { id: 'go', label: 'Go' },
+  { id: "react", label: "React" },
+  { id: "typescript", label: "TypeScript" },
+  { id: "javascript", label: "JavaScript" },
+  { id: "nextjs", label: "Next.js" },
+  { id: "vuejs", label: "Vue.js" },
+  { id: "angular", label: "Angular" },
+  { id: "svelte", label: "Svelte" },
+  { id: "nodejs", label: "Node.js" },
+  { id: "python", label: "Python" },
+  { id: "ruby", label: "Ruby" },
+  { id: "java", label: "Java" },
+  { id: "csharp", label: "C#" },
+  { id: "php", label: "PHP" },
+  { id: "go", label: "Go" },
 ];
 
 const Example = () => {
   const [selected, setSelected] = useState<string[]>([]);
-  const [newTag, setNewTag] = useState<string>('');
+  const [newTag, setNewTag] = useState<string>("");
   const [tags, setTags] =
     useState<{ id: string; label: string }[]>(defaultTags);
 

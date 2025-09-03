@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@repo/dropzone';
-import { useState } from 'react';
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@repo/dropzone";
+import { useState } from "react";
 
 const Example = () => {
   const [files, setFiles] = useState<File[] | undefined>();
@@ -13,7 +13,7 @@ const Example = () => {
 
   return (
     <Dropzone
-      accept={{ 'image/*': [] }}
+      accept={{ "image/*": [] }}
       maxFiles={10}
       maxSize={1024 * 1024 * 10}
       minSize={1024}

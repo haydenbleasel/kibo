@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { BundledLanguage } from '@repo/code-block';
+import type { BundledLanguage } from "@repo/code-block";
 import {
   CodeBlock,
   CodeBlockBody,
@@ -15,12 +15,12 @@ import {
   CodeBlockSelectItem,
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
-} from '@repo/code-block';
+} from "@repo/code-block";
 
 const code = [
   {
-    language: 'js',
-    filename: 'utils.js',
+    language: "js",
+    filename: "utils.js",
     code: `function calculateDiscount(price, percentage) {
   const discount = price * (percentage / 100); // [!code focus]
   return price - discount;
@@ -31,8 +31,8 @@ const finalPrice = calculateDiscount(100, 20);
 console.log(finalPrice); // 80`,
   },
   {
-    language: 'ts',
-    filename: 'utils.ts',
+    language: "ts",
+    filename: "utils.ts",
     code: `function calculateDiscount(price: number, percentage: number): number {
   const discount = price * (percentage / 100); // [!code focus]
   return price - discount;
@@ -67,8 +67,8 @@ const Example = () => (
         </CodeBlockSelectContent>
       </CodeBlockSelect>
       <CodeBlockCopyButton
-        onCopy={() => console.log('Copied code to clipboard')}
-        onError={() => console.error('Failed to copy code to clipboard')}
+        onCopy={() => console.log("Copied code to clipboard")}
+        onError={() => console.error("Failed to copy code to clipboard")}
       />
     </CodeBlockHeader>
     <CodeBlockBody>

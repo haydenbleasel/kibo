@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { QRCode } from '@repo/qr-code';
-import type { ComponentProps } from 'react';
+import { QRCode } from "@repo/qr-code";
+import type { ComponentProps } from "react";
 
-const robustnessOptions: ComponentProps<typeof QRCode>['robustness'][] = [
-  'L',
-  'M',
-  'Q',
-  'H',
+const robustnessOptions: ComponentProps<typeof QRCode>["robustness"][] = [
+  "L",
+  "M",
+  "Q",
+  "H",
 ];
 
 const Example = () => (

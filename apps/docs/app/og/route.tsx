@@ -1,6 +1,6 @@
-import { ImageResponse } from 'next/og';
-import type { NextRequest } from 'next/server';
-import { source } from '../../lib/source';
+import { ImageResponse } from "next/og";
+import type { NextRequest } from "next/server";
+import { source } from "../../lib/source";
 
 const loadGoogleFont = async (font: string, text: string, weights: string) => {
   const url = `https://fonts.googleapis.com/css2?family=${font}:wght@${weights}&text=${encodeURIComponent(text)}`;
@@ -16,15 +16,15 @@ const loadGoogleFont = async (font: string, text: string, weights: string) => {
     }
   }
 
-  throw new Error('failed to load font data');
+  throw new Error("failed to load font data");
 };
 
 export const GET = async (request: NextRequest) => {
-  const slug = request.nextUrl.searchParams.get('slug');
-  const page = await source.getPage(slug ? slug.split('/') : []);
+  const slug = request.nextUrl.searchParams.get("slug");
+  const page = await source.getPage(slug ? slug.split("/") : []);
 
   if (!page) {
-    return new Response('Not found', { status: 404 });
+    return new Response("Not found", { status: 404 });
   }
 
   const { title, description } = page.data;
@@ -34,9 +34,9 @@ export const GET = async (request: NextRequest) => {
     <div tw="bg-[#1D4ED8] relative flex flex-col justify-between w-full h-full">
       <div
         style={{
-          backgroundSize: '48px 48px',
+          backgroundSize: "48px 48px",
           backgroundImage:
-            'linear-gradient(to right, #FFF 1px, transparent 1px), linear-gradient(to bottom, #FFF 1px, transparent 1px)',
+            "linear-gradient(to right, #FFF 1px, transparent 1px), linear-gradient(to bottom, #FFF 1px, transparent 1px)",
         }}
         tw="flex absolute left-0 top-0 w-full h-full opacity-10"
       />
@@ -66,12 +66,12 @@ export const GET = async (request: NextRequest) => {
         </svg>
       </div>
       <div
-        style={{ fontFamily: 'Geist' }}
+        style={{ fontFamily: "Geist" }}
         tw="flex flex-col bottom-0 left-0 right-0 relative z-10 p-12"
       >
         <p tw="text-lg m-0 text-white/80 font-semibold">Kibo UI</p>
         <h1
-          style={{ fontFamily: 'Geist Semibold' }}
+          style={{ fontFamily: "Geist Semibold" }}
           tw="my-4 text-6xl font-bold text-white"
         >
           {page.data.title}
@@ -84,14 +84,14 @@ export const GET = async (request: NextRequest) => {
       height: 630,
       fonts: [
         {
-          name: 'Geist Semibold',
-          data: await loadGoogleFont('Geist', text, '600'),
-          style: 'normal',
+          name: "Geist Semibold",
+          data: await loadGoogleFont("Geist", text, "600"),
+          style: "normal",
         },
         {
-          name: 'Geist',
-          data: await loadGoogleFont('Geist', text, '400'),
-          style: 'normal',
+          name: "Geist",
+          data: await loadGoogleFont("Geist", text, "400"),
+          style: "normal",
         },
       ],
     }

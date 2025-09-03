@@ -1,47 +1,47 @@
-'use client';
+"use client";
 
-import { Deck, DeckCards, DeckEmpty, DeckItem } from '@repo/deck';
-import { StarIcon } from 'lucide-react';
-import Image from 'next/image';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { Deck, DeckCards, DeckEmpty, DeckItem } from "@repo/deck";
+import { StarIcon } from "lucide-react";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 const products = [
   {
     id: 1,
-    name: 'Wireless Headphones',
-    price: '$199',
+    name: "Wireless Headphones",
+    price: "$199",
     rating: 4.5,
-    image: 'https://placehold.co/400x300/ff6b6b/fff?text=Headphones',
-    category: 'Electronics',
-    description: 'Premium wireless headphones with noise cancellation',
+    image: "https://placehold.co/400x300/ff6b6b/fff?text=Headphones",
+    category: "Electronics",
+    description: "Premium wireless headphones with noise cancellation",
   },
   {
     id: 2,
-    name: 'Smart Watch',
-    price: '$299',
+    name: "Smart Watch",
+    price: "$299",
     rating: 4.8,
-    image: 'https://placehold.co/400x300/4ecdc4/fff?text=Watch',
-    category: 'Wearables',
-    description: 'Feature-rich smartwatch with health tracking',
+    image: "https://placehold.co/400x300/4ecdc4/fff?text=Watch",
+    category: "Wearables",
+    description: "Feature-rich smartwatch with health tracking",
   },
   {
     id: 3,
-    name: 'Coffee Maker',
-    price: '$149',
+    name: "Coffee Maker",
+    price: "$149",
     rating: 4.3,
-    image: 'https://placehold.co/400x300/45b7d1/fff?text=Coffee',
-    category: 'Kitchen',
-    description: 'Programmable coffee maker with built-in grinder',
+    image: "https://placehold.co/400x300/45b7d1/fff?text=Coffee",
+    category: "Kitchen",
+    description: "Programmable coffee maker with built-in grinder",
   },
   {
     id: 4,
-    name: 'Laptop Stand',
-    price: '$79',
+    name: "Laptop Stand",
+    price: "$79",
     rating: 4.6,
-    image: 'https://placehold.co/400x300/96ceb4/fff?text=Stand',
-    category: 'Accessories',
-    description: 'Adjustable aluminum laptop stand for better ergonomics',
+    image: "https://placehold.co/400x300/96ceb4/fff?text=Stand",
+    category: "Accessories",
+    description: "Adjustable aluminum laptop stand for better ergonomics",
   },
 ];
 
@@ -79,10 +79,10 @@ const Example = () => (
                   {[...new Array(5)].map((_, i) => (
                     <StarIcon
                       className={cn(
-                        'h-4 w-4',
+                        "h-4 w-4",
                         i < Math.floor(product.rating)
-                          ? 'fill-yellow-400 text-yellow-400'
-                          : 'text-muted-foreground'
+                          ? "fill-yellow-400 text-yellow-400"
+                          : "text-muted-foreground"
                       )}
                       key={`star-${product.id}-${i}`}
                     />

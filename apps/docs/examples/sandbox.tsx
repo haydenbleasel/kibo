@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   SandboxCodeEditor,
@@ -11,13 +11,13 @@ import {
   SandboxTabsContent,
   SandboxTabsList,
   SandboxTabsTrigger,
-} from '@repo/sandbox';
+} from "@repo/sandbox";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from '@repo/shadcn-ui/components/ui/resizable';
-import { AppWindowIcon, CodeIcon, TerminalIcon } from 'lucide-react';
+} from "@repo/shadcn-ui/components/ui/resizable";
+import { AppWindowIcon, CodeIcon, TerminalIcon } from "lucide-react";
 
 const Example = () => (
   <SandboxProvider>

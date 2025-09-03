@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
 import {
   ImageCrop,
   ImageCropApply,
   ImageCropContent,
   ImageCropReset,
-} from '@repo/image-crop';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { Input } from '@repo/shadcn-ui/components/ui/input';
-import Image from 'next/image';
-import { type ChangeEvent, useState } from 'react';
+} from "@repo/image-crop";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { Input } from "@repo/shadcn-ui/components/ui/input";
+import Image from "next/image";
+import { type ChangeEvent, useState } from "react";
 
 const Example = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);

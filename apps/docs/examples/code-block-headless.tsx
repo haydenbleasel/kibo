@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import type { BundledLanguage } from '@repo/code-block';
+import type { BundledLanguage } from "@repo/code-block";
 import {
   CodeBlock,
   CodeBlockBody,
   CodeBlockContent,
   CodeBlockItem,
-} from '@repo/code-block';
+} from "@repo/code-block";
 
 const code = [
   {
-    language: 'jsx',
-    filename: 'MyComponent.jsx',
+    language: "jsx",
+    filename: "MyComponent.jsx",
     code: `function MyComponent(props) {
   return (
     <div>
@@ -22,8 +22,8 @@ const code = [
 }`,
   },
   {
-    language: 'tsx',
-    filename: 'MyComponent.tsx',
+    language: "tsx",
+    filename: "MyComponent.tsx",
     code: `function MyComponent(props: { name: string }) {
   return (
     <div>

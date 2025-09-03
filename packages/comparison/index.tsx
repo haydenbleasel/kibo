@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { GripVerticalIcon } from 'lucide-react';
+import { GripVerticalIcon } from "lucide-react";
 import {
   type MotionValue,
   motion,
   useMotionValue,
   useSpring,
   useTransform,
-} from 'motion/react';
+} from "motion/react";
 import {
   type ComponentProps,
   createContext,
@@ -17,14 +17,14 @@ import {
   type TouchEventHandler,
   useContext,
   useState,
-} from 'react';
-import { cn } from '@/lib/utils';
+} from "react";
+import { cn } from "@/lib/utils";
 
 type ImageComparisonContextType = {
   sliderPosition: number;
   setSliderPosition: (pos: number) => void;
   motionSliderPosition: MotionValue<number>;
-  mode: 'hover' | 'drag';
+  mode: "hover" | "drag";
 };
 
 const ImageComparisonContext = createContext<
@@ -36,7 +36,7 @@ const useImageComparisonContext = () => {
 
   if (!context) {
     throw new Error(
-      'useImageComparisonContext must be used within a ImageComparison'
+      "useImageComparisonContext must be used within a ImageComparison"
     );
   }
 
@@ -44,14 +44,14 @@ const useImageComparisonContext = () => {
 };
 
 export type ComparisonProps = HTMLAttributes<HTMLDivElement> & {
-  mode?: 'hover' | 'drag';
+  mode?: "hover" | "drag";
   onDragStart?: () => void;
   onDragEnd?: () => void;
 };
 
 export const Comparison = ({
   className,
-  mode = 'drag',
+  mode = "drag",
   onDragStart,
   onDragEnd,
   ...props
@@ -65,7 +65,7 @@ export const Comparison = ({
   const [sliderPosition, setSliderPosition] = useState(50);
 
   const handleDrag = (domRect: DOMRect, clientX: number) => {
-    if (!isDragging && mode === 'drag') {
+    if (!isDragging && mode === "drag") {
       return;
     }
 
@@ -97,14 +97,14 @@ export const Comparison = ({
   };
 
   const handleDragStart = () => {
-    if (mode === 'drag') {
+    if (mode === "drag") {
       setIsDragging(true);
       onDragStart?.();
     }
   };
 
   const handleDragEnd = () => {
-    if (mode === 'drag') {
+    if (mode === "drag") {
       setIsDragging(false);
       onDragEnd?.();
     }
@@ -120,7 +120,7 @@ export const Comparison = ({
         aria-valuemin={0}
         aria-valuenow={sliderPosition}
         className={cn(
-          'relative isolate w-full select-none overflow-hidden',
+          "relative isolate w-full select-none overflow-hidden",
           className
         )}
         onMouseDown={handleDragStart}
@@ -139,7 +139,7 @@ export const Comparison = ({
 };
 
 export type ComparisonItemProps = ComponentProps<typeof motion.div> & {
-  position: 'left' | 'right';
+  position: "left" | "right";
 };
 
 export const ComparisonItem = ({
@@ -160,10 +160,10 @@ export const ComparisonItem = ({
   return (
     <motion.div
       aria-hidden="true"
-      className={cn('absolute inset-0 h-full w-full object-cover', className)}
+      className={cn("absolute inset-0 h-full w-full object-cover", className)}
       role="img"
       style={{
-        clipPath: position === 'left' ? leftClipPath : rightClipPath,
+        clipPath: position === "left" ? leftClipPath : rightClipPath,
       }}
       {...props}
     />
@@ -186,8 +186,8 @@ export const ComparisonHandle = ({
     <motion.div
       aria-hidden="true"
       className={cn(
-        '-translate-x-1/2 absolute top-0 z-50 flex h-full w-10 items-center justify-center',
-        mode === 'drag' && 'cursor-grab active:cursor-grabbing',
+        "-translate-x-1/2 absolute top-0 z-50 flex h-full w-10 items-center justify-center",
+        mode === "drag" && "cursor-grab active:cursor-grabbing",
         className
       )}
       role="presentation"
@@ -197,7 +197,7 @@ export const ComparisonHandle = ({
       {children ?? (
         <>
           <div className="-translate-x-1/2 absolute left-1/2 h-full w-1 bg-background" />
-          {mode === 'drag' && (
+          {mode === "drag" && (
             <div className="z-50 flex items-center justify-center rounded-sm bg-background px-0.5 py-1">
               <GripVerticalIcon className="h-4 w-4 select-none text-muted-foreground" />
             </div>

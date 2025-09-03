@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   DialogStack,
@@ -12,8 +12,8 @@ import {
   DialogStackPrevious,
   DialogStackTitle,
   DialogStackTrigger,
-} from '@repo/dialog-stack';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
+} from "@repo/dialog-stack";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
 
 const Example = () => (
   <DialogStack clickable>

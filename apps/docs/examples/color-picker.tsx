@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ColorPicker,
@@ -8,7 +8,7 @@ import {
   ColorPickerHue,
   ColorPickerOutput,
   ColorPickerSelection,
-} from '@repo/color-picker';
+} from "@repo/color-picker";
 
 const Example = () => (
   <ColorPicker className="max-w-sm rounded-md border bg-background p-4 shadow-sm">

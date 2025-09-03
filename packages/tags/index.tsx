@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { XIcon } from 'lucide-react';
+import { XIcon } from "lucide-react";
 import {
   type ComponentProps,
   createContext,
@@ -10,9 +10,9 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+} from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -20,13 +20,13 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 type TagsContextType = {
   value?: string;
@@ -41,7 +41,7 @@ const TagsContext = createContext<TagsContextType>({
   value: undefined,
   setValue: undefined,
   open: false,
-  onOpenChange: () => { },
+  onOpenChange: () => {},
   width: undefined,
   setWidth: undefined,
 });
@@ -50,7 +50,7 @@ const useTagsContext = () => {
   const context = useContext(TagsContext);
 
   if (!context) {
-    throw new Error('useTagsContext must be used within a TagsProvider');
+    throw new Error("useTagsContext must be used within a TagsProvider");
   }
 
   return context;
@@ -101,7 +101,7 @@ export const Tags = ({
       value={{ value, setValue, open, onOpenChange, width, setWidth }}
     >
       <Popover onOpenChange={onOpenChange} open={open}>
-        <div className={cn('relative w-full', className)} ref={ref}>
+        <div className={cn("relative w-full", className)} ref={ref}>
           {children}
         </div>
       </Popover>
@@ -118,7 +118,7 @@ export const TagsTrigger = ({
 }: TagsTriggerProps) => (
   <PopoverTrigger asChild>
     <Button
-      className={cn('h-auto w-full justify-between p-2', className)}
+      className={cn("h-auto w-full justify-between p-2", className)}
       // biome-ignore lint/a11y/useSemanticElements: "Required"
       role="combobox"
       variant="outline"
@@ -149,7 +149,7 @@ export const TagsValue = ({
   };
 
   return (
-    <Badge className={cn('flex items-center gap-2', className)} {...props}>
+    <Badge className={cn("flex items-center gap-2", className)} {...props}>
       {children}
       {onRemove && (
         // biome-ignore lint/a11y/noStaticElementInteractions: "This is a clickable badge"
@@ -176,7 +176,7 @@ export const TagsContent = ({
 
   return (
     <PopoverContent
-      className={cn('p-0', className)}
+      className={cn("p-0", className)}
       style={{ width }}
       {...props}
     >
@@ -188,13 +188,13 @@ export const TagsContent = ({
 export type TagsInputProps = ComponentProps<typeof CommandInput>;
 
 export const TagsInput = ({ className, ...props }: TagsInputProps) => (
-  <CommandInput className={cn('h-9', className)} {...props} />
+  <CommandInput className={cn("h-9", className)} {...props} />
 );
 
 export type TagsListProps = ComponentProps<typeof CommandList>;
 
 export const TagsList = ({ className, ...props }: TagsListProps) => (
-  <CommandList className={cn('max-h-[200px]', className)} {...props} />
+  <CommandList className={cn("max-h-[200px]", className)} {...props} />
 );
 
 export type TagsEmptyProps = ComponentProps<typeof CommandEmpty>;
@@ -204,7 +204,7 @@ export const TagsEmpty = ({
   className,
   ...props
 }: TagsEmptyProps) => (
-  <CommandEmpty {...props}>{children ?? 'No tags found.'}</CommandEmpty>
+  <CommandEmpty {...props}>{children ?? "No tags found."}</CommandEmpty>
 );
 
 export type TagsGroupProps = ComponentProps<typeof CommandGroup>;
@@ -215,7 +215,7 @@ export type TagsItemProps = ComponentProps<typeof CommandItem>;
 
 export const TagsItem = ({ className, ...props }: TagsItemProps) => (
   <CommandItem
-    className={cn('cursor-pointer items-center justify-between', className)}
+    className={cn("cursor-pointer items-center justify-between", className)}
     {...props}
   />
 );

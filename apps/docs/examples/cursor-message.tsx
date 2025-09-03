@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Cursor, CursorBody, CursorMessage, CursorPointer } from '@repo/cursor';
+import { Cursor, CursorBody, CursorMessage, CursorPointer } from "@repo/cursor";
 
 const Example = () => (
   <Cursor color="#000000">

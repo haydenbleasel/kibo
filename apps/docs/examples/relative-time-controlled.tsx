@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   RelativeTime,
@@ -6,13 +6,13 @@ import {
   RelativeTimeZoneDate,
   RelativeTimeZoneDisplay,
   RelativeTimeZoneLabel,
-} from '@repo/relative-time';
-import { useEffect, useState } from 'react';
+} from "@repo/relative-time";
+import { useEffect, useState } from "react";
 
 const timezones = [
-  { label: 'EST', zone: 'America/New_York' },
-  { label: 'GMT', zone: 'Europe/London' },
-  { label: 'JST', zone: 'Asia/Tokyo' },
+  { label: "EST", zone: "America/New_York" },
+  { label: "GMT", zone: "Europe/London" },
+  { label: "JST", zone: "Asia/Tokyo" },
 ];
 
 const Example = () => {

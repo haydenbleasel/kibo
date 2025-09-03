@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Snippet,
@@ -7,29 +7,38 @@ import {
   SnippetTabsContent,
   SnippetTabsList,
   SnippetTabsTrigger,
-} from '@repo/snippet';
-import { track } from '@vercel/analytics/react';
-import Image from 'next/image';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import kibo from '../public/logomark.svg';
-import shadcn from '../public/shadcn.svg';
+} from "@repo/snippet";
+import { track } from "@vercel/analytics/react";
+import { InfoIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { toast } from "sonner";
+import kibo from "../public/logomark.svg";
+import shadcn from "../public/shadcn.svg";
 
 type InstallerProps = {
   packageName: string;
 };
 
 export const Installer = ({ packageName }: InstallerProps) => {
-  const [value, setValue] = useState('kibo-ui');
+  const [value, setValue] = useState("kibo-ui");
 
   const commands = {
-    'kibo-ui': {
+    "kibo-ui": {
+      label: "Kibo UI CLI",
       image: kibo,
       code: `npx kibo-ui@latest add ${packageName}`,
     },
+    namespace: {
+      label: "Namespace",
+      image: kibo,
+      code: `npx shadcn@beta add @kibo-ui/${packageName}`,
+    },
     shadcn: {
+      label: "shadcn CLI",
       image: shadcn,
-      code: `npx shadcn@latest add https://www.kibo-ui.com/registry/${packageName}.json`,
+      code: `npx shadcn@latest add https://www.kibo-ui.com/r/${packageName}.json`,
     },
   };
 
@@ -42,7 +51,7 @@ export const Installer = ({ packageName }: InstallerProps) => {
       <SnippetHeader>
         <SnippetTabsList>
           {Object.entries(commands).map(([key, command]) => (
-            <SnippetTabsTrigger key={key} value={key}>
+            <SnippetTabsTrigger className="basis-auto" key={key} value={key}>
               <Image
                 alt=""
                 className="dark:invert"
@@ -50,19 +59,24 @@ export const Installer = ({ packageName }: InstallerProps) => {
                 src={command.image}
                 width={14}
               />
-              {key}
+              {command.label}
+              {key === "namespace" && (
+                <Link href="/docs/namespace">
+                  <InfoIcon className="size-4 text-primary" />
+                </Link>
+              )}
             </SnippetTabsTrigger>
           ))}
         </SnippetTabsList>
         <SnippetCopyButton
           onCopy={() => {
-            toast.success('Copied to clipboard');
-            track('Copy installer code', {
+            toast.success("Copied to clipboard");
+            track("Copy installer code", {
               cli: value,
               package: packageName,
             });
           }}
-          onError={() => toast.error('Failed to copy to clipboard')}
+          onError={() => toast.error("Failed to copy to clipboard")}
           value={commands[value as keyof typeof commands].code}
         />
       </SnippetHeader>

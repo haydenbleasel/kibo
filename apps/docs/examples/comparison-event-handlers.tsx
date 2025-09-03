@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Comparison, ComparisonHandle, ComparisonItem } from '@repo/comparison';
-import Image from 'next/image';
+import { Comparison, ComparisonHandle, ComparisonItem } from "@repo/comparison";
+import Image from "next/image";
 
 const Example = () => (
   <Comparison
     className="aspect-video"
-    onDragEnd={() => console.log('drag end')}
-    onDragStart={() => console.log('drag start')}
+    onDragEnd={() => console.log("drag end")}
+    onDragStart={() => console.log("drag start")}
   >
     <ComparisonItem className="bg-red-500" position="left">
       <Image

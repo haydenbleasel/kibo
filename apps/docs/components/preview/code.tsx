@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
 import {
   type BundledLanguage,
   CodeBlock,
   CodeBlockBody,
   CodeBlockContent,
+  CodeBlockCopyButton,
   CodeBlockItem,
   type CodeBlockProps,
-} from '@repo/code-block';
+} from "@repo/code-block";
 
 type PreviewCodeProps = {
   code: string;
@@ -16,7 +17,7 @@ type PreviewCodeProps = {
 };
 
 export const PreviewCode = ({ code, language, filename }: PreviewCodeProps) => {
-  const data: CodeBlockProps['data'] = [
+  const data: CodeBlockProps["data"] = [
     {
       language,
       filename,
@@ -30,6 +31,9 @@ export const PreviewCode = ({ code, language, filename }: PreviewCodeProps) => {
       data={data}
       defaultValue={data[0].language}
     >
+      <div className="sticky top-0 z-1">
+        <CodeBlockCopyButton className="absolute top-1 right-1.5" />
+      </div>
       <CodeBlockBody>
         {(item) => (
           <CodeBlockItem key={item.language} value={item.language}>

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   TreeExpander,
@@ -9,7 +9,7 @@ import {
   TreeNodeTrigger,
   TreeProvider,
   TreeView,
-} from '@repo/tree';
+} from "@repo/tree";
 import {
   Database,
   Globe,
@@ -20,67 +20,88 @@ import {
   Table,
   User,
   Users,
-} from 'lucide-react';
+} from "lucide-react";
 
 export default function TreeCustomIconsExample() {
   return (
-    <TreeProvider defaultExpandedIds={['database', 'users-table', 'roles-table', 'api']}>
+    <TreeProvider
+      defaultExpandedIds={["database", "users-table", "roles-table", "api"]}
+    >
       <TreeView>
         <TreeNode nodeId="database">
           <TreeNodeTrigger>
             <TreeExpander hasChildren />
-            <TreeIcon icon={<Database className="h-4 w-4 text-blue-500" />} hasChildren />
+            <TreeIcon
+              hasChildren
+              icon={<Database className="h-4 w-4 text-blue-500" />}
+            />
             <TreeLabel>Database</TreeLabel>
           </TreeNodeTrigger>
           <TreeNodeContent hasChildren>
-            <TreeNode nodeId="users-table" level={1}>
+            <TreeNode level={1} nodeId="users-table">
               <TreeNodeTrigger>
                 <TreeExpander hasChildren />
-                <TreeIcon icon={<Table className="h-4 w-4 text-green-500" />} hasChildren />
+                <TreeIcon
+                  hasChildren
+                  icon={<Table className="h-4 w-4 text-green-500" />}
+                />
                 <TreeLabel>Users</TreeLabel>
               </TreeNodeTrigger>
               <TreeNodeContent hasChildren>
-                <TreeNode nodeId="id-field" level={2}>
+                <TreeNode level={2} nodeId="id-field">
                   <TreeNodeTrigger>
                     <TreeExpander />
-                    <TreeIcon icon={<Key className="h-4 w-4 text-yellow-500" />} />
+                    <TreeIcon
+                      icon={<Key className="h-4 w-4 text-yellow-500" />}
+                    />
                     <TreeLabel>id</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
-                <TreeNode nodeId="email-field" level={2}>
+                <TreeNode level={2} nodeId="email-field">
                   <TreeNodeTrigger>
                     <TreeExpander />
-                    <TreeIcon icon={<Globe className="h-4 w-4 text-purple-500" />} />
+                    <TreeIcon
+                      icon={<Globe className="h-4 w-4 text-purple-500" />}
+                    />
                     <TreeLabel>email</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
-                <TreeNode nodeId="password-field" level={2} isLast>
+                <TreeNode isLast level={2} nodeId="password-field">
                   <TreeNodeTrigger>
                     <TreeExpander />
-                    <TreeIcon icon={<Lock className="h-4 w-4 text-red-500" />} />
+                    <TreeIcon
+                      icon={<Lock className="h-4 w-4 text-red-500" />}
+                    />
                     <TreeLabel>password</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
               </TreeNodeContent>
             </TreeNode>
-            <TreeNode nodeId="roles-table" level={1} isLast>
+            <TreeNode isLast level={1} nodeId="roles-table">
               <TreeNodeTrigger>
                 <TreeExpander hasChildren />
-                <TreeIcon icon={<Table className="h-4 w-4 text-green-500" />} hasChildren />
+                <TreeIcon
+                  hasChildren
+                  icon={<Table className="h-4 w-4 text-green-500" />}
+                />
                 <TreeLabel>Roles</TreeLabel>
               </TreeNodeTrigger>
               <TreeNodeContent hasChildren>
-                <TreeNode nodeId="admin-role" level={2}>
+                <TreeNode level={2} nodeId="admin-role">
                   <TreeNodeTrigger>
                     <TreeExpander />
-                    <TreeIcon icon={<Shield className="h-4 w-4 text-orange-500" />} />
+                    <TreeIcon
+                      icon={<Shield className="h-4 w-4 text-orange-500" />}
+                    />
                     <TreeLabel>Admin</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
-                <TreeNode nodeId="user-role" level={2} isLast>
+                <TreeNode isLast level={2} nodeId="user-role">
                   <TreeNodeTrigger>
                     <TreeExpander />
-                    <TreeIcon icon={<User className="h-4 w-4 text-blue-400" />} />
+                    <TreeIcon
+                      icon={<User className="h-4 w-4 text-blue-400" />}
+                    />
                     <TreeLabel>User</TreeLabel>
                   </TreeNodeTrigger>
                 </TreeNode>
@@ -88,21 +109,24 @@ export default function TreeCustomIconsExample() {
             </TreeNode>
           </TreeNodeContent>
         </TreeNode>
-        <TreeNode nodeId="api" isLast>
+        <TreeNode isLast nodeId="api">
           <TreeNodeTrigger>
             <TreeExpander hasChildren />
-            <TreeIcon icon={<Server className="h-4 w-4 text-indigo-500" />} hasChildren />
+            <TreeIcon
+              hasChildren
+              icon={<Server className="h-4 w-4 text-indigo-500" />}
+            />
             <TreeLabel>API</TreeLabel>
           </TreeNodeTrigger>
           <TreeNodeContent hasChildren>
-            <TreeNode nodeId="auth-endpoint" level={1}>
+            <TreeNode level={1} nodeId="auth-endpoint">
               <TreeNodeTrigger>
                 <TreeExpander />
                 <TreeIcon icon={<Lock className="h-4 w-4 text-red-500" />} />
                 <TreeLabel>Authentication</TreeLabel>
               </TreeNodeTrigger>
             </TreeNode>
-            <TreeNode nodeId="users-endpoint" level={1} isLast>
+            <TreeNode isLast level={1} nodeId="users-endpoint">
               <TreeNodeTrigger>
                 <TreeExpander />
                 <TreeIcon icon={<Users className="h-4 w-4 text-blue-500" />} />

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Snippet,
@@ -7,20 +7,20 @@ import {
   SnippetTabsContent,
   SnippetTabsList,
   SnippetTabsTrigger,
-} from '@repo/snippet';
-import { BoxIcon, HeartIcon } from 'lucide-react';
-import { useState } from 'react';
+} from "@repo/snippet";
+import { BoxIcon, HeartIcon } from "lucide-react";
+import { useState } from "react";
 
 const commands = [
   {
-    label: 'kibo-ui',
+    label: "kibo-ui",
     icon: HeartIcon,
-    code: 'npx kibo-ui@latest add snippet',
+    code: "npx kibo-ui@latest add snippet",
   },
   {
-    label: 'shadcn',
+    label: "shadcn",
     icon: BoxIcon,
-    code: 'npx shadcn@latest add https://www.kibo-ui.com/registry/snippet.json',
+    code: "npx shadcn@latest add https://www.kibo-ui.com/r/snippet.json",
   },
 ];
 

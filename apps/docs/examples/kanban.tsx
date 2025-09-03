@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import {
   KanbanBoard,
   KanbanCard,
   KanbanCards,
   KanbanHeader,
   KanbanProvider,
-} from '@repo/kanban';
-import { useState } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+} from "@repo/kanban";
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const columns = [
-  { id: faker.string.uuid(), name: 'Planned', color: '#6B7280' },
-  { id: faker.string.uuid(), name: 'In Progress', color: '#F59E0B' },
-  { id: faker.string.uuid(), name: 'Done', color: '#10B981' },
+  { id: faker.string.uuid(), name: "Planned", color: "#6B7280" },
+  { id: faker.string.uuid(), name: "In Progress", color: "#F59E0B" },
+  { id: faker.string.uuid(), name: "Done", color: "#10B981" },
 ];
 
 const users = Array.from({ length: 4 })
@@ -38,15 +38,15 @@ const exampleFeatures = Array.from({ length: 20 })
     owner: faker.helpers.arrayElement(users),
   }));
 
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
 });
 
-const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
+const shortDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
 });
 
 const Example = () => {
@@ -93,7 +93,7 @@ const Example = () => {
                   )}
                 </div>
                 <p className="m-0 text-muted-foreground text-xs">
-                  {shortDateFormatter.format(feature.startAt)} -{' '}
+                  {shortDateFormatter.format(feature.startAt)} -{" "}
                   {dateFormatter.format(feature.endAt)}
                 </p>
               </KanbanCard>

@@ -1,11 +1,11 @@
-import { TextLoop } from '../../../../../components/motion-primitives/text-loop';
-import { source } from '../../../../../lib/source';
+import { TextLoop } from "../../../../../components/motion-primitives/text-loop";
+import { source } from "../../../../../lib/source";
 
 const components = source
   .getPages()
-  .filter((page) => page.slugs.at(0) === 'components')
+  .filter((page) => page.slugs.at(0) === "components")
   .map((page) => page.slugs.at(1))
-  .filter((slug) => !slug?.startsWith('ai-'))
+  .filter((slug) => !slug?.startsWith("ai-"))
   .filter(Boolean) as string[];
 
 const Terminal = () => (
@@ -17,7 +17,7 @@ const Terminal = () => (
         <div className="h-3 w-3 rounded-full bg-yellow-500" />
         <div className="h-3 w-3 rounded-full bg-green-500" />
       </div>
-      <div className='font-medium text-muted-foreground text-sm'>Terminal</div>
+      <div className="font-medium text-muted-foreground text-sm">Terminal</div>
       <div className="w-14" /> {/* Spacer for centering */}
     </div>
 

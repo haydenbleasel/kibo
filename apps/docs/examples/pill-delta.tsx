@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Pill, PillDelta } from '@repo/pill';
+import { Pill, PillDelta } from "@repo/pill";
 
 const Example = () => (
   <>

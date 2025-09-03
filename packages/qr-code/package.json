@@ -15,7 +15,7 @@
     "@types/culori": "^4.0.0",
     "@types/qrcode": "^1.5.5",
     "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
+    "@types/react-dom": "^19.1.9",
     "typescript": "^5.9.2"
   }
 }

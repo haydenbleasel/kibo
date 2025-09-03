@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Ticker,
@@ -6,10 +6,10 @@ import {
   TickerPrice,
   TickerPriceChange,
   TickerSymbol,
-} from '@repo/ticker';
-import Image from 'next/image';
+} from "@repo/ticker";
+import Image from "next/image";
 
-const ticker = 'GOOG';
+const ticker = "GOOG";
 
 const Example = () => (
   <Ticker>

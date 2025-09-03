@@ -6,7 +6,7 @@ import {
   CreditCardMagStripe,
   CreditCardName,
   CreditCardNumber,
-} from '@repo/credit-card';
+} from "@repo/credit-card";
 
 const Example = () => (
   <CreditCard>

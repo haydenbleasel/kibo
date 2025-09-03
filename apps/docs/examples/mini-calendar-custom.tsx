@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 import {
   MiniCalendar,
   MiniCalendarDay,
   MiniCalendarDays,
   MiniCalendarNavigation,
-} from '@repo/mini-calendar';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
+} from "@repo/mini-calendar";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 
 const Example = () => (
   <MiniCalendar className="bg-card p-4 shadow-lg">

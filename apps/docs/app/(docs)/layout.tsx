@@ -1,8 +1,8 @@
-import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
-import type { ReactNode } from 'react';
-import { ConditionalContainer } from '../../components/conditional-container';
-import { baseOptions } from '../../lib/layout.config';
-import { source } from '../../lib/source';
+import { DocsLayout } from "fumadocs-ui/layouts/notebook";
+import type { ReactNode } from "react";
+import { ConditionalContainer } from "../../components/conditional-container";
+import { baseOptions } from "../../lib/layout.config";
+import { source } from "../../lib/source";
 
 export default function DocsRootLayout({ children }: { children: ReactNode }) {
   return (
@@ -11,22 +11,22 @@ export default function DocsRootLayout({ children }: { children: ReactNode }) {
         {...baseOptions}
         nav={{
           ...baseOptions.nav,
-          mode: 'top',
+          mode: "top",
         }}
         sidebar={{
           collapsible: false,
           tabs: [
             {
-              title: 'Docs',
-              url: '/docs',
+              title: "Docs",
+              url: "/docs",
             },
             {
-              title: 'Components',
-              url: '/components',
+              title: "Components",
+              url: "/components",
             },
             {
-              title: 'Blocks',
-              url: '/blocks',
+              title: "Blocks",
+              url: "/blocks",
             },
           ],
         }}
@@ -36,4 +36,4 @@ export default function DocsRootLayout({ children }: { children: ReactNode }) {
       </DocsLayout>
     </ConditionalContainer>
   );
-} 
+}

@@ -1,6 +1,6 @@
-import { vercel } from '@t3-oss/env-core/presets-zod';
-import { createEnv } from '@t3-oss/env-nextjs';
-import { z } from 'zod';
+import { vercel } from "@t3-oss/env-core/presets-zod";
+import { createEnv } from "@t3-oss/env-nextjs";
+import { z } from "zod";
 
 export const env = createEnv({
   extends: [vercel()],
@@ -10,7 +10,7 @@ export const env = createEnv({
     BETTERSTACK_URL: z.string().min(1).url().optional(),
 
     // Added by Vercel
-    NEXT_RUNTIME: z.enum(['nodejs', 'edge']).optional(),
+    NEXT_RUNTIME: z.enum(["nodejs", "edge"]).optional(),
 
     // Added by Sentry Integration, Vercel Marketplace
     SENTRY_ORG: z.string().min(1).optional(),
@@ -20,7 +20,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GA_MEASUREMENT_ID: z
       .string()
       .min(1)
-      .startsWith('G-')
+      .startsWith("G-")
       .optional(),
     NEXT_PUBLIC_LOGO_DEV_TOKEN: z.string().min(1).optional(),
 

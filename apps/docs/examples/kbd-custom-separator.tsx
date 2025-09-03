@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Kbd, KbdKey } from '@repo/kbd';
-import { ChevronRightIcon } from 'lucide-react';
+import { Kbd, KbdKey } from "@repo/kbd";
+import { ChevronRightIcon } from "lucide-react";
 
 const Example = () => (
   <Kbd

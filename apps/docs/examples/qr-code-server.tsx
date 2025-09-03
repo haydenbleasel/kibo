@@ -1,4 +1,4 @@
-import { QRCode } from '@repo/qr-code/server';
+import { QRCode } from "@repo/qr-code/server";
 
 const Example = () => (
   <QRCode

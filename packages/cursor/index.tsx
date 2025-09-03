@@ -1,11 +1,11 @@
-import { Children, type HTMLAttributes, type SVGProps } from 'react';
-import { cn } from '@/lib/utils';
+import { Children, type HTMLAttributes, type SVGProps } from "react";
+import { cn } from "@/lib/utils";
 
 export type CursorProps = HTMLAttributes<HTMLSpanElement>;
 
 export const Cursor = ({ className, children, ...props }: CursorProps) => (
   <span
-    className={cn('pointer-events-none relative select-none', className)}
+    className={cn("pointer-events-none relative select-none", className)}
     {...props}
   >
     {children}
@@ -17,7 +17,7 @@ export type CursorPointerProps = SVGProps<SVGSVGElement>;
 export const CursorPointer = ({ className, ...props }: CursorPointerProps) => (
   <svg
     aria-hidden="true"
-    className={cn('size-3.5', className)}
+    className={cn("size-3.5", className)}
     fill="none"
     focusable="false"
     height="20"
@@ -42,9 +42,9 @@ export const CursorBody = ({
 }: CursorBodyProps) => (
   <span
     className={cn(
-      'relative ml-3.5 flex flex-col whitespace-nowrap rounded-xl py-1 pr-3 pl-2.5 text-xs',
-      Children.count(children) > 1 && 'rounded-tl [&>:first-child]:opacity-70',
-      'bg-secondary text-foreground',
+      "relative ml-3.5 flex flex-col whitespace-nowrap rounded-xl py-1 pr-3 pl-2.5 text-xs",
+      Children.count(children) > 1 && "rounded-tl [&>:first-child]:opacity-70",
+      "bg-secondary text-foreground",
       className
     )}
     {...props}

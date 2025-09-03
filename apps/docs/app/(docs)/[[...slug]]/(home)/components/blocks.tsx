@@ -1,18 +1,18 @@
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import type { LucideProps } from 'lucide-react';
-import { ArrowRightIcon, icons } from 'lucide-react';
-import Link from 'next/link';
-import type { ComponentType } from 'react';
-import { createElement } from 'react';
-import CollaborativeCanvasExample from '../../../../../examples/collaborative-canvas';
-import FormExample from '../../../../../examples/form';
-import RoadmapExample from '../../../../../examples/roadmap';
-import { source } from '../../../../../lib/source';
+import { Button } from "@repo/shadcn-ui/components/ui/button";
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import type { LucideProps } from "lucide-react";
+import { ArrowRightIcon, icons } from "lucide-react";
+import Link from "next/link";
+import type { ComponentType } from "react";
+import { createElement } from "react";
+import CollaborativeCanvasExample from "../../../../../examples/collaborative-canvas";
+import FormExample from "../../../../../examples/form";
+import RoadmapExample from "../../../../../examples/roadmap";
+import { source } from "../../../../../lib/source";
 
-const collaborativeCanvas = source.getPage(['blocks', 'collaborative-canvas']);
-const form = source.getPage(['blocks', 'form']);
-const roadmap = source.getPage(['blocks', 'roadmap']);
+const collaborativeCanvas = source.getPage(["blocks", "collaborative-canvas"]);
+const form = source.getPage(["blocks", "form"]);
+const roadmap = source.getPage(["blocks", "roadmap"]);
 
 const examples = [
   {
@@ -44,7 +44,7 @@ const examples = [
         <FormExample />
       </div>
     ),
-    className: 'lg:col-span-2',
+    className: "lg:col-span-2",
   },
 ];
 
@@ -64,15 +64,15 @@ const ExampleCard = ({
   const Icon =
     icon && icon in icons
       ? (props: LucideProps) =>
-        createElement(icons[icon as keyof typeof icons], {
-          ...props,
-        })
+          createElement(icons[icon as keyof typeof icons], {
+            ...props,
+          })
       : null;
 
   return (
     <div
       className={cn(
-        'flex h-full flex-col gap-8 rounded-lg bg-secondary p-4 sm:p-8',
+        "flex h-full flex-col gap-8 rounded-lg bg-secondary p-4 sm:p-8",
         className
       )}
       key={name}

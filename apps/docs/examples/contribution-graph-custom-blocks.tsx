@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ContributionGraph,
@@ -7,8 +7,8 @@ import {
   ContributionGraphFooter,
   ContributionGraphLegend,
   ContributionGraphTotalCount,
-} from '@repo/contribution-graph';
-import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from 'date-fns';
+} from "@repo/contribution-graph";
+import { eachDayOfInterval, endOfYear, formatISO, startOfYear } from "date-fns";
 
 const maxCount = 20;
 const maxLevel = 4;
@@ -26,7 +26,7 @@ const data = days.map((date) => {
   const level = Math.ceil((count / maxCount) * maxLevel);
 
   return {
-    date: formatISO(date, { representation: 'date' }),
+    date: formatISO(date, { representation: "date" }),
     count,
     level,
   };
@@ -40,14 +40,14 @@ const Example = () => (
           activity={activity}
           className={
             activity.level > 3
-              ? 'animate-pulse stroke-2 stroke-emerald-500 dark:stroke-emerald-400'
+              ? "animate-pulse stroke-2 stroke-emerald-500 dark:stroke-emerald-400"
               : activity.level === 0
-                ? 'opacity-50'
-                : ''
+                ? "opacity-50"
+                : ""
           }
           dayIndex={dayIndex}
           style={{
-            filter: activity.level > 2 ? 'brightness(1.2)' : undefined,
+            filter: activity.level > 2 ? "brightness(1.2)" : undefined,
           }}
           weekIndex={weekIndex}
         />

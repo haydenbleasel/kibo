@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import {
   CalendarBody,
   CalendarDate,
@@ -11,7 +11,7 @@ import {
   CalendarMonthPicker,
   CalendarProvider,
   CalendarYearPicker,
-} from '@repo/calendar';
+} from "@repo/calendar";
 import {
   GanttCreateMarkerTrigger,
   GanttFeatureItem,
@@ -25,14 +25,14 @@ import {
   GanttSidebarItem,
   GanttTimeline,
   GanttToday,
-} from '@repo/gantt';
+} from "@repo/gantt";
 import {
   KanbanBoard,
   KanbanCard,
   KanbanCards,
   KanbanHeader,
   KanbanProvider,
-} from '@repo/kanban';
+} from "@repo/kanban";
 import {
   type DragEndEvent,
   ListGroup,
@@ -40,8 +40,8 @@ import {
   ListItem,
   ListItems,
   ListProvider,
-} from '@repo/list';
-import type { ColumnDef } from '@repo/table';
+} from "@repo/list";
+import type { ColumnDef } from "@repo/table";
 import {
   TableBody,
   TableCell,
@@ -51,8 +51,8 @@ import {
   TableHeaderGroup,
   TableProvider,
   TableRow,
-} from '@repo/table';
-import groupBy from 'lodash.groupby';
+} from "@repo/table";
+import groupBy from "lodash.groupby";
 import {
   CalendarIcon,
   ChevronRightIcon,
@@ -63,23 +63,23 @@ import {
   ListIcon,
   TableIcon,
   TrashIcon,
-} from 'lucide-react';
-import { useState } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+} from "lucide-react";
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@/components/ui/context-menu';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+} from "@/components/ui/context-menu";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const statuses = [
-  { id: faker.string.uuid(), name: 'Planned', color: '#6B7280' },
-  { id: faker.string.uuid(), name: 'In Progress', color: '#F59E0B' },
-  { id: faker.string.uuid(), name: 'Done', color: '#10B981' },
+  { id: faker.string.uuid(), name: "Planned", color: "#6B7280" },
+  { id: faker.string.uuid(), name: "In Progress", color: "#F59E0B" },
+  { id: faker.string.uuid(), name: "Done", color: "#10B981" },
 ];
 
 const users = Array.from({ length: 4 })
@@ -140,18 +140,18 @@ const exampleMarkers = Array.from({ length: 6 })
     date: faker.date.past({ years: 0.5, refDate: new Date() }),
     label: capitalize(faker.company.buzzPhrase()),
     className: faker.helpers.arrayElement([
-      'bg-blue-100 text-blue-900',
-      'bg-green-100 text-green-900',
-      'bg-purple-100 text-purple-900',
-      'bg-red-100 text-red-900',
-      'bg-orange-100 text-orange-900',
-      'bg-teal-100 text-teal-900',
+      "bg-blue-100 text-blue-900",
+      "bg-green-100 text-green-900",
+      "bg-purple-100 text-purple-900",
+      "bg-red-100 text-red-900",
+      "bg-orange-100 text-orange-900",
+      "bg-teal-100 text-teal-900",
     ]),
   }));
 
 const GanttView = () => {
   const [features, setFeatures] = useState(exampleFeatures);
-  const groupedFeatures = groupBy(features, 'group.name');
+  const groupedFeatures = groupBy(features, "group.name");
 
   const sortedGroupedFeatures = Object.fromEntries(
     Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
@@ -379,15 +379,15 @@ const ListView = () => {
   );
 };
 
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
 });
 
-const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
+const shortDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
 });
 
 const KanbanView = () => {
@@ -459,7 +459,7 @@ const KanbanView = () => {
                   )}
                 </div>
                 <p className="m-0 text-muted-foreground text-xs">
-                  {shortDateFormatter.format(feature.startAt)} -{' '}
+                  {shortDateFormatter.format(feature.startAt)} -{" "}
                   {dateFormatter.format(feature.endAt)}
                 </p>
               </KanbanCard>
@@ -474,7 +474,7 @@ const KanbanView = () => {
 const TableView = () => {
   const columns: ColumnDef<(typeof exampleFeatures)[number]>[] = [
     {
-      accessorKey: 'name',
+      accessorKey: "name",
       header: ({ column }) => (
         <TableColumnHeader column={column} title="Name" />
       ),
@@ -507,27 +507,27 @@ const TableView = () => {
       ),
     },
     {
-      accessorKey: 'startAt',
+      accessorKey: "startAt",
       header: ({ column }) => (
         <TableColumnHeader column={column} title="Start At" />
       ),
       cell: ({ row }) =>
-        new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'medium',
+        new Intl.DateTimeFormat("en-US", {
+          dateStyle: "medium",
         }).format(row.original.startAt),
     },
     {
-      accessorKey: 'endAt',
+      accessorKey: "endAt",
       header: ({ column }) => (
         <TableColumnHeader column={column} title="End At" />
       ),
       cell: ({ row }) =>
-        new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'medium',
+        new Intl.DateTimeFormat("en-US", {
+          dateStyle: "medium",
         }).format(row.original.endAt),
     },
     {
-      id: 'release',
+      id: "release",
       accessorFn: (row) => row.release.id,
       header: ({ column }) => (
         <TableColumnHeader column={column} title="Release" />
@@ -561,32 +561,32 @@ const TableView = () => {
 const Example = () => {
   const views = [
     {
-      id: 'gantt',
-      label: 'Gantt',
+      id: "gantt",
+      label: "Gantt",
       icon: GanttChartSquareIcon,
       component: GanttView,
     },
     {
-      id: 'calendar',
-      label: 'Calendar',
+      id: "calendar",
+      label: "Calendar",
       icon: CalendarIcon,
       component: CalendarView,
     },
     {
-      id: 'list',
-      label: 'List',
+      id: "list",
+      label: "List",
       icon: ListIcon,
       component: ListView,
     },
     {
-      id: 'kanban',
-      label: 'Kanban',
+      id: "kanban",
+      label: "Kanban",
       icon: KanbanSquareIcon,
       component: KanbanView,
     },
     {
-      id: 'table',
-      label: 'Table',
+      id: "table",
+      label: "Table",
       icon: TableIcon,
       component: TableView,
     },

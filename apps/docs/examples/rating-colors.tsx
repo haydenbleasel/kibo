@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Rating, RatingButton } from '@repo/rating';
+import { Rating, RatingButton } from "@repo/rating";
 
 const Example = () => (
   <Rating defaultValue={3}>

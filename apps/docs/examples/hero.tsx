@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   SiApple,
@@ -8,19 +8,19 @@ import {
   SiInstagram,
   SiX,
   SiYoutube,
-} from '@icons-pack/react-simple-icons';
+} from "@icons-pack/react-simple-icons";
 import {
   Announcement,
   AnnouncementTag,
   AnnouncementTitle,
-} from '@repo/announcement';
+} from "@repo/announcement";
 import {
   Marquee,
   MarqueeContent,
   MarqueeFade,
   MarqueeItem,
-} from '@repo/marquee';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
+} from "@repo/marquee";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
 import {
   VideoPlayer,
   VideoPlayerContent,
@@ -32,44 +32,44 @@ import {
   VideoPlayerTimeDisplay,
   VideoPlayerTimeRange,
   VideoPlayerVolumeRange,
-} from '@repo/video-player';
-import Link from 'next/link';
+} from "@repo/video-player";
+import Link from "next/link";
 
 const logos = [
   {
-    name: 'GitHub',
+    name: "GitHub",
     icon: SiGithub,
-    url: 'https://github.com',
+    url: "https://github.com",
   },
   {
-    name: 'Facebook',
+    name: "Facebook",
     icon: SiFacebook,
-    url: 'https://facebook.com',
+    url: "https://facebook.com",
   },
   {
-    name: 'Google',
+    name: "Google",
     icon: SiGoogle,
-    url: 'https://google.com',
+    url: "https://google.com",
   },
   {
-    name: 'X',
+    name: "X",
     icon: SiX,
-    url: 'https://x.com',
+    url: "https://x.com",
   },
   {
-    name: 'Apple',
+    name: "Apple",
     icon: SiApple,
-    url: 'https://apple.com',
+    url: "https://apple.com",
   },
   {
-    name: 'Instagram',
+    name: "Instagram",
     icon: SiInstagram,
-    url: 'https://instagram.com',
+    url: "https://instagram.com",
   },
   {
-    name: 'YouTube',
+    name: "YouTube",
     icon: SiYoutube,
-    url: 'https://youtube.com',
+    url: "https://youtube.com",
   },
 ];
 

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { formatHex, oklch } from 'culori';
-import QR from 'qrcode';
-import { type HTMLAttributes, useEffect, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { formatHex, oklch } from "culori";
+import QR from "qrcode";
+import { type HTMLAttributes, useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export type QRCodeProps = HTMLAttributes<HTMLDivElement> & {
   data: string;
   foreground?: string;
   background?: string;
-  robustness?: 'L' | 'M' | 'Q' | 'H';
+  robustness?: "L" | "M" | "Q" | "H";
 };
 
 const oklchRegex = /oklch\(([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\)/;
@@ -32,7 +32,7 @@ export const QRCode = ({
   data,
   foreground,
   background,
-  robustness = 'M',
+  robustness = "M",
   className,
   ...props
 }: QRCodeProps) => {
@@ -43,9 +43,9 @@ export const QRCode = ({
       try {
         const styles = getComputedStyle(document.documentElement);
         const foregroundColor =
-          foreground ?? styles.getPropertyValue('--foreground');
+          foreground ?? styles.getPropertyValue("--foreground");
         const backgroundColor =
-          background ?? styles.getPropertyValue('--background');
+          background ?? styles.getPropertyValue("--background");
 
         const foregroundOklch = getOklch(
           foregroundColor,
@@ -54,10 +54,10 @@ export const QRCode = ({
         const backgroundOklch = getOklch(backgroundColor, [0.985, 0, 0]);
 
         const newSvg = await QR.toString(data, {
-          type: 'svg',
+          type: "svg",
           color: {
-            dark: formatHex(oklch({ mode: 'oklch', ...foregroundOklch })),
-            light: formatHex(oklch({ mode: 'oklch', ...backgroundOklch })),
+            dark: formatHex(oklch({ mode: "oklch", ...foregroundOklch })),
+            light: formatHex(oklch({ mode: "oklch", ...backgroundOklch })),
           },
           width: 200,
           errorCorrectionLevel: robustness,
@@ -79,7 +79,7 @@ export const QRCode = ({
 
   return (
     <div
-      className={cn('size-full', '[&_svg]:size-full', className)}
+      className={cn("size-full", "[&_svg]:size-full", className)}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: "Required for SVG"
       dangerouslySetInnerHTML={{ __html: svg }}
       {...props}

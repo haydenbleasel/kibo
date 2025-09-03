@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { BundledLanguage } from '@repo/code-block';
+import type { BundledLanguage } from "@repo/code-block";
 import {
   CodeBlock,
   CodeBlockBody,
@@ -15,12 +15,12 @@ import {
   CodeBlockSelectItem,
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
-} from '@repo/code-block';
+} from "@repo/code-block";
 
 const code = [
   {
-    language: 'jsx',
-    filename: 'MyComponent.jsx',
+    language: "jsx",
+    filename: "MyComponent.jsx",
     code: `function MyComponent(props) {
   return (
     <div>
@@ -31,8 +31,8 @@ const code = [
 }`,
   },
   {
-    language: 'tsx',
-    filename: 'MyComponent.tsx',
+    language: "tsx",
+    filename: "MyComponent.tsx",
     code: `function MyComponent(props: { name: string }) {
   return (
     <div>
@@ -67,8 +67,8 @@ const Example = () => (
         </CodeBlockSelectContent>
       </CodeBlockSelect>
       <CodeBlockCopyButton
-        onCopy={() => console.log('Copied code to clipboard')}
-        onError={() => console.error('Failed to copy code to clipboard')}
+        onCopy={() => console.log("Copied code to clipboard")}
+        onError={() => console.error("Failed to copy code to clipboard")}
       />
     </CodeBlockHeader>
     <CodeBlockBody>

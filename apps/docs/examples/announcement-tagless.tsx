@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Announcement, AnnouncementTitle } from '@repo/announcement';
-import { ArrowUpRightIcon } from 'lucide-react';
+import { Announcement, AnnouncementTitle } from "@repo/announcement";
+import { ArrowUpRightIcon } from "lucide-react";
 
 const Example = () => (
   <Announcement>
