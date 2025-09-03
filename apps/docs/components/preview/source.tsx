@@ -35,7 +35,10 @@ export const PreviewSource = ({ source }: PreviewSourceProps) => (
             <span>{name}</span>
           </div>
         </AccordionTrigger>
-        <AccordionContent className='overflow-visible' style={{ overflow: 'visible' }}>
+        <AccordionContent
+          className="overflow-visible"
+          style={{ overflow: "visible" }}
+        >
           <CodeBlock
             className="overflow-visible rounded-none border-none"
             data={[
@@ -46,7 +49,7 @@ export const PreviewSource = ({ source }: PreviewSourceProps) => (
               },
             ]}
             defaultValue="tsx"
-            >
+          >
             <div className="sticky top-0 z-1">
               <CodeBlockCopyButton className="absolute top-1 right-1.5" />
             </div>
