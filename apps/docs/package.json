@@ -65,7 +65,7 @@
     "fumadocs-core": "15.3.3",
     "fumadocs-mdx": "11.6.7",
     "fumadocs-typescript": "^4.0.4",
-    "fumadocs-ui": "15.3.3",
+    "fumadocs-ui": "15.7.8",
     "import-in-the-middle": "^1.14.2",
     "lodash.groupby": "^4.6.0",
     "lucide-react": "^0.540.0",
