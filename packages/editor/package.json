@@ -15,7 +15,7 @@
     "@tiptap/extension-text-style": "^3.3.1",
     "@tiptap/extension-typography": "^3.3.1",
     "@tiptap/extensions": "^3.3.1",
-    "@tiptap/pm": "^3.3.1",
+    "@tiptap/pm": "^3.4.2",
     "@tiptap/react": "^3.3.1",
     "@tiptap/starter-kit": "^3.3.1",
     "@tiptap/suggestion": "^3.3.1",
