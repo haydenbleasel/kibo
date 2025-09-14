@@ -122,7 +122,7 @@ export const getPackage = async (packageName: string) => {
             if (!css[layerName][selector]) {
               css[layerName][selector] = {};
             }
-            css[layerName][selector][mediaQuery] = JSON.stringify(mediaObj);
+            css[layerName][selector][mediaQuery] = mediaObj;
           }
         });
       });
