@@ -35,7 +35,10 @@ export const Preview = async ({
 
   const parsedCode = code
     .replace(/@repo\/shadcn-ui\//g, "@/")
-    .replace(/@repo\//g, "@/components/ui/kibo-ui/");
+    .replace(/@repo\//g, "@/components/ui/kibo-ui/")
+
+    // Remove typography import
+    .replace(/^import\s+["']@\/components\/ui\/kibo-ui\/typography["'];?\n?/gm, "");
 
   const sourceComponentNames =
     parsedCode
@@ -49,16 +52,20 @@ export const Preview = async ({
       ? `${component}.tsx`
       : `${component}/index.tsx`;
 
-    const source = await readFile(
-      join(process.cwd(), "..", "..", "packages", fileName),
-      "utf-8"
-    );
+    try {
+      const source = await readFile(
+        join(process.cwd(), "..", "..", "packages", fileName),
+        "utf-8"
+      );
 
-    if (sourceComponents.some((s) => s.name === component)) {
-      continue;
+      if (sourceComponents.some((s) => s.name === component)) {
+        continue;
+      }
+
+      sourceComponents.push({ name: component, source });
+    } catch {
+      // skip packages that fail
     }
-
-    sourceComponents.push({ name: component, source });
   }
 
   return (
@@ -72,10 +79,12 @@ export const Preview = async ({
     >
       <Tabs className="size-full gap-0" defaultValue="preview">
         <TabsList className="w-full rounded-none border-b">
-          <TabsTrigger value="source">
-            <BoxIcon className="text-muted-foreground" size={16} />
-            Source
-          </TabsTrigger>
+          {sourceComponents.length > 0 && (
+            <TabsTrigger value="source">
+              <BoxIcon className="text-muted-foreground" size={16} />
+              Source
+            </TabsTrigger>
+          )}
           <TabsTrigger value="code">
             <CodeIcon className="text-muted-foreground" size={16} />
             Code
@@ -85,12 +94,14 @@ export const Preview = async ({
             Preview
           </TabsTrigger>
         </TabsList>
-        <TabsContent
-          className="not-prose size-full overflow-y-auto bg-background"
-          value="source"
-        >
-          <PreviewSource source={sourceComponents} />
-        </TabsContent>
+        {sourceComponents.length > 0 && (
+          <TabsContent
+            className="not-prose size-full overflow-y-auto bg-background"
+            value="source"
+          >
+            <PreviewSource source={sourceComponents} />
+          </TabsContent>
+        )}
         <TabsContent
           className="size-full overflow-y-auto bg-background"
           value="code"

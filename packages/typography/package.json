@@ -3,6 +3,9 @@
   "description": "A typography component designed to display text with a consistent style.",
   "version": "0.0.0",
   "private": true,
+  "exports": {
+    ".": "./styles.css"
+  },
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
     "react": "^19.1.1",
