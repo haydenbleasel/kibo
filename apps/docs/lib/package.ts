@@ -1,8 +1,8 @@
 import { promises as fs, readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import postcss from 'postcss';
-import postcssNested from 'postcss-nested';
+import postcss from "postcss";
+import postcssNested from "postcss-nested";
 
 export type RegistryItemSchema = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json";
@@ -129,7 +129,7 @@ export const getPackage = async (packageName: string) => {
     registryDependencies.push(`https://www.kibo-ui.com/r/${pkg}.json`);
   }
 
-  let css: RegistryItemSchema["css"] = {};
+  const css: RegistryItemSchema["css"] = {};
 
   for (const file of cssFiles) {
     const contents = await fs.readFile(join(packageDir, file.name), "utf-8");
@@ -142,7 +142,7 @@ export const getPackage = async (packageName: string) => {
     // Parse the processed CSS and convert to JSON structure
     const ast = postcss.parse(processed.css);
 
-    ast.walkAtRules('layer', (atRule) => {
+    ast.walkAtRules("layer", (atRule) => {
       const layerName = `@layer ${atRule.params}`;
       css[layerName] = {};
 
@@ -155,7 +155,7 @@ export const getPackage = async (packageName: string) => {
         });
 
         // Handle media queries within rules
-        rule.walkAtRules('media', (mediaRule) => {
+        rule.walkAtRules("media", (mediaRule) => {
           const mediaQuery = `@media ${mediaRule.params}`;
           const mediaObj: Record<string, string> = {};
 
@@ -175,10 +175,16 @@ export const getPackage = async (packageName: string) => {
     });
   }
 
+  let type: RegistryItemSchema["type"] = "registry:ui";
+
+  if (!Object.keys(files).length && Object.keys(css).length) {
+    type = "registry:style";
+  }
+
   const response: RegistryItemSchema = {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name: packageName,
-    type: "registry:ui",
+    type,
     title: packageName,
     description: packageJson.description,
     author: "Hayden Bleasel <hello@haydenbleasel.com>",
