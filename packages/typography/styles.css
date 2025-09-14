@@ -1,25 +1,28 @@
 @layer base {
-  .prose {
+  .typography {
     max-width: 65ch;
     color: var(--color-foreground);
 
-    & h1:not(.not-prose h1) {
+    & h1:not(.not-typography h1) {
       scroll-margin: calc(var(--spacing) * 20);
       font-size: var(--text-4xl);
-      font-weight: var(--font-extrabold);
+      line-height: var(--text-4xl--line-height);
+      font-weight: 800;
       letter-spacing: var(--tracking-tight);
       
       @media (min-width: 1024px) {
         font-size: var(--text-5xl);
+        line-height: var(--text-5xl--line-height);
       }
     }
 
-    & h2:not(.not-prose h2) {
+    & h2:not(.not-typography h2) {
       scroll-margin: calc(var(--spacing) * 20);
       border-bottom: 1px solid var(--color-border);
       padding-bottom: calc(var(--spacing) * 2);
       font-size: var(--text-3xl);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-3xl--line-height);
+      font-weight: 600;
       letter-spacing: var(--tracking-tight);
       margin-top: calc(var(--spacing) * 12);
 
@@ -28,10 +31,11 @@
       }
     }
 
-    & h3:not(.not-prose h3) {
+    & h3:not(.not-typography h3) {
       scroll-margin: calc(var(--spacing) * 20);
       font-size: var(--text-2xl);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-2xl--line-height);
+      font-weight: 600;
       letter-spacing: var(--tracking-tight);
       margin-top: calc(var(--spacing) * 12);
 
@@ -40,10 +44,11 @@
       }
     }
 
-    & h4:not(.not-prose h4) {
+    & h4:not(.not-typography h4) {
       scroll-margin: calc(var(--spacing) * 20);
       font-size: var(--text-xl);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-xl--line-height);
+      font-weight: 600;
       letter-spacing: var(--tracking-tight);
       margin-top: calc(var(--spacing) * 12);
 
@@ -52,10 +57,11 @@
       }
     }
 
-    & h5:not(.not-prose h5) {
+    & h5:not(.not-typography h5) {
       scroll-margin: calc(var(--spacing) * 20);
       font-size: var(--text-lg);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-lg--line-height);
+      font-weight: 600;
       letter-spacing: var(--tracking-tight);
       margin-top: calc(var(--spacing) * 12);
 
@@ -64,10 +70,11 @@
       }
     }
 
-    & h6:not(.not-prose h6) {
+    & h6:not(.not-typography h6) {
       scroll-margin: calc(var(--spacing) * 20);
       font-size: var(--text-base);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-base--line-height);
+      font-weight: 600;
       letter-spacing: var(--tracking-tight);
       margin-top: calc(var(--spacing) * 12);
 
@@ -76,13 +83,13 @@
       }
     }
 
-    & h1:not(.not-prose h1), & h2:not(.not-prose h2), & h3:not(.not-prose h3), & h4:not(.not-prose h4), & h5:not(.not-prose h5), & h6:not(.not-prose h6) {
+    & h1:not(.not-typography h1), & h2:not(.not-typography h2), & h3:not(.not-typography h3), & h4:not(.not-typography h4), & h5:not(.not-typography h5), & h6:not(.not-typography h6) {
       & + p {
         margin-top: 0;
       }
     }
 
-    & p:not(.not-prose p) {
+    & p:not(.not-typography p) {
       line-height: 1.75;
 
       &:not(:first-child) {
@@ -90,25 +97,25 @@
       }
     }
 
-    & li:not(.not-prose li) {
+    & li:not(.not-typography li) {
       line-height: 1.75;
     }
 
-    & a:not(.not-prose a) {
-      font-weight: var(--font-medium);
+    & a:not(.not-typography a) {
+      font-weight: 500;
       color: var(--color-primary);
       text-decoration: underline;
       text-underline-offset: var(--spacing);
     }
 
-    & blockquote:not(.not-prose blockquote) {
+    & blockquote:not(.not-typography blockquote) {
       margin-top: calc(var(--spacing) * 6);
       border-left: 2px solid var(--color-border);
       padding-left: calc(var(--spacing) * 6);
       font-style: italic;
     }
 
-    & table:not(.not-prose table) {
+    & table:not(.not-typography table) {
       margin-top: calc(var(--spacing) * 6);
       margin-bottom: calc(var(--spacing) * 6);
       width: 100%;
@@ -128,7 +135,7 @@
         border: 1px solid var(--color-border);
         padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
         text-align: left;
-        font-weight: var(--font-bold);
+        font-weight: 700;
         
         &[align="center"] {
           text-align: center;
@@ -164,7 +171,7 @@
       }
     }
 
-    & ul:not(.not-prose ul) {
+    & ul:not(.not-typography ul) {
       margin-top: calc(var(--spacing) * 6);
       margin-left: calc(var(--spacing) * 6);
       list-style: disc;
@@ -180,7 +187,7 @@
       }
     }
 
-    & ol:not(.not-prose ol) {
+    & ol:not(.not-typography ol) {
       margin-top: calc(var(--spacing) * 6);
       margin-left: calc(var(--spacing) * 6);
       list-style: decimal;
@@ -196,63 +203,70 @@
       }
     }
 
-    & pre:not(.not-prose pre) {
+    & pre:not(.not-typography pre) {
       background-color: var(--color-muted);
       border-radius: calc(var(--radius) - 2px);
       padding: calc(var(--spacing) * 4);
       margin-top: calc(var(--spacing) * 6);
       margin-bottom: calc(var(--spacing) * 6);
       font-size: var(--text-sm);
+      line-height: var(--text-sm--line-height);
       overflow-y: auto;
     }
 
-    & code:not(pre code):not(.not-prose code) {
+    & code:not(pre code):not(.not-typography code) {
       position: relative;
       border-radius: var(--radius);
       background-color: var(--color-muted);
       padding: calc(var(--spacing) * 0.2) calc(var(--spacing) * 0.3);
       font-family: var(--font-mono);
       font-size: var(--text-sm);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-sm--line-height);
+      font-weight: 600;
     }
 
-    & .lead:not(.not-prose .lead) {
+    & .lead:not(.not-typography .lead) {
       font-size: var(--text-xl);
+      line-height: var(--text-xl--line-height);
       color: var(--color-muted-foreground);
     }
 
-    & .large:not(.not-prose .large) {
+    & .large:not(.not-typography .large) {
       font-size: var(--text-lg);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-lg--line-height);
+      font-weight: 600;
     }
 
-    & .small:not(.not-prose .small) {
+    & .small:not(.not-typography .small) {
       font-size: var(--text-sm);
-      font-weight: var(--font-medium);
+      line-height: var(--text-sm--line-height);
+      font-weight: 500;
       line-height: 1;
     }
 
-    & .muted:not(.not-prose .muted) {
+    & .muted:not(.not-typography .muted) {
       font-size: var(--text-sm);
+      line-height: var(--text-sm--line-height);
       color: var(--color-muted-foreground);
     }
 
-    & img:not(.not-prose img), & picture:not(.not-prose picture), & video:not(.not-prose video) {
+    & img:not(.not-typography img), & picture:not(.not-typography picture), & video:not(.not-typography video) {
       margin-top: calc(var(--spacing) * 6);
       margin-bottom: calc(var(--spacing) * 6);
     }
 
-    & picture > img:not(.not-prose picture > img) {
+    & picture > img:not(.not-typography picture > img) {
       margin-top: 0;
       margin-bottom: 0;
     }
 
-    & kbd:not(.not-prose kbd) {
+    & kbd:not(.not-typography kbd) {
       border-radius: calc(var(--radius) - 2px);
       background-color: var(--color-muted);
       padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 1.5);
       font-size: var(--text-xs);
-      font-weight: var(--font-semibold);
+      line-height: var(--text-xs--line-height);
+      font-weight: 600;
     }
 
     & hr {
@@ -260,12 +274,12 @@
       margin-bottom: calc(var(--spacing) * 10);
     }
 
-    & dl:not(.not-prose dl) {
+    & dl:not(.not-typography dl) {
       margin-top: calc(var(--spacing) * 6);
       margin-bottom: calc(var(--spacing) * 6);
 
       & dt {
-        font-weight: var(--font-semibold);
+        font-weight: 600;
         margin-top: calc(var(--spacing) * 6);
         letter-spacing: var(--tracking-tight);
 
@@ -275,12 +289,12 @@
       }
     }
 
-    & details:not(.not-prose details) {
+    & details:not(.not-typography details) {
       margin-top: calc(var(--spacing) * 6);
 
       & summary {
         cursor: pointer;
-        font-weight: var(--font-semibold);
+        font-weight: 600;
         margin-top: calc(var(--spacing) * 6);
         letter-spacing: var(--tracking-tight);
       }
@@ -292,12 +306,13 @@
       }
     }
 
-    & mark:not(.not-prose mark) {
+    & mark:not(.not-typography mark) {
       background-color: var(--color-yellow-300);
     }
 
-    & small:not(.not-prose small) {
+    & small:not(.not-typography small) {
       font-size: var(--text-xs);
+      line-height: var(--text-xs--line-height);
       line-height: 1;
     }
   }
