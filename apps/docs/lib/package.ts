@@ -85,31 +85,46 @@ export const getPackage = async (packageName: string) => {
       const layerName = `@layer ${atRule.params}`;
       css[layerName] = {};
 
+      // First pass: process non-media rules
       atRule.walkRules((rule) => {
+        // Skip rules that are inside media queries
+        if (rule.parent && rule.parent.type === 'atrule' && (rule.parent as any).name === 'media') {
+          return;
+        }
+
         const selector = rule.selector;
         const ruleObj: Record<string, string> = {};
 
+        // Process all declarations
         rule.walkDecls((decl) => {
           ruleObj[decl.prop] = decl.value;
-        });
-
-        // Handle media queries within rules
-        rule.walkAtRules("media", (mediaRule) => {
-          const mediaQuery = `@media ${mediaRule.params}`;
-          const mediaObj: Record<string, string> = {};
-
-          mediaRule.walkDecls((decl) => {
-            mediaObj[decl.prop] = decl.value;
-          });
-
-          if (Object.keys(mediaObj).length > 0) {
-            ruleObj[mediaQuery] = JSON.stringify(mediaObj);
-          }
         });
 
         if (Object.keys(ruleObj).length > 0) {
           css[layerName][selector] = ruleObj;
         }
+      });
+
+      // Second pass: process media query rules
+      atRule.walkAtRules("media", (mediaRule) => {
+        const mediaQuery = `@media ${mediaRule.params}`;
+
+        mediaRule.walkRules((rule) => {
+          const selector = rule.selector;
+          const mediaObj: Record<string, string> = {};
+
+          rule.walkDecls((decl) => {
+            mediaObj[decl.prop] = decl.value;
+          });
+
+          if (Object.keys(mediaObj).length > 0) {
+            // Merge with existing selector if it exists
+            if (!css[layerName][selector]) {
+              css[layerName][selector] = {};
+            }
+            css[layerName][selector][mediaQuery] = JSON.stringify(mediaObj);
+          }
+        });
       });
     });
   }
