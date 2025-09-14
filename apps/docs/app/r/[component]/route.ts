@@ -2,17 +2,11 @@ import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { track } from "@vercel/analytics/server";
 import { type NextRequest, NextResponse } from "next/server";
-import { getPackage, type RegistryItemSchema } from "../../../lib/package";
+import type { Registry } from "shadcn/schema";
+import { getPackage } from "../../../lib/package";
 
 type RegistryParams = {
   params: Promise<{ component: string }>;
-};
-
-type RegistrySchema = {
-  $schema: "https://ui.shadcn.com/schema/registry.json";
-  name: string;
-  homepage: string;
-  items: Partial<RegistryItemSchema>[];
 };
 
 export const GET = async (_: NextRequest, { params }: RegistryParams) => {
@@ -38,10 +32,9 @@ export const GET = async (_: NextRequest, { params }: RegistryParams) => {
   }
 
   if (packageName === "registry") {
-    const response: RegistrySchema = {
-      $schema: "https://ui.shadcn.com/schema/registry.json",
+    const response: Registry = {
       name: "registry",
-      homepage: "https://ui.shadcn.com",
+      homepage: "https://www.kibo-ui.com/",
       items: [],
     };
 
@@ -58,18 +51,8 @@ export const GET = async (_: NextRequest, { params }: RegistryParams) => {
     for (const name of packageNames) {
       try {
         const pkg = await getPackage(name);
-        response.items.push({
-          name: pkg.name,
-          type: pkg.type,
-          title: pkg.title,
-          description: pkg.description,
-          files: pkg.files.map((file) => ({
-            path: file.path,
-            type: file.type,
-            target: file.target,
-          })),
-          css: pkg.css,
-        });
+        
+        response.items.push(pkg);
       } catch {
         // skip packages that fail
       }

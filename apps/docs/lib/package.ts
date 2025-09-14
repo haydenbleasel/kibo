@@ -3,62 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import postcss from "postcss";
 import postcssNested from "postcss-nested";
-
-export type RegistryItemSchema = {
-  $schema: "https://ui.shadcn.com/schema/registry-item.json";
-  name: string;
-  type:
-    | "registry:lib"
-    | "registry:block"
-    | "registry:component"
-    | "registry:ui"
-    | "registry:hook"
-    | "registry:theme"
-    | "registry:page"
-    | "registry:file"
-    | "registry:style"
-    | "registry:item";
-  description: string;
-  title: string;
-  author: string;
-  dependencies?: string[];
-  devDependencies?: string[];
-  registryDependencies?: string[];
-  files: {
-    path?: string;
-    content?: string;
-    type?:
-      | "registry:lib"
-      | "registry:block"
-      | "registry:component"
-      | "registry:ui"
-      | "registry:hook"
-      | "registry:theme"
-      | "registry:page"
-      | "registry:file"
-      | "registry:style"
-      | "registry:item";
-    target?: string;
-  }[];
-  tailwind?: {
-    config?: {
-      content?: string[];
-      theme?: Record<string, string>;
-      plugins?: string[];
-    };
-  };
-  cssVars?: {
-    theme?: Record<string, string>;
-    light?: Record<string, string>;
-    dark?: Record<string, string>;
-  };
-  css?: Record<string, object>;
-  envVars?: Record<string, string>;
-  meta?: Record<string, unknown>;
-  docs?: string;
-  categories?: string[];
-  extends?: string;
-};
+import type { RegistryItem } from 'shadcn/schema';
 
 export const getPackage = async (packageName: string) => {
   const packageDir = join(process.cwd(), "..", "..", "packages", packageName);
@@ -95,25 +40,19 @@ export const getPackage = async (packageName: string) => {
     (file) => file.isFile() && file.name.endsWith(".css")
   );
 
-  const files: RegistryItemSchema["files"] = [];
+  const files: RegistryItem["files"] = [];
 
-  const fileContents = await Promise.all(
-    tsxFiles.map(async (file) => {
-      const filePath = join(packageDir, file.name);
-      const content = await fs.readFile(filePath, "utf-8");
+  for (const file of tsxFiles) {
+    const filePath = join(packageDir, file.name);
+    const content = await fs.readFile(filePath, "utf-8");
 
-      const registryFile: RegistryItemSchema["files"][number] = {
-        type: "registry:ui",
-        path: file.name,
-        content,
-        target: `components/ui/kibo-ui/${packageName}/${file.name}`,
-      };
-
-      return registryFile;
-    })
-  );
-
-  files.push(...fileContents);
+    files.push({
+      type: "registry:ui",
+      path: file.name,
+      content,
+      target: `components/ui/kibo-ui/${packageName}/${file.name}`,
+    });
+  }
 
   const registryDependencies =
     files
@@ -129,7 +68,7 @@ export const getPackage = async (packageName: string) => {
     registryDependencies.push(`https://www.kibo-ui.com/r/${pkg}.json`);
   }
 
-  const css: RegistryItemSchema["css"] = {};
+  const css: RegistryItem["css"] = {};
 
   for (const file of cssFiles) {
     const contents = await fs.readFile(join(packageDir, file.name), "utf-8");
@@ -164,7 +103,7 @@ export const getPackage = async (packageName: string) => {
           });
 
           if (Object.keys(mediaObj).length > 0) {
-            ruleObj[mediaQuery] = mediaObj;
+            ruleObj[mediaQuery] = JSON.stringify(mediaObj);
           }
         });
 
@@ -175,13 +114,13 @@ export const getPackage = async (packageName: string) => {
     });
   }
 
-  let type: RegistryItemSchema["type"] = "registry:ui";
+  let type: RegistryItem["type"] = "registry:ui";
 
   if (!Object.keys(files).length && Object.keys(css).length) {
     type = "registry:style";
   }
 
-  const response: RegistryItemSchema = {
+  const response: RegistryItem = {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name: packageName,
     type,
