@@ -105,9 +105,14 @@ export const getPackage = async (packageName: string) => {
         }
       });
 
-      // Second pass: process media query rules
+      // Second pass: process media query rules as top-level entries
       atRule.walkAtRules("media", (mediaRule) => {
         const mediaQuery = `@media ${mediaRule.params}`;
+
+        // Create a top-level media query entry if it doesn't exist
+        if (!css[layerName][mediaQuery]) {
+          css[layerName][mediaQuery] = {};
+        }
 
         mediaRule.walkRules((rule) => {
           const selector = rule.selector;
@@ -118,11 +123,8 @@ export const getPackage = async (packageName: string) => {
           });
 
           if (Object.keys(mediaObj).length > 0) {
-            // Merge with existing selector if it exists
-            if (!css[layerName][selector]) {
-              css[layerName][selector] = {};
-            }
-            css[layerName][selector][mediaQuery] = mediaObj;
+            // Store the selector inside the media query
+            css[layerName][mediaQuery][selector] = mediaObj;
           }
         });
       });
