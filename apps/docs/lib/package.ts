@@ -1,6 +1,8 @@
 import { promises as fs, readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import postcss from 'postcss';
+import postcssNested from 'postcss-nested';
 
 export type RegistryItemSchema = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json";
@@ -89,6 +91,10 @@ export const getPackage = async (packageName: string) => {
     (file) => file.isFile() && file.name.endsWith(".tsx")
   );
 
+  const cssFiles = packageFiles.filter(
+    (file) => file.isFile() && file.name.endsWith(".css")
+  );
+
   const files: RegistryItemSchema["files"] = [];
 
   const fileContents = await Promise.all(
@@ -123,6 +129,52 @@ export const getPackage = async (packageName: string) => {
     registryDependencies.push(`https://www.kibo-ui.com/r/${pkg}.json`);
   }
 
+  let css: RegistryItemSchema["css"] = {};
+
+  for (const file of cssFiles) {
+    const contents = await fs.readFile(join(packageDir, file.name), "utf-8");
+
+    // Process CSS with PostCSS to handle nested selectors
+    const processed = await postcss([postcssNested]).process(contents, {
+      from: undefined,
+    });
+
+    // Parse the processed CSS and convert to JSON structure
+    const ast = postcss.parse(processed.css);
+
+    ast.walkAtRules('layer', (atRule) => {
+      const layerName = `@layer ${atRule.params}`;
+      css[layerName] = {};
+
+      atRule.walkRules((rule) => {
+        const selector = rule.selector;
+        const ruleObj: Record<string, string> = {};
+
+        rule.walkDecls((decl) => {
+          ruleObj[decl.prop] = decl.value;
+        });
+
+        // Handle media queries within rules
+        rule.walkAtRules('media', (mediaRule) => {
+          const mediaQuery = `@media ${mediaRule.params}`;
+          const mediaObj: Record<string, string> = {};
+
+          mediaRule.walkDecls((decl) => {
+            mediaObj[decl.prop] = decl.value;
+          });
+
+          if (Object.keys(mediaObj).length > 0) {
+            ruleObj[mediaQuery] = mediaObj;
+          }
+        });
+
+        if (Object.keys(ruleObj).length > 0) {
+          css[layerName][selector] = ruleObj;
+        }
+      });
+    });
+  }
+
   const response: RegistryItemSchema = {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name: packageName,
@@ -134,6 +186,7 @@ export const getPackage = async (packageName: string) => {
     devDependencies,
     registryDependencies,
     files,
+    css,
   };
 
   return response;

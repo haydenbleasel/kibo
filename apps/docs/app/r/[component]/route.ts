@@ -1,7 +1,7 @@
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
 import { track } from "@vercel/analytics/server";
-import { readdir } from "fs/promises";
 import { type NextRequest, NextResponse } from "next/server";
-import { join } from "path";
 import { getPackage, type RegistryItemSchema } from "../../../lib/package";
 
 type RegistryParams = {
@@ -68,6 +68,7 @@ export const GET = async (_: NextRequest, { params }: RegistryParams) => {
             type: file.type,
             target: file.target,
           })),
+          css: pkg.css,
         });
       } catch {
         // skip packages that fail
