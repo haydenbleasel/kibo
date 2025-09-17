@@ -1,9 +1,10 @@
 import { cn } from "@repo/shadcn-ui/lib/utils";
+import { CpuIcon, LibraryIcon } from "lucide-react";
 import Image from "next/image";
 import { env } from "@/env";
 
 type PoweredByProps = {
-  packages: { name: string; url: string }[];
+  packages: string[];
 };
 
 const getHostname = (url: string) => {
@@ -16,29 +17,33 @@ const getHostname = (url: string) => {
   return parsedUrl.hostname.replace("www.", "");
 };
 
+const getPackageName = (url: string) => {
+  return new URL(url).hostname.replace("www.", "");
+};
+
 export const PoweredBy = ({ packages }: PoweredByProps) => (
-  <div className="not-prose mb-8 flex flex-col gap-2">
-    <p className="text-muted-foreground text-sm">Powered by</p>
-    <div className="flex flex-row flex-wrap items-center gap-2">
-      {packages.map(({ name, url }) => (
+  <div className="not-prose mt-6 flex flex-col gap-2">
+    <div className="flex items-center gap-2">
+      <LibraryIcon className="size-4 text-muted-foreground" />
+      <p className="text-muted-foreground text-sm">Powered by</p>
+    </div>
+    <div className="flex flex-col gap-2 pl-[14px]">
+      {packages.map((url) => (
         <a
-          className={cn(
-            "flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 transition-all",
-            "hover:bg-secondary/80"
-          )}
+          className="inline-flex items-center gap-1.5 text-muted-foreground text-sm transition-all hover:text-primary"
           href={url}
-          key={name}
+          key={url}
           rel="noopener"
           target="_blank"
         >
           <Image
-            alt={name}
+            alt=""
             className="h-3.5 w-3.5 overflow-hidden rounded-sm object-cover"
             height={14}
             src={`https://img.logo.dev/${getHostname(url)}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=14&retina=true`}
             width={14}
           />
-          <p className="text-muted-foreground text-sm">{name}</p>
+          <span>{getPackageName(url)}</span>
         </a>
       ))}
     </div>

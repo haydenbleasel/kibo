@@ -34,7 +34,14 @@ const Page = async (props: PageProps) => {
   return (
     <DocsPage
       full={page.data.full}
-      tableOfContent={{ style: "clerk" }}
+      tableOfContent={{
+        style: "clerk",
+        footer: (
+          page.data.dependencies && (
+            <PoweredBy packages={page.data.dependencies} />
+          )
+        )
+      }}
       toc={page.data.toc}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
