@@ -21,10 +21,6 @@ const links = [
     label: "Blocks",
     href: "/blocks",
   },
-  {
-    label: "Extensions",
-    href: "/extensions",
-  },
 ];
 
 export const Navbar = () => {
