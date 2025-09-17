@@ -1,3 +1,4 @@
+import type { TableOfContents } from "fumadocs-core/server";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import {
   DocsBody,
@@ -31,22 +32,36 @@ const Page = async (props: PageProps) => {
 
   const MDX = page.data.body;
 
+  const updatedToc: TableOfContents = [
+    {
+      title: "Installation",
+      url: "#installation",
+      depth: 2,
+    },
+    ...page.data.toc,
+  ];
+
   return (
     <DocsPage
       full={page.data.full}
       tableOfContent={{
         style: "clerk",
-        footer: (
-          page.data.dependencies && (
-            <PoweredBy packages={page.data.dependencies} />
-          )
-        )
+        footer: page.data.dependencies && (
+          <PoweredBy packages={page.data.dependencies} />
+        ),
       }}
-      toc={page.data.toc}
+      toc={updatedToc}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
+        {page.data.installer && (
+          <>
+            <Preview path={page.data.installer} />
+            <h2 id="installation">Installation</h2>
+            <Installer packageName={page.data.installer} />
+          </>
+        )}
         <MDX
           components={{
             ...defaultMdxComponents,

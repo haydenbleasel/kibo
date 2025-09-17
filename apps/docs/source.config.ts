@@ -6,6 +6,7 @@ export const { docs, meta } = defineDocs({
   docs: {
     schema: frontmatterSchema.extend({
       dependencies: z.array(z.string()).optional(),
+      installer: z.string().optional(),
     }),
   }
 });
