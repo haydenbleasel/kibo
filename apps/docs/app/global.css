@@ -182,6 +182,11 @@ h3 {
   margin-top: var(--fd-nav-height);
 }
 
+/* Remove sidebar background */
+#nd-sidebar {
+  @apply bg-transparent;
+}
+
 /* Hide tabs on desktop */
 #nd-sidebar [data-hide-if-empty] {
   @apply hidden;
