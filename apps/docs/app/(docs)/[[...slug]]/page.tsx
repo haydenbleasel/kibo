@@ -41,6 +41,8 @@ const Page = async (props: PageProps) => {
     ...page.data.toc,
   ];
 
+  const type = page.data._file.path.startsWith('blocks') ? 'block' : 'component'
+
   return (
     <DocsPage
       full={page.data.full}
@@ -57,7 +59,7 @@ const Page = async (props: PageProps) => {
       <DocsBody>
         {page.data.installer && (
           <>
-            <Preview path={page.data.installer} />
+            <Preview path={page.data.installer} type={type} />
             <h2 id="installation">Installation</h2>
             <Installer packageName={page.data.installer} />
           </>

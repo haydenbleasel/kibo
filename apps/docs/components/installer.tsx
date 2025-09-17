@@ -16,7 +16,6 @@ import {
 import { track } from "@vercel/analytics/react";
 import { InfoIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import kibo from "../public/logomark.svg";

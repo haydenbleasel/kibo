@@ -1,5 +1,4 @@
-import { cn } from "@repo/shadcn-ui/lib/utils";
-import { CpuIcon, LibraryIcon } from "lucide-react";
+import { LibraryIcon } from "lucide-react";
 import Image from "next/image";
 import { env } from "@/env";
 
@@ -18,6 +17,10 @@ const getHostname = (url: string) => {
 };
 
 const getPackageName = (url: string) => {
+  if (url.startsWith("/")) {
+    return url.replace("/components/", "");
+  }
+
   return new URL(url).hostname.replace("www.", "");
 };
 
