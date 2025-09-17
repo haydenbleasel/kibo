@@ -4,7 +4,7 @@ import "@repo/typography";
 import Image from "next/image";
 
 const Example = () => (
-  <div className="size-full overflow-y-auto p-8">
+  <div className="size-full overflow-y-auto">
     <div className="typography">
       <h1>Styling the Web: A Modern CSS Journey</h1>
 
