@@ -8,11 +8,13 @@ import { createElement } from "react";
 import CollaborativeCanvasExample from "../../../../../examples/collaborative-canvas";
 import FormExample from "../../../../../examples/form";
 import RoadmapExample from "../../../../../examples/roadmap";
+import SpreadsheetExample from "../../../../../examples/spreadsheet";
 import { source } from "../../../../../lib/source";
 
 const collaborativeCanvas = source.getPage(["blocks", "collaborative-canvas"]);
 const form = source.getPage(["blocks", "form"]);
 const roadmap = source.getPage(["blocks", "roadmap"]);
+const spreadsheet = source.getPage(["blocks", "spreadsheet"]);
 
 const examples = [
   {
@@ -46,6 +48,16 @@ const examples = [
     ),
     className: "lg:col-span-2",
   },
+  {
+    icon: spreadsheet?.data.icon,
+    name: spreadsheet?.data.title,
+    description: spreadsheet?.data.description,
+    component: () => (
+      <div className="aspect-square overflow-hidden">
+        <SpreadsheetExample />
+      </div>
+    ),
+  },
 ];
 
 const ExampleCard = ({
@@ -64,9 +76,9 @@ const ExampleCard = ({
   const Icon =
     icon && icon in icons
       ? (props: LucideProps) =>
-        createElement(icons[icon as keyof typeof icons], {
-          ...props,
-        })
+          createElement(icons[icon as keyof typeof icons], {
+            ...props,
+          })
       : null;
 
   return (
