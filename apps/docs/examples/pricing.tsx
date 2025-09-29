@@ -63,7 +63,7 @@ const plans = [
     description: "Critical security, performance, observability and support.",
     features: [
       "You can DDOS our API.",
-      "Nano-second checks.",
+      "Nano-second checks that wrap to two lines.",
       "Invite your extended family.",
       "Unlimited monitors.",
       "We'll sit on your desk.",
@@ -115,7 +115,7 @@ const Example = () => {
                 <CardDescription>
                   <p>{plan.description}</p>
                   {typeof plan.price[frequency as keyof typeof plan.price] ===
-                  "number" ? (
+                    "number" ? (
                     <NumberFlow
                       className="font-medium text-foreground"
                       format={{
@@ -126,7 +126,7 @@ const Example = () => {
                       suffix={`/month, billed ${frequency}.`}
                       value={
                         plan.price[
-                          frequency as keyof typeof plan.price
+                        frequency as keyof typeof plan.price
                         ] as number
                       }
                     />
@@ -140,10 +140,10 @@ const Example = () => {
               <CardContent className="grid gap-2">
                 {plan.features.map((feature, index) => (
                   <div
-                    className="flex items-center gap-2 text-muted-foreground text-sm"
+                    className="flex gap-2 text-muted-foreground text-sm"
                     key={index}
                   >
-                    <BadgeCheck className="h-4 w-4" />
+                    <BadgeCheck className="w-4 flex-none h-[1lh]" />
                     {feature}
                   </div>
                 ))}
