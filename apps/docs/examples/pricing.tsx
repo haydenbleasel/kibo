@@ -115,7 +115,7 @@ const Example = () => {
                 <CardDescription>
                   <p>{plan.description}</p>
                   {typeof plan.price[frequency as keyof typeof plan.price] ===
-                    "number" ? (
+                  "number" ? (
                     <NumberFlow
                       className="font-medium text-foreground"
                       format={{
@@ -126,7 +126,7 @@ const Example = () => {
                       suffix={`/month, billed ${frequency}.`}
                       value={
                         plan.price[
-                        frequency as keyof typeof plan.price
+                          frequency as keyof typeof plan.price
                         ] as number
                       }
                     />
