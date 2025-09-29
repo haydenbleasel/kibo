@@ -63,7 +63,7 @@ const plans = [
     description: "Critical security, performance, observability and support.",
     features: [
       "You can DDOS our API.",
-      "Nano-second checks that wrap to two lines.",
+      "Nano-second checks.",
       "Invite your extended family.",
       "Unlimited monitors.",
       "We'll sit on your desk.",
