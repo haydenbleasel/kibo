@@ -6,7 +6,7 @@
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
     "@tanstack/react-table": "^8.21.3",
-    "jotai": "^2.13.1",
+    "jotai": "^2.15.0",
     "lucide-react": "^0.542.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"

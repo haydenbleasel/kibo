@@ -9,7 +9,7 @@
     "@repo/shadcn-ui": "workspace:*",
     "@uidotdev/usehooks": "^2.4.1",
     "date-fns": "^4.1.0",
-    "jotai": "^2.13.1",
+    "jotai": "^2.15.0",
     "lodash.throttle": "^4.1.1",
     "lucide-react": "^0.542.0",
     "react": "^19.1.1",
