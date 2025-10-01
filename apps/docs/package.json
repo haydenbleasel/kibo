@@ -79,7 +79,7 @@
     "react-dom": "^19.1.1",
     "react-player": "^2.16.0",
     "react-tweet": "^3.2.2",
-    "require-in-the-middle": "^7.5.2",
+    "require-in-the-middle": "^8.0.0",
     "schema-dts": "^1.1.5",
     "shadcn": "^3.2.1",
     "shiki": "3.12.0",
