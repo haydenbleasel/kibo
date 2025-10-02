@@ -9,8 +9,6 @@ export interface StatusBarProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-const COLUMN_COUNT = 6; // LinkedIn URL, First Name, Last Name, Email, Company, Role
-
 export const StatusBar = React.forwardRef<HTMLDivElement, StatusBarProps>(
   ({ children, className, ...props }, ref) => (
     <div
@@ -74,7 +72,7 @@ export const StatusBarSummary: React.FC = () => {
 
   return (
     <span>
-      {rowCount} rows × {COLUMN_COUNT} columns
+      {rowCount} rows × {data[0]?.length} columns
     </span>
   );
 };

@@ -193,8 +193,9 @@ export function SpreadsheetProvider<TData extends SpreadsheetRow>({
   const deleteRow = useCallback(
     (rowId: string) => {
       setData((old) => old.filter((row) => row.id !== rowId));
+      onDeleteRow?.(rowId);
     },
-    [onDeleteRow]
+    [setData, onDeleteRow]
   );
 
   const clearSelectedCells = useCallback(() => {

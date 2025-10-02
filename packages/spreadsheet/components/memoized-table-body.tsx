@@ -44,7 +44,7 @@ export const MemoizedTableBody = React.memo(
       {virtualItems.map((virtualRow) => {
         const row = table.getRowModel().rows[virtualRow.index];
         const rowIndex = virtualRow.index;
-        const rowId = data[rowIndex]?.id;
+        const rowId = row?.original?.id;
         if (!rowId) return null;
 
         const rowCells = getRowCells(rowId);
