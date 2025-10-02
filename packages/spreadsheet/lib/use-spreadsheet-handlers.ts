@@ -1,11 +1,10 @@
 import { useCallback } from "react";
 
-import type { CellPosition, ColumnInfo } from "./spreadsheet-utils";
+import type { ColumnInfo } from "./spreadsheet-utils";
 import { useSpreadsheet } from "../components/spreadsheet-provider";
 import {
   getColumnCells,
   getFirstSelectedCell,
-  getNextCellPosition,
   getNextCellPositionFromMap,
   getRangeCells,
   getRowCells,
@@ -53,7 +52,7 @@ export const useSpreadsheetHandlers = ({
             const newSelection = toggleRowSelection(
               rowId,
               currentSelectedCells,
-              columns,
+              columns
             );
             // Exit edit mode if multiple cells are selected
             if (newSelection.size > 1 && editingCell) {
@@ -83,7 +82,7 @@ export const useSpreadsheetHandlers = ({
             const newSelection = toggleColumnSelection(
               columnId,
               currentSelectedCells,
-              data,
+              data
             );
             // Exit edit mode if multiple cells are selected
             if (newSelection.size > 1 && editingCell) {
@@ -109,7 +108,7 @@ export const useSpreadsheetHandlers = ({
         setSelectedCells((currentSelectedCells) => {
           const newSelection = toggleCellSelection(
             cellKey,
-            currentSelectedCells,
+            currentSelectedCells
           );
           // Exit edit mode if multiple cells are selected
           if (newSelection.size > 1 && editingCell) {
@@ -130,7 +129,7 @@ export const useSpreadsheetHandlers = ({
             rowId,
             columnId,
             columns,
-            data,
+            data
           );
           const newSelection = new Set(rangeCells);
           // Exit edit mode if multiple cells are selected
@@ -171,7 +170,7 @@ export const useSpreadsheetHandlers = ({
       setEditingCell,
       setIsDragging,
       setDragStartCell,
-    ],
+    ]
   );
 
   const handleMouseMove = useCallback(
@@ -185,7 +184,7 @@ export const useSpreadsheetHandlers = ({
         rowId,
         columnId,
         columns,
-        data,
+        data
       );
       const newSelection = new Set(rangeCells);
       setSelectedCells(newSelection);
@@ -203,7 +202,7 @@ export const useSpreadsheetHandlers = ({
       editingCell,
       setSelectedCells,
       setEditingCell,
-    ],
+    ]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -244,7 +243,7 @@ export const useSpreadsheetHandlers = ({
           const nextPosition = getNextCellPositionFromMap(
             currentCellKey,
             "up",
-            navigationMap,
+            navigationMap
           );
           if (nextPosition) {
             const newCellKey = `${nextPosition.rowId}:${nextPosition.columnId}`;
@@ -258,7 +257,7 @@ export const useSpreadsheetHandlers = ({
           const nextPosition = getNextCellPositionFromMap(
             currentCellKey,
             "down",
-            navigationMap,
+            navigationMap
           );
           if (nextPosition) {
             const newCellKey = `${nextPosition.rowId}:${nextPosition.columnId}`;
@@ -272,7 +271,7 @@ export const useSpreadsheetHandlers = ({
           const nextPosition = getNextCellPositionFromMap(
             currentCellKey,
             "left",
-            navigationMap,
+            navigationMap
           );
           if (nextPosition) {
             const newCellKey = `${nextPosition.rowId}:${nextPosition.columnId}`;
@@ -286,7 +285,7 @@ export const useSpreadsheetHandlers = ({
           const nextPosition = getNextCellPositionFromMap(
             currentCellKey,
             "right",
-            navigationMap,
+            navigationMap
           );
           if (nextPosition) {
             const newCellKey = `${nextPosition.rowId}:${nextPosition.columnId}`;
@@ -300,7 +299,7 @@ export const useSpreadsheetHandlers = ({
           const nextPosition = getNextCellPositionFromMap(
             currentCellKey,
             "tab",
-            navigationMap,
+            navigationMap
           );
           if (nextPosition) {
             const newCellKey = `${nextPosition.rowId}:${nextPosition.columnId}`;
@@ -338,7 +337,7 @@ export const useSpreadsheetHandlers = ({
       setSelectedCells,
       clearSelectedCells,
       navigationMap,
-    ],
+    ]
   );
 
   return {

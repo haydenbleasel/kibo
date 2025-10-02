@@ -1,10 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { flexRender } from "@tanstack/react-table";
-import { MoreVerticalIcon } from "lucide-react";
 
 interface MemoizedTableBodyProps {
   virtualItems: any[];
@@ -23,6 +21,9 @@ interface MemoizedTableBodyProps {
     columnId: string
   ) => void;
   deleteRow: (rowId: string) => void;
+  showRowNumbers?: boolean;
+  renderRowNumber?: (rowIndex: number) => React.ReactNode;
+  renderRowActions?: (row: any, rowIndex: number) => React.ReactNode;
 }
 
 export const MemoizedTableBody = React.memo(
@@ -35,6 +36,9 @@ export const MemoizedTableBody = React.memo(
     handleMouseDown,
     handleMouseMove,
     deleteRow,
+    showRowNumbers = true,
+    renderRowNumber,
+    renderRowActions,
   }: MemoizedTableBodyProps) => (
     <>
       {virtualItems.map((virtualRow) => {
@@ -60,17 +64,19 @@ export const MemoizedTableBody = React.memo(
           >
             <div className="flex h-full">
               {/* Row number */}
-              <div
-                data-row-number
-                className={cn(
-                  "border-border bg-muted/30 text-muted-foreground hover:bg-muted/50 dark:hover:bg-muted/40 flex h-9 w-12 cursor-default items-center justify-center border-r border-b font-mono text-xs transition-colors",
-                  isRowSelected && "bg-muted dark:bg-muted/80"
-                )}
-                onMouseDown={(e) => handleMouseDown(e, rowId, "")}
-                onMouseMove={(e) => handleMouseMove(e, rowId, "")}
-              >
-                {rowIndex + 1}
-              </div>
+              {showRowNumbers && (
+                <div
+                  data-row-number
+                  className={cn(
+                    "border-border bg-muted/30 text-muted-foreground hover:bg-muted/50 dark:hover:bg-muted/40 flex h-9 w-12 cursor-default items-center justify-center border-r border-b font-mono text-xs transition-colors",
+                    isRowSelected && "bg-muted dark:bg-muted/80"
+                  )}
+                  onMouseDown={(e) => handleMouseDown(e, rowId, "")}
+                  onMouseMove={(e) => handleMouseMove(e, rowId, "")}
+                >
+                  {renderRowNumber ? renderRowNumber(rowIndex) : rowIndex + 1}
+                </div>
+              )}
               {row.getVisibleCells().map((cell: any) => {
                 const cellKey = `${rowId}:${cell.column.id}`;
                 const isCellSelected = selectedCells.has(cellKey);
@@ -96,12 +102,12 @@ export const MemoizedTableBody = React.memo(
                   </div>
                 );
               })}
-              {/* Delete button */}
-              <div className="border-border flex h-9 w-12 items-center justify-center border-b">
-                <Button size="icon" variant="ghost">
-                  <MoreVerticalIcon className="h-3 w-3" />
-                </Button>
-              </div>
+              {/* Row actions */}
+              {renderRowActions && (
+                <div className="border-border flex h-9 items-center justify-center border-b">
+                  {renderRowActions(row.original, rowIndex)}
+                </div>
+              )}
             </div>
           </div>
         );

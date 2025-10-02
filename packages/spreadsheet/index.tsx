@@ -1,3 +1,4 @@
+// Components
 export { Spreadsheet } from "./components/spreadsheet";
 export {
   SpreadsheetProvider,
@@ -19,12 +20,13 @@ export {
 export { MemoizedTableBody } from "./components/memoized-table-body";
 export { ResizeHandle } from "./components/resize-handle";
 
-// Export types
+// Types
 export type {
   SpreadsheetRow,
   SpreadsheetProviderProps,
 } from "./components/spreadsheet-provider";
-
-// Export utilities
-export { generateSamplePeople } from "./lib/use-enrichment";
-export type { Person } from "./lib/use-enrichment";
+export type {
+  CellPosition,
+  ColumnInfo,
+  NavigationMap,
+} from "./lib/spreadsheet-utils";

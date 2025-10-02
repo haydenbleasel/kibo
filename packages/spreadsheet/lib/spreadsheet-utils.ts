@@ -1,7 +1,6 @@
 /**
  * Pure utility functions for spreadsheet operations
  */
-
 export interface CellPosition {
   rowId: string;
   columnId: string;
@@ -30,7 +29,10 @@ export const getRowCells = (rowId: string, columns: ColumnInfo[]): string[] => {
 /**
  * Get all cells in a column
  */
-export const getColumnCells = (columnId: string, data: any[]): string[] => {
+export const getColumnCells = (
+  columnId: string,
+  data: Record<string, unknown>[]
+): string[] => {
   return data.map((row) => `${row.id}:${columnId}`);
 };
 
@@ -39,15 +41,15 @@ export const getColumnCells = (columnId: string, data: any[]): string[] => {
  */
 export const getRangeCells = (
   startRowId: string,
-  startCol: string,
+  startColId: string,
   endRowId: string,
-  endCol: string,
+  endColId: string,
   columns: ColumnInfo[],
-  data: any[],
+  data: Record<string, unknown>[]
 ): string[] => {
   const columnIds = columns.map((col) => col.accessorKey || col.id || "");
-  const startColIndex = columnIds.indexOf(startCol);
-  const endColIndex = columnIds.indexOf(endCol);
+  const startColIndex = columnIds.indexOf(startColId);
+  const endColIndex = columnIds.indexOf(endColId);
 
   const minColIndex = Math.min(startColIndex, endColIndex);
   const maxColIndex = Math.max(startColIndex, endColIndex);
@@ -71,36 +73,12 @@ export const getRangeCells = (
 };
 
 /**
- * Check if a row is fully selected
- */
-export const isRowFullySelected = (
-  rowId: string,
-  selectedCells: Set<string>,
-  columns: ColumnInfo[],
-): boolean => {
-  const rowCells = getRowCells(rowId, columns);
-  return rowCells.every((cell) => selectedCells.has(cell));
-};
-
-/**
- * Check if a column is fully selected
- */
-export const isColumnFullySelected = (
-  columnId: string,
-  selectedCells: Set<string>,
-  data: any[],
-): boolean => {
-  const columnCells = getColumnCells(columnId, data);
-  return columnCells.every((cell) => selectedCells.has(cell));
-};
-
-/**
  * Toggle row selection
  */
 export const toggleRowSelection = (
   rowId: string,
   selectedCells: Set<string>,
-  columns: ColumnInfo[],
+  columns: ColumnInfo[]
 ): Set<string> => {
   const rowCells = getRowCells(rowId, columns);
   const isRowFullySelected = rowCells.every((cell) => selectedCells.has(cell));
@@ -122,11 +100,11 @@ export const toggleRowSelection = (
 export const toggleColumnSelection = (
   columnId: string,
   selectedCells: Set<string>,
-  data: any[],
+  data: Record<string, unknown>[]
 ): Set<string> => {
   const columnCells = getColumnCells(columnId, data);
   const isColumnFullySelected = columnCells.every((cell) =>
-    selectedCells.has(cell),
+    selectedCells.has(cell)
   );
 
   const newSelectedCells = new Set(selectedCells);
@@ -145,7 +123,7 @@ export const toggleColumnSelection = (
  */
 export const toggleCellSelection = (
   cellKey: string,
-  selectedCells: Set<string>,
+  selectedCells: Set<string>
 ): Set<string> => {
   const newSelectedCells = new Set(selectedCells);
   if (newSelectedCells.has(cellKey)) {
@@ -160,7 +138,7 @@ export const toggleCellSelection = (
  * Get the first selected cell position
  */
 export const getFirstSelectedCell = (
-  selectedCells: Set<string>,
+  selectedCells: Set<string>
 ): CellPosition | null => {
   const firstSelectedCell = Array.from(selectedCells)[0];
   if (!firstSelectedCell) return null;
@@ -176,7 +154,7 @@ export const getFirstSelectedCell = (
  * Get column size CSS variables
  */
 export const getColumnSizeVars = (
-  columnWidths: Record<string, number>,
+  columnWidths: Record<string, number>
 ): Record<string, number> => {
   const colSizes: { [key: string]: number } = {};
   Object.entries(columnWidths).forEach(([columnId, width]) => {
@@ -190,7 +168,7 @@ export const getColumnSizeVars = (
  */
 export const isWithinDataAttribute = (
   target: EventTarget | null,
-  attribute: string,
+  attribute: string
 ): boolean => {
   return (
     target instanceof HTMLElement && !!target.closest(`[data-${attribute}]`)
@@ -198,22 +176,11 @@ export const isWithinDataAttribute = (
 };
 
 /**
- * Get column index from column ID
- */
-export const getColumnIndex = (
-  columnId: string,
-  columns: ColumnInfo[],
-): number => {
-  const columnIds = columns.map((col) => col.accessorKey || col.id || "");
-  return columnIds.indexOf(columnId);
-};
-
-/**
  * Check if editing should be allowed based on current selection
  */
 export const shouldAllowEditing = (
   selectedCells: Set<string>,
-  cellKey: string,
+  cellKey: string
 ): boolean => {
   return selectedCells.has(cellKey) && selectedCells.size === 1;
 };
@@ -222,8 +189,8 @@ export const shouldAllowEditing = (
  * Create a navigation map for all cells in the spreadsheet
  */
 export const createNavigationMap = (
-  data: any[],
-  columns: ColumnInfo[],
+  data: Record<string, unknown>[],
+  columns: ColumnInfo[]
 ): Map<string, NavigationMap> => {
   const navigationMap = new Map<string, NavigationMap>();
   const columnIds = columns.map((col) => col.accessorKey || col.id || "");
@@ -266,7 +233,7 @@ export const createNavigationMap = (
 export const getNextCellPositionFromMap = (
   cellKey: string,
   direction: "up" | "down" | "left" | "right" | "tab",
-  navigationMap: Map<string, NavigationMap>,
+  navigationMap: Map<string, NavigationMap>
 ): CellPosition | null => {
   const navigation = navigationMap.get(cellKey);
   if (!navigation) return null;
@@ -276,67 +243,4 @@ export const getNextCellPositionFromMap = (
 
   const [rowId, columnId] = nextCellKey.split(":");
   return { rowId, columnId };
-};
-
-/**
- * Get next cell position for navigation (legacy function for backward compatibility)
- */
-export const getNextCellPosition = (
-  currentRowId: string,
-  currentColumnId: string,
-  columns: ColumnInfo[],
-  data: any[],
-  direction: "up" | "down" | "left" | "right" | "tab",
-): CellPosition | null => {
-  const columnIds = columns.map((col) => col.accessorKey || col.id || "");
-  const currentColumnIndex = columnIds.indexOf(currentColumnId);
-  const currentRowIndex = data.findIndex((row) => row.id === currentRowId);
-
-  if (currentRowIndex === -1) return null;
-
-  switch (direction) {
-    case "up":
-      if (currentRowIndex > 0) {
-        return {
-          rowId: data[currentRowIndex - 1].id,
-          columnId: currentColumnId,
-        };
-      }
-      break;
-    case "down":
-      if (currentRowIndex < data.length - 1) {
-        return {
-          rowId: data[currentRowIndex + 1].id,
-          columnId: currentColumnId,
-        };
-      }
-      break;
-    case "left":
-      if (currentColumnIndex > 0) {
-        return {
-          rowId: currentRowId,
-          columnId: columnIds[currentColumnIndex - 1],
-        };
-      }
-      break;
-    case "right":
-      if (currentColumnIndex < columnIds.length - 1) {
-        return {
-          rowId: currentRowId,
-          columnId: columnIds[currentColumnIndex + 1],
-        };
-      }
-      break;
-    case "tab":
-      if (currentColumnIndex < columnIds.length - 1) {
-        return {
-          rowId: currentRowId,
-          columnId: columnIds[currentColumnIndex + 1],
-        };
-      } else if (currentRowIndex < data.length - 1) {
-        return { rowId: data[currentRowIndex + 1].id, columnId: columnIds[0] };
-      }
-      break;
-  }
-  return null;
 };

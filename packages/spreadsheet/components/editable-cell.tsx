@@ -2,24 +2,41 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
+import type {
+  Cell,
+  Column,
+  Row,
+  Table,
+  TableMeta,
+} from "@tanstack/react-table";
 
 import { useSpreadsheet } from "./spreadsheet-provider";
 
-interface EditableCellProps {
-  getValue: () => any;
-  row: any;
-  column: any;
-  table: any;
+interface SpreadsheetRow {
+  id: string;
+  [key: string]: unknown;
 }
 
-export const EditableCell = ({
+interface SpreadsheetTableMeta<TData extends SpreadsheetRow>
+  extends TableMeta<TData> {
+  updateData?: (rowIndex: number, columnId: string, value: unknown) => void;
+}
+
+interface EditableCellProps<TData extends SpreadsheetRow = SpreadsheetRow> {
+  getValue: () => unknown;
+  row: Row<TData>;
+  column: Column<TData, unknown>;
+  table: Table<TData>;
+}
+
+export const EditableCell = <TData extends SpreadsheetRow = SpreadsheetRow>({
   getValue,
   row,
   column,
   table,
-}: EditableCellProps) => {
+}: EditableCellProps<TData>) => {
   const initialValue = getValue();
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState<string>(String(initialValue ?? ""));
   const inputRef = useRef<HTMLInputElement>(null);
   const { editingCell, setEditingCell } = useSpreadsheet();
   const isEditing =
@@ -27,7 +44,7 @@ export const EditableCell = ({
     editingCell?.columnId === column.id;
 
   useEffect(() => {
-    setValue(initialValue);
+    setValue(String(initialValue ?? ""));
   }, [initialValue]);
 
   useEffect(() => {
@@ -38,16 +55,24 @@ export const EditableCell = ({
   }, [isEditing]);
 
   const onBlur = () => {
-    table.options.meta?.updateData(row.index, column.id, value);
+    (table.options.meta as SpreadsheetTableMeta<TData>)?.updateData?.(
+      row.index,
+      column.id,
+      value
+    );
     setEditingCell(null);
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      table.options.meta?.updateData(row.index, column.id, value);
+      (table.options.meta as SpreadsheetTableMeta<TData>)?.updateData?.(
+        row.index,
+        column.id,
+        value
+      );
       setEditingCell(null);
     } else if (e.key === "Escape") {
-      setValue(initialValue);
+      setValue(String(initialValue ?? ""));
       setEditingCell(null);
     }
     e.stopPropagation();

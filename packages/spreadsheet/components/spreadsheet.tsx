@@ -11,10 +11,24 @@ import { MemoizedTableBody } from "./memoized-table-body";
 import { ResizeHandle } from "./resize-handle";
 import { useSpreadsheet } from "./spreadsheet-provider";
 
-interface SpreadsheetProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface SpreadsheetProps extends React.HTMLAttributes<HTMLDivElement> {
+  showRowNumbers?: boolean;
+  renderRowNumber?: (rowIndex: number) => React.ReactNode;
+  renderRowActions?: (row: any, rowIndex: number) => React.ReactNode;
+}
 
 export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
-  ({ className, style, ...props }, ref) => {
+  (
+    {
+      className,
+      style,
+      showRowNumbers = true,
+      renderRowNumber,
+      renderRowActions,
+      ...props
+    },
+    ref
+  ) => {
     const {
       data,
       selectedCells,
@@ -57,22 +71,17 @@ export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
       [columnMeta]
     );
 
+    // Mouseup should be global to handle drag ending outside the spreadsheet
     useEffect(() => {
-      const handleGlobalKeyDown = (e: KeyboardEvent) => {
-        handleKeyDown(e as any);
-      };
-
       const handleGlobalMouseUp = () => {
         handleMouseUp();
       };
 
-      document.addEventListener("keydown", handleGlobalKeyDown);
       document.addEventListener("mouseup", handleGlobalMouseUp);
       return () => {
-        document.removeEventListener("keydown", handleGlobalKeyDown);
         document.removeEventListener("mouseup", handleGlobalMouseUp);
       };
-    }, [handleKeyDown, handleMouseUp]);
+    }, [handleMouseUp]);
 
     const rowVirtualizer = useVirtualizer({
       count: table.getRowModel().rows.length,
@@ -84,8 +93,14 @@ export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex flex-col", isDragging && "select-none", className)}
+        className={cn(
+          "relative flex flex-col",
+          isDragging && "select-none",
+          className
+        )}
         style={{ ...columnSizeVars, ...style }}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
         {...props}
       >
         <div
@@ -97,9 +112,11 @@ export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
         />
 
         <div className="bg-muted border-border sticky top-0 z-1 flex border-y">
-          <div className="border-border bg-muted dark:bg-muted/60 text-muted-foreground flex h-10 w-12 items-center justify-center border-r text-xs font-medium">
-            #
-          </div>
+          {showRowNumbers && (
+            <div className="border-border bg-muted dark:bg-muted/60 text-muted-foreground flex h-10 w-12 items-center justify-center border-r text-xs font-medium">
+              #
+            </div>
+          )}
           {table.getHeaderGroups()[0].headers.map((header) => (
             <div
               key={header.id}
@@ -146,6 +163,9 @@ export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
               handleMouseDown={handleMouseDown}
               handleMouseMove={handleMouseMove}
               deleteRow={deleteRow}
+              showRowNumbers={showRowNumbers}
+              renderRowNumber={renderRowNumber}
+              renderRowActions={renderRowActions}
             />
           </div>
         </div>

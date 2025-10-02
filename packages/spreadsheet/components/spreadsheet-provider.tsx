@@ -4,12 +4,12 @@ import React, {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { useControllableState } from "@radix-ui/react-use-controllable-state";
 
 import type { ColumnInfo, NavigationMap } from "../lib/spreadsheet-utils";
 import type { ColumnDef, Table } from "@tanstack/react-table";
@@ -52,42 +52,63 @@ const SpreadsheetContext = createContext<
 >(undefined);
 
 const getColumnId = <TData extends SpreadsheetRow>(
-  column: ColumnDef<TData, any>
+  column: ColumnDef<TData, unknown>
 ) => {
   if (typeof column.id === "string" && column.id) {
     return column.id;
   }
   if (
-    typeof (column as any).accessorKey === "string" &&
-    (column as any).accessorKey
+    typeof (column as unknown as { accessorKey: string }).accessorKey ===
+      "string" &&
+    (column as unknown as { accessorKey: string }).accessorKey
   ) {
-    return (column as any).accessorKey;
+    return (column as unknown as { accessorKey: string }).accessorKey;
   }
   return "";
 };
 
 interface SpreadsheetProviderProps<TData extends SpreadsheetRow> {
   children: React.ReactNode;
-  columns: ColumnDef<TData, any>[];
+  columns: ColumnDef<TData, unknown>[];
+  // Controlled/Uncontrolled data
+  data?: TData[];
+  onDataChange?: React.Dispatch<React.SetStateAction<TData[]>>;
   initialData?: TData[];
+  // Controlled/Uncontrolled widths
+  columnWidths?: Record<string, number>;
   initialColumnWidths?: Record<string, number>;
-  createRow?: (rowIndex: number) => TData;
-  clearCellValue?: (options: {
+  onColumnWidthsChange?: React.Dispatch<
+    React.SetStateAction<Record<string, number>>
+  >;
+  // Callbacks
+  onCreateRow?: (rowIndex: number) => TData;
+  onDeleteRow?: (rowId: string) => void;
+  onClearCellValue?: (options: {
     row: TData;
     columnId: string;
     value: any;
-  }) => any;
+  }) => void;
 }
 
 export function SpreadsheetProvider<TData extends SpreadsheetRow>({
   children,
   columns,
   initialData,
+  data: controlledData,
+  onDataChange,
+  columnWidths: controlledColumnWidths,
   initialColumnWidths,
-  createRow,
-  clearCellValue,
+  onColumnWidthsChange,
+  onCreateRow,
+  onDeleteRow,
+  onClearCellValue,
 }: SpreadsheetProviderProps<TData>) {
-  const [data, setData] = useState<TData[]>(() => initialData ?? []);
+  // Use controllable state for data
+  const [data, setData] = useControllableState({
+    prop: controlledData,
+    defaultProp: initialData ?? [],
+    onChange: onDataChange,
+  });
   const [selectedCells, setSelectedCells] = useState<Set<string>>(new Set());
   const [editingCell, setEditingCell] = useState<{
     rowId: string;
@@ -98,8 +119,10 @@ export function SpreadsheetProvider<TData extends SpreadsheetRow>({
     rowId: string;
     columnId: string;
   } | null>(null);
-  const [columnWidths, setColumnWidths] = useState<Record<string, number>>(
-    () => {
+  // Use controllable state for column widths
+  const [columnWidths, setColumnWidths] = useControllableState({
+    prop: controlledColumnWidths,
+    defaultProp: (() => {
       const initialWidths: Record<string, number> = {};
       columns.forEach((column) => {
         const id = getColumnId(column);
@@ -108,8 +131,9 @@ export function SpreadsheetProvider<TData extends SpreadsheetRow>({
         }
       });
       return initialWidths;
-    }
-  );
+    })(),
+    onChange: onColumnWidthsChange,
+  });
   const [dragLineVisible, setDragLineVisible] = useState(false);
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const dragLineRef = useRef<HTMLDivElement>(null);
@@ -159,28 +183,19 @@ export function SpreadsheetProvider<TData extends SpreadsheetRow>({
     return createNavigationMap(data, columnMeta);
   }, [data, columnMeta]);
 
-  useEffect(() => {
-    setColumnWidths((prev) => {
-      const next: Record<string, number> = {};
-      columnMeta.forEach(({ id }) => {
-        if (id) {
-          next[id] = prev[id] ?? initialColumnWidths?.[id] ?? 150;
-        }
-      });
-      return next;
-    });
-  }, [columnMeta, initialColumnWidths]);
-
   const addRow = useCallback(() => {
     setData((old) => {
-      const nextRow = createRow?.(old.length) ?? ({} as TData);
+      const nextRow = onCreateRow?.(old.length) ?? ({} as TData);
       return [...old, nextRow];
     });
-  }, [createRow]);
+  }, [onCreateRow]);
 
-  const deleteRow = useCallback((rowId: string) => {
-    setData((old) => old.filter((row) => row.id !== rowId));
-  }, []);
+  const deleteRow = useCallback(
+    (rowId: string) => {
+      setData((old) => old.filter((row) => row.id !== rowId));
+    },
+    [onDeleteRow]
+  );
 
   const clearSelectedCells = useCallback(() => {
     if (selectedCells.size === 0) return;
@@ -195,19 +210,19 @@ export function SpreadsheetProvider<TData extends SpreadsheetRow>({
           const currentRow = newData[rowIndex];
           newData[rowIndex] = {
             ...currentRow,
-            [columnId]: clearCellValue
-              ? clearCellValue({
+            [columnId]: onClearCellValue
+              ? onClearCellValue({
                   row: currentRow,
                   columnId,
                   value: currentRow?.[columnId],
                 })
-              : "",
+              : undefined,
           };
         }
       });
       return newData;
     });
-  }, [clearCellValue, selectedCells]);
+  }, [onClearCellValue, selectedCells]);
 
   const value: SpreadsheetContextType<TData> = {
     data,
