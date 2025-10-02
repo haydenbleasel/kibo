@@ -106,14 +106,14 @@ export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
         <div
           ref={dragLineRef}
           className={cn(
-            "bg-primary dark:bg-primary/80 pointer-events-none absolute top-0 bottom-0 z-50 w-0.5 transition-opacity",
+            "bg-primary pointer-events-none absolute top-0 bottom-0 z-50 w-0.5 transition-opacity",
             dragLineVisible ? "opacity-100" : "opacity-0"
           )}
         />
 
         <div className="bg-muted border-border sticky top-0 z-1 flex border-y">
           {showRowNumbers && (
-            <div className="border-border bg-muted dark:bg-muted/60 text-muted-foreground flex h-10 w-12 items-center justify-center border-r text-xs font-medium shrink-0">
+            <div className="border-border bg-muted text-muted-foreground flex h-10 w-12 items-center justify-center border-r text-xs font-medium shrink-0">
               #
             </div>
           )}
@@ -122,7 +122,7 @@ export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
               key={header.id}
               data-column-id={header.column.id}
               data-column-header
-              className="border-border bg-muted dark:bg-muted/60 text-muted-foreground hover:bg-muted/80 dark:hover:bg-muted/70 relative flex h-10 cursor-default items-center border-r pl-1 text-left text-xs font-medium transition-colors shrink-0"
+              className="border-border bg-muted text-muted-foreground relative flex h-10 cursor-default items-center border-r pl-1 text-left text-xs font-medium transition-colors shrink-0"
               style={{
                 width: `calc(var(--col-${header.column.id}-size) * 1px)`,
               }}
@@ -145,6 +145,9 @@ export const Spreadsheet = React.forwardRef<HTMLDivElement, SpreadsheetProps>(
               />
             </div>
           ))}
+          {showRowNumbers && (
+            <div className="border-border bg-muted text-muted-foreground flex h-10 w-12 items-center justify-center border-r text-xs font-medium shrink-0" />
+          )}
         </div>
 
         <div ref={tableContainerRef} className="flex-1">
