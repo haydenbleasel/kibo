@@ -26,20 +26,6 @@ const Layout = ({ children }: LayoutProps) => (
     suppressHydrationWarning
   >
     <body className="flex min-h-screen flex-col">
-      <Banner variant="rainbow">
-        <span className="hidden sm:inline">Looking for the AI components? They're now</span>
-        <span className="sm:hidden">AI Components are now</span>
-        <a
-          className="mx-1 font-semibold underline"
-          href="https://ai-sdk.dev/elements?ref=kibo"
-          rel="noopener"
-          target="_blank"
-        >
-          AI Elements
-        </a>
-        <span>by Vercel.</span>
-      </Banner>
-
       <ThemeProvider>
         <RootProvider>
           <TooltipProvider>{children}</TooltipProvider>
