@@ -37,7 +37,6 @@
     "@repo/image-crop": "workspace:*",
     "@repo/image-zoom": "workspace:*",
     "@repo/kanban": "workspace:*",
-    "@repo/kbd": "workspace:*",
     "@repo/list": "workspace:*",
     "@repo/marquee": "workspace:*",
     "@repo/mini-calendar": "workspace:*",

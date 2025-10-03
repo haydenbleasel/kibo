@@ -120,9 +120,6 @@ importers:
       '@repo/kanban':
         specifier: workspace:*
         version: link:../../packages/kanban
-      '@repo/kbd':
-        specifier: workspace:*
-        version: link:../../packages/kbd
       '@repo/list':
         specifier: workspace:*
         version: link:../../packages/list
@@ -996,34 +993,6 @@ importers:
       tunnel-rat:
         specifier: ^0.1.2
         version: 0.1.2(@types/react@19.1.12)(immer@10.1.1)(react@19.1.1)
-    devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@types/react':
-        specifier: ^19.1.12
-        version: 19.1.12
-      '@types/react-dom':
-        specifier: ^19.1.9
-        version: 19.1.9(@types/react@19.1.12)
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.2
-
-  packages/kbd:
-    dependencies:
-      '@repo/shadcn-ui':
-        specifier: workspace:*
-        version: link:../shadcn-ui
-      react:
-        specifier: ^19.1.1
-        version: 19.1.1
-      react-dom:
-        specifier: ^19.1.1
-        version: 19.1.1(react@19.1.1)
-      ts-key-enum:
-        specifier: ^3.0.13
-        version: 3.0.13
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -8661,9 +8630,6 @@ packages:
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
-
-  ts-key-enum@3.0.13:
-    resolution: {integrity: sha512-2J5QVm+HLfToI6IpJQADzYYWvJQ0P9i8qV0loewy5UQ9PBcwILkw09te/+NPu6aw8OXIn9jVYOT6xCBZnGg8Yg==}
 
   ts-morph@26.0.0:
     resolution: {integrity: sha512-ztMO++owQnz8c/gIENcM9XfCEzgoGphTv+nKpYNM1bgsdOVC/jRZuEBf6N+mLLDNg68Kl+GgUZfOySaRiG1/Ug==}
@@ -17131,8 +17097,6 @@ snapshots:
       - typescript
 
   ts-interface-checker@0.1.13: {}
-
-  ts-key-enum@3.0.13: {}
 
   ts-morph@26.0.0:
     dependencies:
