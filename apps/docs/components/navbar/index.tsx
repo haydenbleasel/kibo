@@ -32,7 +32,7 @@ export const Navbar = () => (
       >
         <Logo />
       </Link>
-      <Links className="hidden md:flex gap-0.5" links={links} />
+      <Links className="hidden gap-1 md:flex" links={links} />
     </div>
 
     <div className="hidden items-center gap-3 md:flex">
