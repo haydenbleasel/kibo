@@ -4,7 +4,7 @@ import { Spinner, type SpinnerProps } from "@repo/spinner";
 
 const variants: SpinnerProps["variant"][] = [
   "default",
-  "circle",
+  "throbber",
   "pinwheel",
   "circle-filled",
   "ellipsis",

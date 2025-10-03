@@ -1,16 +1,26 @@
 ---
 title: Spinner
-description: A spinner is a visual indicator that shows progress or activity.
+description: The Spinner component expands the shadcn spinner component with additional variants.
 icon: Loader
 dependencies:
   - https://lucide.dev/
 installer: spinner
 ---
 
+You can replace the shadcn spinner with this component to get the additional variants.
+
+```tsx
+import { Spinner } from "@/components/ui/spinner"; // [!code --]
+import { Spinner } from "@/components/kibo-ui/spinner"; // [!code ++]
+```
+
 ## Features
 
-- Drag and drop items between groups
-- Customize the item contents
+- Multiple size variants (sm, default, lg)
+- Multiple variants (throbber, pinwheel, circle-filled, etc.)
+- Default variant is the [shadcn spinner](https://ui.shadcn.com/docs/components/spinner)
+- Customizable colors and styles
+- Accessible loading indicator
 
 ## Examples
 

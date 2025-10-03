@@ -1,3 +1,4 @@
+import { Spinner as ShadcnSpinner } from "@repo/shadcn-ui/components/ui/spinner";
 import {
   LoaderCircleIcon,
   LoaderIcon,
@@ -8,12 +9,8 @@ import { cn } from "@/lib/utils";
 
 type SpinnerVariantProps = Omit<SpinnerProps, "variant">;
 
-const Default = ({ className, ...props }: SpinnerVariantProps) => (
+const Throbber = ({ className, ...props }: SpinnerVariantProps) => (
   <LoaderIcon className={cn("animate-spin", className)} {...props} />
-);
-
-const Circle = ({ className, ...props }: SpinnerVariantProps) => (
-  <LoaderCircleIcon className={cn("animate-spin", className)} {...props} />
 );
 
 const Pinwheel = ({ className, ...props }: SpinnerVariantProps) => (
@@ -240,20 +237,20 @@ const Infinite = ({ size = 24, ...props }: SpinnerVariantProps) => (
 
 export type SpinnerProps = LucideProps & {
   variant?:
-    | "default"
-    | "circle"
-    | "pinwheel"
-    | "circle-filled"
-    | "ellipsis"
-    | "ring"
-    | "bars"
-    | "infinite";
+  | "default"
+  | "throbber"
+  | "pinwheel"
+  | "circle-filled"
+  | "ellipsis"
+  | "ring"
+  | "bars"
+  | "infinite";
 };
 
 export const Spinner = ({ variant, ...props }: SpinnerProps) => {
   switch (variant) {
-    case "circle":
-      return <Circle {...props} />;
+    case "throbber":
+      return <Throbber {...props} />;
     case "pinwheel":
       return <Pinwheel {...props} />;
     case "circle-filled":
@@ -267,6 +264,6 @@ export const Spinner = ({ variant, ...props }: SpinnerProps) => {
     case "infinite":
       return <Infinite {...props} />;
     default:
-      return <Default {...props} />;
+      return <ShadcnSpinner className={cn("size-6", props.className)} {...props} />;
   }
 };
