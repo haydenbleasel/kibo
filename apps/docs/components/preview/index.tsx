@@ -35,7 +35,7 @@ export const Preview = async ({
 
   const parsedCode = code
     .replace(/@repo\/shadcn-ui\//g, "@/")
-    .replace(/@repo\//g, "@/components/ui/kibo-ui/")
+    .replace(/@repo\//g, "@/components/kibo-ui/")
 
     // Remove typography import
     .replace(/^import\s+["']@\/components\/ui\/kibo-ui\/typography["'];?\n?/gm, "");
@@ -43,7 +43,7 @@ export const Preview = async ({
   const sourceComponentNames =
     parsedCode
       .match(/@\/components\/ui\/kibo-ui\/([^'"`]+)/g)
-      ?.map((match) => match.replace("@/components/ui/kibo-ui/", "")) || [];
+      ?.map((match) => match.replace("@/components/kibo-ui/", "")) || [];
 
   const sourceComponents: { name: string; source: string }[] = [];
 

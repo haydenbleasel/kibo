@@ -23,7 +23,7 @@ type PreviewSourceProps = {
 const parseCode = (code: string) =>
   code
     .replace(/@repo\/shadcn-ui\//g, "@/")
-    .replace(/@repo\//g, "@/components/ui/kibo-ui/");
+    .replace(/@repo\//g, "@/components/kibo-ui/");
 
 export const PreviewSource = ({ source }: PreviewSourceProps) => (
   <Accordion collapsible defaultValue={source.at(0)?.name} type="single">

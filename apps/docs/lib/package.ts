@@ -50,7 +50,7 @@ export const getPackage = async (packageName: string) => {
       type: "registry:ui",
       path: file.name,
       content,
-      target: `components/ui/kibo-ui/${packageName}/${file.name}`,
+      target: `components/kibo-ui/${packageName}/${file.name}`,
     });
   }
 
