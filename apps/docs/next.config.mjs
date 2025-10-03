@@ -189,6 +189,11 @@ const config = {
         destination: "/components/theme-switcher",
         permanent: true,
       },
+      {
+        source: "/components/kbd",
+        destination: "https://ui.shadcn.com/docs/components/kbd",
+        permanent: true,
+      }
     ];
   },
 
