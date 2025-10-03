@@ -21,7 +21,7 @@ export const DemoVideo = ({ url }: DemoVideoProps) => (
       loop
       muted
       playing
-      playsinline
+      playsInline
       src={url}
       style={{
         position: "absolute",
