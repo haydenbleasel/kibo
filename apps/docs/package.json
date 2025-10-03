@@ -63,7 +63,7 @@
     "@tailwindcss/postcss": "^4.1.12",
     "@vercel/analytics": "^1.5.0",
     "date-fns": "^4.1.0",
-    "fumadocs-core": "15.3.3",
+    "fumadocs-core": "15.8.2",
     "fumadocs-mdx": "11.6.7",
     "fumadocs-typescript": "^4.0.4",
     "fumadocs-ui": "15.3.3",
