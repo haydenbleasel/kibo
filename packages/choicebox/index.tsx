@@ -1,17 +1,23 @@
 "use client";
 
-import { RadioGroup } from "@repo/shadcn-ui/components/ui/radio-group";
-import { cn } from "@repo/shadcn-ui/lib/utils";
-import { CircleIcon } from "lucide-react";
-import { RadioGroup as RadioGroupPrimitive } from "radix-ui";
-import type { ComponentProps, HTMLAttributes } from "react";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  RadioGroup,
+  RadioGroupItem,
+} from "@repo/shadcn-ui/components/ui/radio-group";
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import {
+  type ComponentProps,
+  createContext,
+  type HTMLAttributes,
+  useContext,
+} from "react";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+  FieldTitle,
+} from "@/components/ui/field";
 
 export type ChoiceboxProps = ComponentProps<typeof RadioGroup>;
 
@@ -19,53 +25,57 @@ export const Choicebox = ({ className, ...props }: ChoiceboxProps) => (
   <RadioGroup className={cn("w-full", className)} {...props} />
 );
 
-export type ChoiceboxItemProps = RadioGroupPrimitive.RadioGroupItemProps;
+type ChoiceboxItemContextValue = {
+  value: ChoiceboxItemProps['value'];
+  id?: ChoiceboxItemProps['id'];
+};
+
+const ChoiceboxItemContext = createContext<ChoiceboxItemContextValue | null>(
+  null
+);
+
+const useChoiceboxItemContext = () => {
+  const context = useContext(ChoiceboxItemContext);
+
+  if (!context) {
+    throw new Error('useChoiceboxItemContext must be used within a ChoiceboxItem');
+  }
+
+  return context;
+};
+
+export type ChoiceboxItemProps = ComponentProps<typeof RadioGroupItem>;
 
 export const ChoiceboxItem = ({
   className,
   children,
-  ...props
+  value,
+  id,
 }: ChoiceboxItemProps) => (
-  <RadioGroupPrimitive.Item
-    asChild
-    className={cn(
-      "text-left",
-      '[&[data-state="checked"]]:border-primary',
-      '[&[data-state="checked"]]:bg-primary/15'
-    )}
-    {...props}
-  >
-    <Card
-      className={cn(
-        "flex cursor-pointer flex-row items-start justify-between rounded-md p-4 shadow-none transition-all",
-        className
-      )}
-    >
-      {children}
-    </Card>
-  </RadioGroupPrimitive.Item>
+  <ChoiceboxItemContext.Provider value={{ value, id }}>
+    <FieldLabel htmlFor={id}>
+      <Field className={className} orientation="horizontal">
+        {children}
+      </Field>
+    </FieldLabel>
+  </ChoiceboxItemContext.Provider>
 );
 
-export type ChoiceboxItemHeaderProps = ComponentProps<typeof CardHeader>;
+export type ChoiceboxItemHeaderProps = ComponentProps<typeof FieldContent>;
 
 export const ChoiceboxItemHeader = ({
   className,
   ...props
-}: ComponentProps<typeof CardHeader>) => (
-  <CardHeader className={cn("flex-1 p-0", className)} {...props} />
+}: ChoiceboxItemHeaderProps) => (
+  <FieldContent className={className} {...props} />
 );
 
-export type ChoiceboxItemTitleProps = ComponentProps<typeof CardTitle>;
+export type ChoiceboxItemTitleProps = ComponentProps<typeof FieldTitle>;
 
 export const ChoiceboxItemTitle = ({
   className,
   ...props
-}: ChoiceboxItemTitleProps) => (
-  <CardTitle
-    className={cn("flex items-center gap-2 text-sm", className)}
-    {...props}
-  />
-);
+}: ChoiceboxItemTitleProps) => <FieldTitle className={className} {...props} />;
 
 export type ChoiceboxItemSubtitleProps = HTMLAttributes<HTMLSpanElement>;
 
@@ -80,40 +90,20 @@ export const ChoiceboxItemSubtitle = ({
 );
 
 export type ChoiceboxItemDescriptionProps = ComponentProps<
-  typeof CardDescription
+  typeof FieldDescription
 >;
 
 export const ChoiceboxItemDescription = ({
   className,
   ...props
 }: ChoiceboxItemDescriptionProps) => (
-  <CardDescription className={cn("text-sm", className)} {...props} />
+  <FieldDescription className={className} {...props} />
 );
 
-export type ChoiceboxItemContentProps = ComponentProps<typeof CardContent>;
+export type ChoiceboxIndicatorProps = Partial<ComponentProps<typeof RadioGroupItem>>;
 
-export const ChoiceboxItemContent = ({
-  className,
-  ...props
-}: ChoiceboxItemContentProps) => (
-  <CardContent
-    className={cn(
-      "flex aspect-square size-4 shrink-0 items-center justify-center rounded-full border border-input p-0 text-primary shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40",
-      className
-    )}
-    {...props}
-  />
-);
+export const ChoiceboxIndicator = (props: ChoiceboxIndicatorProps) => {
+  const context = useChoiceboxItemContext();
 
-export type ChoiceboxItemIndicatorProps = ComponentProps<
-  typeof RadioGroupPrimitive.RadioGroupIndicator
->;
-
-export const ChoiceboxItemIndicator = ({
-  className,
-  ...props
-}: ChoiceboxItemIndicatorProps) => (
-  <RadioGroupPrimitive.Indicator asChild {...props}>
-    <CircleIcon className={cn("size-2 fill-primary", className)} />
-  </RadioGroupPrimitive.Indicator>
-);
+  return <RadioGroupItem {...props} value={context.value} />;
+};

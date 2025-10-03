@@ -2,11 +2,10 @@
 
 import {
   Choicebox,
+  ChoiceboxIndicator,
   ChoiceboxItem,
-  ChoiceboxItemContent,
   ChoiceboxItemDescription,
   ChoiceboxItemHeader,
-  ChoiceboxItemIndicator,
   ChoiceboxItemTitle,
 } from "@repo/choicebox";
 import {
@@ -184,9 +183,7 @@ const Example = () => {
                     {type.description}
                   </ChoiceboxItemDescription>
                 </ChoiceboxItemHeader>
-                <ChoiceboxItemContent>
-                  <ChoiceboxItemIndicator />
-                </ChoiceboxItemContent>
+                <ChoiceboxIndicator />
               </ChoiceboxItem>
             ))}
           </Choicebox>
