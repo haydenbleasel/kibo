@@ -32,17 +32,12 @@ export const Installer = ({ packageName }: InstallerProps) => {
     "kibo-ui": {
       label: "Kibo UI CLI",
       image: kibo,
-      code: `npx kibo-ui@latest add ${packageName}`,
-    },
-    namespace: {
-      label: "Namespace",
-      image: kibo,
-      code: `npx shadcn@beta add @kibo-ui/${packageName}`,
+      code: `npx kibo-ui add ${packageName}`,
     },
     shadcn: {
       label: "shadcn CLI",
       image: shadcn,
-      code: `npx shadcn@latest add https://www.kibo-ui.com/r/${packageName}.json`,
+      code: `npx shadcn add @kibo-ui/${packageName}`,
     },
   };
 
@@ -64,25 +59,6 @@ export const Installer = ({ packageName }: InstallerProps) => {
                 width={14}
               />
               {command.label}
-              {key === "namespace" && (
-                <Tooltip>
-                  <TooltipTrigger>
-                    <InfoIcon className="size-4" />
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-sm text-sm">
-                    Kibo UI is a{" "}
-                    <a
-                      className="underline"
-                      href="https://github.com/shadcn-ui/ui/blob/main/apps/v4/public/r/registries.json"
-                    >
-                      trusted registry
-                    </a>{" "}
-                    so you can use it without configuring your{" "}
-                    <code className="font-mono text-xs">components.json</code>{" "}
-                    file.
-                  </TooltipContent>
-                </Tooltip>
-              )}
             </SnippetTabsTrigger>
           ))}
         </SnippetTabsList>
