@@ -67,7 +67,7 @@ export const Links = ({
           {Boolean(link.count) && (
             <Badge
               className={cn(
-                "ml-1.5 bg-foreground/5",
+                "ml-1.5 hidden bg-foreground/5 lg:block",
                 link.active && "bg-primary text-primary-foreground"
               )}
               variant="secondary"
