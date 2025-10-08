@@ -18,6 +18,9 @@ const blocksCount = source
   .getPages()
   .filter(({ slugs }) => slugs[0] === "blocks").length;
 
+const compsPath = path.join(process.cwd(), "pro/components/registry");
+const compsCount = globSync(`${compsPath}/**/*.tsx`).length;
+
 export const Navbar = () => (
   <div className="fixed inset-x-0 top-(--fd-banner-height) z-40 flex items-center justify-between bg-fd-background/80 px-4 py-3 backdrop-blur-sm transition-colors">
     <div className="flex items-center gap-3">
@@ -31,6 +34,7 @@ export const Navbar = () => (
         blocksCount={blocksCount}
         className="hidden gap-1 md:flex"
         componentsCount={componentsCount}
+        compsCount={compsCount}
       />
     </div>
 
