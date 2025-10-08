@@ -1,6 +1,7 @@
 import path from "node:path";
 import { globSync } from "glob";
 import Link from "next/link";
+import { processFolderName } from "../../lib/comps";
 import { source } from "../../lib/source";
 import { Logo } from "../navbar/logo";
 import { Theme } from "./theme";
@@ -23,13 +24,6 @@ const componentsRight = components.slice(componentsHalf);
 const compsHalf = Math.ceil(compFolders.length / 2);
 const compsLeft = compFolders.slice(0, compsHalf);
 const compsRight = compFolders.slice(compsHalf);
-
-const processFolderName = (name: string) => {
-  return name
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
 
 export const Footer = () => (
   <footer className="mt-16 grid gap-8 py-8">

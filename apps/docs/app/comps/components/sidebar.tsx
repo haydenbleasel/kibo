@@ -21,6 +21,7 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import type * as React from "react";
 import { Project } from "ts-morph";
+import { processFolderName } from "../../../lib/comps";
 import { CompSidebarLink } from "./link";
 
 const basePath = path.join(process.cwd(), "../../packages/comps");
@@ -112,13 +113,13 @@ for (const component of components) {
       }
 
       subgroups.push({
-        name: subdir.name,
+        name: processFolderName(subdir.name),
         items: subItems,
       });
     }
 
     pages.push({
-      name: component.name,
+      name: processFolderName(component.name),
       subgroups,
     });
   } else {
@@ -161,14 +162,11 @@ for (const component of components) {
 export const CompsSidebar = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => (
-  <Sidebar
-    {...props}
-    className="absolute h-full border-none"
-  >
+  <Sidebar {...props} className="absolute h-full border-none">
     <SidebarContent>
       {pages.map((page) => (
         <SidebarGroup key={page.name}>
-          <SidebarGroupLabel className="capitalize">
+          <SidebarGroupLabel>
             {page.name}
           </SidebarGroupLabel>
           <SidebarGroupContent>
