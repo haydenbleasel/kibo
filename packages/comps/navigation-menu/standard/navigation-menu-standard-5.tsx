@@ -12,41 +12,67 @@ import {
 
 export const title = "Mixed Links and Dropdowns";
 
+const menuItems = [
+  {
+    type: "dropdown" as const,
+    trigger: "Products",
+    items: [
+      { label: "Analytics", href: "#" },
+      { label: "Marketing", href: "#" },
+      { label: "Commerce", href: "#" },
+    ],
+  },
+  {
+    type: "link" as const,
+    label: "Pricing",
+    href: "#",
+  },
+  {
+    type: "link" as const,
+    label: "About",
+    href: "#",
+  },
+  {
+    type: "dropdown" as const,
+    trigger: "Support",
+    items: [
+      { label: "Help Center", href: "#" },
+      { label: "Contact Us", href: "#" },
+      { label: "Status", href: "#" },
+    ],
+  },
+];
+
 const Example = () => (
-  <div className="pb-[50vh]">
-    <div className="w-full max-w-md bg-background rounded-md p-px border">
+  <div className="pr-[50vw] pb-[50vh]">
+    <div className="w-full max-w-md rounded-md border bg-background p-px">
       <NavigationMenu>
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="w-48 p-2">
-                <NavigationMenuLink href="#">Analytics</NavigationMenuLink>
-                <NavigationMenuLink href="#">Marketing</NavigationMenuLink>
-                <NavigationMenuLink href="#">Commerce</NavigationMenuLink>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="#" className={navigationMenuTriggerStyle()}>
-              Pricing
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="#" className={navigationMenuTriggerStyle()}>
-              About
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Support</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="w-48 p-2">
-                <NavigationMenuLink href="#">Help Center</NavigationMenuLink>
-                <NavigationMenuLink href="#">Contact Us</NavigationMenuLink>
-                <NavigationMenuLink href="#">Status</NavigationMenuLink>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+          {menuItems.map((item, index) =>
+            item.type === "dropdown" ? (
+              <NavigationMenuItem key={index}>
+                <NavigationMenuTrigger>{item.trigger}</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-48 p-2">
+                    {item.items.map((subItem, subIndex) => (
+                      <NavigationMenuLink href={subItem.href} key={subIndex}>
+                        {subItem.label}
+                      </NavigationMenuLink>
+                    ))}
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            ) : (
+              <NavigationMenuItem key={index}>
+                <NavigationMenuLink
+                  className={navigationMenuTriggerStyle()}
+                  href={item.href}
+                >
+                  {item.label}
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            )
+          )}
         </NavigationMenuList>
       </NavigationMenu>
     </div>

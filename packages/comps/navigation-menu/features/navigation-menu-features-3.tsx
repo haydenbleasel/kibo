@@ -1,6 +1,14 @@
 "use client";
 
 import {
+  BarChart,
+  Calendar,
+  FileText,
+  MessageSquare,
+  Settings,
+  Users,
+} from "lucide-react";
+import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -8,102 +16,105 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  Users,
-  MessageSquare,
-  Calendar,
-  FileText,
-  BarChart,
-  Settings,
-} from "lucide-react";
 
 export const title = "Feature Sections with Headers";
 
+const sections = [
+  {
+    title: "Team Tools",
+    items: [
+      {
+        icon: Users,
+        label: "Team Management",
+        description: "Organize and manage your team members",
+        href: "#",
+      },
+      {
+        icon: MessageSquare,
+        label: "Team Chat",
+        description: "Real-time messaging and collaboration",
+        href: "#",
+      },
+    ],
+  },
+  {
+    title: "Project Tools",
+    items: [
+      {
+        icon: Calendar,
+        label: "Project Timeline",
+        description: "Track milestones and deadlines",
+        href: "#",
+      },
+      {
+        icon: FileText,
+        label: "Documentation",
+        description: "Shared knowledge base and wikis",
+        href: "#",
+      },
+    ],
+  },
+  {
+    title: "Management",
+    items: [
+      {
+        icon: BarChart,
+        label: "Reports",
+        description: "Team performance and insights",
+        href: "#",
+      },
+      {
+        icon: Settings,
+        label: "Settings",
+        description: "Configure team preferences",
+        href: "#",
+      },
+    ],
+  },
+];
+
 const Example = () => (
-  <div className="pb-[50vh]">
-    <div className="w-full max-w-md bg-background rounded-md p-px border">
+  <div className="pr-[50vw] pb-[50vh]">
+    <div className="w-full max-w-md rounded-md border bg-background p-px">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Collaboration</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[500px] p-4">
-              <div className="space-y-4">
-                <div>
-                  <h4 className="mb-2 text-sm font-semibold">Team Tools</h4>
-                  <div className="space-y-1">
-                    <NavigationMenuLink href="#">
-                      <Users className="h-4 w-4" />
-                      <div>
-                        <span className="font-medium">Team Management</span>
-                        <span className="text-muted-foreground">
-                          Organize and manage your team members
-                        </span>
+              <div className="w-[400px] p-4">
+                <div className="space-y-4">
+                  {sections.map((section) => (
+                    <div key={section.title}>
+                      <h4 className="mb-2 font-semibold text-sm">
+                        {section.title}
+                      </h4>
+                      <div className="space-y-1">
+                        {section.items.map((item) => (
+                          <NavigationMenuLink
+                            className="flex flex-row items-start gap-2"
+                            href={item.href}
+                            key={item.label}
+                          >
+                            <item.icon className="mt-1 size-4" />
+                            <div>
+                              <span className="block font-medium">
+                                {item.label}
+                              </span>
+                              <span className="block text-muted-foreground">
+                                {item.description}
+                              </span>
+                            </div>
+                          </NavigationMenuLink>
+                        ))}
                       </div>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink href="#">
-                      <MessageSquare className="h-4 w-4" />
-                      <div>
-                        <span className="font-medium">Team Chat</span>
-                        <span className="text-muted-foreground">
-                          Real-time messaging and collaboration
-                        </span>
-                      </div>
-                    </NavigationMenuLink>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="mb-2 text-sm font-semibold">Project Tools</h4>
-                  <div className="space-y-1">
-                    <NavigationMenuLink href="#">
-                      <Calendar className="h-4 w-4" />
-                      <div>
-                        <span className="font-medium">Project Timeline</span>
-                        <span className="text-muted-foreground">
-                          Track milestones and deadlines
-                        </span>
-                      </div>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink href="#">
-                      <FileText className="h-4 w-4" />
-                      <div>
-                        <span className="font-medium">Documentation</span>
-                        <span className="text-muted-foreground">
-                          Shared knowledge base and wikis
-                        </span>
-                      </div>
-                    </NavigationMenuLink>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="mb-2 text-sm font-semibold">Management</h4>
-                  <div className="space-y-1">
-                    <NavigationMenuLink href="#">
-                      <BarChart className="h-4 w-4" />
-                      <div>
-                        <span className="font-medium">Reports</span>
-                        <span className="text-muted-foreground">
-                          Team performance and insights
-                        </span>
-                      </div>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink href="#">
-                      <Settings className="h-4 w-4" />
-                      <div>
-                        <span className="font-medium">Settings</span>
-                        <span className="text-muted-foreground">
-                          Configure team preferences
-                        </span>
-                      </div>
-                    </NavigationMenuLink>
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
     </div>
   </div>
 );

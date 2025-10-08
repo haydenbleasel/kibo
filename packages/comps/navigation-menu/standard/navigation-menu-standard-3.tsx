@@ -1,5 +1,6 @@
 "use client";
 
+import { Book, FileText, Video } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,46 +9,53 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { FileText, Book, Video } from "lucide-react";
 
 export const title = "Navigation with Descriptions";
 
+const resources = [
+  {
+    icon: FileText,
+    label: "Documentation",
+    description: "Learn how to integrate our tools",
+    href: "#",
+  },
+  {
+    icon: Book,
+    label: "Guides & Tutorials",
+    description: "Step-by-step guides to get started",
+    href: "#",
+  },
+  {
+    icon: Video,
+    label: "Video Courses",
+    description: "Learn at your own pace with videos",
+    href: "#",
+  },
+];
+
 const Example = () => (
-  <div className="pb-[50vh]">
-    <div className="w-full max-w-md bg-background rounded-md p-px border">
+  <div className="pr-[50vw] pb-[50vh]">
+    <div className="w-full max-w-md rounded-md border bg-background p-px">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="w-80 p-2">
-                <NavigationMenuLink href="#">
-                  <FileText />
-                  <div>
-                    <span className="font-medium">Documentation</span>
-                    <span className="text-muted-foreground">
-                      Learn how to integrate our tools
-                    </span>
-                  </div>
-                </NavigationMenuLink>
-                <NavigationMenuLink href="#">
-                  <Book />
-                  <div>
-                    <span className="font-medium">Guides & Tutorials</span>
-                    <span className="text-muted-foreground">
-                      Step-by-step guides to get started
-                    </span>
-                  </div>
-                </NavigationMenuLink>
-                <NavigationMenuLink href="#">
-                  <Video />
-                  <div>
-                    <span className="font-medium">Video Courses</span>
-                    <span className="text-muted-foreground">
-                      Learn at your own pace with videos
-                    </span>
-                  </div>
-                </NavigationMenuLink>
+                {resources.map((resource, index) => {
+                  const Icon = resource.icon;
+                  return (
+                    <NavigationMenuLink href={resource.href} key={index}>
+                      <Icon />
+                      <div>
+                        <span className="font-medium">{resource.label}</span>
+                        <span className="text-muted-foreground">
+                          {resource.description}
+                        </span>
+                      </div>
+                    </NavigationMenuLink>
+                  );
+                })}
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>

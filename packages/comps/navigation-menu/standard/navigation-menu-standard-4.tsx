@@ -11,33 +11,46 @@ import {
 
 export const title = "Navigation without Viewport";
 
+const menuSections = [
+  {
+    trigger: "Products",
+    items: [
+      { label: "Product 1", href: "#" },
+      { label: "Product 2", href: "#" },
+      { label: "Product 3", href: "#" },
+      { label: "Product 4", href: "#" },
+    ],
+  },
+  {
+    trigger: "Company",
+    items: [
+      { label: "About", href: "#" },
+      { label: "Team", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Contact", href: "#" },
+    ],
+  },
+];
+
 const Example = () => (
-  <div className="pb-[50vh]">
-    <div className="w-full max-w-md bg-background rounded-md p-px border">
+  <div className="pr-[50vw] pb-[50vh]">
+    <div className="w-full max-w-md rounded-md border bg-background p-px">
       <NavigationMenu viewport={false}>
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="w-48 p-2">
-                <NavigationMenuLink href="#">Product 1</NavigationMenuLink>
-                <NavigationMenuLink href="#">Product 2</NavigationMenuLink>
-                <NavigationMenuLink href="#">Product 3</NavigationMenuLink>
-                <NavigationMenuLink href="#">Product 4</NavigationMenuLink>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Company</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="w-48 p-2">
-                <NavigationMenuLink href="#">About</NavigationMenuLink>
-                <NavigationMenuLink href="#">Team</NavigationMenuLink>
-                <NavigationMenuLink href="#">Careers</NavigationMenuLink>
-                <NavigationMenuLink href="#">Contact</NavigationMenuLink>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+          {menuSections.map((section, index) => (
+            <NavigationMenuItem key={index}>
+              <NavigationMenuTrigger>{section.trigger}</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="w-48 p-2">
+                  {section.items.map((item, itemIndex) => (
+                    <NavigationMenuLink href={item.href} key={itemIndex}>
+                      {item.label}
+                    </NavigationMenuLink>
+                  ))}
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          ))}
         </NavigationMenuList>
       </NavigationMenu>
     </div>
