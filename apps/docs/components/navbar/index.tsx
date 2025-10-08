@@ -8,7 +8,6 @@ import { Logo } from "./logo";
 import { MobileMenu } from "./mobile-menu";
 import { MobileSearch } from "./mobile-search";
 import { Search } from "./search";
-import { Theme } from "./theme";
 
 const componentsCount = source
   .getPages()
@@ -40,10 +39,7 @@ export const Navbar = () => (
 
     <div className="hidden items-center gap-3 md:flex">
       <Search />
-      <div className="hidden items-center gap-1 lg:flex">
-        <GitHub />
-        <Theme />
-      </div>
+      <GitHub />
     </div>
 
     <div className="flex items-center gap-3 md:hidden">
