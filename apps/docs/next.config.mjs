@@ -194,6 +194,11 @@ const config = {
         destination: "https://ui.shadcn.com/docs/components/kbd",
         permanent: true,
       },
+      {
+        source: '/comps',
+        destination: '/comps/accordion/form/accordion-form-1',
+        permanent: false,
+      }
     ];
   },
 
