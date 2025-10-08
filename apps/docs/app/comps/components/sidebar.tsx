@@ -210,6 +210,5 @@ export const CompsSidebar = ({
         </SidebarGroup>
       ))}
     </SidebarContent>
-    <SidebarRail />
   </Sidebar>
 );
