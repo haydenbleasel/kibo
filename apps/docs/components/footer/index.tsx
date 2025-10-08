@@ -107,7 +107,7 @@ export const Footer = () => (
         </ul>
       </div>
       <div className="col-span-2">
-        <h3 className="font-medium text-sm">Comps</h3>
+        <h3 className="font-medium text-sm">Compositions</h3>
         <div className="grid grid-cols-2 gap-4">
           <ul className="mt-2 space-y-1 text-sm">
             {compsLeft.map((folder) => (
