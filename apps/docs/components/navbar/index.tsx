@@ -18,7 +18,7 @@ const blocksCount = source
   .getPages()
   .filter(({ slugs }) => slugs[0] === "blocks").length;
 
-const compsPath = path.join(process.cwd(), "pro/components/registry");
+const compsPath = path.join(process.cwd(), "../../packages/comps");
 const compsCount = globSync(`${compsPath}/**/*.tsx`).length;
 
 export const Navbar = () => (

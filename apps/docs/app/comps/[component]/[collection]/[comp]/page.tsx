@@ -14,7 +14,7 @@ type Props = {
   }>;
 };
 
-const basePath = path.join(process.cwd(), "pro/components/registry");
+const basePath = path.join(process.cwd(), "../../packages/comps");
 
 const ComponentCompPage = async ({ params }: Props) => {
   const { component, collection, comp } = await params;
@@ -43,7 +43,7 @@ const ComponentCompPage = async ({ params }: Props) => {
     title = titleDeclaration ? titleDeclaration.replaceAll('"', "") : comp;
 
     // Dynamically import the component
-    const module = await import(`@pro/components/registry/${component}/${collection}/${comp}`);
+    const module = await import(`@repo/comps/${component}/${collection}/${comp}`);
     Component = module.default;
   } catch {
     notFound();

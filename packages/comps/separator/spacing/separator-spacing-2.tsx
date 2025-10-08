@@ -1,0 +1,13 @@
+import { Separator } from "@/components/ui/separator";
+
+export const title = "Default Spacing";
+
+const Example = () => (
+  <div className="space-y-4">
+    <p className="text-sm">Section 1</p>
+    <Separator />
+    <p className="text-sm">Section 2</p>
+  </div>
+);
+
+export default Example;

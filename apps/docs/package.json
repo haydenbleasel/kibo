@@ -26,6 +26,7 @@
     "@repo/color-picker": "workspace:*",
     "@repo/combobox": "workspace:*",
     "@repo/comparison": "workspace:*",
+    "@repo/comps": "workspace:*",
     "@repo/contribution-graph": "workspace:*",
     "@repo/credit-card": "workspace:*",
     "@repo/cursor": "workspace:*",

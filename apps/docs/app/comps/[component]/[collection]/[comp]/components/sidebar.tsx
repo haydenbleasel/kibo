@@ -23,7 +23,7 @@ import type * as React from "react";
 import { Project } from "ts-morph";
 import { CompSidebarLink } from "./link";
 
-const basePath = path.join(process.cwd(), "pro/components/registry");
+const basePath = path.join(process.cwd(), "../../packages/comps");
 
 const directory = readdirSync(basePath, {
   withFileTypes: true,
