@@ -11,15 +11,16 @@ type CompsLayoutProps = {
 
 const CompsAuthenticatedLayout = ({ children }: CompsLayoutProps) => (
   <div
+    className="h-full"
     style={
       {
         "--sidebar": "transparent",
       } as CSSProperties
     }
   >
-    <SidebarProvider className="min-h-full">
+    <SidebarProvider className="h-full">
       <CompsSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset className="h-full">{children}</SidebarInset>
     </SidebarProvider>
   </div>
 );

@@ -31,7 +31,7 @@ export const ComponentPreview = ({
 
   return (
     <Tabs
-      className="mt-2 h-full gap-0"
+      className="mt-2 mb-4 flex h-[calc(100%-4.5rem)] flex-col gap-0"
       onValueChange={setActiveTab}
       value={activeTab}
     >
@@ -63,12 +63,12 @@ export const ComponentPreview = ({
           <TabsTrigger value="code">Code</TabsTrigger>
         </TabsList>
       </header>
-      <TabsContent className="px-6 py-4" value="preview">
+      <TabsContent className="flex-1 px-6 py-4" value="preview">
         <div className="flex size-full items-center justify-center rounded-lg bg-secondary/50 p-8">
           {children}
         </div>
       </TabsContent>
-      <TabsContent className="px-6 py-4" value="code">
+      <TabsContent className="flex-1 px-6 py-4" value="code">
         <div className="size-full [&_figure]:border-none [&_figure]:bg-secondary/50">
           <DynamicCodeBlock code={code} lang="tsx" />
         </div>
