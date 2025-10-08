@@ -1,9 +1,9 @@
 import {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationEllipsis,
 } from "@/components/ui/pagination";
 
 export const title = "With Ellipsis";

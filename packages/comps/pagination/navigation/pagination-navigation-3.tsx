@@ -11,7 +11,7 @@ const Example = () => (
   <Pagination>
     <PaginationContent>
       <PaginationItem>
-        <PaginationLink href="#" className="gap-1 px-2.5">
+        <PaginationLink className="gap-1 px-2.5" href="#">
           First
         </PaginationLink>
       </PaginationItem>
@@ -21,7 +21,7 @@ const Example = () => (
         </PaginationLink>
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" className="gap-1 px-2.5">
+        <PaginationLink className="gap-1 px-2.5" href="#">
           Last
         </PaginationLink>
       </PaginationItem>

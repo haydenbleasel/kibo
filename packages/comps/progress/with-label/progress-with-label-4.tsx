@@ -11,7 +11,9 @@ const Example = () => {
     <div className="w-full max-w-md space-y-2">
       <div className="flex justify-between text-sm">
         <span className="text-muted-foreground">Tasks completed</span>
-        <span className="font-medium">{current} of {total}</span>
+        <span className="font-medium">
+          {current} of {total}
+        </span>
       </div>
       <Progress value={value} />
     </div>

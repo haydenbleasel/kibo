@@ -15,7 +15,7 @@ const Example = () => (
     <PopoverTrigger asChild>
       <Button className="relative" size="icon" variant="ghost">
         <Bell className="h-5 w-5" />
-        <Badge className="absolute -right-1 -top-1 h-5 w-5 items-center justify-center rounded-full p-0 text-xs">
+        <Badge className="-right-1 -top-1 absolute h-5 w-5 items-center justify-center rounded-full p-0 text-xs">
           3
         </Badge>
       </Button>

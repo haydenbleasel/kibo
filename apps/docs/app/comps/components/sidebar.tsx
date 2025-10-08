@@ -166,46 +166,44 @@ export const CompsSidebar = ({
     <SidebarContent>
       {pages.map((page) => (
         <SidebarGroup key={page.name}>
-          <SidebarGroupLabel>
-            {page.name}
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>{page.name}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {page.items?.length
                 ? page.items
-                  .sort((a, b) => a.name.localeCompare(b.name))
-                  .map((item) => (
-                    <SidebarMenuItem key={item.name}>
-                      <SidebarMenuButton asChild>
-                        <Link className="truncate" href={item.url}>
-                          {item.name}
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((item) => (
+                      <SidebarMenuItem key={item.name}>
+                        <SidebarMenuButton asChild>
+                          <Link className="truncate" href={item.url}>
+                            {item.name}
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))
                 : null}
               {page.subgroups?.length
                 ? page.subgroups.map((subgroup) => (
-                  <Collapsible key={subgroup.name}>
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton className="capitalize">
-                          {subgroup.name}
-                          <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          {subgroup.items
-                            .sort((a, b) => a.name.localeCompare(b.name))
-                            .map((item) => (
-                              <CompSidebarLink key={item.name} {...item} />
-                            ))}
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-                ))
+                    <Collapsible key={subgroup.name}>
+                      <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                          <SidebarMenuButton className="capitalize">
+                            {subgroup.name}
+                            <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                          </SidebarMenuButton>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <SidebarMenuSub>
+                            {subgroup.items
+                              .sort((a, b) => a.name.localeCompare(b.name))
+                              .map((item) => (
+                                <CompSidebarLink key={item.name} {...item} />
+                              ))}
+                          </SidebarMenuSub>
+                        </CollapsibleContent>
+                      </SidebarMenuItem>
+                    </Collapsible>
+                  ))
                 : null}
             </SidebarMenu>
           </SidebarGroupContent>

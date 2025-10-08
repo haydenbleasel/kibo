@@ -38,7 +38,10 @@ export const Preview = async ({
     .replace(/@repo\//g, "@/components/kibo-ui/")
 
     // Remove typography import
-    .replace(/^import\s+["']@\/components\/ui\/kibo-ui\/typography["'];?\n?/gm, "");
+    .replace(
+      /^import\s+["']@\/components\/ui\/kibo-ui\/typography["'];?\n?/gm,
+      ""
+    );
 
   const sourceComponentNames =
     parsedCode

@@ -7,7 +7,7 @@ const Example = () => {
   return (
     <div className="w-full max-w-md space-y-2">
       <Progress value={value} />
-      <span className="text-sm text-muted-foreground">Almost there!</span>
+      <span className="text-muted-foreground text-sm">Almost there!</span>
     </div>
   );
 };

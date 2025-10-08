@@ -3,8 +3,8 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationPrevious,
   PaginationNext,
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 
 export const title = "With First and Last";
@@ -13,7 +13,7 @@ const Example = () => (
   <Pagination>
     <PaginationContent>
       <PaginationItem>
-        <PaginationLink href="#" className="gap-1 px-2.5">
+        <PaginationLink className="gap-1 px-2.5" href="#">
           First
         </PaginationLink>
       </PaginationItem>
@@ -29,7 +29,7 @@ const Example = () => (
         <PaginationNext href="#" />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" className="gap-1 px-2.5">
+        <PaginationLink className="gap-1 px-2.5" href="#">
           Last
         </PaginationLink>
       </PaginationItem>

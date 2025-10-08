@@ -6,7 +6,7 @@ const Example = () => {
   const value = 45;
   return (
     <div className="w-full max-w-md space-y-2">
-      <span className="text-sm font-medium">Uploading...</span>
+      <span className="font-medium text-sm">Uploading...</span>
       <Progress value={value} />
     </div>
   );

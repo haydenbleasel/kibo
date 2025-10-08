@@ -16,8 +16,17 @@ export const GitHub = async ({ className }: GitHubProps) => {
   const json = await data.json();
 
   return (
-    <Button asChild className={cn("h-8 shadow-none", className)} size="sm" variant="ghost">
-      <a href="https://github.com/haydenbleasel/kibo" rel="noreferrer" target="_blank">
+    <Button
+      asChild
+      className={cn("h-8 shadow-none", className)}
+      size="sm"
+      variant="ghost"
+    >
+      <a
+        href="https://github.com/haydenbleasel/kibo"
+        rel="noreferrer"
+        target="_blank"
+      >
         <SiGithub />
         <span className="text-muted-foreground text-xs tabular-nums">
           {new Intl.NumberFormat("en-US", {

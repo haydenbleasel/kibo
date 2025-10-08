@@ -17,4 +17,4 @@ export const Logo = () => (
     </svg>
     <span className="font-semibold">Kibo UI</span>
   </div>
-)
+);

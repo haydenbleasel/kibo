@@ -2,6 +2,6 @@ import { Progress } from "@/components/ui/progress";
 
 export const title = "Quarter Progress";
 
-const Example = () => <Progress value={25} className="w-full max-w-md" />;
+const Example = () => <Progress className="w-full max-w-md" value={25} />;
 
 export default Example;

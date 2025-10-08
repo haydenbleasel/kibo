@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { processFolderName } from "../../../../../../lib/comps";
 
 type ComponentPreviewProps = {
   component: string;
@@ -42,13 +43,13 @@ export const ComponentPreview = ({
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbPage className="capitalize">
-                  {component}
+                  {processFolderName(component)}
                 </BreadcrumbPage>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbPage className="capitalize">
-                  {collection}
+                  {processFolderName(collection)}
                 </BreadcrumbPage>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />

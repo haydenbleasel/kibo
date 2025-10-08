@@ -195,10 +195,10 @@ const config = {
         permanent: true,
       },
       {
-        source: '/comps',
-        destination: '/comps/accordion/form/accordion-form-1',
+        source: "/comps",
+        destination: "/comps/accordion/form/accordion-form-1",
         permanent: false,
-      }
+      },
     ];
   },
 

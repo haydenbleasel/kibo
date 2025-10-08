@@ -2,8 +2,8 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationPrevious,
   PaginationNext,
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 
 export const title = "With Page Counter";
@@ -15,7 +15,7 @@ const Example = () => (
         <PaginationPrevious href="#" />
       </PaginationItem>
       <PaginationItem>
-        <span className="text-sm text-muted-foreground">Page 2 of 10</span>
+        <span className="text-muted-foreground text-sm">Page 2 of 10</span>
       </PaginationItem>
       <PaginationItem>
         <PaginationNext href="#" />

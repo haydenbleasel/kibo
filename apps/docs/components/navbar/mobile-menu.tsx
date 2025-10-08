@@ -29,10 +29,16 @@ export const MobileMenu = () => (
             {group.pages?.map((page) =>
               page.startsWith("---") ? undefined : (
                 <DrawerClose asChild key={page}>
-                  <Link className="text-muted-foreground" href={`/${group.title?.toLowerCase()}/${page}`} key={page}>
+                  <Link
+                    className="text-muted-foreground"
+                    href={`/${group.title?.toLowerCase()}/${page}`}
+                    key={page}
+                  >
                     {
                       docs.find(
-                        (doc) => doc._file.path === `${group.title?.toLowerCase()}/${page}.mdx`
+                        (doc) =>
+                          doc._file.path ===
+                          `${group.title?.toLowerCase()}/${page}.mdx`
                       )?.title
                     }
                   </Link>

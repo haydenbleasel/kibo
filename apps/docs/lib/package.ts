@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import postcss from "postcss";
 import postcssNested from "postcss-nested";
-import type { RegistryItem } from 'shadcn/schema';
+import type { RegistryItem } from "shadcn/schema";
 
 export const getPackage = async (packageName: string) => {
   const packageDir = join(process.cwd(), "..", "..", "packages", packageName);
@@ -88,7 +88,11 @@ export const getPackage = async (packageName: string) => {
       // First pass: process non-media rules
       atRule.walkRules((rule) => {
         // Skip rules that are inside media queries
-        if (rule.parent && rule.parent.type === 'atrule' && (rule.parent as any).name === 'media') {
+        if (
+          rule.parent &&
+          rule.parent.type === "atrule" &&
+          (rule.parent as any).name === "media"
+        ) {
           return;
         }
 

@@ -143,7 +143,7 @@ const Example = () => {
                     className="flex gap-2 text-muted-foreground text-sm"
                     key={index}
                   >
-                    <BadgeCheck className="w-4 flex-none h-[1lh]" />
+                    <BadgeCheck className="h-[1lh] w-4 flex-none" />
                     {feature}
                   </div>
                 ))}

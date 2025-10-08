@@ -26,8 +26,8 @@ export const Choicebox = ({ className, ...props }: ChoiceboxProps) => (
 );
 
 type ChoiceboxItemContextValue = {
-  value: ChoiceboxItemProps['value'];
-  id?: ChoiceboxItemProps['id'];
+  value: ChoiceboxItemProps["value"];
+  id?: ChoiceboxItemProps["id"];
 };
 
 const ChoiceboxItemContext = createContext<ChoiceboxItemContextValue | null>(
@@ -38,7 +38,9 @@ const useChoiceboxItemContext = () => {
   const context = useContext(ChoiceboxItemContext);
 
   if (!context) {
-    throw new Error('useChoiceboxItemContext must be used within a ChoiceboxItem');
+    throw new Error(
+      "useChoiceboxItemContext must be used within a ChoiceboxItem"
+    );
   }
 
   return context;
@@ -100,7 +102,9 @@ export const ChoiceboxItemDescription = ({
   <FieldDescription className={className} {...props} />
 );
 
-export type ChoiceboxIndicatorProps = Partial<ComponentProps<typeof RadioGroupItem>>;
+export type ChoiceboxIndicatorProps = Partial<
+  ComponentProps<typeof RadioGroupItem>
+>;
 
 export const ChoiceboxIndicator = (props: ChoiceboxIndicatorProps) => {
   const context = useChoiceboxItemContext();

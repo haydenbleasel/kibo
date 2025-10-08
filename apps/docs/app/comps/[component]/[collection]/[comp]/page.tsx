@@ -21,7 +21,7 @@ export const generateMetadata = async ({ params }: Props) => {
   const { component, collection, comp } = await params;
   return {
     title: `${processFolderName(component)} / ${processFolderName(collection)} / ${processFolderName(comp)} | Kibo UI`,
-    description: 'A composition from Kibo UI',
+    description: "A composition from Kibo UI",
   };
 };
 

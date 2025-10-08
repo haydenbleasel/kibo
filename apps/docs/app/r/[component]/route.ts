@@ -51,7 +51,7 @@ export const GET = async (_: NextRequest, { params }: RegistryParams) => {
     for (const name of packageNames) {
       try {
         const pkg = await getPackage(name);
-        
+
         response.items.push(pkg);
       } catch {
         // skip packages that fail

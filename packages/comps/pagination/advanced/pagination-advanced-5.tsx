@@ -3,8 +3,8 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationPrevious,
   PaginationNext,
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 
 export const title = "Disabled State";
@@ -14,8 +14,8 @@ const Example = () => (
     <PaginationContent>
       <PaginationItem>
         <PaginationPrevious
-          href="#"
           className="pointer-events-none opacity-50"
+          href="#"
         />
       </PaginationItem>
       <PaginationItem>

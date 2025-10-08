@@ -9,11 +9,11 @@ const Example = () => (
       <h1>Styling the Web: A Modern CSS Journey</h1>
 
       <p>
-        CSS has come a long way since its inception. From simple layout tweaks to
-        complex responsive designs, it's become an essential tool for crafting
-        delightful web experiences. In this article, we’ll explore various HTML
-        elements commonly styled with modern CSS utility systems like{" "}
-        <code>tailwindcss</code>
+        CSS has come a long way since its inception. From simple layout tweaks
+        to complex responsive designs, it's become an essential tool for
+        crafting delightful web experiences. In this article, we’ll explore
+        various HTML elements commonly styled with modern CSS utility systems
+        like <code>tailwindcss</code>
         and component libraries.
       </p>
 
@@ -111,8 +111,8 @@ const Example = () => (
       <h2>Inline Elements</h2>
       <p>
         You can <strong>bold</strong> text, <em>italicize</em> it,{" "}
-        <u>underline</u> it, or even add <a href="https://example.com">links</a>.
-        Here’s some <code>inline code</code> too.
+        <u>underline</u> it, or even add <a href="https://example.com">links</a>
+        . Here’s some <code>inline code</code> too.
       </p>
 
       <h2>Definition List</h2>
@@ -129,19 +129,19 @@ const Example = () => (
       <details>
         <summary>Click to expand additional info</summary>
         <p>
-          Utility CSS simplifies the process of managing and scaling CSS in large
-          projects.
+          Utility CSS simplifies the process of managing and scaling CSS in
+          large projects.
         </p>
       </details>
 
       <h2>Inline Elements</h2>
       <p>
         You can <strong>bold</strong> text, <em>italicize</em> it,{" "}
-        <u>underline</u> it, or even add <a href="https://example.com">links</a>.
-        Here’s some <code>inline code</code> too.{" "}
-        <mark>Highlight important info</mark> and <small>small text size</small>.{" "}
-        <abbr title="HyperText Markup Language">HTML</abbr> is the foundation of
-        the web.
+        <u>underline</u> it, or even add <a href="https://example.com">links</a>
+        . Here’s some <code>inline code</code> too.{" "}
+        <mark>Highlight important info</mark> and <small>small text size</small>
+        . <abbr title="HyperText Markup Language">HTML</abbr> is the foundation
+        of the web.
       </p>
 
       <h2>Superscript & Subscript</h2>

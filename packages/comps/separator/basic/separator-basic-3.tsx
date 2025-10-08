@@ -4,15 +4,15 @@ export const title = "In Navigation";
 
 const Example = () => (
   <div className="flex items-center space-x-2 text-sm">
-    <a href="#" className="hover:underline">
+    <a className="hover:underline" href="#">
       Home
     </a>
-    <Separator orientation="vertical" className="h-4" />
-    <a href="#" className="hover:underline">
+    <Separator className="h-4" orientation="vertical" />
+    <a className="hover:underline" href="#">
       Products
     </a>
-    <Separator orientation="vertical" className="h-4" />
-    <a href="#" className="hover:underline">
+    <Separator className="h-4" orientation="vertical" />
+    <a className="hover:underline" href="#">
       About
     </a>
   </div>

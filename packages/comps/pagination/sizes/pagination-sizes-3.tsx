@@ -3,8 +3,8 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationPrevious,
   PaginationNext,
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 
 export const title = "Large Size";
@@ -13,25 +13,25 @@ const Example = () => (
   <Pagination className="text-base">
     <PaginationContent className="gap-2">
       <PaginationItem>
-        <PaginationPrevious href="#" size="lg" className="h-11 px-4" />
+        <PaginationPrevious className="h-11 px-4" href="#" size="lg" />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" size="lg" className="h-11 w-11">
+        <PaginationLink className="h-11 w-11" href="#" size="lg">
           1
         </PaginationLink>
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" isActive size="lg" className="h-11 w-11">
+        <PaginationLink className="h-11 w-11" href="#" isActive size="lg">
           2
         </PaginationLink>
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" size="lg" className="h-11 w-11">
+        <PaginationLink className="h-11 w-11" href="#" size="lg">
           3
         </PaginationLink>
       </PaginationItem>
       <PaginationItem>
-        <PaginationNext href="#" size="lg" className="h-11 px-4" />
+        <PaginationNext className="h-11 px-4" href="#" size="lg" />
       </PaginationItem>
     </PaginationContent>
   </Pagination>

@@ -17,4 +17,4 @@ export const MobileSearch = () => {
       <SearchIcon className="size-4" />
     </Button>
   );
-}
+};

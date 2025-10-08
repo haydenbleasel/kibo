@@ -237,14 +237,14 @@ const Infinite = ({ size = 24, ...props }: SpinnerVariantProps) => (
 
 export type SpinnerProps = LucideProps & {
   variant?:
-  | "default"
-  | "throbber"
-  | "pinwheel"
-  | "circle-filled"
-  | "ellipsis"
-  | "ring"
-  | "bars"
-  | "infinite";
+    | "default"
+    | "throbber"
+    | "pinwheel"
+    | "circle-filled"
+    | "ellipsis"
+    | "ring"
+    | "bars"
+    | "infinite";
 };
 
 export const Spinner = ({ variant, ...props }: SpinnerProps) => {
@@ -264,6 +264,8 @@ export const Spinner = ({ variant, ...props }: SpinnerProps) => {
     case "infinite":
       return <Infinite {...props} />;
     default:
-      return <ShadcnSpinner className={cn("size-6", props.className)} {...props} />;
+      return (
+        <ShadcnSpinner className={cn("size-6", props.className)} {...props} />
+      );
   }
 };
