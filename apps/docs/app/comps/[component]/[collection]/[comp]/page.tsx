@@ -4,6 +4,7 @@ import path from "node:path";
 import { notFound } from "next/navigation";
 import type * as React from "react";
 import { Project } from "ts-morph";
+import { processFolderName } from "../../../../../lib/comps";
 import { ComponentPreview } from "./components/preview";
 
 type Props = {
@@ -15,6 +16,14 @@ type Props = {
 };
 
 const basePath = path.join(process.cwd(), "../../packages/comps");
+
+export const generateMetadata = async ({ params }: Props) => {
+  const { component, collection, comp } = await params;
+  return {
+    title: `${processFolderName(component)} / ${processFolderName(collection)} / ${processFolderName(comp)} | Kibo UI`,
+    description: 'A composition from Kibo UI',
+  };
+};
 
 const ComponentCompPage = async ({ params }: Props) => {
   const { component, collection, comp } = await params;
@@ -43,7 +52,9 @@ const ComponentCompPage = async ({ params }: Props) => {
     title = titleDeclaration ? titleDeclaration.replaceAll('"', "") : comp;
 
     // Dynamically import the component
-    const module = await import(`@repo/comps/${component}/${collection}/${comp}`);
+    const module = await import(
+      `@repo/comps/${component}/${collection}/${comp}`
+    );
     Component = module.default;
   } catch {
     notFound();
@@ -67,8 +78,7 @@ export function generateStaticParams() {
   });
   const components = componentsDirectory.filter((file) => file.isDirectory());
 
-  const params: { component: string; collection: string; comp: string }[] =
-    [];
+  const params: { component: string; collection: string; comp: string }[] = [];
 
   for (const component of components) {
     const collectionsDirectory = readdirSync(`${basePath}/${component.name}`, {
