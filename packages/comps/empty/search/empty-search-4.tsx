@@ -15,7 +15,7 @@ const Example = () => (
   <Empty>
     <EmptyHeader>
       <EmptyMedia>
-        <Search className="h-16 w-16 text-muted-foreground" />
+        <Search className="size-8 text-muted-foreground" />
       </EmptyMedia>
       <EmptyTitle>No results for your search</EmptyTitle>
       <EmptyDescription>

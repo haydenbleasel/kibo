@@ -34,8 +34,8 @@ const Example = () => (
       </DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          <Image />
+        <DropdownMenuSubTrigger className="px-2 py-1.5">
+          <Image className="mr-2 size-4 text-muted-foreground" />
           Media
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent>
@@ -54,8 +54,8 @@ const Example = () => (
         </DropdownMenuSubContent>
       </DropdownMenuSub>
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          <FileText />
+        <DropdownMenuSubTrigger className="px-2 py-1.5">
+          <FileText className="mr-2 size-4 text-muted-foreground" />
           Document Type
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent>

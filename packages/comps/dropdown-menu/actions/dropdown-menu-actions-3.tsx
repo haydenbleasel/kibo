@@ -44,9 +44,9 @@ const Example = () => (
       </DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          <Share2 />
-          Share
+        <DropdownMenuSubTrigger className="px-2 py-1.5">
+          <Share2 className="mr-2 size-4 text-muted-foreground" />
+          <span>Share</span>
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent>
           <DropdownMenuItem>

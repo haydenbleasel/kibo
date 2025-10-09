@@ -45,8 +45,8 @@ const Example = () => {
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
-              <Download />
+            <DropdownMenuSubTrigger className="px-2 py-1.5">
+              <Download className="mr-2 size-4 text-muted-foreground" />
               Export
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
