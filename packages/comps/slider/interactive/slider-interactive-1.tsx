@@ -12,7 +12,7 @@ const Example = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
-    if (!isNaN(newValue) && newValue >= 0 && newValue <= 100) {
+    if (!Number.isNaN(newValue) && newValue >= 0 && newValue <= 100) {
       setValue([newValue]);
     }
   };

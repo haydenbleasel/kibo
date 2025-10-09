@@ -16,7 +16,9 @@ export function useCopyToClipboard({
       return;
     }
 
-    if (!value) return;
+    if (!value) {
+      return;
+    }
 
     navigator.clipboard.writeText(value).then(() => {
       setIsCopied(true);

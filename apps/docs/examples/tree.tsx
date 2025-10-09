@@ -10,7 +10,7 @@ import {
   TreeProvider,
   TreeView,
 } from "@repo/tree";
-import { FileCode, FileJson, FileText, FileType } from "lucide-react";
+import { FileCode, FileJson, FileText } from "lucide-react";
 
 export default function TreeExample() {
   return (

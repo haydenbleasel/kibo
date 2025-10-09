@@ -1356,16 +1356,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         behavior: "smooth",
       });
     },
-    [
-      timelineData,
-      zoom,
-      range,
-      columnWidth,
-      sidebarWidth,
-      headerHeight,
-      rowHeight,
-      onAddItem,
-    ]
+    [timelineData, zoom, range, columnWidth, sidebarWidth, onAddItem]
   );
 
   return (

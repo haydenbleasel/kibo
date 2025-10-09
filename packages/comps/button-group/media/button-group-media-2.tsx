@@ -14,13 +14,17 @@ const Example = () => {
   const decreaseVolume = () => {
     const newVolume = Math.max(0, volume - 10);
     setVolume(newVolume);
-    if (newVolume === 0) setIsMuted(true);
+    if (newVolume === 0) {
+      setIsMuted(true);
+    }
   };
 
   const increaseVolume = () => {
     const newVolume = Math.min(100, volume + 10);
     setVolume(newVolume);
-    if (isMuted) setIsMuted(false);
+    if (isMuted) {
+      setIsMuted(false);
+    }
   };
 
   return (

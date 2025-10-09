@@ -1,5 +1,3 @@
-import { Separator } from "@/components/ui/separator";
-
 export const title = "Gradient Separator";
 
 const Example = () => (

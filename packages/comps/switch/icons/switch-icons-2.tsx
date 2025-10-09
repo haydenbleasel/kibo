@@ -1,6 +1,6 @@
 "use client";
 
-import { BellIcon, BellOffIcon } from "lucide-react";
+import { BellIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 

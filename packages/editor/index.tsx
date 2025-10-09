@@ -102,10 +102,10 @@ import type { FormEventHandler, HTMLAttributes, ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import tippy, { type Instance as TippyInstance } from "tippy.js";
 
-interface SlashNodeAttrs {
+type SlashNodeAttrs = {
   id: string | null;
   label?: string | null;
-}
+};
 
 type SlashOptions<
   SlashOptionSuggestionItem = unknown,
@@ -129,13 +129,13 @@ type SlashOptions<
 
 const SlashPluginKey = new PluginKey("slash");
 
-export interface SuggestionItem {
+export type SuggestionItem = {
   title: string;
   description: string;
   icon: LucideIcon;
   searchTerms: string[];
   command: (props: { editor: Editor; range: Range }) => void;
-}
+};
 
 export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"] =
   () => [
