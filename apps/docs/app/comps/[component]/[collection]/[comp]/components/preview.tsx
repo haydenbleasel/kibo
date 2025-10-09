@@ -1,5 +1,6 @@
 "use client";
 
+import { SidebarTrigger } from "@repo/shadcn-ui/components/ui/sidebar";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import { type ReactNode, useState } from "react";
 import {
@@ -38,6 +39,7 @@ export const ComponentPreview = ({
     >
       <header className="flex shrink-0 items-center gap-2">
         <div className="flex items-center gap-2 px-3">
+          <SidebarTrigger className="md:hidden" />
           <Separator className="mr-2 h-4" orientation="vertical" />
           <Breadcrumb>
             <BreadcrumbList>
