@@ -19,20 +19,18 @@ const Example = () => {
 
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
-      <div className="flex items-end gap-4">
-        <div className="flex flex-1 flex-col gap-2">
-          <Label htmlFor="slider">Value</Label>
-          <Slider id="slider" onValueChange={setValue} value={value} />
-        </div>
-        <Input
-          className="w-20 bg-background"
-          max={100}
-          min={0}
-          onChange={handleInputChange}
-          type="number"
-          value={value[0]}
-        />
+      <div className="flex flex-1 flex-col gap-2">
+        <Label htmlFor="slider">Value</Label>
+        <Slider id="slider" onValueChange={setValue} value={value} />
       </div>
+      <Input
+        className="w-20 bg-background"
+        max={100}
+        min={0}
+        onChange={handleInputChange}
+        type="number"
+        value={value[0]}
+      />
     </div>
   );
 };
