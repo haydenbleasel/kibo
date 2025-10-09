@@ -22,7 +22,7 @@ const Example = () => {
         <span className="peer-data-[state=unchecked]:rtl:-translate-x-full pointer-events-none relative ms-0.5 flex items-center justify-center px-2 text-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] peer-data-[state=checked]:invisible peer-data-[state=unchecked]:translate-x-full">
           <span className="font-medium text-[10px] uppercase">Off</span>
         </span>
-        <span className="peer-data-[state=checked]:-translate-x-full pointer-events-none relative me-0.5 flex items-center justify-center px-2 text-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] peer-data-[state=unchecked]:invisible peer-data-[state=checked]:text-background peer-data-[state=checked]:rtl:translate-x-full">
+        <span className="peer-data-[state=checked]:-translate-x-full pointer-events-none relative me-0.5 flex items-center justify-center px-2 text-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] peer-data-[state=unchecked]:invisible peer-data-[state=checked]:text-primary-foreground peer-data-[state=checked]:rtl:translate-x-full">
           <span className="font-medium text-[10px] uppercase">On</span>
         </span>
       </div>
