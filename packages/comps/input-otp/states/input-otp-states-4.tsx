@@ -1,5 +1,6 @@
 "use client";
 
+import { Check } from "lucide-react";
 import { useState } from "react";
 import {
   InputOTP,
@@ -8,14 +9,31 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-export const title = "Controlled OTP Input";
+export const title = "OTP with Success State";
 
 const Example = () => {
   const [value, setValue] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+    setIsSuccess(false);
+    if (newValue.length === 6) {
+      // Simulate successful verification
+      setTimeout(() => {
+        setIsSuccess(true);
+      }, 500);
+    }
+  };
 
   return (
     <div className="space-y-2">
-      <InputOTP maxLength={6} onChange={setValue} value={value}>
+      <InputOTP
+        disabled={isSuccess}
+        maxLength={6}
+        onChange={handleChange}
+        value={value}
+      >
         <InputOTPGroup>
           <InputOTPSlot className="bg-background" index={0} />
           <InputOTPSlot className="bg-background" index={1} />
@@ -28,13 +46,12 @@ const Example = () => {
           <InputOTPSlot className="bg-background" index={5} />
         </InputOTPGroup>
       </InputOTP>
-      <div className="text-center text-sm">
-        {value === "" ? (
-          <>Enter your one-time password.</>
-        ) : (
-          <>You entered: {value}</>
-        )}
-      </div>
+      {isSuccess && (
+        <div className="flex items-center gap-2 text-green-600 text-sm">
+          <Check className="h-4 w-4" />
+          <span>Code verified successfully!</span>
+        </div>
+      )}
     </div>
   );
 };

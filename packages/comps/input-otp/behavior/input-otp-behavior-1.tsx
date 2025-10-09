@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -21,7 +20,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-export const title = "OTP in Form with Validation";
+export const title = "Auto-submit OTP";
 
 const formSchema = z.object({
   pin: z.string().min(6, {
@@ -38,7 +37,7 @@ const Example = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success(`You submitted the following values: ${values.pin}`);
+    toast.success(`Code submitted: ${values.pin}`);
   }
 
   return (
@@ -52,7 +51,16 @@ const Example = () => {
               <FormItem>
                 <FormLabel>One-Time Password</FormLabel>
                 <FormControl>
-                  <InputOTP maxLength={6} {...field}>
+                  <InputOTP
+                    maxLength={6}
+                    {...field}
+                    onChange={(value) => {
+                      field.onChange(value);
+                      if (value.length === 6) {
+                        form.handleSubmit(onSubmit)();
+                      }
+                    }}
+                  >
                     <InputOTPGroup>
                       <InputOTPSlot className="bg-background" index={0} />
                       <InputOTPSlot className="bg-background" index={1} />
@@ -67,13 +75,12 @@ const Example = () => {
                   </InputOTP>
                 </FormControl>
                 <FormDescription>
-                  Please enter the one-time password sent to your phone.
+                  Form will auto-submit when all digits are entered.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import {
   InputOTP,
@@ -8,14 +9,26 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-export const title = "Controlled OTP Input";
+export const title = "OTP with Loading State";
 
 const Example = () => {
   const [value, setValue] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+    if (newValue.length === 6) {
+      setIsVerifying(true);
+      // Simulate verification
+      setTimeout(() => {
+        setIsVerifying(false);
+      }, 2000);
+    }
+  };
 
   return (
     <div className="space-y-2">
-      <InputOTP maxLength={6} onChange={setValue} value={value}>
+      <InputOTP maxLength={6} onChange={handleChange} value={value}>
         <InputOTPGroup>
           <InputOTPSlot className="bg-background" index={0} />
           <InputOTPSlot className="bg-background" index={1} />
@@ -28,13 +41,12 @@ const Example = () => {
           <InputOTPSlot className="bg-background" index={5} />
         </InputOTPGroup>
       </InputOTP>
-      <div className="text-center text-sm">
-        {value === "" ? (
-          <>Enter your one-time password.</>
-        ) : (
-          <>You entered: {value}</>
-        )}
-      </div>
+      {isVerifying && (
+        <div className="flex items-center gap-2 text-sm">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <span>Verifying code...</span>
+        </div>
+      )}
     </div>
   );
 };

@@ -11,18 +11,18 @@ const Example = () => {
   return (
     <InputOTP maxLength={6}>
       <InputOTPGroup>
-        <InputOTPSlot index={0} />
-        <InputOTPSlot index={1} />
+        <InputOTPSlot className="bg-background" index={0} />
+        <InputOTPSlot className="bg-background" index={1} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot index={2} />
-        <InputOTPSlot index={3} />
+        <InputOTPSlot className="bg-background" index={2} />
+        <InputOTPSlot className="bg-background" index={3} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot index={4} />
-        <InputOTPSlot index={5} />
+        <InputOTPSlot className="bg-background" index={4} />
+        <InputOTPSlot className="bg-background" index={5} />
       </InputOTPGroup>
     </InputOTP>
   );

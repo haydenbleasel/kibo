@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -8,14 +5,12 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-export const title = "Controlled OTP Input";
+export const title = "Disabled OTP Input";
 
 const Example = () => {
-  const [value, setValue] = useState("");
-
   return (
     <div className="space-y-2">
-      <InputOTP maxLength={6} onChange={setValue} value={value}>
+      <InputOTP disabled maxLength={6}>
         <InputOTPGroup>
           <InputOTPSlot className="bg-background" index={0} />
           <InputOTPSlot className="bg-background" index={1} />
@@ -28,13 +23,9 @@ const Example = () => {
           <InputOTPSlot className="bg-background" index={5} />
         </InputOTPGroup>
       </InputOTP>
-      <div className="text-center text-sm">
-        {value === "" ? (
-          <>Enter your one-time password.</>
-        ) : (
-          <>You entered: {value}</>
-        )}
-      </div>
+      <p className="text-muted-foreground text-sm">
+        This OTP input is disabled.
+      </p>
     </div>
   );
 };
