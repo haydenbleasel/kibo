@@ -3,7 +3,7 @@
 import { faker } from "@faker-js/faker";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { type ComponentProps, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -13,41 +13,32 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-export const title = "Calendar with Custom Select Day Style in Popover";
+export const title = "Date Picker with Disabled Dates";
 
 const now = new Date();
 const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-const bookedDays = [
-  faker.date.between({
-    from: startOfMonth,
-    to: new Date(now.getFullYear(), now.getMonth(), 10),
-  }),
-  faker.date.between({
-    from: new Date(now.getFullYear(), now.getMonth(), 11),
-    to: new Date(now.getFullYear(), now.getMonth(), 20),
-  }),
-  faker.date.between({
-    from: new Date(now.getFullYear(), now.getMonth(), 21),
-    to: endOfMonth,
-  }),
-];
+const disabledRangeStart = faker.date.between({
+  from: startOfMonth,
+  to: new Date(now.getFullYear(), now.getMonth(), 7),
+});
+const disabledRangeEnd = new Date(disabledRangeStart);
+disabledRangeEnd.setDate(disabledRangeStart.getDate() + 4);
+
+const specificDisabledDate = faker.date.between({
+  from: new Date(now.getFullYear(), now.getMonth(), 15),
+  to: endOfMonth,
+});
 
 const Example = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
-  const modifiers = {
-    booked: bookedDays,
-  };
-
-  const modifiersStyles: ComponentProps<typeof Calendar>["modifiersStyles"] = {
-    booked: {
-      backgroundColor: "#fbbf24",
-      color: "#78350f",
-      fontWeight: "bold",
-    },
-  };
+  const disabledDays = [
+    { from: disabledRangeStart, to: disabledRangeEnd },
+    { dayOfWeek: [0, 6] }, // Disable weekends
+    specificDisabledDate, // Disable specific date
+  ];
 
   return (
     <Popover>
@@ -65,14 +56,8 @@ const Example = () => {
       </PopoverTrigger>
       <PopoverContent align="start" className="w-auto p-0">
         <Calendar
-          classNames={{
-            day_button: "rounded-full",
-            day: "rounded-full",
-            today: "rounded-full",
-          }}
+          disabled={disabledDays}
           mode="single"
-          modifiers={modifiers}
-          modifiersStyles={modifiersStyles}
           onSelect={setDate}
           selected={date}
         />

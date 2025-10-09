@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-export const title = "Calendar with Date and Time in Popover";
+export const title = "Date Picker with Date and Time";
 
 const Example = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());

@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-export const title = "Calendar with Month and Year Selector in Popover";
+export const title = "Date Picker with Month and Year Selector";
 
 const Example = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
