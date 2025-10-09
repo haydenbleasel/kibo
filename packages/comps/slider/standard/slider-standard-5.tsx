@@ -23,12 +23,12 @@ const Example = () => {
         step={25}
         value={value}
       />
-      <div className="flex items-center justify-between text-muted-foreground text-xs">
-        <span>0</span>
-        <span>25</span>
-        <span>50</span>
-        <span>75</span>
-        <span>100</span>
+      <div className="flex items-center justify-between text-muted-foreground text-xs tabular-nums">
+        <span className="w-6 text-left">0</span>
+        <span className="w-6 text-center">25</span>
+        <span className="w-6 text-center">50</span>
+        <span className="w-6 text-center">75</span>
+        <span className="w-6 text-right">100</span>
       </div>
     </div>
   );
