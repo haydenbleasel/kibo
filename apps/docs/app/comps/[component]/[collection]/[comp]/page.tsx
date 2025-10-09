@@ -1,9 +1,11 @@
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type * as React from "react";
 import { Project } from "ts-morph";
+import { env } from "@/env";
 import { processFolderName } from "../../../../../lib/comps";
 import { ComponentPreview } from "./components/preview";
 
@@ -16,13 +18,29 @@ type Props = {
 };
 
 const basePath = path.join(process.cwd(), "../../packages/comps");
+const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+const baseUrl = `${protocol}://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
 
-export const generateMetadata = async ({ params }: Props) => {
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
   const { component, collection, comp } = await params;
-  return {
+  const metadata: Metadata = {
     title: `${processFolderName(component)} / ${processFolderName(collection)} / ${processFolderName(comp)} | Kibo UI`,
     description: "A composition from Kibo UI",
+    openGraph: {
+      images: [
+        {
+          url: new URL("/comps.jpg", baseUrl).toString(),
+          width: 1200,
+          height: 630,
+          alt: "Kibo UI Compositions",
+        },
+      ],
+    },
   };
+
+  return metadata;
 };
 
 const ComponentCompPage = async ({ params }: Props) => {
