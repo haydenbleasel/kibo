@@ -15,7 +15,7 @@ const Example = () => {
       <div className="relative pt-6">
         <Slider id="slider" onValueChange={setValue} value={value} />
         <div
-          className="-translate-x-1/2 absolute top-0 rounded bg-primary px-2 py-1 text-primary-foreground text-xs"
+          className="-translate-x-1/2 -top-2 absolute rounded bg-primary px-2 py-1 text-primary-foreground text-xs"
           style={{ left: `${value[0]}%` }}
         >
           {value[0]}%
