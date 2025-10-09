@@ -120,6 +120,22 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [pathname, allUrls, router]);
 
+  // Scroll active link into view
+  useEffect(() => {
+    // Small delay to ensure the DOM has updated
+    const timer = setTimeout(() => {
+      const activeLink = document.querySelector('[data-active="true"]');
+      if (activeLink) {
+        activeLink.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
   const filteredPages = useMemo(() => {
     if (!searchQuery.trim()) {
       return pages;
