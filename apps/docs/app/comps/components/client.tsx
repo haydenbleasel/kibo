@@ -166,10 +166,10 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
 
       if (e.key === "ArrowLeft" && currentIndex > 0) {
         e.preventDefault();
-        router.push(allUrls[currentIndex - 1]);
+        router.push(allUrls[currentIndex - 1], { scroll: false });
       } else if (e.key === "ArrowRight" && currentIndex < allUrls.length - 1) {
         e.preventDefault();
-        router.push(allUrls[currentIndex + 1]);
+        router.push(allUrls[currentIndex + 1], { scroll: false });
       }
     };
 
