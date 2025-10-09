@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export const title = "Standard with Title and Action";
 
 const Example = () => (
-  <Alert>
+  <Alert className="w-full max-w-lg">
     <div className="col-span-2 flex items-center justify-between gap-4">
       <AlertTitle>Success</AlertTitle>
       <div className="flex shrink-0 gap-2">

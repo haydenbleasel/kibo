@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export const title = "Warning with Everything";
 
 const Example = () => (
-  <Alert className="flex flex-row items-start gap-3 border-warning/80 bg-warning/5 text-warning">
+  <Alert className="w-full max-w-lg flex flex-row items-start gap-3 border-warning/80 bg-warning/5 text-warning">
     <TriangleAlert className="size-4 shrink-0 translate-y-0.5 text-warning/60" />
     <div className="flex flex-1 items-start justify-between gap-4">
       <div className="flex flex-col gap-0.5">

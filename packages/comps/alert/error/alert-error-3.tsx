@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export const title = "Error with Title and Action";
 
 const Example = () => (
-  <Alert className="border-destructive/80 bg-destructive/5 text-destructive">
+  <Alert className="w-full max-w-lg border-destructive/80 bg-destructive/5 text-destructive">
     <div className="col-span-2 flex items-center justify-between gap-4">
       <AlertTitle>Error</AlertTitle>
       <div className="flex shrink-0 gap-2">

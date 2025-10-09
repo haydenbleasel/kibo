@@ -3,7 +3,7 @@ import { Alert, AlertTitle } from "@/components/ui/alert";
 export const title = "Error with Title";
 
 const Example = () => (
-  <Alert className="border-destructive/80 bg-destructive/5 text-destructive">
+  <Alert className="w-full max-w-lg border-destructive/80 bg-destructive/5 text-destructive">
     <AlertTitle>Error</AlertTitle>
   </Alert>
 );
