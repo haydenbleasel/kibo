@@ -20,7 +20,8 @@ import {
 } from "@repo/shadcn-ui/components/ui/sidebar";
 import { ChevronDown, Search } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { CompSidebarLink } from "./link";
 
 type Page = {
@@ -44,6 +45,80 @@ type CompsSidebarClientProps = {
 
 export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Helper function to check if a subgroup contains the active page
+  const isSubgroupActive = (subgroup: Page["subgroups"][0]) => {
+    return subgroup.items.some((item) => item.url === pathname);
+  };
+
+  // Track which subgroups should be open based on active page and search
+  const [openSubgroups, setOpenSubgroups] = useState<Set<string>>(new Set());
+
+  // Update open subgroups when pathname or search changes
+  useEffect(() => {
+    const newOpenSubgroups = new Set<string>();
+
+    // If searching, open all subgroups with matches
+    if (searchQuery.trim()) {
+      filteredPages.forEach((page) => {
+        page.subgroups?.forEach((subgroup) => {
+          newOpenSubgroups.add(`${page.name}-${subgroup.name}`);
+        });
+      });
+    } else {
+      // Otherwise, only open the subgroup containing the active page
+      pages.forEach((page) => {
+        page.subgroups?.forEach((subgroup) => {
+          if (isSubgroupActive(subgroup)) {
+            newOpenSubgroups.add(`${page.name}-${subgroup.name}`);
+          }
+        });
+      });
+    }
+
+    setOpenSubgroups(newOpenSubgroups);
+  }, [pathname, searchQuery, pages]);
+
+  // Get all component URLs in order
+  const allUrls = useMemo(() => {
+    const urls: string[] = [];
+    pages.forEach((page) => {
+      page.items?.forEach((item) => urls.push(item.url));
+      page.subgroups?.forEach((subgroup) => {
+        subgroup.items.forEach((item) => urls.push(item.url));
+      });
+    });
+    return urls;
+  }, [pages]);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle arrow keys when not typing in an input
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
+
+      const currentIndex = allUrls.indexOf(pathname);
+      if (currentIndex === -1) return;
+
+      if (e.key === "ArrowLeft" && currentIndex > 0) {
+        e.preventDefault();
+        router.push(allUrls[currentIndex - 1]);
+      } else if (e.key === "ArrowRight" && currentIndex < allUrls.length - 1) {
+        e.preventDefault();
+        router.push(allUrls[currentIndex + 1]);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [pathname, allUrls, router]);
 
   const filteredPages = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -126,30 +201,46 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
                       ))
                   : null}
                 {page.subgroups?.length
-                  ? page.subgroups.map((subgroup) => (
-                      <Collapsible
-                        defaultOpen={searchQuery.trim().length > 0}
-                        key={subgroup.name}
-                      >
-                        <SidebarMenuItem>
-                          <CollapsibleTrigger asChild>
-                            <SidebarMenuButton className="capitalize">
-                              {subgroup.name}
-                              <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                            </SidebarMenuButton>
-                          </CollapsibleTrigger>
-                          <CollapsibleContent>
-                            <SidebarMenuSub>
-                              {subgroup.items
-                                .sort((a, b) => a.name.localeCompare(b.name))
-                                .map((item) => (
-                                  <CompSidebarLink key={item.name} {...item} />
-                                ))}
-                            </SidebarMenuSub>
-                          </CollapsibleContent>
-                        </SidebarMenuItem>
-                      </Collapsible>
-                    ))
+                  ? page.subgroups.map((subgroup) => {
+                      const subgroupKey = `${page.name}-${subgroup.name}`;
+                      const isOpen = openSubgroups.has(subgroupKey);
+
+                      return (
+                        <Collapsible
+                          key={subgroup.name}
+                          open={isOpen}
+                          onOpenChange={(open) => {
+                            setOpenSubgroups((prev) => {
+                              const next = new Set(prev);
+                              if (open) {
+                                next.add(subgroupKey);
+                              } else {
+                                next.delete(subgroupKey);
+                              }
+                              return next;
+                            });
+                          }}
+                        >
+                          <SidebarMenuItem>
+                            <CollapsibleTrigger asChild>
+                              <SidebarMenuButton className="capitalize">
+                                {subgroup.name}
+                                <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                              </SidebarMenuButton>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                              <SidebarMenuSub>
+                                {subgroup.items
+                                  .sort((a, b) => a.name.localeCompare(b.name))
+                                  .map((item) => (
+                                    <CompSidebarLink key={item.name} {...item} />
+                                  ))}
+                              </SidebarMenuSub>
+                            </CollapsibleContent>
+                          </SidebarMenuItem>
+                        </Collapsible>
+                      );
+                    })
                   : null}
               </SidebarMenu>
             </SidebarGroupContent>
