@@ -1,28 +1,8 @@
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@repo/shadcn-ui/components/ui/collapsible";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarRail,
-} from "@repo/shadcn-ui/components/ui/sidebar";
-import { ChevronDown } from "lucide-react";
-import Link from "next/link";
-import type * as React from "react";
 import { Project } from "ts-morph";
 import { processFolderName } from "../../../lib/comps";
-import { CompSidebarLink } from "./link";
+import { CompsSidebarClient } from "./client";
 
 const basePath = path.join(process.cwd(), "../../packages/comps");
 
@@ -159,56 +139,4 @@ for (const component of components) {
   }
 }
 
-export const CompsSidebar = ({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) => (
-  <Sidebar {...props} className="absolute h-full border-none">
-    <SidebarContent>
-      {pages.map((page) => (
-        <SidebarGroup key={page.name}>
-          <SidebarGroupLabel>{page.name}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {page.items?.length
-                ? page.items
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((item) => (
-                      <SidebarMenuItem key={item.name}>
-                        <SidebarMenuButton asChild>
-                          <Link className="truncate" href={item.url}>
-                            {item.name}
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))
-                : null}
-              {page.subgroups?.length
-                ? page.subgroups.map((subgroup) => (
-                    <Collapsible key={subgroup.name}>
-                      <SidebarMenuItem>
-                        <CollapsibleTrigger asChild>
-                          <SidebarMenuButton className="capitalize">
-                            {subgroup.name}
-                            <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                          </SidebarMenuButton>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <SidebarMenuSub>
-                            {subgroup.items
-                              .sort((a, b) => a.name.localeCompare(b.name))
-                              .map((item) => (
-                                <CompSidebarLink key={item.name} {...item} />
-                              ))}
-                          </SidebarMenuSub>
-                        </CollapsibleContent>
-                      </SidebarMenuItem>
-                    </Collapsible>
-                  ))
-                : null}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      ))}
-    </SidebarContent>
-  </Sidebar>
-);
+export const CompsSidebar = () => <CompsSidebarClient pages={pages} />;
