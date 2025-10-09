@@ -216,7 +216,6 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
               <SidebarMenu>
                 {page.items?.length
                   ? page.items
-                    .sort((a, b) => a.name.localeCompare(b.name))
                     .map((item) => (
                       <SidebarMenuItem key={item.name}>
                         <SidebarMenuButton asChild>
@@ -258,7 +257,6 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
                           <CollapsibleContent>
                             <SidebarMenuSub>
                               {subgroup.items
-                                .sort((a, b) => a.name.localeCompare(b.name))
                                 .map((item) => (
                                   <CompSidebarLink
                                     key={item.name}
