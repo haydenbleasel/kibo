@@ -24,7 +24,7 @@ const CompsLayout = ({ children }: CompsLayoutProps) => (
       >
         <SidebarProvider className="h-full">
           <CompsSidebar />
-          <SidebarInset className="h-full">{children}</SidebarInset>
+          <SidebarInset className="h-full overflow-hidden">{children}</SidebarInset>
         </SidebarProvider>
       </div>
     </div>

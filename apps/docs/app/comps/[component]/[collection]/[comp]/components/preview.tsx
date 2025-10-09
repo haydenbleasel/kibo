@@ -71,8 +71,8 @@ export const ComponentPreview = ({
           {children}
         </div>
       </TabsContent>
-      <TabsContent className="flex-1 px-6 py-4" value="code">
-        <div className="size-full [&_figure]:border-none [&_figure]:bg-secondary/50">
+      <TabsContent className="flex-1 overflow-hidden px-6 py-4" value="code">
+        <div className="size-full overflow-hidden [&_.fd-scroll-container]:h-full [&_.fd-scroll-container]:max-h-none [&_figure]:h-full [&_figure]:overflow-hidden [&_figure]:border-none [&_figure]:bg-secondary/50">
           <DynamicCodeBlock code={code} lang="tsx" />
         </div>
       </TabsContent>
