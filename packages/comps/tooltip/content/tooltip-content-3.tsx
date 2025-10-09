@@ -18,7 +18,7 @@ const Example = () => (
     <TooltipContent>
       <div className="flex items-center gap-2">
         <p>Save changes</p>
-        <Kbd>⌘S</Kbd>
+        <Kbd className="text-primary-foreground">⌘S</Kbd>
       </div>
     </TooltipContent>
   </Tooltip>
