@@ -20,7 +20,7 @@ export const GitHub = async ({ className }: GitHubProps) => {
       asChild
       className={cn("h-8 shadow-none", className)}
       size="sm"
-      variant="ghost"
+      variant="outline"
     >
       <a
         href="https://github.com/haydenbleasel/kibo"
