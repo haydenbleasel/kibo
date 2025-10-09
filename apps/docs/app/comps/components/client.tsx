@@ -208,7 +208,6 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
                       return (
                         <Collapsible
                           key={subgroup.name}
-                          open={isOpen}
                           onOpenChange={(open) => {
                             setOpenSubgroups((prev) => {
                               const next = new Set(prev);
@@ -220,6 +219,7 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
                               return next;
                             });
                           }}
+                          open={isOpen}
                         >
                           <SidebarMenuItem>
                             <CollapsibleTrigger asChild>
@@ -233,7 +233,10 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
                                 {subgroup.items
                                   .sort((a, b) => a.name.localeCompare(b.name))
                                   .map((item) => (
-                                    <CompSidebarLink key={item.name} {...item} />
+                                    <CompSidebarLink
+                                      key={item.name}
+                                      {...item}
+                                    />
                                   ))}
                               </SidebarMenuSub>
                             </CollapsibleContent>

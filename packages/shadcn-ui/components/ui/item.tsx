@@ -1,7 +1,7 @@
 import { Separator } from "@repo/shadcn-ui/components/ui/separator";
 import { cn } from "@repo/shadcn-ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Slot } from "radix-ui";
+import { Slot as SlotPrimitive } from "radix-ui";
 import type * as React from "react";
 
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
@@ -58,7 +58,7 @@ function Item({
   ...props
 }: React.ComponentProps<"div"> &
   VariantProps<typeof itemVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : "div";
+  const Comp = asChild ? SlotPrimitive.Slot : "div";
   return (
     <Comp
       className={cn(itemVariants({ variant, size, className }))}
