@@ -19,8 +19,10 @@ const area = faker.number.int({ min: 200, max: 500 });
 const Example = () => (
   <Card className="w-full max-w-md overflow-hidden">
     <CardHeader>
-      <CardTitle>Is this an image?</CardTitle>
-      <CardDescription>This is a card with an image.</CardDescription>
+      <CardTitle>3-Bedroom House</CardTitle>
+      <CardDescription>
+        A luxurious 3-bedroom house with a modern design.
+      </CardDescription>
     </CardHeader>
     <CardContent className="p-0">
       {/** biome-ignore lint/performance/noImgElement: "Kibo UI is framework agnostic" */}

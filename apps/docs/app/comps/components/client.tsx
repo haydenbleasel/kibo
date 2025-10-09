@@ -52,9 +52,12 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
   const router = useRouter();
 
   // Helper function to check if a subgroup contains the active page
-  const isSubgroupActive = useCallback((subgroup: Subgroup) => {
-    return subgroup.items.some((item) => item.url === pathname);
-  }, [pathname]);
+  const isSubgroupActive = useCallback(
+    (subgroup: Subgroup) => {
+      return subgroup.items.some((item) => item.url === pathname);
+    },
+    [pathname]
+  );
 
   // Track which subgroups should be open based on active page and search
   const [openSubgroups, setOpenSubgroups] = useState<Set<string>>(new Set());
@@ -215,8 +218,7 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
             <SidebarGroupContent>
               <SidebarMenu>
                 {page.items?.length
-                  ? page.items
-                    .map((item) => (
+                  ? page.items.map((item) => (
                       <SidebarMenuItem key={item.name}>
                         <SidebarMenuButton asChild>
                           <Link className="truncate" href={item.url}>
@@ -228,47 +230,43 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
                   : null}
                 {page.subgroups?.length
                   ? page.subgroups.map((subgroup) => {
-                    const subgroupKey = `${page.name}-${subgroup.name}`;
-                    const isOpen = openSubgroups.has(subgroupKey);
+                      const subgroupKey = `${page.name}-${subgroup.name}`;
+                      const isOpen = openSubgroups.has(subgroupKey);
 
-                    return (
-                      <Collapsible
-                        key={subgroup.name}
-                        onOpenChange={(open) => {
-                          setOpenSubgroups((prev) => {
-                            const next = new Set(prev);
-                            if (open) {
-                              next.add(subgroupKey);
-                            } else {
-                              next.delete(subgroupKey);
-                            }
-                            return next;
-                          });
-                        }}
-                        open={isOpen}
-                      >
-                        <SidebarMenuItem>
-                          <CollapsibleTrigger asChild>
-                            <SidebarMenuButton className="capitalize">
-                              {subgroup.name}
-                              <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                            </SidebarMenuButton>
-                          </CollapsibleTrigger>
-                          <CollapsibleContent>
-                            <SidebarMenuSub>
-                              {subgroup.items
-                                .map((item) => (
-                                  <CompSidebarLink
-                                    key={item.name}
-                                    {...item}
-                                  />
+                      return (
+                        <Collapsible
+                          key={subgroup.name}
+                          onOpenChange={(open) => {
+                            setOpenSubgroups((prev) => {
+                              const next = new Set(prev);
+                              if (open) {
+                                next.add(subgroupKey);
+                              } else {
+                                next.delete(subgroupKey);
+                              }
+                              return next;
+                            });
+                          }}
+                          open={isOpen}
+                        >
+                          <SidebarMenuItem>
+                            <CollapsibleTrigger asChild>
+                              <SidebarMenuButton className="capitalize">
+                                {subgroup.name}
+                                <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                              </SidebarMenuButton>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                              <SidebarMenuSub>
+                                {subgroup.items.map((item) => (
+                                  <CompSidebarLink key={item.name} {...item} />
                                 ))}
-                            </SidebarMenuSub>
-                          </CollapsibleContent>
-                        </SidebarMenuItem>
-                      </Collapsible>
-                    );
-                  })
+                              </SidebarMenuSub>
+                            </CollapsibleContent>
+                          </SidebarMenuItem>
+                        </Collapsible>
+                      );
+                    })
                   : null}
               </SidebarMenu>
             </SidebarGroupContent>
