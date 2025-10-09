@@ -1,4 +1,3 @@
-import { Circle } from "lucide-react";
 import {
   Command,
   CommandEmpty,

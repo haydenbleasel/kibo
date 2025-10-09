@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-interface ColorPickerContextValue {
+type ColorPickerContextValue = {
   hue: number;
   saturation: number;
   lightness: number;
@@ -37,7 +37,7 @@ interface ColorPickerContextValue {
   setLightness: (lightness: number) => void;
   setAlpha: (alpha: number) => void;
   setMode: (mode: string) => void;
-}
+};
 
 const ColorPickerContext = createContext<ColorPickerContextValue | undefined>(
   undefined

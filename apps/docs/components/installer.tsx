@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@repo/shadcn-ui/components/ui/tooltip";
-import {
   Snippet,
   SnippetCopyButton,
   SnippetHeader,
@@ -14,7 +9,6 @@ import {
   SnippetTabsTrigger,
 } from "@repo/snippet";
 import { track } from "@vercel/analytics/react";
-import { InfoIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";

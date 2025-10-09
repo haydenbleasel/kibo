@@ -34,7 +34,9 @@ export function TextLoop({
   const items = Children.toArray(children);
 
   useEffect(() => {
-    if (!trigger) return;
+    if (!trigger) {
+      return;
+    }
 
     const intervalMs = interval * 1000;
     const timer = setInterval(() => {

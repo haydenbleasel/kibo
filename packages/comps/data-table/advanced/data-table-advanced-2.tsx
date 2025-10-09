@@ -7,7 +7,6 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -113,7 +112,9 @@ const Example = () => {
 
     if (currentPage >= pageCount - 3) {
       for (let i = Math.max(4, currentPage - 1); i < pageCount - 1; i++) {
-        if (!pages.includes(i)) pages.push(i);
+        if (!pages.includes(i)) {
+          pages.push(i);
+        }
       }
     }
 

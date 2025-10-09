@@ -1,10 +1,4 @@
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldSet,
-} from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 
 export const title = "Multiple Textareas - Different Sizes";

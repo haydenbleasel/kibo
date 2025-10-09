@@ -46,7 +46,9 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredPages = useMemo(() => {
-    if (!searchQuery.trim()) return pages;
+    if (!searchQuery.trim()) {
+      return pages;
+    }
 
     const query = searchQuery.toLowerCase();
 

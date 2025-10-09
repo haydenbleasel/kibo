@@ -58,7 +58,9 @@ const Example = () => {
                   disabled={service.disabled}
                   key={service.value}
                   onSelect={(currentValue) => {
-                    if (service.disabled) return;
+                    if (service.disabled) {
+                      return;
+                    }
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}

@@ -77,7 +77,9 @@ const Example = () => {
                     disabled={isDisabled}
                     key={interest.value}
                     onSelect={(currentValue) => {
-                      if (isDisabled) return;
+                      if (isDisabled) {
+                        return;
+                      }
                       setSelectedValues(
                         selectedValues.includes(currentValue)
                           ? selectedValues.filter((v) => v !== currentValue)
