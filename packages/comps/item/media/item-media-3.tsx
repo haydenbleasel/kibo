@@ -30,45 +30,42 @@ const music = [
   },
 ];
 
-const Example = () => {
-  return (
-    <div className="flex w-full max-w-md flex-col gap-6">
-      <ItemGroup className="gap-4">
-        {music.map((song) => (
-          <Item
-            asChild
-            className="bg-background"
-            key={song.title}
-            role="listitem"
-            variant="outline"
-          >
-            <a href="#">
-              <ItemMedia variant="image">
-                {/** biome-ignore lint/performance/noImgElement: "Kibo UI is framework agnostic" */}
-                <img
-                  alt={song.title}
-                  className="object-cover grayscale"
-                  height={32}
-                  src="https://placehold.co/32x32"
-                  width={32}
-                />
-              </ItemMedia>
-              <ItemContent>
-                <ItemTitle className="line-clamp-1">
-                  {song.title} -{" "}
-                  <span className="text-muted-foreground">{song.album}</span>
-                </ItemTitle>
-                <ItemDescription>{song.artist}</ItemDescription>
-              </ItemContent>
-              <ItemContent className="flex-none text-center">
-                <ItemDescription>{song.duration}</ItemDescription>
-              </ItemContent>
-            </a>
-          </Item>
-        ))}
-      </ItemGroup>
-    </div>
-  );
-};
+const Example = () => (
+  <div className="flex w-full max-w-md flex-col gap-6">
+    <ItemGroup className="gap-4">
+      {music.map((song) => (
+        <Item
+          asChild
+          className="bg-background"
+          key={song.title}
+          variant="outline"
+        >
+          <a href="#">
+            <ItemMedia variant="image">
+              {/** biome-ignore lint/performance/noImgElement: "Kibo UI is framework agnostic" */}
+              <img
+                alt={song.title}
+                className="object-cover grayscale"
+                height={32}
+                src="https://placehold.co/32x32"
+                width={32}
+              />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle className="line-clamp-1">
+                {song.title} -{" "}
+                <span className="text-muted-foreground">{song.album}</span>
+              </ItemTitle>
+              <ItemDescription>{song.artist}</ItemDescription>
+            </ItemContent>
+            <ItemContent className="flex-none text-center">
+              <ItemDescription>{song.duration}</ItemDescription>
+            </ItemContent>
+          </a>
+        </Item>
+      ))}
+    </ItemGroup>
+  </div>
+);
 
 export default Example;
