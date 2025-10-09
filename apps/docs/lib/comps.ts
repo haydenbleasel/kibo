@@ -3,6 +3,10 @@ export const processFolderName = (name: string) => {
     return "AI";
   }
 
+  if (name === "kbd") {
+    return "kbd";
+  }
+
   return name
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
