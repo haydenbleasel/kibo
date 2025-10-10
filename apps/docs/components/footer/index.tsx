@@ -1,7 +1,7 @@
 import path from "node:path";
 import { globSync } from "glob";
 import Link from "next/link";
-import { processFolderName } from "../../lib/comps";
+import { processFolderName } from "../../lib/patterns";
 import { source } from "../../lib/source";
 import { Logo } from "../navbar/logo";
 import { Theme } from "./theme";
@@ -11,9 +11,9 @@ const docs = pages.filter((page) => page.slugs[0] === "docs");
 const components = pages.filter((page) => page.slugs[0] === "components");
 const blocks = pages.filter((page) => page.slugs[0] === "blocks");
 
-const compsPath = path.join(process.cwd(), "../../packages/comps");
-const compFiles = globSync("*", { cwd: compsPath, withFileTypes: true });
-const compFolders = compFiles
+const patternsPath = path.join(process.cwd(), "../../packages/patterns");
+const patternFiles = globSync("*", { cwd: patternsPath, withFileTypes: true });
+const patternFolders = patternFiles
   .filter((folder) => folder.isDirectory() && folder.name !== "node_modules")
   .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -21,9 +21,9 @@ const componentsHalf = Math.ceil(components.length / 2);
 const componentsLeft = components.slice(0, componentsHalf);
 const componentsRight = components.slice(componentsHalf);
 
-const compsHalf = Math.ceil(compFolders.length / 2);
-const compsLeft = compFolders.slice(0, compsHalf);
-const compsRight = compFolders.slice(compsHalf);
+const patternsHalf = Math.ceil(patternFolders.length / 2);
+const patternsLeft = patternFolders.slice(0, patternsHalf);
+const patternsRight = patternFolders.slice(patternsHalf);
 
 export const Footer = () => (
   <footer className="mt-16 grid gap-8 py-8">
@@ -107,10 +107,10 @@ export const Footer = () => (
         </ul>
       </div>
       <div className="col-span-2">
-        <h3 className="font-medium text-sm">Compositions</h3>
+        <h3 className="font-medium text-sm">Patterns</h3>
         <div className="grid grid-cols-2 gap-4">
           <ul className="mt-2 space-y-1 text-sm">
-            {compsLeft.map((folder) => (
+            {patternsLeft.map((folder) => (
               <li key={folder.name}>
                 <Link
                   className="text-muted-foreground transition-colors hover:text-primary"
@@ -122,7 +122,7 @@ export const Footer = () => (
             ))}
           </ul>
           <ul className="mt-2 space-y-1 text-sm">
-            {compsRight.map((folder) => (
+            {patternsRight.map((folder) => (
               <li key={folder.name}>
                 <Link
                   className="text-muted-foreground transition-colors hover:text-primary"

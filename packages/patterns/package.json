@@ -1,6 +1,6 @@
 {
-  "name": "@repo/comps",
-  "description": "A collection of shadcn/ui compositions.",
+  "name": "@repo/patterns",
+  "description": "A collection of shadcn/ui patterns.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

@@ -17,8 +17,8 @@ const blocksCount = source
   .getPages()
   .filter(({ slugs }) => slugs[0] === "blocks").length;
 
-const compsPath = path.join(process.cwd(), "../../packages/comps");
-const compsCount = globSync(`${compsPath}/**/*.tsx`).length;
+const patternsPath = path.join(process.cwd(), "../../packages/patterns");
+const patternsCount = globSync(`${patternsPath}/**/*.tsx`).length;
 
 export const Navbar = () => (
   <div className="fixed inset-x-0 top-(--fd-banner-height) z-40 flex items-center justify-between bg-fd-background/80 px-4 py-3 backdrop-blur-sm transition-colors">
@@ -33,7 +33,7 @@ export const Navbar = () => (
         blocksCount={blocksCount}
         className="hidden gap-1 md:flex"
         componentsCount={componentsCount}
-        compsCount={compsCount}
+        patternsCount={patternsCount}
       />
     </div>
 

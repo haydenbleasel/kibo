@@ -87,9 +87,6 @@ importers:
       '@repo/comparison':
         specifier: workspace:*
         version: link:../../packages/comparison
-      '@repo/comps':
-        specifier: workspace:*
-        version: link:../../packages/comps
       '@repo/contribution-graph':
         specifier: workspace:*
         version: link:../../packages/contribution-graph
@@ -132,6 +129,9 @@ importers:
       '@repo/mini-calendar':
         specifier: workspace:*
         version: link:../../packages/mini-calendar
+      '@repo/patterns':
+        specifier: workspace:*
+        version: link:../../packages/patterns
       '@repo/pill':
         specifier: workspace:*
         version: link:../../packages/pill
@@ -573,58 +573,6 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
-    devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@types/react':
-        specifier: ^19.1.12
-        version: 19.1.12
-      '@types/react-dom':
-        specifier: ^19.1.9
-        version: 19.1.9(@types/react@19.1.12)
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.2
-
-  packages/comps:
-    dependencies:
-      '@faker-js/faker':
-        specifier: ^10.0.0
-        version: 10.0.0
-      '@hookform/resolvers':
-        specifier: ^5.2.2
-        version: 5.2.2(react-hook-form@7.62.0(react@19.1.1))
-      '@repo/shadcn-ui':
-        specifier: workspace:*
-        version: link:../shadcn-ui
-      '@tanstack/react-table':
-        specifier: ^8.21.3
-        version: 8.21.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      input-otp:
-        specifier: ^1.4.2
-        version: 1.4.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      lucide-react:
-        specifier: ^0.542.0
-        version: 0.542.0(react@19.1.1)
-      react:
-        specifier: ^19.1.1
-        version: 19.1.1
-      react-dom:
-        specifier: ^19.1.1
-        version: 19.1.1(react@19.1.1)
-      react-hook-form:
-        specifier: ^7.62.0
-        version: 7.62.0(react@19.1.1)
-      recharts:
-        specifier: ^3.1.2
-        version: 3.1.2(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1)(redux@5.0.1)
-      sonner:
-        specifier: ^2.0.7
-        version: 2.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -1150,6 +1098,58 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/react':
+        specifier: ^19.1.12
+        version: 19.1.12
+      '@types/react-dom':
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.12)
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
+
+  packages/patterns:
+    dependencies:
+      '@faker-js/faker':
+        specifier: ^10.0.0
+        version: 10.0.0
+      '@hookform/resolvers':
+        specifier: ^5.2.2
+        version: 5.2.2(react-hook-form@7.62.0(react@19.1.1))
+      '@repo/shadcn-ui':
+        specifier: workspace:*
+        version: link:../shadcn-ui
+      '@tanstack/react-table':
+        specifier: ^8.21.3
+        version: 8.21.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      input-otp:
+        specifier: ^1.4.2
+        version: 1.4.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      lucide-react:
+        specifier: ^0.542.0
+        version: 0.542.0(react@19.1.1)
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
+      react-hook-form:
+        specifier: ^7.62.0
+        version: 7.62.0(react@19.1.1)
+      recharts:
+        specifier: ^3.1.2
+        version: 3.1.2(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1)(redux@5.0.1)
+      sonner:
+        specifier: ^2.0.7
+        version: 2.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { processFolderName } from "../../../../../../lib/comps";
+import { processFolderName } from "../../../../../../lib/patterns";
 
 type ComponentPreviewProps = {
   component: string;

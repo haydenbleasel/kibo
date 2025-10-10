@@ -1,10 +1,10 @@
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { Project } from "ts-morph";
-import { processFolderName } from "../../../lib/comps";
+import { processFolderName } from "../../../lib/patterns";
 import { CompsSidebarClient } from "./client";
 
-const basePath = path.join(process.cwd(), "../../packages/comps");
+const basePath = path.join(process.cwd(), "../../packages/patterns");
 
 const directory = readdirSync(basePath, {
   withFileTypes: true,
@@ -87,7 +87,7 @@ for (const component of components) {
 
         subItems.push({
           name: title ? title.replaceAll('"', "") : file.name,
-          url: `/comps/${component.name}/${subdir.name}/${file.name.replace(".tsx", "")}`,
+          url: `/patterns/${component.name}/${subdir.name}/${file.name.replace(".tsx", "")}`,
           content,
         });
       }
@@ -127,7 +127,7 @@ for (const component of components) {
 
       items.push({
         name: title ? title.replaceAll('"', "") : file.name,
-        url: `/comps/${component.name}/${file.name.replace(".tsx", "")}`,
+        url: `/patterns/${component.name}/${file.name.replace(".tsx", "")}`,
         content,
       });
     }

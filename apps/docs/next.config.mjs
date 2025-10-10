@@ -195,8 +195,8 @@ const config = {
         permanent: true,
       },
       {
-        source: "/comps",
-        destination: "/comps/accordion/form/accordion-form-1",
+        source: "/patterns",
+        destination: "/patterns/accordion/form/accordion-form-1",
         permanent: false,
       },
     ];

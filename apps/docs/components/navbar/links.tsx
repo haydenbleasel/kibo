@@ -10,14 +10,14 @@ type LinksProps = {
   className: string;
   componentsCount: number;
   blocksCount: number;
-  compsCount: number;
+  patternsCount: number;
 };
 
 export const Links = ({
   className,
   componentsCount,
   blocksCount,
-  compsCount,
+  patternsCount,
 }: LinksProps) => {
   const pathname = usePathname();
 
@@ -29,7 +29,7 @@ export const Links = ({
         pathname !== "/" &&
         !pathname.startsWith("/components") &&
         !pathname.startsWith("/blocks") &&
-        !pathname.startsWith("/comps"),
+        !pathname.startsWith("/patterns"),
     },
     {
       label: "Components",
@@ -44,10 +44,10 @@ export const Links = ({
       count: blocksCount,
     },
     {
-      label: "Compositions",
-      href: "/comps",
-      active: pathname.startsWith("/comps"),
-      count: compsCount,
+      label: "Patterns",
+      href: "/patterns",
+      active: pathname.startsWith("/patterns"),
+      count: patternsCount,
     },
   ];
 

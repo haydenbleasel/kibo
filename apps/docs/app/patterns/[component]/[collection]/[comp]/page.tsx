@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import type * as React from "react";
 import { Project } from "ts-morph";
 import { env } from "@/env";
-import { processFolderName } from "../../../../../lib/comps";
+import { processFolderName } from "../../../../../lib/patterns";
 import { ComponentPreview } from "./components/preview";
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
   }>;
 };
 
-const basePath = path.join(process.cwd(), "../../packages/comps");
+const basePath = path.join(process.cwd(), "../../packages/patterns");
 const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
 const baseUrl = `${protocol}://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
 
@@ -27,14 +27,14 @@ export const generateMetadata = async ({
   const { component, collection, comp } = await params;
   const metadata: Metadata = {
     title: `${processFolderName(component)} / ${processFolderName(collection)} / ${processFolderName(comp)} | Kibo UI`,
-    description: "A composition from Kibo UI",
+    description: "A pattern from Kibo UI",
     openGraph: {
       images: [
         {
-          url: new URL("/comps.jpg", baseUrl).toString(),
+          url: new URL("/patterns.jpg", baseUrl).toString(),
           width: 1200,
           height: 630,
-          alt: "Kibo UI Compositions",
+          alt: "Kibo UI Patterns",
         },
       ],
     },
@@ -71,7 +71,7 @@ const ComponentCompPage = async ({ params }: Props) => {
 
     // Dynamically import the component
     const module = await import(
-      `@repo/comps/${component}/${collection}/${comp}`
+      `@repo/patterns/${component}/${collection}/${comp}`
     );
     Component = module.default;
   } catch {
