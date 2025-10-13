@@ -10,7 +10,6 @@ const withMDX = createMDX();
 const sentryConfig: SentryBuildOptions = {
   org: env.SENTRY_ORG,
   project: env.SENTRY_PROJECT,
-  silent: !process.env.CI,
   widenClientFileUpload: true,
   tunnelRoute: true,
   disableLogger: true,
