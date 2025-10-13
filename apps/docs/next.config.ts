@@ -12,9 +12,12 @@ const sentryConfig: SentryBuildOptions = {
   project: env.SENTRY_PROJECT,
   silent: !process.env.CI,
   widenClientFileUpload: true,
-  tunnelRoute: "/monitoring",
+  tunnelRoute: true,
   disableLogger: true,
   automaticVercelMonitors: true,
+  reactComponentAnnotation: {
+    enabled: true,
+  },
 };
 
 const config: NextConfig = {
