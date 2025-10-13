@@ -19,7 +19,7 @@ export const GET = async (_: NextRequest) => {
   }
 
   const response: Registry = {
-    name: "registry",
+    name: "Kibo UI Registry",
     homepage: "https://www.kibo-ui.com/",
     items: [],
   };
