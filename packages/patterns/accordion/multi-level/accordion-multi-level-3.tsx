@@ -50,7 +50,7 @@ const Example = () => (
         key={item.id}
         value={item.id}
       >
-        <AccordionTrigger className="group px-4 py-3 text-[15px] leading-6 hover:no-underline [&>svg]:hidden">
+        <AccordionTrigger className="group px-4 py-3 hover:no-underline [&>svg]:hidden">
           <div className="flex w-full items-center justify-between">
             <span className="text-left">{item.title}</span>
             <div className="relative size-4 shrink-0">
@@ -66,7 +66,7 @@ const Example = () => (
               defaultOpen={collapsible.open}
               key={collapsible.id}
             >
-              <CollapsibleTrigger className="flex gap-2 font-semibold text-[15px] leading-6 [&[data-state=open]>svg]:rotate-180">
+              <CollapsibleTrigger className="flex gap-2 font-medium tracking-tight [&[data-state=open]>svg]:rotate-180">
                 <ChevronDown
                   aria-hidden="true"
                   className="mt-1 shrink-0 opacity-60 transition-transform duration-200"
