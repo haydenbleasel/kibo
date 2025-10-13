@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Dialog as SheetPrimitive } from "radix-ui";
+import { Dialog as SheetPrimitive } from "radix-ui"
 import { XIcon } from "lucide-react"
 
 import { cn } from "@repo/shadcn-ui/lib/utils"

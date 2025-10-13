@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Slot as SlotPrimitive } from "radix-ui";
+import { Slot as SlotPrimitive } from "radix-ui"
 import { ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@repo/shadcn-ui/lib/utils"

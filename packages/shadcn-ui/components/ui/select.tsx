@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Select as SelectPrimitive } from "radix-ui";
+import { Select as SelectPrimitive } from "radix-ui"
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
 import { cn } from "@repo/shadcn-ui/lib/utils"
@@ -54,6 +54,7 @@ function SelectContent({
   className,
   children,
   position = "popper",
+  align = "center",
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Content>) {
   return (
@@ -67,6 +68,7 @@ function SelectContent({
           className
         )}
         position={position}
+        align={align}
         {...props}
       >
         <SelectScrollUpButton />

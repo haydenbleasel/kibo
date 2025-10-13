@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ScrollArea as ScrollAreaPrimitive } from "radix-ui";
+import { ScrollArea as ScrollAreaPrimitive } from "radix-ui"
 
 import { cn } from "@repo/shadcn-ui/lib/utils"
 
