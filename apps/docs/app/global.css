@@ -177,49 +177,14 @@ h3 {
   @apply tracking-tight;
 }
 
-/* Fix offset with custom nav */
-#nd-page {
-  margin-top: var(--fd-nav-height);
+:root {
+  --fd-page-width: 100%;
 }
 
-/* Remove sidebar background */
-#nd-sidebar {
-  @apply bg-transparent;
+.landing-page #nd-docs-layout {
+  @apply pl-0!;
 }
 
-/* Hide tabs on desktop */
-#nd-sidebar [data-hide-if-empty] {
-  @apply hidden;
-}
-
-/* Hide navbar links on mobile */
-#nd-sidebar-mobile a[href="/docs"].lg\:hidden,
-#nd-sidebar-mobile a[href="/blocks"].lg\:hidden,
-#nd-sidebar-mobile a[href="/components"].lg\:hidden {
-  @apply hidden;
-}
-
-/* Ensure tabs are hidden on desktop */
-#nd-sidebar a[href="/docs"].lg\:hidden,
-#nd-sidebar a[href="/blocks"].lg\:hidden,
-#nd-sidebar a[href="/components"].lg\:hidden {
-  @apply hidden;
-}
-
-/* Remove borders from sidebar and nav */
-#nd-sidebar > div,
-#nd-subnav > div,
-#nd-tocnav {
-  @apply border-none!;
-}
-
-/* Hide the sidebar on the landing page on desktop */
 .landing-page #nd-sidebar {
-  @apply md:hidden;
+  @apply hidden;
 }
-
-/* Alternative:don't show the sidebar at all in the landing page on mobile.
-in this case, set:
-1. in /(docs)/[[...slug]]/page.tsx: sidebar={{ hidden: true, collapsible: false }
-2. in /global.css: .landing-page #nd-subnav button[data-search] + button { @apply hidden; }
-*/

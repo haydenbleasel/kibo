@@ -7,7 +7,6 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { RootProvider } from "fumadocs-ui/provider";
 import type { ReactNode } from "react";
 import { ThemeProvider } from "@/providers/theme";
-import { Footer } from "../components/footer";
 import { env } from "../env";
 import { mono, sans } from "../lib/fonts";
 
@@ -29,7 +28,6 @@ const Layout = ({ children }: LayoutProps) => (
       <ThemeProvider>
         <RootProvider>
           <TooltipProvider>{children}</TooltipProvider>
-          <Footer />
         </RootProvider>
         <VercelAnalytics />
         {env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (

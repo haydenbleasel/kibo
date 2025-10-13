@@ -37,7 +37,7 @@ export const MobileMenu = () => (
                     {
                       docs.find(
                         (doc) =>
-                          doc._file.path ===
+                          doc.info.path ===
                           `${group.title?.toLowerCase()}/${page}.mdx`
                       )?.title
                     }

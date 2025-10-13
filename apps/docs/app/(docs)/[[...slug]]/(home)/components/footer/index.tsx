@@ -1,9 +1,9 @@
 import path from "node:path";
 import { globSync } from "glob";
 import Link from "next/link";
-import { processFolderName } from "../../lib/patterns";
-import { source } from "../../lib/source";
-import { Logo } from "../navbar/logo";
+import { Logo } from "../../../../../../components/navbar/logo";
+import { processFolderName } from "../../../../../../lib/patterns";
+import { source } from "../../../../../../lib/source";
 import { Theme } from "./theme";
 
 const pages = source.getPages();

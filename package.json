@@ -14,7 +14,7 @@
     "format": "ultracite format",
     "test": "turbo test",
     "analyze": "turbo analyze",
-    "bump-deps": "npx npm-check-updates --deep -u -x shiki,fumadocs-*,next,zod,recharts,require-in-the-middle && pnpm install",
+    "bump-deps": "npx npm-check-updates --deep -u -x shiki,next,recharts,require-in-the-middle && pnpm install",
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/shadcn-ui && npx shadcn@latest migrate radix -c packages/shadcn-ui",
     "clean": "git clean -xdf node_modules"
   },
@@ -33,6 +33,6 @@
   "type": "module",
   "dependencies": {
     "tsup": "^8.5.0",
-    "zod": "^3.25.42"
+    "zod": "^4.1.12"
   }
 }

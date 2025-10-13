@@ -14,8 +14,16 @@ const DocsRootLayout = ({ children }: DocsRootLayoutProps) => (
       nav={{
         component: <Navbar />,
       }}
+      searchToggle={{
+        enabled: false,
+      }}
       sidebar={{
         collapsible: false,
+        tabs: false,
+        className: 'border-none',
+      }}
+      themeSwitch={{
+        enabled: false,
       }}
       tree={source.pageTree}
     >

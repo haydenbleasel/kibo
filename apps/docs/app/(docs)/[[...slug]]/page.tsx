@@ -41,12 +41,15 @@ const Page = async (props: PageProps) => {
     ...page.data.toc,
   ];
 
-  const type = page.data._file.path.startsWith("blocks")
+  const type = page.data.info.path.startsWith("blocks")
     ? "block"
     : "component";
 
   return (
     <DocsPage
+      container={{
+        className: 'max-w-[75rem]'
+      }}
       full={page.data.full ?? page.slugs.includes("blocks")}
       tableOfContent={{
         style: "clerk",
