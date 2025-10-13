@@ -11,7 +11,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
-    "shiki": "3.12.0"
+    "shiki": "3.13.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
