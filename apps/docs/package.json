@@ -81,7 +81,7 @@
     "react-player": "^3.3.3",
     "react-tweet": "^3.2.2",
     "recharts": "^2.15.4",
-    "require-in-the-middle": "^8.0.0",
+    "require-in-the-middle": "7.5.2",
     "schema-dts": "^1.1.5",
     "shadcn": "^3.4.0",
     "shiki": "3.12.0",

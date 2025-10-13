@@ -253,8 +253,8 @@ importers:
         specifier: ^2.15.4
         version: 2.15.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       require-in-the-middle:
-        specifier: ^8.0.0
-        version: 8.0.0
+        specifier: 7.5.2
+        version: 7.5.2
       schema-dts:
         specifier: ^1.1.5
         version: 1.1.5
@@ -7889,10 +7889,6 @@ packages:
   require-in-the-middle@7.5.2:
     resolution: {integrity: sha512-gAZ+kLqBdHarXB64XpAe2VCjB7rIRv+mU8tfRWziHRJ5umKsIHN2tLLv6EtMw7WCdP19S0ERVMldNvxYCHnhSQ==}
     engines: {node: '>=8.6.0'}
-
-  require-in-the-middle@8.0.0:
-    resolution: {integrity: sha512-9s0pnM5tH8G4dSI3pms2GboYOs25LwOGnRMxN/Hx3TYT1K0rh6OjaWf4dI0DAQnMyaEXWoGVnSTPQasqwzTTAA==}
-    engines: {node: '>=9.3.0 || >=8.10.0 <9.0.0'}
 
   require-main-filename@2.0.0:
     resolution: {integrity: sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==}
@@ -15824,13 +15820,6 @@ snapshots:
       debug: 4.4.3
       module-details-from-path: 1.0.4
       resolve: 1.22.8
-    transitivePeerDependencies:
-      - supports-color
-
-  require-in-the-middle@8.0.0:
-    dependencies:
-      debug: 4.4.3
-      module-details-from-path: 1.0.4
     transitivePeerDependencies:
       - supports-color
 

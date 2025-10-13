@@ -14,7 +14,7 @@
     "format": "ultracite format",
     "test": "turbo test",
     "analyze": "turbo analyze",
-    "bump-deps": "npx npm-check-updates --deep -u -x shiki,fumadocs-*,react-player,next,zod,recharts && pnpm install",
+    "bump-deps": "npx npm-check-updates --deep -u -x shiki,fumadocs-*,react-player,next,zod,recharts,require-in-the-middle && pnpm install",
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/shadcn-ui && npx shadcn@latest migrate radix -c packages/shadcn-ui",
     "clean": "git clean -xdf node_modules"
   },
