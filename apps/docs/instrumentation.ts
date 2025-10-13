@@ -1,16 +1,14 @@
-import { init } from "@sentry/nextjs";
-import { env } from "./env";
+// biome-ignore lint/performance/noNamespaceImport: "Required for Sentry"
+import * as Sentry from '@sentry/nextjs';
 
-const opts = {
-  dsn: env.NEXT_PUBLIC_SENTRY_DSN,
-};
-
-export const initializeSentry = () => {
-  if (env.NEXT_RUNTIME === "nodejs") {
-    init(opts);
+export async function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    await import('./sentry.server.config');
   }
 
-  if (env.NEXT_RUNTIME === "edge") {
-    init(opts);
+  if (process.env.NEXT_RUNTIME === 'edge') {
+    await import('./sentry.edge.config');
   }
-};
+}
+
+export const onRequestError = Sentry.captureRequestError;

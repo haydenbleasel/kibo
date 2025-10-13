@@ -2,7 +2,8 @@
 
 import { Button } from "@repo/shadcn-ui/components/ui/button";
 import { cn } from "@repo/shadcn-ui/lib/utils";
-import { captureException } from "@sentry/nextjs";
+// biome-ignore lint/performance/noNamespaceImport: "Required for Sentry"
+import * as Sentry from "@sentry/nextjs";
 import type NextError from "next/error";
 import { useEffect } from "react";
 import { mono, sans } from "../lib/fonts";
@@ -14,7 +15,7 @@ type GlobalErrorProperties = {
 
 const GlobalError = ({ error, reset }: GlobalErrorProperties) => {
   useEffect(() => {
-    captureException(error);
+    Sentry.captureException(error);
   }, [error]);
 
   return (
