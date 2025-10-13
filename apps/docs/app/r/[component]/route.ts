@@ -1,6 +1,7 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { track } from "@vercel/analytics/server";
+import { notFound } from "next/navigation";
 import { type NextRequest, NextResponse } from "next/server";
 import type { Registry } from "shadcn/schema";
 import { getPackage } from "../../../lib/package";
@@ -8,6 +9,8 @@ import { getPackage } from "../../../lib/package";
 type RegistryParams = {
   params: Promise<{ component: string }>;
 };
+
+const filteredPackages = ["shadcn-ui", "typescript-config", "patterns"];
 
 export const GET = async (_: NextRequest, { params }: RegistryParams) => {
   const { component } = await params;
@@ -20,6 +23,10 @@ export const GET = async (_: NextRequest, { params }: RegistryParams) => {
   }
 
   const packageName = component.replace(".json", "");
+
+  if (filteredPackages.includes(packageName)) {
+    notFound();
+  }
 
   if (process.env.NODE_ENV === "production") {
     try {
@@ -46,7 +53,7 @@ export const GET = async (_: NextRequest, { params }: RegistryParams) => {
     const packageNames = packageDirectories
       .filter((dirent) => dirent.isDirectory())
       .map((dirent) => dirent.name)
-      .filter((name) => name !== "shadcn-ui" && name !== "typescript-config");
+      .filter((name) => !filteredPackages.includes(name));
 
     for (const name of packageNames) {
       try {
@@ -71,4 +78,16 @@ export const GET = async (_: NextRequest, { params }: RegistryParams) => {
       { status: 500 }
     );
   }
+};
+
+export const generateStaticParams = async () => {
+  const packagesDir = join(process.cwd(), "..", "..", "packages");
+  const packageDirectories = await readdir(packagesDir, {
+    withFileTypes: true,
+  });
+
+  return packageDirectories
+    .map((dirent) => dirent.name)
+    .filter((name) => !filteredPackages.includes(name))
+    .map((name) => ({ component: name }));
 };

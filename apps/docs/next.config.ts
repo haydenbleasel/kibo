@@ -3,13 +3,12 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 import { type SentryBuildOptions, withSentryConfig } from "@sentry/nextjs";
 import { createMDX } from "fumadocs-mdx/next";
 import type { NextConfig } from "next";
-import { env } from "./env";
 
 const withMDX = createMDX();
 
 const sentryConfig: SentryBuildOptions = {
-  org: env.SENTRY_ORG,
-  project: env.SENTRY_PROJECT,
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
   widenClientFileUpload: true,
   tunnelRoute: true,
   disableLogger: true,
