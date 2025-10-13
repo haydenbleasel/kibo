@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,6 +9,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 
 export const title = "Information with Highlighted Content";
 
@@ -17,7 +17,7 @@ const Example = () => (
   <AlertDialog>
     <AlertDialogTrigger asChild>
       <Button variant="outline">
-        <Sparkles className="mr-2 size-4" />
+        <Sparkles className="size-4" />
         What's New
       </Button>
     </AlertDialogTrigger>

@@ -1,4 +1,3 @@
-import { Download } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,6 +10,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 export const title = "Actions with Loading State";
 
@@ -18,7 +18,7 @@ const Example = () => (
   <AlertDialog>
     <AlertDialogTrigger asChild>
       <Button variant="outline">
-        <Download className="mr-2 size-4" />
+        <Download className="size-4" />
         Download
       </Button>
     </AlertDialogTrigger>
@@ -43,7 +43,7 @@ const Example = () => (
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
         <AlertDialogAction>
-          <Download className="mr-2 size-4" />
+          <Download className="size-4" />
           Download File
         </AlertDialogAction>
       </AlertDialogFooter>

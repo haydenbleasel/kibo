@@ -31,7 +31,7 @@ const Example = () => (
         <AlertDialogCancel>Stay Here</AlertDialogCancel>
         <AlertDialogAction>
           Continue
-          <ExternalLink className="ml-2 size-4" />
+          <ExternalLink className="size-4" />
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
