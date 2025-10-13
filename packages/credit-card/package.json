@@ -5,14 +5,14 @@
   "private": true,
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-svg-credit-card-payment-icons": "^4.1.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-svg-credit-card-payment-icons": "^4.2.1"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
-    "typescript": "^5.9.2"
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "typescript": "^5.9.3"
   }
 }

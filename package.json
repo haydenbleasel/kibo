@@ -14,22 +14,22 @@
     "format": "ultracite format",
     "test": "turbo test",
     "analyze": "turbo analyze",
-    "bump-deps": "npx npm-check-updates --deep -u -x shiki,fumadocs-*,react-player,next,zod && pnpm install",
+    "bump-deps": "npx npm-check-updates --deep -u -x shiki,fumadocs-*,react-player,next,zod,recharts && pnpm install",
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/shadcn-ui && npx shadcn@latest migrate radix -c packages/shadcn-ui",
     "clean": "git clean -xdf node_modules"
   },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
-    "@biomejs/biome": "2.2.2",
-    "@types/node": "^24.3.0",
-    "turbo": "^2.5.6",
-    "typescript": "^5.9.2",
-    "ultracite": "^5.3.3"
+    "@biomejs/biome": "2.2.5",
+    "@types/node": "^24.7.2",
+    "turbo": "^2.5.8",
+    "typescript": "^5.9.3",
+    "ultracite": "^5.6.2"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.18.2",
   "type": "module",
   "dependencies": {
     "tsup": "^8.5.0",
