@@ -17,7 +17,7 @@ const Example = () => (
     </TooltipTrigger>
     <TooltipContent>
       <div className="flex items-center gap-2">
-        <CheckCircleIcon className="size-4 text-primary-foreground" />
+        <CheckCircleIcon className="size-4" />
         <p>All systems operational</p>
       </div>
     </TooltipContent>
