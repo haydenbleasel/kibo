@@ -53,8 +53,16 @@ const getCroppedPngImage = async (
   imageSrc: HTMLImageElement,
   scaleFactor: number,
   pixelCrop: PixelCrop,
-  maxImageSize: number
+  maxImageSize: number,
+  minScale: number = 0.1
 ): Promise<string> => {
+  // Prevent infinite recursion by enforcing a minimum scale
+  if (scaleFactor < minScale) {
+    throw new Error(
+      `Unable to reduce image size below ${maxImageSize} bytes. Try using a smaller crop area or increasing maxImageSize.`
+    );
+  }
+
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
@@ -65,9 +73,13 @@ const getCroppedPngImage = async (
   const scaleX = imageSrc.naturalWidth / imageSrc.width;
   const scaleY = imageSrc.naturalHeight / imageSrc.height;
 
-  ctx.imageSmoothingEnabled = false;
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
+  // Enable image smoothing for better quality when downscaling
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+
+  // Apply scale factor to canvas dimensions to actually downscale the image
+  canvas.width = Math.max(1, Math.floor(pixelCrop.width * scaleFactor));
+  canvas.height = Math.max(1, Math.floor(pixelCrop.height * scaleFactor));
 
   ctx.drawImage(
     imageSrc,
@@ -129,6 +141,7 @@ const useImageCrop = () => {
 export type ImageCropProps = {
   file: File;
   maxImageSize?: number;
+  minScale?: number;
   onCrop?: (croppedImage: string) => void;
   children: ReactNode;
   onChange?: ReactCropProps["onChange"];
@@ -138,6 +151,7 @@ export type ImageCropProps = {
 export const ImageCrop = ({
   file,
   maxImageSize = 1024 * 1024 * 5,
+  minScale = 0.1,
   onCrop,
   children,
   onChange,
@@ -191,7 +205,8 @@ export const ImageCrop = ({
       imgRef.current,
       1,
       completedCrop,
-      maxImageSize
+      maxImageSize,
+      minScale
     );
 
     onCrop?.(croppedImage);
