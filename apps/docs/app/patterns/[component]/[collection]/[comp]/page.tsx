@@ -57,7 +57,6 @@ export const generateMetadata = async ({
         },
       ],
       card: "summary_large_image",
-      creator: '@haydenbleasel',
     }
   };
 

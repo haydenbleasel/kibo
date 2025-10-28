@@ -128,7 +128,6 @@ export const generateMetadata = async (props: {
         },
       ],
       card: "summary_large_image",
-      creator: '@haydenbleasel',
     }
   };
 };

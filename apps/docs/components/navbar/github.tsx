@@ -9,7 +9,7 @@ type GitHubProps = {
 };
 
 export const GitHub = async ({ className }: GitHubProps) => {
-  const data = await fetch("https://api.github.com/repos/haydenbleasel/kibo", {
+  const data = await fetch("https://api.github.com/repos/shadcnblocks/kibo", {
     // Cache for 1 day (86400 seconds)
     next: { revalidate: DAY },
   });
@@ -23,7 +23,7 @@ export const GitHub = async ({ className }: GitHubProps) => {
       variant="outline"
     >
       <a
-        href="https://github.com/haydenbleasel/kibo"
+        href="https://github.com/shadcnblocks/kibo"
         rel="noreferrer"
         target="_blank"
       >

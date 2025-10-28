@@ -9,7 +9,7 @@ import {
 import { glimpse } from "@repo/glimpse/server";
 
 const Example = async () => {
-  const data = await glimpse("https://github.com/haydenbleasel/kibo");
+  const data = await glimpse("https://github.com/haydenbleasel/ultracite");
 
   return (
     <div>
@@ -18,7 +18,7 @@ const Example = async () => {
         <GlimpseTrigger asChild>
           <a
             className="font-medium text-primary underline"
-            href="https://github.com/haydenbleasel/kibo"
+            href="https://github.com/haydenbleasel/ultracite"
           >
             Kibo UI
           </a>

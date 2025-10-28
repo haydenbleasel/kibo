@@ -8,7 +8,7 @@ const getGitHubData = unstable_cache(
   async () => {
     try {
       const { data } = await octokit.rest.repos.get({
-        owner: "haydenbleasel",
+        owner: "shadcnblocks",
         repo: "kibo",
       });
       return {

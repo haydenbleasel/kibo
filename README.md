@@ -3,7 +3,7 @@
 <div>
   <img src="https://img.shields.io/npm/dy/kibo-ui" alt="" />
   <img src="https://img.shields.io/npm/v/kibo-ui" alt="" />
-  <img src="https://img.shields.io/github/license/haydenbleasel/kibo" alt="" />
+  <img src="https://img.shields.io/github/license/shadcnblocks/kibo" alt="" />
 </div>
 
 ## Overview
@@ -20,8 +20,8 @@ While shadcn/ui focuses on wrapping primitives from Radix UI, Kibo UI is designe
 
 ## Contributors
 
-<a href="https://github.com/haydenbleasel/kibo/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=haydenbleasel/kibo" />
+<a href="https://github.com/shadcnblocks/kibo/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=shadcnblocks/kibo" />
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
