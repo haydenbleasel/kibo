@@ -8,16 +8,10 @@ export const env = createEnv({
     ANALYZE: z.string().optional(),
   },
   client: {
-    NEXT_PUBLIC_GA_MEASUREMENT_ID: z
-      .string()
-      .min(1)
-      .startsWith("G-")
-      .optional(),
     NEXT_PUBLIC_LOGO_DEV_TOKEN: z.string().min(1).optional(),
   },
   runtimeEnv: {
     ANALYZE: process.env.ANALYZE,
-    NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
     NEXT_PUBLIC_LOGO_DEV_TOKEN: process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN,
   },
 });
