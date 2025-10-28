@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type * as React from "react";
 import { Project } from "ts-morph";
-import { env } from "@/env";
 import { processFolderName } from "../../../../../lib/patterns";
 import { ComponentPreview } from "./components/preview";
 
@@ -19,7 +18,7 @@ type Props = {
 
 const basePath = path.join(process.cwd(), "../../packages/patterns");
 const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-const baseUrl = `${protocol}://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
+const baseUrl = `${protocol}://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
 
 export const generateMetadata = async ({
   params,

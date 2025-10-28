@@ -1,6 +1,5 @@
 import { LibraryIcon } from "lucide-react";
 import Image from "next/image";
-import { env } from "@/env";
 
 type PoweredByProps = {
   packages: string[];
@@ -43,7 +42,7 @@ export const PoweredBy = ({ packages }: PoweredByProps) => (
             alt=""
             className="h-3.5 w-3.5 overflow-hidden rounded-sm object-cover"
             height={14}
-            src={`https://img.logo.dev/${getHostname(url)}?token=${env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=14&retina=true`}
+            src={`https://img.logo.dev/${getHostname(url)}?token=${process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN}&size=14&retina=true`}
             width={14}
           />
           <span>{getPackageName(url)}</span>
