@@ -1,22 +1,9 @@
 import { withLogtail } from "@logtail/next";
 import withBundleAnalyzer from "@next/bundle-analyzer";
-import { type SentryBuildOptions, withSentryConfig } from "@sentry/nextjs";
 import { createMDX } from "fumadocs-mdx/next";
 import type { NextConfig } from "next";
 
 const withMDX = createMDX();
-
-const sentryConfig: SentryBuildOptions = {
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
-  widenClientFileUpload: true,
-  tunnelRoute: true,
-  disableLogger: true,
-  automaticVercelMonitors: true,
-  reactComponentAnnotation: {
-    enabled: true,
-  },
-};
 
 const config: NextConfig = {
   images: {
@@ -173,15 +160,9 @@ const config: NextConfig = {
       },
     ];
   },
-
-  transpilePackages: ["@sentry/nextjs"],
 };
 
 let nextConfig = withMDX(withLogtail({ ...config }));
-
-if (process.env.VERCEL) {
-  nextConfig = withSentryConfig(nextConfig, sentryConfig);
-}
 
 if (process.env.ANALYZE === "true") {
   nextConfig = withBundleAnalyzer()(nextConfig);

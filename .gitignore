@@ -37,9 +37,6 @@ yarn-error.log*
 .DS_Store
 *.pem
 
-# Sentry Config File
-.env.sentry-build-plugin
-
 # BaseHub
 .basehub
 
