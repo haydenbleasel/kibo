@@ -11,7 +11,7 @@
     "date-fns": "^4.1.0",
     "jotai": "^2.15.0",
     "lodash.throttle": "^4.1.1",
-    "lucide-react": "^0.545.0",
+    "lucide-react": "^0.548.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
