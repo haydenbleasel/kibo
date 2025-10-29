@@ -21,7 +21,7 @@
     "@tiptap/suggestion": "^3.6.6",
     "fuse.js": "^7.1.0",
     "lowlight": "^3.3.0",
-    "lucide-react": "^0.545.0",
+    "lucide-react": "^0.548.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tippy.js": "^6.3.7"

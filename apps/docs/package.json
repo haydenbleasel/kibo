@@ -67,7 +67,7 @@
     "glob": "^11.0.3",
     "import-in-the-middle": "^1.15.0",
     "lodash.groupby": "^4.6.0",
-    "lucide-react": "^0.545.0",
+    "lucide-react": "^0.548.0",
     "mcp-handler": "^1.0.3",
     "motion": "^12.23.24",
     "next": "15.4.7",
