@@ -10,7 +10,7 @@
     "@tiptap/extension-code-block-lowlight": "^3.6.6",
     "@tiptap/extension-list": "^3.6.6",
     "@tiptap/extension-subscript": "^3.6.6",
-    "@tiptap/extension-superscript": "^3.6.6",
+    "@tiptap/extension-superscript": "^3.9.0",
     "@tiptap/extension-table": "^3.6.6",
     "@tiptap/extension-text-style": "^3.6.6",
     "@tiptap/extension-typography": "^3.6.6",
