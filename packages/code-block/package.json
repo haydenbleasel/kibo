@@ -6,7 +6,7 @@
   "dependencies": {
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@repo/shadcn-ui": "workspace:*",
-    "@shikijs/transformers": "^3.13.0",
+    "@shikijs/transformers": "^3.14.0",
     "lucide-react": "^0.545.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
