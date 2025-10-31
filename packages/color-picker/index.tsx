@@ -69,6 +69,18 @@ export const ColorPicker = ({
   const selectedColor = Color(value);
   const defaultColor = Color(defaultValue);
 
+  /**
+   * As long as value wasn't triggered by an internal interaction
+   * we do not trigger the onChange callback.
+   */
+  const isDirty = useRef(false)
+  const markAsDirty = () => {
+    isDirty.current = true
+  }
+  const markAsClean = () => {
+    isDirty.current = false
+  }
+
   const [hue, setHue] = useState(
     selectedColor.hue() || defaultColor.hue() || 0
   );
@@ -88,6 +100,10 @@ export const ColorPicker = ({
     if (value) {
       const color = Color.rgb(value).rgb().object();
 
+      // Changes to the value prop are considered external changes
+      // and should not trigger an onChange event.
+      markAsClean()
+
       setHue(color.r);
       setSaturation(color.g);
       setLightness(color.b);
@@ -97,7 +113,7 @@ export const ColorPicker = ({
 
   // Notify parent of changes
   useEffect(() => {
-    if (onChange) {
+    if (onChange && isDirty.current) {
       const color = Color.hsl(hue, saturation, lightness).alpha(alpha / 100);
       const rgba = color.rgb().array();
 
@@ -113,10 +129,22 @@ export const ColorPicker = ({
         lightness,
         alpha,
         mode,
-        setHue,
-        setSaturation,
-        setLightness,
-        setAlpha,
+        setHue: (...args) => {
+          markAsDirty();
+          setHue(...args)
+        },
+        setSaturation: (...args) => {
+          markAsDirty();
+          setSaturation(...args)
+        },
+        setLightness: (...args) => {
+          markAsDirty();
+          setLightness(...args)
+        },
+        setAlpha: (...args) => {
+          markAsDirty();
+          setAlpha(...args)
+        },
         setMode,
       }}
     >
