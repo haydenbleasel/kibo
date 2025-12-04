@@ -215,6 +215,8 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
 
                     return (
                       <Collapsible
+                        // Seems group hasn't declared yet, this is important to listen the group-data state change
+                        className="group/collapsible"
                         key={subgroup.name}
                         onOpenChange={(open) => {
                           setOpenSubgroups((prev) => {
@@ -233,7 +235,8 @@ export const CompsSidebarClient = ({ pages }: CompsSidebarClientProps) => {
                           <CollapsibleTrigger asChild>
                             <SidebarMenuButton className="capitalize">
                               {subgroup.name}
-                              <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                              {/* this chevron group-data now listen to group/collapsible */}
+                              <ChevronDown className="ml-auto transition-transform rotate-0 group-data-[state=open]/collapsible:-rotate-180" />
                             </SidebarMenuButton>
                           </CollapsibleTrigger>
                           <CollapsibleContent>
