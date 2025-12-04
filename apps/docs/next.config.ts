@@ -74,7 +74,7 @@ const config: NextConfig = {
         permanent: true,
       },
       {
-        source: "/components/ai-:slug*",
+        source: "/components/ai-:slug(.*)",
         destination: "https://ai-sdk.dev/elements/components?ref=kibo",
         permanent: true,
       },
