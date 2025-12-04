@@ -18,7 +18,7 @@
     "@tiptap/pm": "^3.6.6",
     "@tiptap/react": "^3.6.6",
     "@tiptap/starter-kit": "^3.6.6",
-    "@tiptap/suggestion": "^3.6.6",
+    "@tiptap/suggestion": "^3.9.0",
     "fuse.js": "^7.1.0",
     "lowlight": "^3.3.0",
     "lucide-react": "^0.545.0",
