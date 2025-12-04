@@ -776,8 +776,8 @@ importers:
         specifier: ^3.6.6
         version: 3.6.6(@tiptap/core@3.6.6(@tiptap/pm@3.6.6))(@tiptap/pm@3.6.6)
       '@tiptap/extension-superscript':
-        specifier: ^3.6.6
-        version: 3.6.6(@tiptap/core@3.6.6(@tiptap/pm@3.6.6))(@tiptap/pm@3.6.6)
+        specifier: ^3.9.0
+        version: 3.9.0(@tiptap/core@3.6.6(@tiptap/pm@3.6.6))(@tiptap/pm@3.6.6)
       '@tiptap/extension-table':
         specifier: ^3.6.6
         version: 3.6.6(@tiptap/core@3.6.6(@tiptap/pm@3.6.6))(@tiptap/pm@3.6.6)
@@ -4125,11 +4125,11 @@ packages:
       '@tiptap/core': ^3.6.6
       '@tiptap/pm': ^3.6.6
 
-  '@tiptap/extension-superscript@3.6.6':
-    resolution: {integrity: sha512-HHjwp2xuTE2YpSfPeS11tTDe3Eb/D6CbGBCXrwGLZw/LPFwHrbnBYIsxxbc5kLvRSXOQYqhF/E0zHedtJHYvsg==}
+  '@tiptap/extension-superscript@3.9.0':
+    resolution: {integrity: sha512-jB1SuNFZJQvJ8DhbohE/yFFXkGKmjfggpua+sjX1nisn/plun15nCWlFPY/XkdW8UsK8V4VYusK4jLodezuspw==}
     peerDependencies:
-      '@tiptap/core': ^3.6.6
-      '@tiptap/pm': ^3.6.6
+      '@tiptap/core': ^3.9.0
+      '@tiptap/pm': ^3.9.0
 
   '@tiptap/extension-table@3.6.6':
     resolution: {integrity: sha512-kPplbVCL5X+eSXjE5rDwmO+N7Fi20EuLs3JeKopHKJtcRWRdS5bTibRueew3p6GRSbMmtHuaBy/XJVF4xBccKA==}
@@ -5702,6 +5702,7 @@ packages:
 
   intersection-observer@0.10.0:
     resolution: {integrity: sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==}
+    deprecated: The Intersection Observer polyfill is no longer needed and can safely be removed. Intersection Observer has been Baseline since 2019.
 
   io-ts@2.2.21:
     resolution: {integrity: sha512-zz2Z69v9ZIC3mMLYWIeoUcwWD6f+O7yP92FMVVaXEOSZH1jnVBmET/urd/uoarD1WGBY4rCj8TAyMPzsGNzMFQ==}
@@ -10781,7 +10782,7 @@ snapshots:
       '@tiptap/core': 3.6.6(@tiptap/pm@3.6.6)
       '@tiptap/pm': 3.6.6
 
-  '@tiptap/extension-superscript@3.6.6(@tiptap/core@3.6.6(@tiptap/pm@3.6.6))(@tiptap/pm@3.6.6)':
+  '@tiptap/extension-superscript@3.9.0(@tiptap/core@3.6.6(@tiptap/pm@3.6.6))(@tiptap/pm@3.6.6)':
     dependencies:
       '@tiptap/core': 3.6.6(@tiptap/pm@3.6.6)
       '@tiptap/pm': 3.6.6
