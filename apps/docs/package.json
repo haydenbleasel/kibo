@@ -70,7 +70,7 @@
     "lucide-react": "^0.545.0",
     "mcp-handler": "^1.0.3",
     "motion": "^12.23.24",
-    "next": "15.5.7",
+    "next": "15.5.9",
     "next-themes": "^0.4.6",
     "postcss-nested": "^7.0.2",
     "react": "^19.2.1",
